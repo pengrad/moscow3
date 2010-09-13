@@ -8,7 +8,7 @@
  *
  * Created on 12.09.2010, 17:20:34
  */
-package routeFleet;
+package rzd.routeFleet;
 
 /**
  *

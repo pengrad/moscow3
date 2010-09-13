@@ -1,4 +1,4 @@
-package routeFleet;
+package rzd.routeFleet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +10,6 @@ import rzd.bd.Base;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
