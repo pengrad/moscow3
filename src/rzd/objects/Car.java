@@ -10,32 +10,27 @@ package rzd.objects;
  */
 public class Car {
 
-    private int id =-1;
-    private int idRoad=-1;
-    private int idTrain=-1;
-    private String number="ХУЙ";
+    private int number;
+    private CarLocation carLocation;
 
-    public int getId() {
-        return id;
+    public Car(int number, CarLocation carLocation) {
+        this.number = number;
+        this.carLocation = carLocation;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdRoad() {
-        return idRoad;
-    }
-
-    public void setIdRoad(int idRoad) {
-        this.idRoad = idRoad;
-    }
-
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
+    }
+
+    public CarLocation getCarLocation() {
+        return carLocation;
+    }
+
+    public void setCarLocation(CarLocation carLocation) {
+        this.carLocation = carLocation;
     }
 }
