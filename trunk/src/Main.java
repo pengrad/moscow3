@@ -3,9 +3,12 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import rzd.objects.Road;
+import rzd.objects.RoadType;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
@@ -28,29 +31,29 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         Session session = getSession();
 //        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 4);
-//        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
+        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
 //        for(TrainCarsEntity tc : car.getTrainCarsesByNumber()) {
 //            System.out.println(tc.getTrainByIdTrain().getRouteByIdRoute().getPointDeparture());
 //        }
-        Timestamp time = new Timestamp(new Date().getTime());
-        CarLocationEntity loc = new CarLocationEntity(null, null, null);
-        CarEntity car = new CarEntity(111, time, time, loc);
-        RouteEntity route = new RouteEntity("fff", "Kursk", "Kiev");
-        TrainEntity train = new TrainEntity(time, time, route);
-        session.beginTransaction();
-        session.saveOrUpdate(loc);
-        session.saveOrUpdate(car);
-        session.saveOrUpdate(route);
-        session.saveOrUpdate(train);
+//        Timestamp time = new Timestamp(new Date().getTime());
+//        CarLocationEntity loc = new CarLocationEntity(null, null, null);
+//        CarEntity car = new CarEntity(111, time, time, loc);
+//        RouteEntity route = new RouteEntity("fff", "Kursk", "Kiev");
+//        TrainEntity train = new TrainEntity(time, time, route);
+//        session.beginTransaction();
+//        session.saveOrUpdate(loc);
+//        session.saveOrUpdate(car);
+//        session.saveOrUpdate(route);
+//        session.saveOrUpdate(train);
 //        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 6);
 //        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
 //        System.out.println(car.getDateUpdateLocation());
 //        System.out.println(train.getRouteByIdRoute().getPointDeparture());
-        TrainCarsEntity cars = new TrainCarsEntity();
-        cars.setCarByIdCar(car);
-        cars.setTrainByIdTrain(train);
-        session.saveOrUpdate(cars);
-        session.getTransaction().commit();
+//        TrainCarsEntity cars = new TrainCarsEntity();
+//        cars.setCarByIdCar(car);
+//        cars.setTrainByIdTrain(train);
+//        session.saveOrUpdate(cars);
+//        session.getTransaction().commit();`
         session.close();
     }
 }
