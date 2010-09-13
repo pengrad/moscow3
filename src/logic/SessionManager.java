@@ -11,27 +11,19 @@ import java.util.logging.Logger;
 
 public class SessionManager {
 
-    private static SessionManager instance;
-
-    public static SessionManager get() throws HibernateInitializeException {
-        if (instance == null) instance = new SessionManager();
-        return instance;
-    }
-
-    private final SessionFactory sessionFactory;
-    private final ThreadLocal<Session> localSession;
-    private static final Logger log = Logger.getAnonymousLogger();
-
-    private SessionManager() throws HibernateInitializeException {
+    private static final SessionFactory sessionFactory;
+    private static final ThreadLocal<Session> localSession;
+    
+    static {
         try {
             sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
             localSession = new ThreadLocal<Session>();
-        } catch (ExceptionInInitializerError e) {
-            throw new HibernateInitializeException(e);
+        } catch (Throwable e) {
+            throw new RuntimeException("Ошибка соединения с базой - " + e.getMessage(), e);
         }
     }
 
-    public Session getSession() {
+    public static Session openSession() throws HibernateException{
         Session session = localSession.get();
         if (session == null) {
             session = sessionFactory.openSession();
@@ -40,47 +32,12 @@ public class SessionManager {
         return session;
     }
 
-    public void close() {
-        try {
-            getSession().close();
-        } catch (Throwable e) {
-            log.log(Level.WARNING, "Cannot close", e);
-        }
+    public static void closeSession() throws HibernateException {
+        Session session = localSession.get();
         localSession.set(null);
-    }
-
-    protected void beginTran() {
-        getSession().beginTransaction();
-    }
-
-    protected void commit() {
-        getSession().getTransaction().commit();
-    }
-
-    protected void rollback() {
-        try {
-            getSession().getTransaction().rollback();
-        } catch (HibernateException e) {
-            log.log(Level.WARNING, "Cannot rollback", e);
+        if(session != null) {
+            session.close();
         }
     }
 
-    public <T> T getEntityById(T t, int id) {
-        Object o = getSession().get(t.getClass(), id);
-        return (T) o;
-    }
-
-    public boolean saveOrUpdateEntities(Object... entities) {
-        try {
-            beginTran();
-            for (Object o : entities) {
-                getSession().saveOrUpdate(o);
-            }
-            commit();
-            return true;
-        } catch (HibernateException e) {
-            rollback();
-            return false;
-        }
-    }
 }

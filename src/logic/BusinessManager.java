@@ -2,6 +2,7 @@ package logic;
 
 import logic.HibernateInitializeException;
 import logic.SessionManager;
+import org.hibernate.HibernateException;
 
 public class BusinessManager {
 
@@ -23,5 +24,24 @@ public class BusinessManager {
 
     private BusinessManager() throws HibernateInitializeException {
         session = SessionManager.get();
+    }
+
+    public <T> T getEntityById(T t, int id) {
+        Object o = getSession().get(t.getClass(), id);
+        return (T) o;
+    }
+
+    public boolean saveOrUpdateEntities(Object... entities) {
+        try {
+            beginTran();
+            for (Object o : entities) {
+                getSession().saveOrUpdate(o);
+            }
+            commit();
+            return true;
+        } catch (HibernateException e) {
+            rollback();
+            return false;
+        }
     }
 }
