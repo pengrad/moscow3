@@ -32,18 +32,18 @@ public class Main {
 //        for(TrainCarsEntity tc : car.getTrainCarsesByNumber()) {
 //            System.out.println(tc.getTrainByIdTrain().getRouteByIdRoute().getPointDeparture());
 //        }
-//        Timestamp time = new Timestamp(new Date().getTime());
-//        CarLocationEntity loc = new CarLocationEntity(null, null, null);
-//        CarEntity car = new CarEntity(111, time, time, loc);
-//        RouteEntity route = new RouteEntity("fff", "Kursk", "Kiev");
-//        TrainEntity train = new TrainEntity(time, time, route);
+        Timestamp time = new Timestamp(new Date().getTime());
+        CarLocationEntity loc = new CarLocationEntity(null, null, null);
+        CarEntity car = new CarEntity(111, time, time, loc);
+        RouteEntity route = new RouteEntity("fff", "Kursk", "Kiev");
+        TrainEntity train = new TrainEntity(time, time, route);
         session.beginTransaction();
-//        session.saveOrUpdate(loc);
-//        session.saveOrUpdate(car);
-//        session.saveOrUpdate(route);
-//        session.saveOrUpdate(train);
-        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 6);
-        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
+        session.saveOrUpdate(loc);
+        session.saveOrUpdate(car);
+        session.saveOrUpdate(route);
+        session.saveOrUpdate(train);
+//        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 6);
+//        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
 //        System.out.println(car.getDateUpdateLocation());
 //        System.out.println(train.getRouteByIdRoute().getPointDeparture());
         TrainCarsEntity cars = new TrainCarsEntity();
