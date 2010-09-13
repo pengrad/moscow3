@@ -11,7 +11,7 @@ public class HibernateInitializeException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Ошибки инициализации Hibernate";
+        return "Ошибка инициализации Hibernate";
     }
 
     @Override
