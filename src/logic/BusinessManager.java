@@ -23,24 +23,25 @@ public class BusinessManager {
     }
 
     private BusinessManager() throws HibernateInitializeException {
-        session = SessionManager.get();
+//        session = SessionManager.get();
     }
 
     public <T> T getEntityById(T t, int id) {
-        Object o = getSession().get(t.getClass(), id);
-        return (T) o;
+//        Object o = getSession().get(t.getClass(), id);
+//        return (T) o;
+        return null;
     }
 
     public boolean saveOrUpdateEntities(Object... entities) {
         try {
-            beginTran();
+//            beginTran();
             for (Object o : entities) {
-                getSession().saveOrUpdate(o);
+//                getSession().saveOrUpdate(o);
             }
-            commit();
+//            commit();
             return true;
         } catch (HibernateException e) {
-            rollback();
+//            rollback();
             return false;
         }
     }
