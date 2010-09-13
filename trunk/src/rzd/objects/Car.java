@@ -13,7 +13,7 @@ public class Car {
     private int id =-1;
     private int idRoad=-1;
     private int idTrain=-1;
-    private String number="0000000ewf0";
+    private String number="ХУЙ";
 
     public int getId() {
         return id;
