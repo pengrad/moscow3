@@ -113,11 +113,11 @@ public class Controller implements MouseListener, ActionListener {
 
 
     private void createCar() {
-        carEditInf.open(new Car());
+//        carEditInf.open(new Car());
     }
 
     private void editCar() {
-        carEditInf.open(new Car());
+//        carEditInf.open(new Car());
 
     }
 

@@ -64,7 +64,7 @@ public class Controller implements ActionListener {
                     int idTypeRoad = new Integer(((Object[]) cars.get(i))[0].toString());
                     int idRoad = new Integer(((Object[]) cars.get(i))[1].toString());
                     int numberCar = new Integer(((Object[]) cars.get(i))[2].toString());
-                    ((Road) roadType.get(idTypeRoad).get(idRoad)).addCar(new GCar(new Car()));
+//                    ((Road) roadType.get(idTypeRoad).get(idRoad)).addCar(new GCar(new Car()));
                 }
             }
 
