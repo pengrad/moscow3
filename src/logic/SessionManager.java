@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 class SessionManager {
 
     private SessionManager() {
-    }        
+    }
 
 //    private static SessionManager instance = new SessionManager();
 
@@ -71,10 +72,10 @@ class SessionManager {
         ArrayList<T> res = null;
         try {
             List list = getSession().createCriteria(t.getClass()).list();
-            if(list != null) {
+            if (list != null) {
                 res = new ArrayList<T>(list.size());
-                for(Object o : list) {
-                    res.add((T)o);
+                for (Object o : list) {
+                    res.add((T) o);
                 }
             }
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package logic;
 
 import logic.HibernateInitializeException;
 import logic.SessionManager;
+import logic.model.CarEntity;
 import logic.model.RoadTypeEntity;
 import logic.model.RouteEntity;
 import logic.model.RouteScheduleEntity;
