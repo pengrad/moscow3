@@ -12,12 +12,10 @@ import java.util.ArrayList;
 public class RoadType {
     private int id;
     private String name;
-    private ArrayList<Road> roads;
 
-    public RoadType(int id, String name, ArrayList<Road> roads) {
+    public RoadType(int id, String name) {
         this.id = id;
         this.name = name;
-        this.roads = roads;
     }
 
     public int getId() {
@@ -34,13 +32,5 @@ public class RoadType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ArrayList<Road> getRoads() {
-        return roads;
-    }
-
-    public void setRoads(ArrayList<Road> roads) {
-        this.roads = roads;
-    }
+    }    
 }

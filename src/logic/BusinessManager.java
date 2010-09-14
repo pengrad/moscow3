@@ -2,7 +2,7 @@ package logic;
 
 import logic.HibernateInitializeException;
 import logic.SessionManager;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 
 public class BusinessManager {
 
@@ -33,16 +33,16 @@ public class BusinessManager {
     }
 
     public boolean saveOrUpdateEntities(Object... entities) {
-        try {
+//        try {
 //            beginTran();
             for (Object o : entities) {
 //                getSession().saveOrUpdate(o);
             }
 //            commit();
             return true;
-        } catch (HibernateException e) {
+    //    } catch (HibernateException e) {
 //            rollback();
-            return false;
-        }
+     //       return false;
+    //    }
     }
 }

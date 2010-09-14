@@ -10,14 +10,12 @@ package rzd.objects;
 public class Road {
     private int id;
     private String name;
-    private RoadType roadType;
     private String comment;
     private int position;
 
-    public Road(int id, String name, RoadType roadType, String comment, int position) {
+    public Road(int id, String name, String comment, int position) {
         this.id = id;
         this.name = name;
-        this.roadType = roadType;
         this.comment = comment;
         this.position = position;
     }
@@ -38,13 +36,7 @@ public class Road {
         this.name = name;
     }
 
-    public RoadType getRoadType() {
-        return roadType;
-    }
-
-    public void setRoadType(RoadType roadType) {
-        this.roadType = roadType;
-    }
+  
 
     public String getComment() {
         return comment;

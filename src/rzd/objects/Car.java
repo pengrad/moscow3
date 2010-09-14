@@ -11,11 +11,11 @@ package rzd.objects;
 public class Car {
 
     private int number;
-    private CarLocation carLocation;
+    private CarLocation location;
 
     public Car(int number, CarLocation carLocation) {
         this.number = number;
-        this.carLocation = carLocation;
+        this.location = carLocation;
     }
 
     public int getNumber() {
@@ -27,10 +27,10 @@ public class Car {
     }
 
     public CarLocation getCarLocation() {
-        return carLocation;
+        return location;
     }
 
     public void setCarLocation(CarLocation carLocation) {
-        this.carLocation = carLocation;
+        this.location = carLocation;
     }
 }
