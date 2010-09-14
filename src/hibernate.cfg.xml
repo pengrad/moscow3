@@ -18,7 +18,8 @@
       <mapping class="logic.model.RouteEntity"/>
       <mapping class="logic.model.RouteScheduleEntity"/>
       <mapping class="logic.model.TrainEntity"/>
-      <mapping class="logic.model.TrainCarsEntity"/>      
+      <mapping class="logic.model.TrainCarsEntity"/>
+      <mapping class="logic.model.CarLocationHistoryEntity"/>
 
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->

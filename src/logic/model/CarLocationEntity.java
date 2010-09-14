@@ -3,7 +3,7 @@ package logic.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-@javax.persistence.Table(name = "car_location", catalog = "rzd")
+@Table(name = "car_location", catalog = "rzd")
 @Entity
 public class CarLocationEntity {
 
@@ -18,7 +18,7 @@ public class CarLocationEntity {
 
     private int idLocation;
 
-    @javax.persistence.Column(name = "id_location", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_location", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     @GeneratedValue
     public int getIdLocation() {
@@ -61,7 +61,7 @@ public class CarLocationEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_otherlocation", referencedColumnName = "id")
+    @JoinColumn(name = "id_otherlocation", referencedColumnName = "id")
     CarAnotherLocationEntity getCarAnotherLocationByIdOtherlocation() {
         return carAnotherLocationByIdOtherlocation;
     }
@@ -74,7 +74,7 @@ public class CarLocationEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_road", referencedColumnName = "id")
+    @JoinColumn(name = "id_road", referencedColumnName = "id")
     RoadEntity getRoadByIdRoad() {
         return roadByIdRoad;
     }
@@ -87,12 +87,23 @@ public class CarLocationEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_train", referencedColumnName = "id_train")
+    @JoinColumn(name = "id_train", referencedColumnName = "id_train")
     TrainEntity getTrainByIdTrain() {
         return trainByIdTrain;
     }
 
     public void setTrainByIdTrain(TrainEntity trainByIdTrain) {
         this.trainByIdTrain = trainByIdTrain;
+    }
+
+    private Collection<CarLocationHistoryEntity> carLocationHistoriesByIdLocation;
+
+    @OneToMany(mappedBy = "carLocationByIdLocation")
+    public Collection<CarLocationHistoryEntity> getCarLocationHistoriesByIdLocation() {
+        return carLocationHistoriesByIdLocation;
+    }
+
+    public void setCarLocationHistoriesByIdLocation(Collection<CarLocationHistoryEntity> carLocationHistoriesByIdLocation) {
+        this.carLocationHistoriesByIdLocation = carLocationHistoriesByIdLocation;
     }
 }

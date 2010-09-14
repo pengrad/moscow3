@@ -1,17 +1,14 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
-@javax.persistence.Table(name = "car_another_location", catalog = "rzd")
+@Table(name = "car_another_location", catalog = "rzd")
 @Entity
 public class CarAnotherLocationEntity {
     private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getId() {
         return id;
@@ -23,7 +20,7 @@ public class CarAnotherLocationEntity {
 
     private String parking;
 
-    @javax.persistence.Column(name = "parking", nullable = false, insertable = true, updatable = true, length = 2000, precision = 0)
+    @Column(name = "parking", nullable = false, insertable = true, updatable = true, length = 2000, precision = 0)
     @Basic
     public String getParking() {
         return parking;
@@ -32,6 +29,19 @@ public class CarAnotherLocationEntity {
     public void setParking(String parking) {
         this.parking = parking;
     }
+
+
+    private Collection<CarLocationEntity> carLocationsById;
+
+    @OneToMany(mappedBy = "carAnotherLocationByIdOtherlocation")
+    public Collection<CarLocationEntity> getCarLocationsById() {
+        return carLocationsById;
+    }
+
+    public void setCarLocationsById(Collection<CarLocationEntity> carLocationsById) {
+        this.carLocationsById = carLocationsById;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -51,16 +61,5 @@ public class CarAnotherLocationEntity {
         int result = id;
         result = 31 * result + (parking != null ? parking.hashCode() : 0);
         return result;
-    }
-
-    private Collection<CarLocationEntity> carLocationsById;
-
-    @OneToMany(mappedBy = "carAnotherLocationByIdOtherlocation")
-    public Collection<CarLocationEntity> getCarLocationsById() {
-        return carLocationsById;
-    }
-
-    public void setCarLocationsById(Collection<CarLocationEntity> carLocationsById) {
-        this.carLocationsById = carLocationsById;
     }
 }
