@@ -31,7 +31,8 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         Session session = getSession();
 //        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 4);
-        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
+//        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
+        CarLocationEntity cl = (CarLocationEntity) session.get(CarLocationEntity.class, 9);
 //        for(TrainCarsEntity tc : car.getTrainCarsesByNumber()) {
 //            System.out.println(tc.getTrainByIdTrain().getRouteByIdRoute().getPointDeparture());
 //        }

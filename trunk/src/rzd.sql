@@ -114,6 +114,20 @@ CREATE TABLE `car` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='type_location -1 - в составе поезда 0 - на пути 1 - прочее';
 
 #
+# Structure for the `car_location_history` table : 
+#
+
+CREATE TABLE `car_location_history` (
+  `id_car` int(11) NOT NULL,
+  `id_location` int(11) NOT NULL,
+  PRIMARY KEY (`id_car`,`id_location`),
+  KEY `id_car` (`id_car`),
+  KEY `id_location` (`id_location`),
+  CONSTRAINT `car_location_history_fk1` FOREIGN KEY (`id_location`) REFERENCES `car_location` (`id_location`),
+  CONSTRAINT `car_location_history_fk` FOREIGN KEY (`id_car`) REFERENCES `car` (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+
+#
 # Structure for the `route_schedule` table : 
 #
 
@@ -128,7 +142,7 @@ CREATE TABLE `route_schedule` (
   PRIMARY KEY (`id`),
   KEY `id_route` (`id_route`),
   CONSTRAINT `route_schedule_fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id_route`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `train_cars` table : 
@@ -227,6 +241,14 @@ COMMIT;
 
 INSERT INTO `car` (`number`, `id_location`, `date_update_location`, `date_update`) VALUES 
   (111,9,'2010-09-13 22:05:20','2010-09-13 22:05:20');
+COMMIT;
+
+#
+# Data for the `route_schedule` table  (LIMIT 0,500)
+#
+
+INSERT INTO `route_schedule` (`id`, `id_route`, `time_departure`, `time_destination`, `date_begin`, `day_move`, `day_stop`) VALUES 
+  (1,7,'22:33:33','22:33:33','2010-01-01',5,1);
 COMMIT;
 
 
