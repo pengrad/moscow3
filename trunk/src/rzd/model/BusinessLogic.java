@@ -4,14 +4,7 @@ import java.util.ArrayList;
 
 import rzd.objects.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: ЧерныхЕА
- * Date: 14.09.2010
- * Time: 10:35:47
- * To change this template use File | Settings | File Templates.
- */
-public interface DataSource {
+public interface BusinessLogic {
 
     public ArrayList<RoadType> getRoadTypes();
 
