@@ -20,7 +20,7 @@ public class GTrainSt extends Figure {
         this.train=train;
         setLayout(new FlowLayout());
         for (int i = 0; i < 30; i++) {
-            add(new GCar(new Car()));
+//            add(new GCar(new Car()));
         }
         gVagons = new ArrayList<GCar>(0);
     }

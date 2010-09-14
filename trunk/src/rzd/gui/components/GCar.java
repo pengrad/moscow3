@@ -36,6 +36,6 @@ public class GCar extends Figure {
         g.fill(shape);
         g.setFont(new Font("Tahoma", Font.PLAIN, 11));
         g.setColor(ColorHelper.COLOR_VAGON_NAMBER);
-        g.drawString(car.getNumber(), (int) shape.getBounds().getX() + 2, (int) shape.getBounds().getY() + 13);
+//        g.drawString(car.getNumber(), (int) shape.getBounds().getX() + 2, (int) shape.getBounds().getY() + 13);
     }
 }
