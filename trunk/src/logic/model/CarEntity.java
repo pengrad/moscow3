@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-@javax.persistence.Table(name = "car", catalog = "rzd")
+@Table(name = "car", catalog = "rzd")
 @Entity
 public class CarEntity {
 
@@ -20,7 +20,7 @@ public class CarEntity {
 
     private int number;
 
-    @javax.persistence.Column(name = "number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getNumber() {
         return number;
@@ -32,7 +32,7 @@ public class CarEntity {
 
     private Timestamp dateUpdateLocation;
 
-    @javax.persistence.Column(name = "date_update_location", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_update_location", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateUpdateLocation() {
         return dateUpdateLocation;
@@ -44,7 +44,7 @@ public class CarEntity {
 
     private Timestamp dateUpdate;
 
-    @javax.persistence.Column(name = "date_update", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_update", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateUpdate() {
         return dateUpdate;
@@ -81,7 +81,7 @@ public class CarEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
+    @JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
     CarLocationEntity getCarLocationByIdLocation() {
         return carLocationByIdLocation;
     }
@@ -99,5 +99,16 @@ public class CarEntity {
 
     public void setTrainCarsesByNumber(Collection<TrainCarsEntity> trainCarsesByNumber) {
         this.trainCarsesByNumber = trainCarsesByNumber;
+    }
+
+    private Collection<CarLocationHistoryEntity> carLocationHistoriesByNumber;
+
+    @OneToMany(mappedBy = "carByIdCar")
+    public Collection<CarLocationHistoryEntity> getCarLocationHistoriesByNumber() {
+        return carLocationHistoriesByNumber;
+    }
+
+    public void setCarLocationHistoriesByNumber(Collection<CarLocationHistoryEntity> carLocationHistoriesByNumber) {
+        this.carLocationHistoriesByNumber = carLocationHistoriesByNumber;
     }
 }
