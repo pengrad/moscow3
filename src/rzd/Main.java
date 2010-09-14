@@ -5,6 +5,12 @@
 
 package rzd;
 
+import logic.BusinessManager;
+import logic.HibernateInitializeException;
+import rzd.objects.Route;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author ЧерныхЕА
@@ -14,8 +20,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws HibernateInitializeException {
+        ArrayList<Route> r = BusinessManager.get().getRoutes();
+        for(Route rr : r) {
+            System.out.println(rr.getNumber());
+        }
     }
 
 }
