@@ -23,8 +23,8 @@ public class PRoute extends javax.swing.JPanel {
     public PRoute() {
         initComponents();
         this.c = new Controller(this);
-        bCreateTrain.addActionListener(c);
-        tTarins.addMouseListener(c);
+        bCreateRout.addActionListener(c);
+        tRoute.addMouseListener(c);
     }
 
     /** This method is called from within the constructor to
@@ -37,20 +37,22 @@ public class PRoute extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tTarins = new javax.swing.JTable();
-        fSearchTainByNumber = new javax.swing.JTextField();
-        bCreateTrain = new javax.swing.JButton();
+        tRoute = new javax.swing.JTable();
+        bCreateRout = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tSchedule = new javax.swing.JTable();
+        bCreateSchedule = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(237, 243, 249));
+        tRoute.setModel(new ModelTable() );
+        tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tRoute);
 
-        tTarins.setModel(new ModelTable() );
-        tTarins.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tTarins);
+        bCreateRout.setText("Создать маршрут");
 
-        fSearchTainByNumber.setFont(new java.awt.Font("Tahoma", 2, 11));
-        fSearchTainByNumber.setText("Поиск по номеру маршрута");
+        tSchedule.setModel(new ModelTable() );
+        jScrollPane2.setViewportView(tSchedule);
 
-        bCreateTrain.setText("Создать маршрут");
+        bCreateSchedule.setText("Создать расписание");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,28 +60,35 @@ public class PRoute extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(fSearchTainByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
-                .addComponent(bCreateTrain)
+                .addContainerGap(401, Short.MAX_VALUE)
+                .addComponent(bCreateSchedule)
+                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(407, Short.MAX_VALUE)
+                .addComponent(bCreateRout, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fSearchTainByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bCreateTrain))
+                .addComponent(bCreateRout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(bCreateSchedule)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bCreateTrain;
-    public javax.swing.JTextField fSearchTainByNumber;
+    public javax.swing.JButton bCreateRout;
+    public javax.swing.JButton bCreateSchedule;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable tTarins;
+    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable tRoute;
+    public javax.swing.JTable tSchedule;
     // End of variables declaration//GEN-END:variables
 }
