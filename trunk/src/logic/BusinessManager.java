@@ -1,8 +1,6 @@
 package logic;
 
-import logic.model.RoadTypeEntity;
-import logic.model.RouteEntity;
-import logic.model.RouteScheduleEntity;
+import logic.model.*;
 import rzd.model.BusinessLogic;
 import rzd.model.objects.*;
 
@@ -42,20 +40,17 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Route> getRoutes() {
-        Collection<RouteScheduleEntity> objects = SessionManager.getAllObjects(new RouteScheduleEntity());
+        Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
         SessionManager.closeSession();
         if(objects == null) return null;
         ArrayList<Route> list = new ArrayList<Route>(objects.size());
-        for(RouteScheduleEntity rs : objects) {
-            RouteEntity re = rs.getRouteByIdRoute();
-            list.add(new Route(rs.getId(), re.getNumber(), re.getPointDeparture(), re.getPointDestination(),
-                    rs.getTimeDeparture(), rs.getTimeDeparture(), rs.getDateBegin(), rs.getDayMove(), rs.getDayStop()));
+        for(RouteEntity re : objects) {
+            list.add(new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination()));
         }
         return list;
     }
 
     public boolean updateRoute(Route route) {
-        
         SessionManager.getSession().saveOrUpdate(null);
         return true;
     }
@@ -66,7 +61,15 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Schedule> getSchedules() {
-        return null;
+        Collection<RouteScheduleEntity> objects = SessionManager.getAllObjects(new RouteScheduleEntity());
+        SessionManager.closeSession();
+        if(objects == null) return null;
+        ArrayList<Schedule> list = new ArrayList<Schedule>(objects.size());
+        for(RouteScheduleEntity rs : objects) {
+            list.add(new Schedule(rs.getId(), rs.getTimeDeparture(), rs.getTimeDestination(), rs.getDateBegin(), 
+                    rs.getDayMove(), rs.getDayStop()));
+        }
+        return list;
     }
 
     public boolean updateSchedule(Schedule schedule) {
@@ -109,19 +112,7 @@ public class BusinessManager implements BusinessLogic {
         return false;
     }
 
-    public ArrayList<Train> getTrainsByRoad(Road road) {
-        return null;
-    }
-
-    public boolean addTrainInRoad(Road road, Train train) {
-        return false;
-    }
-
-    public boolean removeTrainFromRoad(Road road, Train train) {
-        return false;
-    }
-
-    public ArrayList<Train> getTrainsByRoad() {
+    public Train getTrainByRoad(Road road) {
         return null;
     }
 
@@ -158,18 +149,6 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public boolean addCarInAnotherLocation(Car car, CarAnotherLocation carAnotherLocation) {
-        return false;
-    }
-
-    public boolean addCarInTrain(Train train, Car road) {
-        return false;
-    }
-
-    public boolean addCarInRoad(Train train, Car car) {
-        return false;
-    }
-
-    public boolean addCarInAnotherLocation(CarAnotherLocation carAnotherLocation, Car car) {
         return false;
     }
 }
