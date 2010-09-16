@@ -52,6 +52,10 @@ public class TestModel implements BusinessLogic {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public boolean addRoute(Route route) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public boolean updateRoute(Route route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -81,6 +85,10 @@ public class TestModel implements BusinessLogic {
     }
 
     public Route getRouteBySchedule(Schedule schedule) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrains(java.util.Date dBegin, java.util.Date dEnd) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

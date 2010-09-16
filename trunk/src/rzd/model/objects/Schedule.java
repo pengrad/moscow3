@@ -12,17 +12,17 @@ import java.sql.Time;
  */
 public class Schedule {
     private int id;
-    private Time time_departure;
-    private Time time_destination;
-    private Date date_begin;
+    private Time timeDeparture;
+    private Time timeDestination;
+    private Date dateBegin;
     private int dayMove;
     private int dayStop;
 
-    public Schedule(int id, Time time_departure, Time time_destination, Date date_begin, int dayMove, int dayStop) {
+    public Schedule(int id, Time timeDeparture, Time timeDestination, Date dateBegin, int dayMove, int dayStop) {
         this.id = id;
-        this.time_departure = time_departure;
-        this.time_destination = time_destination;
-        this.date_begin = date_begin;
+        this.timeDeparture = timeDeparture;
+        this.timeDestination = timeDestination;
+        this.dateBegin = dateBegin;
         this.dayMove = dayMove;
         this.dayStop = dayStop;
     }
@@ -35,28 +35,28 @@ public class Schedule {
         this.id = id;
     }
 
-    public Time getTime_departure() {
-        return time_departure;
+    public Time getTimeDeparture() {
+        return timeDeparture;
     }
 
-    public void setTime_departure(Time time_departure) {
-        this.time_departure = time_departure;
+    public void setTimeDeparture(Time timeDeparture) {
+        this.timeDeparture = timeDeparture;
     }
 
-    public Time getTime_destination() {
-        return time_destination;
+    public Time getTimeDestination() {
+        return timeDestination;
     }
 
-    public void setTime_destination(Time time_destination) {
-        this.time_destination = time_destination;
+    public void setTimeDestination(Time timeDestination) {
+        this.timeDestination = timeDestination;
     }
 
-    public Date getDate_begin() {
-        return date_begin;
+    public Date getDateBegin() {
+        return dateBegin;
     }
 
-    public void setDate_begin(Date date_begin) {
-        this.date_begin = date_begin;
+    public void setDateBegin(Date dateBegin) {
+        this.dateBegin = dateBegin;
     }
 
     public int getDayMove() {

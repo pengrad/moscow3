@@ -1,6 +1,7 @@
 package rzd.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import rzd.model.objects.*;
 
@@ -30,7 +31,7 @@ public interface BusinessLogic {
 
     public Route getRouteBySchedule(Schedule schedule);
 
-    public ArrayList<Train> getTrains();
+    public ArrayList<Train> getTrains(Date dBegin,Date dEnd);
 
     public boolean addTrain(Train train, Route route);
 
