@@ -2,7 +2,6 @@ package rzd.carsFleet;
 
 import rzd.ModelTable;
 import rzd.bd.Base;
-import rzd.objects.Car;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

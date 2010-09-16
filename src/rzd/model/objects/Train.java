@@ -2,12 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rzd.objects;
+package rzd.model.objects;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 /**
  * @author ЧерныхЕА

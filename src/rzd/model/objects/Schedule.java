@@ -1,31 +1,25 @@
-package rzd.objects;
+package rzd.model.objects;
 
 import java.sql.Date;
 import java.sql.Time;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Евгений
+ * User: ЧерныхЕА
  * Date: 14.09.2010
- * Time: 0:24:49
+ * Time: 16:27:02
  * To change this template use File | Settings | File Templates.
  */
-public class Route {
+public class Schedule {
     private int id;
-    private String number;
-    private String point_departure;
-    private String point_destination;
     private Time time_departure;
     private Time time_destination;
     private Date date_begin;
     private int dayMove;
     private int dayStop;
 
-    public Route(int id, String number, String point_departure, String point_destination, Time time_departure, Time time_destination, Date date_begin, int dayMove, int dayStop) {
+    public Schedule(int id, Time time_departure, Time time_destination, Date date_begin, int dayMove, int dayStop) {
         this.id = id;
-        this.number = number;
-        this.point_departure = point_departure;
-        this.point_destination = point_destination;
         this.time_departure = time_departure;
         this.time_destination = time_destination;
         this.date_begin = date_begin;
@@ -39,30 +33,6 @@ public class Route {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getPoint_departure() {
-        return point_departure;
-    }
-
-    public void setPoint_departure(String point_departure) {
-        this.point_departure = point_departure;
-    }
-
-    public String getPoint_destination() {
-        return point_destination;
-    }
-
-    public void setPoint_destination(String point_destination) {
-        this.point_destination = point_destination;
     }
 
     public Time getTime_departure() {

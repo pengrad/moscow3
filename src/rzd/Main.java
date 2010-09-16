@@ -7,7 +7,7 @@ package rzd;
 
 import logic.BusinessManager;
 import logic.HibernateInitializeException;
-import rzd.objects.Route;
+import rzd.model.objects.Route;
 
 import java.util.ArrayList;
 

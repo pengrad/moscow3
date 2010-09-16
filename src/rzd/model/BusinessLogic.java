@@ -2,55 +2,66 @@ package rzd.model;
 
 import java.util.ArrayList;
 
-import rzd.objects.*;
+import rzd.model.objects.*;
 
 public interface BusinessLogic {
 
     public ArrayList<RoadType> getRoadTypes();
 
-    public ArrayList<Road> getRoadsByType(RoadType roadType);
+       public ArrayList<Road> getRoadsByType(RoadType roadType);
 
-    public ArrayList<Route> getRoutes();
+       public ArrayList<Route> getRoutes();
 
-    public boolean updateRoute(Route route);
+       public boolean updateRoute(Route route);
 
-    public boolean removeRoute(Route route);
+       public boolean removeRoute(Route route);
 
-    public ArrayList<Train> getTrains();
+       public ArrayList<Schedule> getSchedules();
 
-    public boolean updateTrain(Train train);
+       public boolean updateSchedule(Schedule schedule);
 
-    public Route getRouteByTrain(Train train);
+       public boolean removeSchedule(Schedule schedule);
 
-    public boolean addTrainInRoad(Road road, Train train);
+       public ArrayList<Schedule> getSchedulesByRoute(Route route);
 
-    public boolean removeTrainFromRoad(Road road, Train train);
+       public Route getRouteBySchedule(Schedule schedule);
 
-    public ArrayList<Train> getTrainsByRoad();
+       public boolean addRouteInSchedule(Route route, Schedule schedule);
 
-    public ArrayList<Car> getCars();
+       public ArrayList<Train> getTrains();
 
-    public boolean updateCar(Car car);
+       public boolean updateTrain(Train train);
 
-    public boolean removeCar();
+       public Route getRouteByTrain(Train train);
 
-    public ArrayList<Car> getCarsByTrain(Train train);
+       public boolean addTrainInRoad(Train train, Road road);
 
-    public ArrayList<Car> getCarsByRoad(Road train);
+       public boolean removeTrainFromRoad(Train train, Road road);
 
-    public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation);
+       public ArrayList<Train> getTrainsByRoad();
 
-    public boolean addCarInTrain(Train train, Car road);
+       public ArrayList<Car> getCars();
 
-    //  public boolean removeCarFromTrain(Train train, Car car);
+       public boolean updateCar(Car car);
 
-    public boolean addCarInRoad(Train train, Car car);
+       public boolean removeCar();
 
-    // public boolean removeCarFromRoad(Road road, Car car);
+       public ArrayList<Car> getCarsByTrain(Train train);
 
-    public boolean addCarInAnotherLocation(CarAnotherLocation carAnotherLocation, Car car);
+       public ArrayList<Car> getCarsByRoad(Road train);
 
-    //  public boolean removeCarFromAnotherLocation(CarAnotherLocation carAnotherLocation, Car car);
+       public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation);
 
+       public boolean addCarInTrain(Car road, Train train);
 
+       //  public boolean removeCarFromTrain(Train train, Car car);
+
+       public boolean addCarInRoad(Car car, Road road);
+
+       // public boolean removeCarFromRoad(Road road, Car car);
+
+       public boolean addCarInAnotherLocation(Car car, CarAnotherLocation carAnotherLocation);
+
+       //  public boolean removeCarFromAnotherLocation(CarAnotherLocation carAnotherLocation, Car car);
+   
 }

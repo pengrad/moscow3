@@ -1,4 +1,4 @@
-package rzd.objects;
+package rzd.model.objects;
 
 /**
  * Created by IntelliJ IDEA.

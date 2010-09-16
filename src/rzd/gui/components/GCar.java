@@ -10,7 +10,7 @@ import rzd.test.ControllerStation;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import rzd.objects.Car;
+import rzd.model.objects.Car;
 
 /**
  * @author ЧерныхЕА

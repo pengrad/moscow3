@@ -1,6 +1,6 @@
 package rzd.model;
 
-import rzd.objects.*;
+import rzd.model.objects.*;
 
 import java.util.ArrayList;
 
