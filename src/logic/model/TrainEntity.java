@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-@javax.persistence.Table(name = "train", catalog = "rzd")
+@Table(name = "train", catalog = "rzd")
 @Entity
 public class TrainEntity {
 
     public TrainEntity() {
     }
 
-    public TrainEntity(Timestamp dtDeparture, Timestamp dtDestination, RouteEntity routeByIdRoute) {
+    public TrainEntity(Timestamp dtDeparture, Timestamp dtDestination){//}, RouteEntity routeByIdRoute) {
         this.dtDeparture = dtDeparture;
         this.dtDestination = dtDestination;
-        this.routeByIdRoute = routeByIdRoute;
+        //this.routeByIdRoute = routeByIdRoute;
     }
 
     private int idTrain;
 
-    @javax.persistence.Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     @GeneratedValue
     public int getIdTrain() {
@@ -32,7 +32,7 @@ public class TrainEntity {
 
     private Timestamp dtDeparture;
 
-    @javax.persistence.Column(name = "dt_departure", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "dt_departure", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDtDeparture() {
         return dtDeparture;
@@ -44,7 +44,7 @@ public class TrainEntity {
 
     private Timestamp dtDestination;
 
-    @javax.persistence.Column(name = "dt_destination", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "dt_destination", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDtDestination() {
         return dtDestination;
@@ -88,19 +88,6 @@ public class TrainEntity {
         this.carLocationsByIdTrain = carLocationsByIdTrain;
     }
 
-    private RouteEntity routeByIdRoute;
-
-    @ManyToOne
-    public
-    @JoinColumn(name = "id_route", referencedColumnName = "id_route", nullable = false)
-    RouteEntity getRouteByIdRoute() {
-        return routeByIdRoute;
-    }
-
-    public void setRouteByIdRoute(RouteEntity routeByIdRoute) {
-        this.routeByIdRoute = routeByIdRoute;
-    }
-
     private Collection<TrainCarsEntity> trainCarsesByIdTrain;
 
     @OneToMany(mappedBy = "trainByIdTrain")
@@ -110,5 +97,18 @@ public class TrainEntity {
 
     public void setTrainCarsesByIdTrain(Collection<TrainCarsEntity> trainCarsesByIdTrain) {
         this.trainCarsesByIdTrain = trainCarsesByIdTrain;
+    }
+
+    private RouteScheduleEntity routeScheduleByIdSchedule;
+
+    @ManyToOne
+    public
+    @JoinColumn(name = "id_schedule", referencedColumnName = "id", nullable = false)
+    RouteScheduleEntity getRouteScheduleByIdSchedule() {
+        return routeScheduleByIdSchedule;
+    }
+
+    public void setRouteScheduleByIdSchedule(RouteScheduleEntity routeScheduleByIdSchedule) {
+        this.routeScheduleByIdSchedule = routeScheduleByIdSchedule;
     }
 }
