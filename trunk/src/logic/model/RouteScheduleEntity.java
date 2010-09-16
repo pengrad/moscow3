@@ -1,13 +1,11 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Collection;
 
-@javax.persistence.Table(name = "route_schedule", catalog = "rzd")
+@Table(name = "route_schedule", catalog = "rzd")
 @Entity
 public class RouteScheduleEntity {
 
@@ -25,7 +23,7 @@ public class RouteScheduleEntity {
 
     private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getId() {
         return id;
@@ -37,7 +35,7 @@ public class RouteScheduleEntity {
 
     private Time timeDeparture;
 
-    @javax.persistence.Column(name = "time_departure", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
+    @Column(name = "time_departure", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     @Basic
     public Time getTimeDeparture() {
         return timeDeparture;
@@ -49,7 +47,7 @@ public class RouteScheduleEntity {
 
     private Time timeDestination;
 
-    @javax.persistence.Column(name = "time_destination", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
+    @Column(name = "time_destination", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     @Basic
     public Time getTimeDestination() {
         return timeDestination;
@@ -61,7 +59,7 @@ public class RouteScheduleEntity {
 
     private Date dateBegin;
 
-    @javax.persistence.Column(name = "date_begin", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "date_begin", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Date getDateBegin() {
         return dateBegin;
@@ -73,7 +71,7 @@ public class RouteScheduleEntity {
 
     private int dayMove;
 
-    @javax.persistence.Column(name = "day_move", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "day_move", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public int getDayMove() {
         return dayMove;
@@ -85,7 +83,7 @@ public class RouteScheduleEntity {
 
     private int dayStop;
 
-    @javax.persistence.Column(name = "day_stop", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "day_stop", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public int getDayStop() {
         return dayStop;
@@ -129,12 +127,23 @@ public class RouteScheduleEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_route", referencedColumnName = "id_route", nullable = false)
+    @JoinColumn(name = "id_route", referencedColumnName = "id_route", nullable = false)
     RouteEntity getRouteByIdRoute() {
         return routeByIdRoute;
     }
 
     public void setRouteByIdRoute(RouteEntity routeByIdRoute) {
         this.routeByIdRoute = routeByIdRoute;
+    }
+
+    private Collection<TrainEntity> trainsById;
+
+    @OneToMany(mappedBy = "routeScheduleByIdSchedule")
+    public Collection<TrainEntity> getTrainsById() {
+        return trainsById;
+    }
+
+    public void setTrainsById(Collection<TrainEntity> trainsById) {
+        this.trainsById = trainsById;
     }
 }
