@@ -6,10 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import rzd.ModelTable;
-import rzd.bd.Base;
+import rzd.model.TestModel;
+import rzd.model.objects.Train;
+
 
 import javax.swing.*;
 import java.util.ArrayList;
+import rzd.model.objects.Route;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,30 +26,44 @@ public class Controller implements ActionListener, MouseListener {
     private PRoute pTrains;
     private DEditRoute dEditTrain;
 
-    private JPopupMenu menu;
-    private JMenuItem editTrain;
-    private JMenuItem deleteTrain;
+    private JPopupMenu menuRoute;
+    private JPopupMenu menuSchedule;
+
+    private JMenuItem editRoute;
+    private JMenuItem deleteRoute;
+    private JMenuItem editSchedule;
+    private JMenuItem deleteScedule;
 
     public Controller(PRoute p) {
         this.pTrains = p;
         dEditTrain = new DEditRoute(null, true);
 
-        menu = new JPopupMenu();
-        editTrain = new JMenuItem("Редактировать информацию о поезде", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
-        editTrain.addActionListener(this);
-        deleteTrain = new JMenuItem("Удалить поезд", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
-        deleteTrain.addActionListener(this);
-        menu.add(editTrain);
-        menu.add(deleteTrain);
-
+        menuRoute = new JPopupMenu();
+        menuSchedule = new JPopupMenu();
+        editRoute = new JMenuItem("Редактировать маршрут", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
+        editRoute.addActionListener(this);
+        deleteRoute = new JMenuItem("Удалить маршрут", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
+        deleteRoute.addActionListener(this);
+        menuRoute.add(editRoute);
+        menuRoute.add(deleteRoute);
+         editSchedule = new JMenuItem("Редактировать расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
+        editSchedule.addActionListener(this);
+        deleteScedule = new JMenuItem("Удалить расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
+        deleteScedule.addActionListener(this);
+        menuSchedule.add(editSchedule);
+        menuSchedule.add(deleteScedule);
         update();
 
     }
 
     public void update() {
         try {
-            ArrayList trains = Base.getInstance().getTrainsAll();
-            ((ModelTable) pTrains.tTarins.getModel()).setDate(trains);
+           ArrayList<Route> routes = TestModel.get().getRoutes();
+       
+            ((ModelTable) pTrains.tRoute.getModel()).setDate(routes);
+          ArrayList<Train> trains = TestModel.get().getTrains();
+            ((ModelTable) pTrains.tRoute.getModel()).setDate(trains);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pTrains, e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -54,10 +71,10 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-          if (e.getSource() == pTrains.tTarins && e.getButton() == 3) {
-            int row = pTrains.tTarins.rowAtPoint(e.getPoint());
+          if (e.getSource() == pTrains.tRoute && e.getButton() == 3) {
+            int row = pTrains.tRoute.rowAtPoint(e.getPoint());
             pTrains.tTarins.addRowSelectionInterval(row, row);
-            menu.show(pTrains.tTarins,e.getX(), e.getY());
+            menuRoute.show(pTrains.tTarins,e.getX(), e.getY());
         }
     }
 
@@ -80,9 +97,9 @@ public class Controller implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pTrains.bCreateTrain) {
             insertTrain();
-        } else if (e.getSource() == editTrain) {
+        } else if (e.getSource() == editRoute) {
             editTrain();
-        } else if (e.getSource() == deleteTrain) {
+        } else if (e.getSource() == deleteRoute) {
             deleteTrain();
         }
     }
@@ -93,10 +110,10 @@ public class Controller implements ActionListener, MouseListener {
         ArrayList data = dEditTrain.open(null);
         if (data != null) {
             try {
-                int n = Base.getInstance().insertTrain(data);
-                if (n > 0) {
-                    ((ModelTable) pTrains.tTarins.getModel()).addRow(data.toArray());
-                }
+             //   int n = TestModel.get().updateTrain(new Train(0,));
+//                if (n > 0) {
+//                    ((ModelTable) pTrains.tTarins.getModel()).addRow(data.toArray());
+//                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pTrains, e.getMessage());
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -119,16 +136,16 @@ public class Controller implements ActionListener, MouseListener {
         ArrayList newData = dEditTrain.open(data);
         if (newData != null) {
             try {
-                int n = Base.getInstance().updateTrain(newData);
-                if (n > 0) {
-                    pTrains.tTarins.getModel().setValueAt(newData.get(0), row, 0);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(1), row, 1);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(2), row, 2);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(3), row, 3);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(4), row, 4);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(5), row, 5);
-                    pTrains.tTarins.getModel().setValueAt(newData.get(6), row, 6);
-                }
+//                int n = Base.getInstance().updateTrain(newData);
+//                if (n > 0) {
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(0), row, 0);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(1), row, 1);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(2), row, 2);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(3), row, 3);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(4), row, 4);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(5), row, 5);
+//                    pTrains.tTarins.getModel().setValueAt(newData.get(6), row, 6);
+//                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pTrains, e.getMessage());
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -140,10 +157,10 @@ public class Controller implements ActionListener, MouseListener {
         int row = pTrains.tTarins.getSelectedRow();
         int number = new Integer(pTrains.tTarins.getModel().getValueAt(row, 0).toString());
         try {
-            int n = Base.getInstance().deleteTrain(number);
-            if (n > 0) {
-                ((ModelTable) pTrains.tTarins.getModel()).removeRow(row);
-            }
+//            int n = Base.getInstance().deleteTrain(number);
+//            if (n > 0) {
+//                ((ModelTable) pTrains.tTarins.getModel()).removeRow(row);
+//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pTrains, e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

@@ -28,7 +28,6 @@ public class ModelTable extends DefaultTableModel {
         if (list == null) return null;
         Vector v = new Vector(list.size());
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(Arrays.toString((Object[]) list.get(i)));
             v.addElement(convertToVector((Object[]) list.get(i)));
         }
         return v;

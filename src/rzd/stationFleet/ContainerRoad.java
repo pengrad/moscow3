@@ -11,8 +11,6 @@
 
 package rzd.stationFleet;
 
-import rzd.gui.components.*;
-
 /**
  *
  * @author ЧерныхЕА
@@ -56,11 +54,11 @@ public class ContainerRoad extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-public void addRoad(Road r){
+public void addRoad(PRoad r){
     pContainerRoads.add(r);
 }
 
-public void removeRoad(Road r){
+public void removeRoad(PRoad r){
     pContainerRoads.remove(r);
 }
 

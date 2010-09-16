@@ -1,7 +1,8 @@
 package rzd.carsFleet;
 
 import rzd.ModelTable;
-import rzd.bd.Base;
+import rzd.model.TestModel;
+import rzd.model.objects.Car;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -96,7 +97,7 @@ public class Controller implements MouseListener, ActionListener {
 
     public void update() {
         try {
-            ArrayList date = Base.getInstance().getCarsAll();
+            ArrayList<Car> date = TestModel.get().getCars();
             if (date != null) {
                 JTable t = pCarFleet.tCars;
                 ModelTable mt = (ModelTable) t.getModel();
