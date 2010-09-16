@@ -100,7 +100,7 @@ public class TestModel implements BusinessLogic {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addTrain(Train train, Route route) {
+    public boolean addTrain(Train train, Schedule route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -108,7 +108,7 @@ public class TestModel implements BusinessLogic {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean updateTrain(Train train) {
+    public boolean updateTrain(Train train, Schedule schedule) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

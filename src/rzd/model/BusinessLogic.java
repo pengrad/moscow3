@@ -33,9 +33,9 @@ public interface BusinessLogic {
 
     public ArrayList<Train> getTrains(Date dBegin,Date dEnd);
 
-    public boolean addTrain(Train train, Route route);
+    public boolean addTrain(Train train, Schedule route);
 
-    public boolean updateTrain(Train train,Route route);
+    public boolean updateTrain(Train train, Schedule route);
 
     public Route getRouteByTrain(Train train);
 

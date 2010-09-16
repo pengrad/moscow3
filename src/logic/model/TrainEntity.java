@@ -11,10 +11,10 @@ public class TrainEntity {
     public TrainEntity() {
     }
 
-    public TrainEntity(Timestamp dtDeparture, Timestamp dtDestination){//}, RouteEntity routeByIdRoute) {
+    public TrainEntity(Timestamp dtDeparture, Timestamp dtDestination, RouteScheduleEntity routeScheduleByIdSchedule) {
         this.dtDeparture = dtDeparture;
         this.dtDestination = dtDestination;
-        //this.routeByIdRoute = routeByIdRoute;
+        this.routeScheduleByIdSchedule = routeScheduleByIdSchedule;
     }
 
     private int idTrain;
