@@ -59,6 +59,10 @@ public class BusinessManager implements BusinessLogic {
         return list;
     }
 
+    public boolean addRoute(Route route) {
+        return false;
+    }
+
     public boolean updateRoute(Route route) {
         if(route == null) return false;
         RouteEntity r = new RouteEntity(route.getNumber(), route.getPoint_departure(), route.getPoint_destination());
