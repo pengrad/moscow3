@@ -1,6 +1,4 @@
-package rzd.objects;
-
-import java.util.ArrayList;
+package rzd.model.objects;
 
 /**
  * Created by IntelliJ IDEA.

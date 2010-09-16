@@ -7,7 +7,6 @@ package rzd.stationFleet;
 import rzd.bd.Base;
 import rzd.gui.components.GCar;
 import rzd.gui.components.GTrainSt;
-import rzd.objects.Car;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

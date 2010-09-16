@@ -10,7 +10,7 @@
  */
 package rzd.carsFleet;
 
-import rzd.objects.Car;
+import rzd.model.objects.Car;
 
 /**
  *

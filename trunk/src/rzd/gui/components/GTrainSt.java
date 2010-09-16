@@ -6,8 +6,8 @@ package rzd.gui.components;
 
 import java.awt.*;
 import java.util.ArrayList;
-import rzd.objects.Car;
-import rzd.objects.Train;
+
+import rzd.model.objects.Train;
 
 /**
  * @author ЧерныхЕА
