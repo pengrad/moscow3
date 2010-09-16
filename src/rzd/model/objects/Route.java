@@ -13,14 +13,14 @@ import java.sql.Time;
 public class Route {
     private int id;
     private String number;
-    private String point_departure;
-    private String point_destination;
+    private String pointDeparture;
+    private String pointDestination;
 
-    public Route(int id, String number, String point_departure, String point_destination) {
+    public Route(int id, String number, String pointDeparture, String pointDestination) {
         this.id = id;
         this.number = number;
-        this.point_departure = point_departure;
-        this.point_destination = point_destination;
+        this.pointDeparture = pointDeparture;
+        this.pointDestination = pointDestination;
     }
 
     public int getId() {
@@ -39,20 +39,20 @@ public class Route {
         this.number = number;
     }
 
-    public String getPoint_departure() {
-        return point_departure;
+    public String getPointDeparture() {
+        return pointDeparture;
     }
 
-    public void setPoint_departure(String point_departure) {
-        this.point_departure = point_departure;
+    public void setPoint_departure(String pointDeparture) {
+        this.pointDeparture = pointDeparture;
     }
 
-    public String getPoint_destination() {
-        return point_destination;
+    public String getPointDestination() {
+        return pointDestination;
     }
 
-    public void setPoint_destination(String point_destination) {
-        this.point_destination = point_destination;
+    public void setPoint_destination(String pointDestination) {
+        this.pointDestination = pointDestination;
     }
 
 }
