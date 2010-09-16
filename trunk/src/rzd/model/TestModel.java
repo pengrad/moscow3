@@ -1,6 +1,7 @@
 package rzd.model;
 
 import java.sql.Date;
+
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class TestModel implements BusinessLogic {
     public static TestModel get() {
         return tm;
     }
+
     HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
 
     private TestModel() {
@@ -62,7 +64,11 @@ public class TestModel implements BusinessLogic {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean updateSchedule(Schedule schedule) {
+    public boolean addSchedule(Schedule schedule, Route route) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean updateSchedule(Schedule schedule, Route route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -84,6 +90,14 @@ public class TestModel implements BusinessLogic {
 
     public ArrayList<Train> getTrains() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean addTrain(Train train, Route route) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean updateTrain(Train train, Route route) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public boolean updateTrain(Train train) {
@@ -108,6 +122,14 @@ public class TestModel implements BusinessLogic {
 
     public ArrayList<Car> getCars() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean addCar(Car car, CarLocation carLocation) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public boolean updateCar(Car car, CarLocation carLocation) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public boolean updateCar(Car car) {
