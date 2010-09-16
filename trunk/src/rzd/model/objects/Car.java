@@ -12,7 +12,7 @@ public class Car {
 
     private int number;
 
-    public Car(int number, CarLocation carLocation) {
+    public Car(int number) {
         this.number = number;
     }
 

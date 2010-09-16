@@ -16,7 +16,7 @@ public class Route {
     private String point_departure;
     private String point_destination;
 
-    public Route(int id, String number, String point_departure, String point_destination, Time time_departure, Time time_destination, Date date_begin, int dayMove, int dayStop) {
+    public Route(int id, String number, String point_departure, String point_destination) {
         this.id = id;
         this.number = number;
         this.point_departure = point_departure;
