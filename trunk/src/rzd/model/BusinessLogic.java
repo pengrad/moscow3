@@ -38,7 +38,7 @@ public interface BusinessLogic {
 
     public boolean removeTrainFromRoad(Train train, Road road);
 
-    public ArrayList<Train> getTrainsByRoad(Road road);
+    public Train getTrainByRoad(Road road);
 
     public ArrayList<Car> getCars();
 

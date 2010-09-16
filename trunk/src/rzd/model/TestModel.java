@@ -102,7 +102,7 @@ public class TestModel implements BusinessLogic {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public ArrayList<Train> getTrainsByRoad(Road road) {
+    public Train getTrainByRoad(Road road) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
