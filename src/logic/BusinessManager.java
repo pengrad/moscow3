@@ -1,17 +1,13 @@
 package logic;
 
-import logic.HibernateInitializeException;
-import logic.SessionManager;
-import logic.model.CarEntity;
 import logic.model.RoadTypeEntity;
 import logic.model.RouteEntity;
 import logic.model.RouteScheduleEntity;
 import rzd.model.BusinessLogic;
-import rzd.objects.*;
+import rzd.model.objects.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
-//import org.hibernate.HibernateException;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -69,6 +65,30 @@ public class BusinessManager implements BusinessLogic {
         return true;
     }
 
+    public ArrayList<Schedule> getSchedules() {
+        return null;
+    }
+
+    public boolean updateSchedule(Schedule schedule) {
+        return false;
+    }
+
+    public boolean removeSchedule(Schedule schedule) {
+        return false;
+    }
+
+    public ArrayList<Schedule> getSchedulesByRoute(Route route) {
+        return null;
+    }
+
+    public Route getRouteBySchedule(Schedule schedule) {
+        return null;
+    }
+
+    public boolean addRouteInSchedule(Route route, Schedule schedule) {
+        return false;
+    }
+
     public ArrayList<Train> getTrains() {
         return null;
     }
@@ -78,6 +98,18 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Route getRouteByTrain(Train train) {
+        return null;
+    }
+
+    public boolean addTrainInRoad(Train train, Road road) {
+        return false;
+    }
+
+    public boolean removeTrainFromRoad(Train train, Road road) {
+        return false;
+    }
+
+    public ArrayList<Train> getTrainsByRoad(Road road) {
         return null;
     }
 
@@ -115,6 +147,18 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation) {
         return null;
+    }
+
+    public boolean addCarInTrain(Car road, Train train) {
+        return false;
+    }
+
+    public boolean addCarInRoad(Car car, Road road) {
+        return false;
+    }
+
+    public boolean addCarInAnotherLocation(Car car, CarAnotherLocation carAnotherLocation) {
+        return false;
     }
 
     public boolean addCarInTrain(Train train, Car road) {
