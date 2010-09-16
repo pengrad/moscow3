@@ -1,7 +1,6 @@
 package rzd.model.objects;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,13 +11,13 @@ import java.sql.Time;
  */
 public class Schedule {
     private int id;
-    private Time timeDeparture;
-    private Time timeDestination;
+    private Date timeDeparture;
+    private Date timeDestination;
     private Date dateBegin;
     private int dayMove;
     private int dayStop;
 
-    public Schedule(int id, Time timeDeparture, Time timeDestination, Date dateBegin, int dayMove, int dayStop) {
+    public Schedule(int id, Date timeDeparture, Date timeDestination, Date dateBegin, int dayMove, int dayStop) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
@@ -35,19 +34,19 @@ public class Schedule {
         this.id = id;
     }
 
-    public Time getTimeDeparture() {
+    public Date getTimeDeparture() {
         return timeDeparture;
     }
 
-    public void setTimeDeparture(Time timeDeparture) {
+    public void setTimeDeparture(Date timeDeparture) {
         this.timeDeparture = timeDeparture;
     }
 
-    public Time getTimeDestination() {
+    public Date getTimeDestination() {
         return timeDestination;
     }
 
-    public void setTimeDestination(Time timeDestination) {
+    public void setTimeDestination(Date timeDestination) {
         this.timeDestination = timeDestination;
     }
 
