@@ -55,9 +55,10 @@ public class Controller implements ActionListener {
                 while (itRoad.hasNext()) {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
+                    System.out.println("road="+k.getName());
                     roads.get(k).addCars(TestModel.get().getCarsByRoad(k));
                     roads.get(k).addTrain(TestModel.get().getTrainByRoad(k));
-          }
+                }
             }
 
             //Заполняем пути поездами и вагонами
@@ -93,7 +94,7 @@ public class Controller implements ActionListener {
                         for (int k = 0; k < r.size(); k++) {
                             PRoad road = new PRoad(r.get(k).getName());
                             cRoad.addRoad(road);
-                            roads.put(r.get(i), road);
+                            roads.put(r.get(k), road);
                         }
                         tabPanel.add(rType.getName(), cRoad);
                         roadType.put(rType, roads);

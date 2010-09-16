@@ -1,5 +1,6 @@
 package rzd.model;
 
+import java.sql.Date;
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
@@ -8,12 +9,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class TestModel implements BusinessLogic {
+
     private final static TestModel tm = new TestModel();
 
     public static TestModel get() {
         return tm;
     }
-
     HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
 
     private TestModel() {
@@ -30,7 +31,6 @@ public class TestModel implements BusinessLogic {
         roads.add(new Road(6, "Путь 6", "", 60));
         roadTypes.put(roadType, roads);
     }
-
 
     public ArrayList<RoadType> getRoadTypes() {
         Set<RoadType> tr = roadTypes.keySet();
@@ -103,7 +103,7 @@ public class TestModel implements BusinessLogic {
     }
 
     public Train getTrainByRoad(Road road) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()));
     }
 
     public ArrayList<Car> getCars() {
@@ -119,11 +119,19 @@ public class TestModel implements BusinessLogic {
     }
 
     public ArrayList<Car> getCarsByTrain(Train train) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<Car> cars = new ArrayList<Car>();
+        cars.add(new Car(00000000));
+        cars.add(new Car(11111111));
+        cars.add(new Car(33333333));
+        return cars;
     }
 
     public ArrayList<Car> getCarsByRoad(Road train) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<Car> cars = new ArrayList<Car>();
+        cars.add(new Car(12345678));
+        cars.add(new Car(22345678));
+        cars.add(new Car(32345678));
+        return cars;
     }
 
     public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation) {
