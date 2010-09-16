@@ -100,16 +100,5 @@ public class RouteEntity {
 
     public void setRouteSchedulesByIdRoute(Collection<RouteScheduleEntity> routeSchedulesByIdRoute) {
         this.routeSchedulesByIdRoute = routeSchedulesByIdRoute;
-    }
-
-    private Collection<TrainEntity> trainsByIdRoute;
-
-    @OneToMany(mappedBy = "routeByIdRoute")
-    public Collection<TrainEntity> getTrainsByIdRoute() {
-        return trainsByIdRoute;
-    }
-
-    public void setTrainsByIdRoute(Collection<TrainEntity> trainsByIdRoute) {
-        this.trainsByIdRoute = trainsByIdRoute;
-    }
+    }    
 }
