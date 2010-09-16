@@ -4,7 +4,6 @@
  */
 package rzd.stationFleet;
 
-import rzd.bd.Base;
 import rzd.gui.components.GCar;
 import rzd.gui.components.GTrainSt;
 import rzd.model.TestModel;
@@ -57,7 +56,8 @@ public class Controller implements ActionListener {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
                     roads.get(k).addCars(TestModel.get().getCarsByRoad(k));
-                }
+                    roads.get(k).addTrain(TestModel.get().getTrainByRoad(k));
+          }
             }
 
             //Заполняем пути поездами и вагонами
