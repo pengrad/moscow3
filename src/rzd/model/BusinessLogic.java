@@ -18,6 +18,8 @@ public interface BusinessLogic {
 
     public ArrayList<Schedule> getSchedules();
 
+    public boolean addSchedule(Schedule schedule, Route route);
+
     public boolean updateSchedule(Schedule schedule, Route route);
 
     public boolean removeSchedule(Schedule schedule);
@@ -26,11 +28,11 @@ public interface BusinessLogic {
 
     public Route getRouteBySchedule(Schedule schedule);
 
-    public boolean addRouteInSchedule(Route route, Schedule schedule);
-
     public ArrayList<Train> getTrains();
 
-    public boolean updateTrain(Train train);
+    public boolean addTrain(Train train, Route route);
+
+    public boolean updateTrain(Train train,Route route);
 
     public Route getRouteByTrain(Train train);
 
@@ -42,7 +44,9 @@ public interface BusinessLogic {
 
     public ArrayList<Car> getCars();
 
-    public boolean updateCar(Car car);
+    public boolean addCar(Car car,CarLocation carLocation);
+
+    public boolean updateCar(Car car,CarLocation carLocation);
 
     public boolean removeCar();
 

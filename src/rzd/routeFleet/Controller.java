@@ -32,7 +32,7 @@ public class Controller implements ActionListener, MouseListener {
     private JMenuItem editRoute;
     private JMenuItem deleteRoute;
     private JMenuItem editSchedule;
-    private JMenuItem deleteScedule;
+    private JMenuItem deleteSchedule;
 
     public Controller(PRoute p) {
         this.pTrains = p;
@@ -46,12 +46,12 @@ public class Controller implements ActionListener, MouseListener {
         deleteRoute.addActionListener(this);
         menuRoute.add(editRoute);
         menuRoute.add(deleteRoute);
-         editSchedule = new JMenuItem("Редактировать расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
+        editSchedule = new JMenuItem("Редактировать расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
         editSchedule.addActionListener(this);
-        deleteScedule = new JMenuItem("Удалить расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
-        deleteScedule.addActionListener(this);
+        deleteSchedule = new JMenuItem("Удалить расписание", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
+        deleteSchedule.addActionListener(this);
         menuSchedule.add(editSchedule);
-        menuSchedule.add(deleteScedule);
+        menuSchedule.add(deleteSchedule);
         update();
 
     }
@@ -59,10 +59,9 @@ public class Controller implements ActionListener, MouseListener {
     public void update() {
         try {
            ArrayList<Route> routes = TestModel.get().getRoutes();
-       
-            ((ModelTable) pTrains.tRoute.getModel()).setDate(routes);
-          ArrayList<Train> trains = TestModel.get().getTrains();
-            ((ModelTable) pTrains.tRoute.getModel()).setDate(trains);
+          ((ModelTable) pTrains.tRoute.getModel()).setDate(routes);
+//          ArrayList<> trains = TestModel.get().g;
+//            ((ModelTable) pTrains.tRoute.getModel()).setDate(trains);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pTrains, e.getMessage());
