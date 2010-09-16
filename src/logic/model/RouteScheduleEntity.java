@@ -10,6 +10,19 @@ import java.sql.Time;
 @javax.persistence.Table(name = "route_schedule", catalog = "rzd")
 @Entity
 public class RouteScheduleEntity {
+
+    public RouteScheduleEntity() {
+    }
+
+    public RouteScheduleEntity(Time timeDeparture, Time timeDestination, Date dateBegin, int dayMove, int dayStop, RouteEntity routeByIdRoute) {
+        this.timeDeparture = timeDeparture;
+        this.timeDestination = timeDestination;
+        this.dateBegin = dateBegin;
+        this.dayMove = dayMove;
+        this.dayStop = dayStop;
+        this.routeByIdRoute = routeByIdRoute;
+    }
+
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
