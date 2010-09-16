@@ -12,6 +12,8 @@ public interface BusinessLogic {
 
     public ArrayList<Route> getRoutes();
 
+    public boolean addRoute(Route route);
+
     public boolean updateRoute(Route route);
 
     public boolean removeRoute(Route route);
