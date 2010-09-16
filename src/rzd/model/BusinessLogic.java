@@ -18,7 +18,7 @@ public interface BusinessLogic {
 
     public ArrayList<Schedule> getSchedules();
 
-    public boolean updateSchedule(Schedule schedule);
+    public boolean updateSchedule(Schedule schedule, Route route);
 
     public boolean removeSchedule(Schedule schedule);
 
