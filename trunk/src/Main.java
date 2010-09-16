@@ -26,8 +26,9 @@ public class Main {
         Session session = getSession();
 //        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 4);
 //        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
-        CarLocationEntity cl = (CarLocationEntity) session.get(CarLocationEntity.class, null);
-        System.out.println(cl.getIdLocation());
+//        CarLocationEntity cl = (CarLocationEntity) session.get(CarLocationEntity.class, 1);
+//        System.out.println(cl.getIdLocation());
+        session.delete(null);
 //        for(TrainCarsEntity tc : car.getTrainCarsesByNumber()) {
 //            System.out.println(tc.getTrainByIdTrain().getRouteByIdRoute().getPointDeparture());
 //        }

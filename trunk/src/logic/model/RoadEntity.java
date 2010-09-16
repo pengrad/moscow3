@@ -6,6 +6,12 @@ import java.util.Collection;
 @javax.persistence.Table(name = "road", catalog = "rzd")
 @Entity
 public class RoadEntity {
+
+    public RoadEntity() {
+    }
+
+    
+
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
