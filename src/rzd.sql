@@ -68,17 +68,34 @@ CREATE TABLE `route` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 #
+# Structure for the `route_schedule` table : 
+#
+
+CREATE TABLE `route_schedule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_route` int(11) NOT NULL COMMENT 'ссылка на маршрут',
+  `time_departure` time NOT NULL COMMENT 'Время отправления поезда',
+  `time_destination` time NOT NULL COMMENT 'Время прибытия',
+  `date_begin` date NOT NULL COMMENT 'Начало действия расписания',
+  `day_move` int(11) NOT NULL COMMENT 'Дни в пути',
+  `day_stop` int(11) NOT NULL COMMENT 'Дни простоя на станции',
+  PRIMARY KEY (`id`),
+  KEY `id_route` (`id_route`),
+  CONSTRAINT `route_schedule_fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id_route`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
 # Structure for the `train` table : 
 #
 
 CREATE TABLE `train` (
   `id_train` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор',
-  `id_route` int(11) NOT NULL COMMENT 'Ссылка на маршрут',
+  `id_schedule` int(11) NOT NULL COMMENT 'Расписание поезда (в расписании маршрут)',
   `dt_departure` datetime NOT NULL COMMENT 'Время и дата отправления поезда',
   `dt_destination` datetime NOT NULL COMMENT 'Дата и время прибытия поезда',
   PRIMARY KEY (`id_train`),
-  KEY `train_fk` (`id_route`),
-  CONSTRAINT `train_fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id_route`)
+  KEY `id_schedule` (`id_schedule`),
+  CONSTRAINT `train_fk` FOREIGN KEY (`id_schedule`) REFERENCES `route_schedule` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 #
@@ -114,37 +131,6 @@ CREATE TABLE `car` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='type_location -1 - в составе поезда 0 - на пути 1 - прочее';
 
 #
-# Structure for the `car_location_history` table : 
-#
-
-CREATE TABLE `car_location_history` (
-  `id_car` int(11) NOT NULL,
-  `id_location` int(11) NOT NULL,
-  PRIMARY KEY (`id_car`,`id_location`),
-  KEY `id_car` (`id_car`),
-  KEY `id_location` (`id_location`),
-  CONSTRAINT `car_location_history_fk1` FOREIGN KEY (`id_location`) REFERENCES `car_location` (`id_location`),
-  CONSTRAINT `car_location_history_fk` FOREIGN KEY (`id_car`) REFERENCES `car` (`number`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
-
-#
-# Structure for the `route_schedule` table : 
-#
-
-CREATE TABLE `route_schedule` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_route` int(11) NOT NULL COMMENT 'ссылка на маршрут',
-  `time_departure` time NOT NULL COMMENT 'Время отправления поезда',
-  `time_destination` time NOT NULL COMMENT 'Время прибытия',
-  `date_begin` date NOT NULL COMMENT 'Начало действия расписания',
-  `day_move` int(11) NOT NULL COMMENT 'Дни в пути',
-  `day_stop` int(11) NOT NULL COMMENT 'Дни простоя на станции',
-  PRIMARY KEY (`id`),
-  KEY `id_route` (`id_route`),
-  CONSTRAINT `route_schedule_fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id_route`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-#
 # Structure for the `train_cars` table : 
 #
 
@@ -154,8 +140,8 @@ CREATE TABLE `train_cars` (
   PRIMARY KEY (`id_train`,`id_car`),
   KEY `id_train` (`id_train`),
   KEY `id_car` (`id_car`),
-  CONSTRAINT `train_cars_fk1` FOREIGN KEY (`id_car`) REFERENCES `car` (`number`),
-  CONSTRAINT `train_cars_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`)
+  CONSTRAINT `train_cars_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
+  CONSTRAINT `train_cars_fk1` FOREIGN KEY (`id_car`) REFERENCES `car` (`number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
@@ -164,14 +150,6 @@ CREATE TABLE `train_cars` (
 
 INSERT INTO `route` (`id_route`, `number`, `point_departure`, `point_destination`) VALUES 
   (7,'fff','Kursk','Kiev');
-COMMIT;
-
-#
-# Data for the `train` table  (LIMIT 0,500)
-#
-
-INSERT INTO `train` (`id_train`, `id_route`, `dt_departure`, `dt_destination`) VALUES 
-  (7,7,'2010-09-13 22:05:20','2010-09-13 22:05:20');
 COMMIT;
 
 #
@@ -241,14 +219,6 @@ COMMIT;
 
 INSERT INTO `car` (`number`, `id_location`, `date_update_location`, `date_update`) VALUES 
   (111,9,'2010-09-13 22:05:20','2010-09-13 22:05:20');
-COMMIT;
-
-#
-# Data for the `route_schedule` table  (LIMIT 0,500)
-#
-
-INSERT INTO `route_schedule` (`id`, `id_route`, `time_departure`, `time_destination`, `date_begin`, `day_move`, `day_stop`) VALUES 
-  (1,7,'22:33:33','22:33:33','2010-01-01',5,1);
 COMMIT;
 
 
