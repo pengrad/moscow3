@@ -11,11 +11,9 @@ package rzd.model.objects;
 public class Car {
 
     private int number;
-    private CarLocation location;
 
     public Car(int number, CarLocation carLocation) {
         this.number = number;
-        this.location = carLocation;
     }
 
     public int getNumber() {
@@ -26,11 +24,5 @@ public class Car {
         this.number = number;
     }
 
-    public CarLocation getCarLocation() {
-        return location;
-    }
 
-    public void setCarLocation(CarLocation carLocation) {
-        this.location = carLocation;
-    }
 }
