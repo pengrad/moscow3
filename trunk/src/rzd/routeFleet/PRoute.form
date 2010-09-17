@@ -16,16 +16,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="548" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="566" max="32767" attributes="0"/>
+          <Component id="jScrollPane2" alignment="0" pref="566" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="401" max="32767" attributes="0"/>
-              <Component id="bCreateSchedule" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="378" max="32767" attributes="0"/>
+              <Component id="bCreateSchedule" min="-2" pref="176" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane2" alignment="0" pref="548" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="407" max="32767" attributes="0"/>
-              <Component id="bCreateRout" min="-2" pref="131" max="-2" attributes="0"/>
+              <EmptySpace pref="382" max="32767" attributes="0"/>
+              <Component id="bCreateRoute" min="-2" pref="172" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -33,14 +33,14 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Component id="bCreateRout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="bCreateRoute" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="161" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="bCreateSchedule" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="178" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="178" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,7 +68,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="bCreateRout">
+    <Component class="javax.swing.JButton" name="bCreateRoute">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x421;&#x43e;&#x437;&#x434;&#x430;&#x442;&#x44c; &#x43c;&#x430;&#x440;&#x448;&#x440;&#x443;&#x442;"/>
       </Properties>

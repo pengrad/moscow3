@@ -103,14 +103,13 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pTrains.bCreateRout) {
+        if (e.getSource() == pTrains.bCreateRoute) {
             insertRoute();
         } else if (e.getSource() == editRoute) {
             editRoute();
         } else if (e.getSource() == deleteRoute) {
             deleteRoute();
-        }
-        if (e.getSource() == pTrains.bCreateSchedule) {
+        } else if (e.getSource() == pTrains.bCreateSchedule) {
             insertSchedule();
         } else if (e.getSource() == editSchedule) {
             editSchedule();
@@ -173,64 +172,54 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     private void insertSchedule() {
-        dEditRoute.setLocationRelativeTo(pTrains);
-        Object[] data = dEditSchedule.open(null,TestModel.get().getRoutes(),null);
-        // if (data != null) {
-        try {
-            //   int n = TestModel.get().updateTrain(new Train(0,));
-//                if (n > 0) {
-//                    ((ModelTable) pTrains.tTarins.getModel()).addRow(data.toArray());
-//                }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pTrains, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        dEditSchedule.setLocationRelativeTo(pTrains);
+        Object[] data = dEditSchedule.open(null, TestModel.get().getRoutes(), null);
+        if (data != null) {
+            try {
+                boolean b = TestModel.get().addSchedule((Schedule) data[0], (Route) data[1]);
+                if (b) {
+                    ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(pTrains, e.getMessage());
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
-        // }
     }
 
     private void editSchedule() {
-//        int row = pTrains.tTarins.getSelectedRow();
-//        ArrayList data = new ArrayList();
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 0));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 1));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 2));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 3));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 4));
-//
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 5));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 6));
-//        dEditTrain.setLocationRelativeTo(pTrains);
-//        ArrayList newData = dEditTrain.open(data);
-//        if (newData != null) {
-        try {
-//                int n = Base.getInstance().updateTrain(newData);
-//                if (n > 0) {
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(0), row, 0);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(1), row, 1);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(2), row, 2);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(3), row, 3);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(4), row, 4);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(5), row, 5);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(6), row, 6);
-//                }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pTrains, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        int row = pTrains.tSchedule.getSelectedRow();
+        if (row != -1) {
+            Schedule schedule = getScheduleByTabRow(row);
+            Route route = TestModel.get().getRouteBySchedule(schedule);
+            dEditSchedule.setLocationRelativeTo(pTrains);
+            Object[] data = dEditSchedule.open(schedule, TestModel.get().getRoutes(), route);
+            if (data != null) {
+                try {
+                    boolean b = TestModel.get().updateSchedule((Schedule) data[0], (Route) data[1]);
+                    if (b) {
+                        ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(pTrains, e.getMessage());
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
         }
-//        }
     }
 
     private void deleteSchedule() {
-//        int row = pTrains.tTarins.getSelectedRow();
-//        int number = new Integer(pTrains.tTarins.getModel().getValueAt(row, 0).toString());
-        try {
-//            int n = Base.getInstance().deleteTrain(number);
-//            if (n > 0) {
-//                ((ModelTable) pTrains.tTarins.getModel()).removeRow(row);
-//            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pTrains, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        int row = pTrains.tSchedule.getSelectedRow();
+        if (row != -1) {
+            try {
+                boolean b = TestModel.get().removeSchedule(getScheduleByTabRow(row));
+                if (b) {
+                    ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(pTrains, e.getMessage());
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 

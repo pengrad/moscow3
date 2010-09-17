@@ -48,6 +48,14 @@ public class TestModel implements BusinessLogic {
         return roadTypes.get(roadType);
     }
 
+    public Road getRoadByTrain(Train train) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public Road getRoadByCar(Car car) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public ArrayList<Route> getRoutes() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -90,6 +98,22 @@ public class TestModel implements BusinessLogic {
     }
 
     public ArrayList<Train> getTrains(java.util.Date dBegin, java.util.Date dEnd) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrainsGoing(int forHours) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrainsArriving(int forHours) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrainsSentToday() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrainsArrivedToday() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
