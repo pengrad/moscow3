@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import rzd.ModelTable;
+import rzd.Utils;
 import rzd.model.TestModel;
 import rzd.model.objects.Schedule;
 import rzd.model.objects.Train;
@@ -29,7 +30,7 @@ public class Controller implements ActionListener, MouseListener {
 
     private PRoute pTrains;
     private DEditRoute dEditRoute;
-    private DEditRoute dEditSchedule;
+    private DEditSchedule dEditSchedule;
 
 
     private JPopupMenu menuRoute;
@@ -43,7 +44,7 @@ public class Controller implements ActionListener, MouseListener {
     public Controller(PRoute p) {
         this.pTrains = p;
         dEditRoute = new DEditRoute(null, true);
-        dEditRoute = new DEditRoute(null, true);
+        dEditSchedule = new DEditSchedule(null, true);
 
         menuRoute = new JPopupMenu();
         menuSchedule = new JPopupMenu();
@@ -124,10 +125,10 @@ public class Controller implements ActionListener, MouseListener {
         Route data = dEditRoute.open(null);
         if (data != null) {
             try {
-//                boolean b = TestModel.get().addRoute(new Route(0,);
-//                if (b) {
-//                    ((ModelTable) pTrains.tRoute.getModel()).addRow(data.toArray());
-//                }
+                boolean b = TestModel.get().addRoute(data);
+                if (b) {
+                    ((ModelTable) pTrains.tRoute.getModel()).setDate(getRoutesTabView());
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pTrains, e.getMessage());
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -136,65 +137,55 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     private void editRoute() {
-//        int row = pTrains.tTarins.getSelectedRow();
-//        ArrayList data = new ArrayList();
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 0));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 1));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 2));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 3));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 4));
-//
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 5));
-//        data.add(pTrains.tTarins.getModel().getValueAt(row, 6));
-//        dEditTrain.setLocationRelativeTo(pTrains);
-//        ArrayList newData = dEditTrain.open(data);
-//        if (newData != null) {
-        try {
-//                int n = Base.getInstance().updateTrain(newData);
-//                if (n > 0) {
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(0), row, 0);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(1), row, 1);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(2), row, 2);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(3), row, 3);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(4), row, 4);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(5), row, 5);
-//                    pTrains.tTarins.getModel().setValueAt(newData.get(6), row, 6);
-//                }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pTrains, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        int row = pTrains.tRoute.getSelectedRow();
+        if (row != -1) {
+            Route data = getRouteByTabRow(row);
+            dEditRoute.setLocationRelativeTo(pTrains);
+            data = dEditRoute.open(data);
+            if (data != null) {
+                try {
+                    boolean b = TestModel.get().updateRoute(data);
+                    if (b) {
+                        ((ModelTable) pTrains.tRoute.getModel()).setDate(getRoutesTabView());
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(pTrains, e.getMessage());
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
         }
-//        }
     }
 
     private void deleteRoute() {
-//        int row = pTrains.tTarins.getSelectedRow();
-//        int number = new Integer(pTrains.tTarins.getModel().getValueAt(row, 0).toString());
-        try {
-//            int n = Base.getInstance().deleteTrain(number);
-//            if (n > 0) {
-//                ((ModelTable) pTrains.tTarins.getModel()).removeRow(row);
-//            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pTrains, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        int row = pTrains.tRoute.getSelectedRow();
+        if (row != -1) {
+            Route data = getRouteByTabRow(row);
+            try {
+                boolean b = TestModel.get().removeRoute(data);
+                if (b) {
+                    ((ModelTable) pTrains.tRoute.getModel()).setDate(getRoutesTabView());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(pTrains, e.getMessage());
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 
     private void insertSchedule() {
         dEditRoute.setLocationRelativeTo(pTrains);
-        //ArrayList data = dEditRoute.open(null);
-       // if (data != null) {
-            try {
-                //   int n = TestModel.get().updateTrain(new Train(0,));
+        Object[] data = dEditSchedule.open(null,TestModel.get().getRoutes(),null);
+        // if (data != null) {
+        try {
+            //   int n = TestModel.get().updateTrain(new Train(0,));
 //                if (n > 0) {
 //                    ((ModelTable) pTrains.tTarins.getModel()).addRow(data.toArray());
 //                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(pTrains, e.getMessage());
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-       // }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(pTrains, e.getMessage());
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        // }
     }
 
     private void editSchedule() {
@@ -246,7 +237,7 @@ public class Controller implements ActionListener, MouseListener {
 
     //Методы конверторы
 
-    public static ArrayList<Object[]> getRoutesTabView() {
+    public ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = TestModel.get().getRoutes();
         if (routes != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());
@@ -258,12 +249,13 @@ public class Controller implements ActionListener, MouseListener {
                 o[3] = r.getPointDestination();
                 res.add(o);
             }
+            res.add(new Object[]{"ID", "Номер маршрута", "Станция отправления", "Станция назначения"});
             return res;
         }
         return null;
     }
 
-    public static ArrayList<Object[]> getScheduleTabView() {
+    public ArrayList<Object[]> getScheduleTabView() {
         ArrayList<Schedule> schedules = TestModel.get().getSchedules();
         if (schedules != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(schedules.size());
@@ -277,14 +269,36 @@ public class Controller implements ActionListener, MouseListener {
                 o[4] = s.getDayMove();
                 o[5] = s.getDayStop();
                 if (r != null)
-                    o[6] = r.getNumber() + " " + r.getPointDeparture() + " - " + r.getPointDestination();
+                    o[6] = r.toString();
                 else
                     o[6] = "Маршрут не назначен";
                 res.add(o);
             }
+            res.add(new Object[]{"ID", "Время отправления", "Время прибытия", "Начало действия маршрута", "Время в пути", "Время простоя", "Маршрут"});
             return res;
         }
         return null;
     }
 
+    public Route getRouteByTabRow(int row) {
+        if (row < 0 || row > pTrains.tRoute.getModel().getRowCount()) return null;
+        return new Route(
+                new Integer(pTrains.tRoute.getModel().getValueAt(row, 0).toString()),
+                pTrains.tRoute.getModel().getValueAt(row, 1).toString(),
+                pTrains.tRoute.getModel().getValueAt(row, 2).toString(),
+                pTrains.tRoute.getModel().getValueAt(row, 2).toString()
+        );
+    }
+
+    public Schedule getScheduleByTabRow(int row) {
+        if (row < 0 || row > pTrains.tSchedule.getModel().getRowCount()) return null;
+        return new Schedule(
+                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 0).toString()),
+                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 1).toString()),
+                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 2).toString()),
+                Utils.convertStrToDate(pTrains.tSchedule.getModel().getValueAt(row, 3).toString()),
+                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 4).toString()),
+                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 5).toString())
+        );
+    }
 }

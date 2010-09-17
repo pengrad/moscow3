@@ -53,6 +53,7 @@ public class TestModel implements BusinessLogic {
     }
 
     public boolean addRoute(Route route) {
+        System.out.println("add");
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

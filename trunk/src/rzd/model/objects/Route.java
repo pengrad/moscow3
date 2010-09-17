@@ -1,5 +1,6 @@
 package rzd.model.objects;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -11,6 +12,7 @@ import java.sql.Time;
  * To change this template use File | Settings | File Templates.
  */
 public class Route {
+
     private int id;
     private String number;
     private String pointDeparture;
@@ -43,7 +45,7 @@ public class Route {
         return pointDeparture;
     }
 
-    public void setPoint_departure(String pointDeparture) {
+    public void setPointDeparture(String pointDeparture) {
         this.pointDeparture = pointDeparture;
     }
 
@@ -51,8 +53,22 @@ public class Route {
         return pointDestination;
     }
 
-    public void setPoint_destination(String pointDestination) {
+    public void setPointDestination(String pointDestination) {
         this.pointDestination = pointDestination;
     }
 
+    @Override
+    public String toString() {
+        return number + " " + pointDeparture + " - " + pointDestination;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Route) {
+            if (id == ((Route) o).getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
