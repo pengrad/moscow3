@@ -3,6 +3,7 @@ package rzd;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,10 +19,10 @@ public class Utils {
     }
 
     public static Date convertStrToDate(String date) {
-        String[] d = date.split(".");
-        int dd = new Integer(d[0]);
-        int mm = new Integer(d[1]);
-        int yy = new Integer(d[2]);
+        StringTokenizer t = new StringTokenizer(date, ".");
+        int dd = new Integer(t.nextToken());
+        int mm = new Integer(t.nextToken());
+        int yy = new Integer(t.nextToken());
         return new GregorianCalendar(yy, mm, dd).getTime();
     }
 
@@ -30,11 +31,27 @@ public class Utils {
         return sdf.format(time);
     }
 
+    public static String convertDateTimeToStr(Date time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd.MM.yyyy");
+        return sdf.format(time);
+    }
+
     public static Date convertStrToTime(String time) {
-        String[] d = time.split(":");
-        int hh = new Integer(d[0]);
-        int mm = new Integer(d[1]);
+        StringTokenizer t = new StringTokenizer(time, ":");
+        int hh = new Integer(t.nextToken());
+        int mm = new Integer(t.nextToken());
         return new GregorianCalendar(0, 0, 0, hh, mm).getTime();
+    }
+
+    public static Date convertStrToDateTime(String dt) {
+        StringTokenizer t = new StringTokenizer(dt);
+        int hh = new Integer(t.nextToken(":"));
+        int mm = new Integer(t.nextToken(" "));
+        int dd = new Integer(t.nextToken("."));
+        int MM = new Integer(t.nextToken("."));
+        int yy = new Integer(t.nextToken());
+
+        return new GregorianCalendar(yy, MM, dd, hh, mm).getTime();
     }
 
 }

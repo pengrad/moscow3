@@ -11,6 +11,10 @@ public interface BusinessLogic {
 
     public ArrayList<Road> getRoadsByType(RoadType roadType);
 
+    public Road getRoadByTrain(Train train);
+
+    public Road getRoadByCar(Car car);
+
     public ArrayList<Route> getRoutes();
 
     public boolean addRoute(Route route);
@@ -31,7 +35,19 @@ public interface BusinessLogic {
 
     public Route getRouteBySchedule(Schedule schedule);
 
-    public ArrayList<Train> getTrains(Date dBegin,Date dEnd);
+    public ArrayList<Train> getTrains(Date dBegin, Date dEnd);
+
+    //Отправляющиеся поезда за часов
+    public ArrayList<Train> getTrainsGoing(int forHours);
+
+    //Прибывающие поезда за часов
+    public ArrayList<Train> getTrainsArriving(int forHours);
+
+    //Отправленные поезда сегодня
+    public ArrayList<Train> getTrainsSentToday();
+
+    //Прибывшие поезда сегодня
+    public ArrayList<Train> getTrainsArrivedToday();
 
     public boolean addTrain(Train train, Schedule route);
 
@@ -47,9 +63,9 @@ public interface BusinessLogic {
 
     public ArrayList<Car> getCars();
 
-    public boolean addCar(Car car,CarLocation carLocation);
+    public boolean addCar(Car car, CarLocation carLocation);
 
-    public boolean updateCar(Car car,CarLocation carLocation);
+    public boolean updateCar(Car car, CarLocation carLocation);
 
     public boolean removeCar();
 

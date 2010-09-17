@@ -14,6 +14,7 @@ import rzd.model.objects.Route;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 import rzd.Utils;
 import rzd.model.objects.Schedule;
 
@@ -25,8 +26,7 @@ public class DEditSchedule extends javax.swing.JDialog {
     private Schedule schedule;
     private ArrayList<Route> routes;
     private Route route;
-        private Object[] ret;
-
+    private Object[] ret;
 
 
     /**
@@ -73,7 +73,7 @@ public class DEditSchedule extends javax.swing.JDialog {
         fDayStop = new javax.swing.JFormattedTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        CRoute = new javax.swing.JComboBox();
+        cRoute = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Создание/редактирование расписания");
@@ -89,9 +89,11 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(20, 14));
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Например 12:45");
+
+        fTimeDeparture.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -103,7 +105,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(fTimeDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,9 +124,11 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(20, 14));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Например 18:30");
+
+        fTimeDestination.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -136,7 +140,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(fTimeDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,9 +159,11 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel6.setPreferredSize(new java.awt.Dimension(20, 14));
 
         jLabel11.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Например 27.12.2010");
+
+        fDateBegin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -197,9 +203,11 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel8.setPreferredSize(new java.awt.Dimension(20, 14));
 
         jLabel13.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Например 3");
+
+        fDayMove.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -211,7 +219,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(fDayMove, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,9 +238,11 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel9.setPreferredSize(new java.awt.Dimension(20, 14));
 
         jLabel14.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Например 1");
+
+        fDayStop.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -244,7 +254,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(fDayStop, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +272,7 @@ public class DEditSchedule extends javax.swing.JDialog {
         jLabel10.setText("   Маршрут");
         jLabel10.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        CRoute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cRoute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -271,7 +281,7 @@ public class DEditSchedule extends javax.swing.JDialog {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(CRoute, 0, 285, Short.MAX_VALUE)
+                .addComponent(cRoute, 0, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -280,7 +290,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -295,7 +305,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(bSave)
                 .addGap(18, 18, 18)
                 .addComponent(bCancel)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -316,7 +326,7 @@ public class DEditSchedule extends javax.swing.JDialog {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancel)
                     .addComponent(bSave))
@@ -329,8 +339,8 @@ public class DEditSchedule extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
-           if (isCorrectInputData()) {
-        if (schedule == null) {
+        if (isCorrectInputData()) {
+            if (schedule == null) {
                 schedule = new Schedule(
                         0,
                         Utils.convertStrToTime(fTimeDeparture.getText().trim()),
@@ -345,7 +355,12 @@ public class DEditSchedule extends javax.swing.JDialog {
                 schedule.setDayMove(new Integer(fDayMove.getText().trim()));
                 schedule.setDayStop(new Integer(fDayStop.getText().trim()));
             }
-            ret = new Object[]{schedule, CRoute.getSelectedItem()};
+            Route route = (Route) cRoute.getSelectedItem();
+            if (route != null) {
+                ret = new Object[]{schedule, route};
+            } else {
+                ret = null;
+            }
             setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Заполните все поля");
@@ -353,7 +368,7 @@ public class DEditSchedule extends javax.swing.JDialog {
     }//GEN-LAST:event_bSaveActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        ret= null;
+        ret = null;
         setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
@@ -376,15 +391,15 @@ public class DEditSchedule extends javax.swing.JDialog {
         });
     }
 
-    public Object[] open(Schedule schedule,ArrayList<Route> routes,Route route) {
+    public Object[] open(Schedule schedule, ArrayList<Route> routes, Route route) {
         this.schedule = schedule;
         this.routes = routes;
         this.route = route;
-        CRoute.removeAllItems();
-        if(routes!=null)
-        for(Route r:routes){
-       CRoute.addItem(r);
-        }
+        cRoute.removeAllItems();
+        if (routes != null)
+            for (Route r : routes) {
+                cRoute.addItem(r);
+            }
         if (schedule == null) {
             fTimeDeparture.setText("");
             fTimeDestination.setText("");
@@ -397,7 +412,10 @@ public class DEditSchedule extends javax.swing.JDialog {
             fDateBegin.setText(Utils.convertDateToStr(schedule.getDateBegin()));
             fDayMove.setText(new Integer(schedule.getDayMove()).toString());
             fDayStop.setText(new Integer(schedule.getDayStop()).toString());
-      }
+            if (route != null) {
+                cRoute.setSelectedItem(route);
+            }
+        }
         setVisible(true);
         return ret;
     }
@@ -414,9 +432,9 @@ public class DEditSchedule extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox CRoute;
     public javax.swing.JButton bCancel;
     public javax.swing.JButton bSave;
+    public javax.swing.JComboBox cRoute;
     public javax.swing.JFormattedTextField fDateBegin;
     public javax.swing.JFormattedTextField fDayMove;
     public javax.swing.JFormattedTextField fDayStop;
