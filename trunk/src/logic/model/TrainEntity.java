@@ -54,6 +54,18 @@ public class TrainEntity {
         this.dtDestination = dtDestination;
     }
 
+    private String trainChief;
+
+    @Column(name = "train_chief", nullable = true, insertable = true, updatable = true, length = 100, precision = 0)
+    @Basic
+    public String getTrainChief() {
+        return trainChief;
+    }
+
+    public void setTrainChief(String trainChief) {
+        this.trainChief = trainChief;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,5 +122,18 @@ public class TrainEntity {
 
     public void setRouteScheduleByIdSchedule(RouteScheduleEntity routeScheduleByIdSchedule) {
         this.routeScheduleByIdSchedule = routeScheduleByIdSchedule;
+    }
+
+    private RoadEntity roadByIdRoad;
+
+    @ManyToOne
+    public
+    @JoinColumn(name = "id_road", referencedColumnName = "id")
+    RoadEntity getRoadByIdRoad() {
+        return roadByIdRoad;
+    }
+
+    public void setRoadByIdRoad(RoadEntity roadByIdRoad) {
+        this.roadByIdRoad = roadByIdRoad;
     }
 }

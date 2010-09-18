@@ -1,6 +1,7 @@
 package logic.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Table(name = "car_location_history", catalog = "rzd")
 @Entity
@@ -9,9 +10,10 @@ public class CarLocationHistoryEntity {
     public CarLocationHistoryEntity() {
     }
 
-    public CarLocationHistoryEntity(CarLocationEntity carLocation, CarEntity car) {
-        this.carLocationByIdLocation = carLocation;
-        this.carByIdCar = car;
+    public CarLocationHistoryEntity(Timestamp ddate, CarLocationEntity carLocationByIdLocation, CarEntity carByIdCar) {
+        this.ddate = ddate;
+        this.carLocationByIdLocation = carLocationByIdLocation;
+        this.carByIdCar = carByIdCar;
         this.idCar = carByIdCar.getNumber();
         this.idLocation = carLocationByIdLocation.getIdLocation();
     }
@@ -38,6 +40,18 @@ public class CarLocationHistoryEntity {
 
     public void setIdLocation(int idLocation) {
         this.idLocation = idLocation;
+    }
+
+    private Timestamp ddate;
+
+    @Column(name = "ddate", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
+    @Basic
+    public Timestamp getDdate() {
+        return ddate;
+    }
+
+    public void setDdate(Timestamp ddate) {
+        this.ddate = ddate;
     }
 
     @Override
@@ -87,4 +101,5 @@ public class CarLocationHistoryEntity {
         this.carByIdCar = carByIdCar;
         this.idCar = carByIdCar.getNumber();
     }
+
 }

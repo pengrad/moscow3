@@ -35,8 +35,16 @@ public class CarLocationEntity {
         if (o == null || getClass() != o.getClass()) return false;
 
         CarLocationEntity that = (CarLocationEntity) o;
-
-        if (idLocation != that.idLocation) return false;
+        if (this.carAnotherLocationByIdOtherlocation != null) {
+            if (!this.carAnotherLocationByIdOtherlocation.equals(that.carAnotherLocationByIdOtherlocation))
+                return false;
+        } else if (that.carAnotherLocationByIdOtherlocation != null) return false;
+        if (this.trainByIdTrain != null) {
+            if (!this.trainByIdTrain.equals(that.trainByIdTrain)) return false;
+        } else if (that.trainByIdTrain != null) return false;
+        if (this.roadByIdRoad != null) {
+            if (!this.roadByIdRoad.equals(that.getRoadByIdRoad())) return false;
+        } else if (that.roadByIdRoad != null) return false;
 
         return true;
     }

@@ -54,6 +54,30 @@ public class BusinessManager implements BusinessLogic {
         return list;
     }
 
+    public Road getRoadByTrain(Train train) {
+        try {
+            TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
+            RoadEntity re = te.getRoadByIdRoad();
+            return new Road(re.getId(), re.getName(), re.getComments(), re.getPosition());
+        } catch (Throwable t) {
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public Road getRoadByCar(Car car) {
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            RoadEntity re = ce.getCarLocationByIdLocation().getRoadByIdRoad();
+            return new Road(re.getId(), re.getName(), re.getComments(), re.getPosition());
+        } catch (Throwable t) {
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
     public ArrayList<Route> getRoutes() {
         Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
         SessionManager.closeSession();
@@ -195,6 +219,22 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
+    public ArrayList<Train> getTrainsGoing() {
+        return null;
+    }
+
+    public ArrayList<Train> getTrainsArriving() {
+        return null;
+    }
+
+    public ArrayList<Train> getTrainsGoneToday() {
+        return null;
+    }
+
+    public ArrayList<Train> getTrainsArrivedToday() {
+        return null;
+    }
+
     public boolean addTrain(Train train, Schedule schedule) {
         if (train == null || schedule == null) return false;
         RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
@@ -251,18 +291,87 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Car> getCars() {
-        return null;
+        Collection<CarEntity> objects = SessionManager.getAllObjects(new CarEntity());
+        SessionManager.closeSession();
+        if (objects == null) return null;
+        ArrayList<Car> list = new ArrayList<Car>(objects.size());
+        for (CarEntity ce : objects) {
+            list.add(new Car(ce.getNumber()));
+        }
+        return list;
     }
 
     public boolean addCar(Car car, CarLocation carLocation) {
-        return false;
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            if (ce != null) return false;
+            Road r = carLocation.getRoad();
+            CarAnotherLocation cal = carLocation.getOtherLocation();
+            Train t = carLocation.getTrain();
+            RoadEntity re = null;
+            CarAnotherLocationEntity cale = null;
+            TrainEntity te = null;
+            if (r != null) re = SessionManager.getEntityById(new RoadEntity(), r.getId());
+            if (cal != null) cale = SessionManager.getEntityById(new CarAnotherLocationEntity(), cal.getId());
+            if (t != null) te = SessionManager.getEntityById(new TrainEntity(), t.getId());
+            // поезд не может быть на пути или в составе поезда и при этом в каком то другом местоположении
+            if (cale != null && (re != null || t != null)) return false;
+            CarLocationEntity cle = new CarLocationEntity(te, cale, re);
+            ce = new CarEntity(car.getNumber(), new Timestamp(new Date().getTime()), cle);
+            SessionManager.beginTran();
+            SessionManager.saveOrUpdateEntities(cle, ce);
+            SessionManager.commit();
+            return true;
+        } catch (Throwable t) {
+            try {
+                SessionManager.rollback();
+            } catch (Throwable ignored) {
+            }
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public boolean updateCar(Car car, CarLocation carLocation) {
-        return false;
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            if (ce == null) return false;
+            Road r = carLocation.getRoad();
+            CarAnotherLocation cal = carLocation.getOtherLocation();
+            Train t = carLocation.getTrain();
+            RoadEntity re = null;
+            CarAnotherLocationEntity cale = null;
+            TrainEntity te = null;
+            if (r != null) re = SessionManager.getEntityById(new RoadEntity(), r.getId());
+            if (cal != null) cale = SessionManager.getEntityById(new CarAnotherLocationEntity(), cal.getId());
+            if (t != null) te = SessionManager.getEntityById(new TrainEntity(), t.getId());
+            // поезд не может быть на пути или в составе поезда и при этом в каком то другом местоположении
+            if (cale != null && (re != null || t != null)) return false;
+            // проверка что существующее местоположение и новое - не одно и то же
+            CarLocationEntity cle = new CarLocationEntity(te, cale, re);
+            CarLocationEntity cleOld = ce.getCarLocationByIdLocation();
+            if(cle.equals(cleOld)) return false;
+            Timestamp time = new Timestamp(new Date().getTime());
+            ce.setDateUpdate(time);
+            ce.setCarLocationByIdLocation(cle);
+            CarLocationHistoryEntity clhe = new CarLocationHistoryEntity(time, cleOld, ce);
+            SessionManager.beginTran();
+            SessionManager.saveOrUpdateEntities(clhe, cle, ce);
+            SessionManager.commit();
+            return true;
+        } catch (Throwable t) {
+            try {
+                SessionManager.rollback();
+            } catch (Throwable ignored) {
+            }
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
-    public boolean removeCar() {
+    public boolean removeCar(Car car) {
         return false;
     }
 

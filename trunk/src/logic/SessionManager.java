@@ -48,6 +48,18 @@ class SessionManager {
         }
     }
 
+    public static void beginTran() {
+        localSession.get().beginTransaction();
+    }
+
+    public static void rollback() {
+        localSession.get().getTransaction().rollback();
+    }
+
+    public static void commit() {
+        localSession.get().getTransaction().commit();
+    }
+
     public static <T> T getEntityById(T t, Serializable id) throws DatabaseException {
         try {
             Object o = getSession().get(t.getClass(), id);

@@ -11,9 +11,8 @@ public class CarEntity {
     public CarEntity() {
     }
 
-    public CarEntity(int number, Timestamp dateUpdateLocation, Timestamp dateUpdate, CarLocationEntity carLocationByIdLocation) {
+    public CarEntity(int number, Timestamp dateUpdate, CarLocationEntity carLocationByIdLocation) {
         this.number = number;
-        this.dateUpdateLocation = dateUpdateLocation;
         this.dateUpdate = dateUpdate;
         this.carLocationByIdLocation = carLocationByIdLocation;
     }
@@ -28,18 +27,6 @@ public class CarEntity {
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    private Timestamp dateUpdateLocation;
-
-    @Column(name = "date_update_location", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
-    @Basic
-    public Timestamp getDateUpdateLocation() {
-        return dateUpdateLocation;
-    }
-
-    public void setDateUpdateLocation(Timestamp dateUpdateLocation) {
-        this.dateUpdateLocation = dateUpdateLocation;
     }
 
     private Timestamp dateUpdate;
@@ -63,16 +50,12 @@ public class CarEntity {
 
         if (number != carEntity.number) return false;
         if (dateUpdate != null ? !dateUpdate.equals(carEntity.dateUpdate) : carEntity.dateUpdate != null) return false;
-        if (dateUpdateLocation != null ? !dateUpdateLocation.equals(carEntity.dateUpdateLocation) : carEntity.dateUpdateLocation != null)
-            return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = number;
-        result = 31 * result + (dateUpdateLocation != null ? dateUpdateLocation.hashCode() : 0);
         result = 31 * result + (dateUpdate != null ? dateUpdate.hashCode() : 0);
         return result;
     }

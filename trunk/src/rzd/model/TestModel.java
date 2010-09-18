@@ -173,7 +173,7 @@ public class TestModel implements BusinessLogic {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean removeCar() {
+    public boolean removeCar(Car car) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
