@@ -92,11 +92,25 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         ArrayList<RoadType> rt = TestModel.get().getRoadTypes();
         if (roadTypes != null && roadTypes.size() > 0) {
             for (RoadType rtTmp : rt) {
-            // roadTypes.put(rt,TestModel.get().getRoadsByType(rt));
+                roadTypes.put(rtTmp, TestModel.get().getRoadsByType(rtTmp));
             }
 
         }
-      //  dEditTrain.open(null);
+        Road road = TestModel.get().getRoadByTrain(train);
+        ArrayList<Route> routes = TestModel.get().getRoutes();
+        Route route = TestModel.get().getRouteByTrain(train);
+        ArrayList<Car> carInTran = TestModel.get().getCarsByTrain(train);
+        ArrayList<Car> carAll = TestModel.get().getCars();
+        Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
+        if (res != null) {
+            train = (Train) res[0];
+            route = (Route) res[1];
+            road = (Road) res[2];
+            carInTran = (ArrayList<Car>) res[3];
+    //   boolean  b=TestModel.get().addTrain(train,)
+            //   TestModel.get().add
+        }
+
     }
 
     private void addDestinationTrain() {
