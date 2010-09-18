@@ -54,4 +54,9 @@ public class Utils {
         return new GregorianCalendar(yy, MM, dd, hh, mm).getTime();
     }
 
+    public static String getDateByDateBeginAndPeriod(Date dateBegin,int dayMove,int dayStop){
+
+        return "";
+    }
+
 }

@@ -7,14 +7,12 @@ package rzd.dispStatinoFleet;
 import rzd.ModelTable;
 import rzd.Utils;
 import rzd.model.TestModel;
-import rzd.model.objects.Car;
-import rzd.model.objects.Road;
-import rzd.model.objects.Route;
-import rzd.model.objects.Train;
+import rzd.model.objects.*;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author ЧерныхЕА
@@ -26,6 +24,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     private JMenuItem editTrain;
     private JMenuItem viewTrain;
     private JTable activeTable;
+    private DEditTrain dEditTrain;
 
     public Controller(PDispStation pDispStation) {
         this.pDispStation = pDispStation;
@@ -36,7 +35,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         menuTrain.add(viewTrain);
         editTrain.addActionListener(this);
         viewTrain.addActionListener(this);
-
+        dEditTrain = new DEditTrain(null, true);
     }
 
     public void itemStateChanged(ItemEvent e) {
@@ -64,7 +63,6 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == pDispStation.bAddDeparture) {
             addDepartureTrain();
         } else if (e.getSource() == pDispStation.bAddDestination) {
@@ -88,18 +86,33 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     }
 
     private void addDepartureTrain() {
+        dEditTrain.setLocationRelativeTo(pDispStation);
+        Train train = null;
+        HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
+        ArrayList<RoadType> rt = TestModel.get().getRoadTypes();
+        if (roadTypes != null && roadTypes.size() > 0) {
+            for (RoadType rtTmp : rt) {
+            // roadTypes.put(rt,TestModel.get().getRoadsByType(rt));
+            }
+
+        }
+      //  dEditTrain.open(null);
     }
 
     private void addDestinationTrain() {
+        dEditTrain.setLocationRelativeTo(pDispStation);
     }
 
     private void editTrain(JTable activeTab) {
+
     }
 
     private void viewTrain(JTable activeTab) {
+
     }
 
     //Методы конвертации
+
     private ArrayList<Object[]> getTrainTabView(ArrayList<Train> trains) {
         if (trains != null) {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());
@@ -108,14 +121,14 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
                 Road road = TestModel.get().getRoadByTrain(train);
                 ArrayList<Car> cars = TestModel.get().getCarsByTrain(train);
                 data.add(new Object[]{
-                            train.getId(),
-                            route.toString(),
-                            Utils.convertDateToStr(train.getDtDeparture()),
-                            Utils.convertDateToStr(train.getDtDestination()),
-                            "Начальник",
-                            road.getName(),
-                            ((cars == null) ? 0 : cars.size())
-                        });
+                        train.getId(),
+                        route.toString(),
+                        Utils.convertDateToStr(train.getDtDeparture()),
+                        Utils.convertDateToStr(train.getDtDestination()),
+                        train.getChief(),
+                        road.getName(),
+                        ((cars == null) ? 0 : cars.size())
+                });
             }
             data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия", "Дата и время отправления", "Начальник", "Путь", "Кол-во вагонов"});
             return data;
@@ -130,6 +143,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         return new Train(
                 new Integer(table.getModel().getValueAt(row, 0).toString()),
                 Utils.convertStrToDateTime(table.getModel().getValueAt(row, 2).toString()),
-                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()));
+                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()),
+                table.getModel().getValueAt(row, 4).toString());
     }
 }
