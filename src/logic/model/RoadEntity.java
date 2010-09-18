@@ -3,7 +3,7 @@ package logic.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-@javax.persistence.Table(name = "road", catalog = "rzd")
+@Table(name = "road", catalog = "rzd")
 @Entity
 public class RoadEntity {
 
@@ -14,7 +14,7 @@ public class RoadEntity {
 
     private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getId() {
         return id;
@@ -26,7 +26,7 @@ public class RoadEntity {
 
     private String name;
 
-    @javax.persistence.Column(name = "name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getName() {
         return name;
@@ -38,7 +38,7 @@ public class RoadEntity {
 
     private String comments;
 
-    @javax.persistence.Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
+    @Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
     @Basic
     public String getComments() {
         return comments;
@@ -50,7 +50,7 @@ public class RoadEntity {
 
     private int position;
 
-    @javax.persistence.Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getPosition() {
         return position;
@@ -104,5 +104,16 @@ public class RoadEntity {
 
     public void setRoadTypeByIdType(RoadTypeEntity roadTypeByIdType) {
         this.roadTypeByIdType = roadTypeByIdType;
+    }
+
+    private Collection<TrainEntity> trainsById;
+
+    @OneToMany(mappedBy = "roadByIdRoad")
+    public Collection<TrainEntity> getTrainsById() {
+        return trainsById;
+    }
+
+    public void setTrainsById(Collection<TrainEntity> trainsById) {
+        this.trainsById = trainsById;
     }
 }

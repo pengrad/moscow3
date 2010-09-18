@@ -67,7 +67,7 @@ public interface BusinessLogic {
 
     public boolean updateCar(Car car, CarLocation carLocation);
 
-    public boolean removeCar();
+    public boolean removeCar(Car car);
 
     public ArrayList<Car> getCarsByTrain(Train train);
 
