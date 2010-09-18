@@ -10,17 +10,15 @@
         <property name="connection.password">root</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-
-        <mapping class="logic.model.CarLocationEntity"/>
         <mapping class="logic.model.CarEntity"/>
-        <mapping class="logic.model.CarAnotherLocationEntity"/>
+        <mapping class="logic.model.CarLocationHistoryEntity"/>
+        <mapping class="logic.model.LocationEntity"/>
+        <mapping class="logic.model.LocationOtherEntity"/>
         <mapping class="logic.model.RoadEntity"/>
         <mapping class="logic.model.RoadTypeEntity"/>
         <mapping class="logic.model.RouteEntity"/>
         <mapping class="logic.model.RouteScheduleEntity"/>
         <mapping class="logic.model.TrainEntity"/>
-        <mapping class="logic.model.TrainCarsEntity"/>
-        <mapping class="logic.model.CarLocationHistoryEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

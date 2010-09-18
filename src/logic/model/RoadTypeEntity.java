@@ -6,19 +6,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Collection;
 
+/**
+ * User: Стас
+ * Date: 19.09.2010
+ * Time: 2:16:12
+ */
+
 @javax.persistence.Table(name = "road_type", catalog = "rzd")
 @Entity
 public class RoadTypeEntity {
-    private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+
+    private int idType;
+
+    @javax.persistence.Column(name = "id_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    public int getId() {
-        return id;
+    public int getIdType() {
+        return idType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdType(int idType) {
+        this.idType = idType;
     }
 
     private String name;
@@ -40,7 +48,7 @@ public class RoadTypeEntity {
 
         RoadTypeEntity that = (RoadTypeEntity) o;
 
-        if (id != that.id) return false;
+        if (idType != that.idType) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -48,19 +56,19 @@ public class RoadTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = idType;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
-    private Collection<RoadEntity> roadsById;
+    private Collection<RoadEntity> roads;
 
-    @OneToMany(mappedBy = "roadTypeByIdType")
-    public Collection<RoadEntity> getRoadsById() {
-        return roadsById;
+    @OneToMany(mappedBy = "roadType")
+    public Collection<RoadEntity> getRoads() {
+        return roads;
     }
 
-    public void setRoadsById(Collection<RoadEntity> roadsById) {
-        this.roadsById = roadsById;
+    public void setRoads(Collection<RoadEntity> roads) {
+        this.roads = roads;
     }
 }

@@ -7,15 +7,13 @@ package rzd.model.objects;
  * Time: 0:40:21
  * To change this template use File | Settings | File Templates.
  */
-public class CarLocation {
+public class Location {
     private int id;
-    private Train train;
     private Road road;
-    private CarAnotherLocation otherLocation;
+    private LocationAnother otherLocation;
 
-    public CarLocation(int id, Train train, Road road, CarAnotherLocation otherLocation) {
+    public Location(int id, Road road, LocationAnother otherLocation) {
         this.id = id;
-        this.train = train;
         this.road = road;
         this.otherLocation = otherLocation;
     }
@@ -28,14 +26,6 @@ public class CarLocation {
         this.id = id;
     }
 
-    public Train getTrain() {
-        return train;
-    }
-
-    public void setTrain(Train train) {
-        this.train = train;
-    }
-
     public Road getRoad() {
         return road;
     }
@@ -44,11 +34,11 @@ public class CarLocation {
         this.road = road;
     }
 
-    public CarAnotherLocation getOtherLocation() {
+    public LocationAnother getOtherLocation() {
         return otherLocation;
     }
 
-    public void setOtherLocation(CarAnotherLocation otherLocation) {
+    public void setOtherLocation(LocationAnother otherLocation) {
         this.otherLocation = otherLocation;
     }
 }

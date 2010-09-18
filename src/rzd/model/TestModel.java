@@ -154,18 +154,19 @@ public class TestModel implements BusinessLogic {
     }
 
     public Train getTrainByRoad(Road road) {
-        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()));
+//        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()));
+        return null;
     }
 
     public ArrayList<Car> getCars() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addCar(Car car, CarLocation carLocation) {
+    public boolean addCar(Car car, Location carLocation) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean updateCar(Car car, CarLocation carLocation) {
+    public boolean updateCar(Car car, Location carLocation) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -193,7 +194,7 @@ public class TestModel implements BusinessLogic {
         return cars;
     }
 
-    public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation) {
+    public ArrayList<Car> getCarsByAnotherLocation(LocationAnother carAnotherLocation) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -205,7 +206,7 @@ public class TestModel implements BusinessLogic {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addCarInAnotherLocation(Car car, CarAnotherLocation carAnotherLocation) {
+    public boolean addCarInAnotherLocation(Car car, LocationAnother carAnotherLocation) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

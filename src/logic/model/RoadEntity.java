@@ -3,30 +3,32 @@ package logic.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Table(name = "road", catalog = "rzd")
+/**
+ * User: Стас
+ * Date: 19.09.2010
+ * Time: 2:16:11
+ */
+
+@javax.persistence.Table(name = "road", catalog = "rzd")
 @Entity
 public class RoadEntity {
 
-    public RoadEntity() {
-    }
 
-    
+    private int idRoad;
 
-    private int id;
-
-    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "id_road", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    public int getId() {
-        return id;
+    public int getIdRoad() {
+        return idRoad;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdRoad(int idRoad) {
+        this.idRoad = idRoad;
     }
 
     private String name;
 
-    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @javax.persistence.Column(name = "name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getName() {
         return name;
@@ -38,7 +40,7 @@ public class RoadEntity {
 
     private String comments;
 
-    @Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
+    @javax.persistence.Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
     @Basic
     public String getComments() {
         return comments;
@@ -50,8 +52,8 @@ public class RoadEntity {
 
     private int position;
 
-    @Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    @Id
+    @javax.persistence.Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
     public int getPosition() {
         return position;
     }
@@ -67,7 +69,8 @@ public class RoadEntity {
 
         RoadEntity that = (RoadEntity) o;
 
-        if (id != that.id) return false;
+        if (idRoad != that.idRoad) return false;
+        if (position != that.position) return false;
         if (comments != null ? !comments.equals(that.comments) : that.comments != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
@@ -76,44 +79,34 @@ public class RoadEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = idRoad;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (comments != null ? comments.hashCode() : 0);
+        result = 31 * result + position;
         return result;
     }
 
-    private Collection<CarLocationEntity> carLocationsById;
+    private Collection<LocationEntity> locations;
 
-    @OneToMany(mappedBy = "roadByIdRoad")
-    public Collection<CarLocationEntity> getCarLocationsById() {
-        return carLocationsById;
+    @OneToMany(mappedBy = "road")
+    public Collection<LocationEntity> getLocations() {
+        return locations;
     }
 
-    public void setCarLocationsById(Collection<CarLocationEntity> carLocationsById) {
-        this.carLocationsById = carLocationsById;
+    public void setLocations(Collection<LocationEntity> locations) {
+        this.locations = locations;
     }
 
-    private RoadTypeEntity roadTypeByIdType;
+    private RoadTypeEntity roadType;
 
     @ManyToOne
     public
-    @JoinColumn(name = "id_type", referencedColumnName = "id", nullable = false)
-    RoadTypeEntity getRoadTypeByIdType() {
-        return roadTypeByIdType;
+    @JoinColumn(name = "id_type", referencedColumnName = "id_type", nullable = false)
+    RoadTypeEntity getRoadType() {
+        return roadType;
     }
 
-    public void setRoadTypeByIdType(RoadTypeEntity roadTypeByIdType) {
-        this.roadTypeByIdType = roadTypeByIdType;
-    }
-
-    private Collection<TrainEntity> trainsById;
-
-    @OneToMany(mappedBy = "roadByIdRoad")
-    public Collection<TrainEntity> getTrainsById() {
-        return trainsById;
-    }
-
-    public void setTrainsById(Collection<TrainEntity> trainsById) {
-        this.trainsById = trainsById;
+    public void setRoadType(RoadTypeEntity roadType) {
+        this.roadType = roadType;
     }
 }
