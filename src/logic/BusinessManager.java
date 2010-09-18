@@ -351,7 +351,7 @@ public class BusinessManager implements BusinessLogic {
             // проверка что существующее местоположение и новое - не одно и то же
             CarLocationEntity cle = new CarLocationEntity(te, cale, re);
             CarLocationEntity cleOld = ce.getCarLocationByIdLocation();
-            if(cle.equals(cleOld)) return false;
+            if (cle.equals(cleOld)) return false;
             Timestamp time = new Timestamp(new Date().getTime());
             ce.setDateUpdate(time);
             ce.setCarLocationByIdLocation(cle);
@@ -372,7 +372,20 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public boolean removeCar(Car car) {
-        return false;
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            CarLocationEntity cle = ce.getCarLocationByIdLocation();
+
+            return true;
+        } catch (Exception e) {
+            try {
+                SessionManager.rollback();
+            } catch (Throwable ignored) {
+            }
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public ArrayList<Car> getCarsByTrain(Train train) {
