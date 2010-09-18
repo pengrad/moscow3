@@ -21,13 +21,13 @@ CREATE DATABASE `rzd`
 USE `rzd`;
 
 #
-# Structure for the `car_another_location` table : 
+# Structure for the `location_other` table : 
 #
 
-CREATE TABLE `car_another_location` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `location_other` (
+  `id_otherlocation` int(11) NOT NULL AUTO_INCREMENT,
   `parking` varchar(2000) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_otherlocation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
@@ -35,9 +35,9 @@ CREATE TABLE `car_another_location` (
 #
 
 CREATE TABLE `road_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_type` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 #
@@ -45,15 +45,30 @@ CREATE TABLE `road_type` (
 #
 
 CREATE TABLE `road` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_road` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `id_type` int(11) NOT NULL,
   `comments` varchar(2000) DEFAULT ' ',
   `position` int(11) DEFAULT NULL COMMENT 'порядок пути. для сортировки',
-  PRIMARY KEY (`id`),
-  KEY `road_fk` (`id_type`),
-  CONSTRAINT `road_fk` FOREIGN KEY (`id_type`) REFERENCES `road_type` (`id`)
+  PRIMARY KEY (`id_road`),
+  KEY `id_type` (`id_type`),
+  CONSTRAINT `road_fk` FOREIGN KEY (`id_type`) REFERENCES `road_type` (`id_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+
+#
+# Structure for the `location` table : 
+#
+
+CREATE TABLE `location` (
+  `id_location` int(11) NOT NULL AUTO_INCREMENT,
+  `id_road` int(11) DEFAULT NULL,
+  `id_otherlocation` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_location`),
+  KEY `id_road` (`id_road`),
+  KEY `id_otherlocation` (`id_otherlocation`),
+  CONSTRAINT `location_fk1` FOREIGN KEY (`id_otherlocation`) REFERENCES `location_other` (`id_otherlocation`),
+  CONSTRAINT `location_fk` FOREIGN KEY (`id_road`) REFERENCES `road` (`id_road`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=cp1251;
 
 #
 # Structure for the `route` table : 
@@ -72,14 +87,14 @@ CREATE TABLE `route` (
 #
 
 CREATE TABLE `route_schedule` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_schedule` int(11) NOT NULL AUTO_INCREMENT,
   `id_route` int(11) NOT NULL COMMENT 'ссылка на маршрут',
   `time_departure` time NOT NULL COMMENT 'Время отправления поезда',
   `time_destination` time NOT NULL COMMENT 'Время прибытия',
   `date_begin` date NOT NULL COMMENT 'Начало действия расписания',
   `day_move` int(11) NOT NULL COMMENT 'Дни в пути',
   `day_stop` int(11) NOT NULL COMMENT 'Дни простоя на станции',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id_schedule`),
   KEY `id_route` (`id_route`),
   CONSTRAINT `route_schedule_fk` FOREIGN KEY (`id_route`) REFERENCES `route` (`id_route`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -91,30 +106,16 @@ CREATE TABLE `route_schedule` (
 CREATE TABLE `train` (
   `id_train` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор',
   `id_schedule` int(11) NOT NULL COMMENT 'Расписание поезда (в расписании маршрут)',
+  `id_location` int(11) NOT NULL COMMENT 'Местоположение поезда (location)',
+  `train_chief` varchar(100) DEFAULT NULL COMMENT 'Начальник поезда',
   `dt_departure` datetime NOT NULL COMMENT 'Время и дата отправления поезда',
   `dt_destination` datetime NOT NULL COMMENT 'Дата и время прибытия поезда',
   PRIMARY KEY (`id_train`),
   KEY `id_schedule` (`id_schedule`),
-  CONSTRAINT `train_fk` FOREIGN KEY (`id_schedule`) REFERENCES `route_schedule` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
-#
-# Structure for the `car_location` table : 
-#
-
-CREATE TABLE `car_location` (
-  `id_location` int(11) NOT NULL AUTO_INCREMENT,
-  `id_train` int(11) DEFAULT NULL,
-  `id_road` int(11) DEFAULT NULL,
-  `id_otherlocation` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_location`),
-  KEY `id_train` (`id_train`),
-  KEY `id_road` (`id_road`),
-  KEY `id_otherlocation` (`id_otherlocation`),
-  CONSTRAINT `car_location_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
-  CONSTRAINT `car_location_fk1` FOREIGN KEY (`id_road`) REFERENCES `road` (`id`),
-  CONSTRAINT `car_location_fk2` FOREIGN KEY (`id_otherlocation`) REFERENCES `car_another_location` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=cp1251;
+  KEY `id_location` (`id_location`),
+  CONSTRAINT `train_fk` FOREIGN KEY (`id_schedule`) REFERENCES `route_schedule` (`id_schedule`),
+  CONSTRAINT `train_fk1` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `car` table : 
@@ -123,40 +124,39 @@ CREATE TABLE `car_location` (
 CREATE TABLE `car` (
   `number` int(11) NOT NULL COMMENT 'Уникальный номер вагона',
   `id_location` int(11) NOT NULL COMMENT 'Ссылка на место нахождения вагона\r\nМожет ссылаться на путь или что то еще в зависимости от поля type_location',
-  `date_update_location` datetime NOT NULL COMMENT 'Дата изменения местоположения',
+  `id_train` int(11) DEFAULT NULL COMMENT 'Поезд, в состав которого входит вагон',
   `date_update` datetime NOT NULL COMMENT 'Дата обновления записи',
   PRIMARY KEY (`number`),
-  KEY `car_fk` (`id_location`),
-  CONSTRAINT `car_fk` FOREIGN KEY (`id_location`) REFERENCES `car_location` (`id_location`)
+  KEY `id_train` (`id_train`),
+  KEY `id_location` (`id_location`),
+  CONSTRAINT `car_fk` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
+  CONSTRAINT `car_fk1` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='type_location -1 - в составе поезда 0 - на пути 1 - прочее';
 
 #
-# Structure for the `train_cars` table : 
+# Structure for the `car_location_history` table : 
 #
 
-CREATE TABLE `train_cars` (
-  `id_train` int(11) NOT NULL,
-  `id_car` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_train`,`id_car`),
+CREATE TABLE `car_location_history` (
+  `id_history` int(11) NOT NULL AUTO_INCREMENT,
+  `number` int(11) NOT NULL,
+  `id_location` int(11) NOT NULL,
+  `id_train` int(11) DEFAULT NULL,
+  `ddate` datetime NOT NULL COMMENT 'Дата задания местоположения',
+  PRIMARY KEY (`id_history`),
+  KEY `number` (`number`),
+  KEY `id_location` (`id_location`),
   KEY `id_train` (`id_train`),
-  KEY `id_car` (`id_car`),
-  CONSTRAINT `train_cars_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
-  CONSTRAINT `train_cars_fk1` FOREIGN KEY (`id_car`) REFERENCES `car` (`number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Data for the `route` table  (LIMIT 0,500)
-#
-
-INSERT INTO `route` (`id_route`, `number`, `point_departure`, `point_destination`) VALUES 
-  (7,'fff','Kursk','Kiev');
-COMMIT;
+  CONSTRAINT `car_location_history_fk` FOREIGN KEY (`number`) REFERENCES `car` (`number`),
+  CONSTRAINT `car_location_history_fk1` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
+  CONSTRAINT `car_location_history_fk2` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`)
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 #
 # Data for the `road_type` table  (LIMIT 0,500)
 #
 
-INSERT INTO `road_type` (`id`, `name`) VALUES 
+INSERT INTO `road_type` (`id_type`, `name`) VALUES 
   (1,'Приемоотправочные пути'),
   (2,'Пути отстоя вагонов'),
   (3,'Вытяжные пути'),
@@ -168,7 +168,7 @@ COMMIT;
 # Data for the `road` table  (LIMIT 0,500)
 #
 
-INSERT INTO `road` (`id`, `name`, `id_type`, `comments`, `position`) VALUES 
+INSERT INTO `road` (`id_road`, `name`, `id_type`, `comments`, `position`) VALUES 
   (1,'1 (3 п. 11-го корпуса)',4,NULL,NULL),
   (2,'1 тупик',1,NULL,NULL),
   (3,'10 (2 п. Юго корпуса)',4,NULL,NULL),
@@ -206,19 +206,27 @@ INSERT INTO `road` (`id`, `name`, `id_type`, `comments`, `position`) VALUES
 COMMIT;
 
 #
-# Data for the `car_location` table  (LIMIT 0,500)
+# Data for the `location` table  (LIMIT 0,500)
 #
 
-INSERT INTO `car_location` (`id_location`, `id_train`, `id_road`, `id_otherlocation`) VALUES 
-  (9,NULL,NULL,NULL);
+INSERT INTO `location` (`id_location`, `id_road`, `id_otherlocation`) VALUES 
+  (9,NULL,NULL);
+COMMIT;
+
+#
+# Data for the `route` table  (LIMIT 0,500)
+#
+
+INSERT INTO `route` (`id_route`, `number`, `point_departure`, `point_destination`) VALUES 
+  (7,'fff','Kursk','Kiev');
 COMMIT;
 
 #
 # Data for the `car` table  (LIMIT 0,500)
 #
 
-INSERT INTO `car` (`number`, `id_location`, `date_update_location`, `date_update`) VALUES 
-  (111,9,'2010-09-13 22:05:20','2010-09-13 22:05:20');
+INSERT INTO `car` (`number`, `id_location`, `id_train`, `date_update`) VALUES 
+  (111,9,NULL,'2010-09-13 22:05:20');
 COMMIT;
 
 
