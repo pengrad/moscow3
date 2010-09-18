@@ -8,6 +8,7 @@ package rzd.model.objects;
  * To change this template use File | Settings | File Templates.
  */
 public class RoadType {
+
     private int id;
     private String name;
 
@@ -30,5 +31,20 @@ public class RoadType {
 
     public void setName(String name) {
         this.name = name;
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o != null && o instanceof RoadType) {
+            if (id == ((RoadType) o).getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

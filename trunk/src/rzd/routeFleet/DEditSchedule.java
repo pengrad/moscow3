@@ -28,7 +28,6 @@ public class DEditSchedule extends javax.swing.JDialog {
     private Route route;
     private Object[] ret;
 
-
     /**
      * Creates new form DEditTrain
      */
@@ -396,10 +395,14 @@ public class DEditSchedule extends javax.swing.JDialog {
         this.routes = routes;
         this.route = route;
         cRoute.removeAllItems();
-        if (routes != null)
+        if (routes != null) {
             for (Route r : routes) {
                 cRoute.addItem(r);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Справочник маршрутов пуст");
+            return null;
+        }
         if (schedule == null) {
             fTimeDeparture.setText("");
             fTimeDestination.setText("");

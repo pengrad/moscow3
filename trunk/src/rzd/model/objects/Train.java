@@ -13,12 +13,14 @@ public class Train {
     private int id;
     private Date dtDeparture;
     private Date dtDestination;
+    private String chief;
 
-    public Train(int id, Date dtDeparture, Date dtDestination) {
+    public Train(int id, Date dtDeparture, Date dtDestination, String chief) {
         this.id = id;
         this.dtDeparture = dtDeparture;
         this.dtDestination = dtDestination;
-      }
+        this.chief = chief;
+    }
 
     public int getId() {
         return id;
@@ -43,5 +45,12 @@ public class Train {
     public void setDtDestination(Date dtDestination) {
         this.dtDestination = dtDestination;
     }
-           
+
+    public String getChief() {
+        return chief;
+    }
+
+    public void setChief(String chief) {
+        this.chief = chief;
+    }
 }

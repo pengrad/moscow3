@@ -64,7 +64,7 @@ public class Route {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Route) {
+        if (o != null && o instanceof Route) {
             if (id == ((Route) o).getId()) {
                 return true;
             }

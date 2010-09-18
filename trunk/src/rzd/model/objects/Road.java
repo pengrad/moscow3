@@ -60,7 +60,7 @@ public class Road {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Road)) {
+        if (o==null||!(o instanceof Road)) {
             return false;
         }
         if (id == ((Road) o).getId()) {

@@ -4,6 +4,8 @@
  */
 package rzd.model.objects;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 /**
  *
  * @author ЧерныхЕА
@@ -23,6 +25,17 @@ public class Car {
     public void setNumber(int number) {
         this.number = number;
     }
+
+    @Override
+    public String toString(){
+    return  new Integer(number).toString();
+    }
+    public boolean  equals(Object o){
+    if(o==null|| !(o instanceof Car)) return false;
+   if(number==((Car)o).getNumber()) return true;
+   else return false;
+    }
+
 
 
 }
