@@ -8,6 +8,7 @@ package rzd.model.objects;
  * To change this template use File | Settings | File Templates.
  */
 public class Road {
+
     private int id;
     private String name;
     private String comment;
@@ -36,8 +37,6 @@ public class Road {
         this.name = name;
     }
 
-  
-
     public String getComment() {
         return comment;
     }
@@ -52,5 +51,22 @@ public class Road {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Road)) {
+            return false;
+        }
+        if (id == ((Road) o).getId()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

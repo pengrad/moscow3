@@ -101,11 +101,15 @@ public class TestModel implements BusinessLogic {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public ArrayList<Train> getTrainsGoing(int forHours) {
+    public ArrayList<Train> getTrainsGoing() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public ArrayList<Train> getTrainsArriving(int forHours) {
+    public ArrayList<Train> getTrainsArriving() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public ArrayList<Train> getTrainsGoneToday() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
