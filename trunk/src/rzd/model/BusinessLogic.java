@@ -38,13 +38,13 @@ public interface BusinessLogic {
     public ArrayList<Train> getTrains(Date dBegin, Date dEnd);
 
     //Отправляющиеся поезда за часов
-    public ArrayList<Train> getTrainsGoing(int forHours);
+    public ArrayList<Train> getTrainsGoing();
 
     //Прибывающие поезда за часов
-    public ArrayList<Train> getTrainsArriving(int forHours);
+    public ArrayList<Train> getTrainsArriving();
 
     //Отправленные поезда сегодня
-    public ArrayList<Train> getTrainsSentToday();
+    public ArrayList<Train> getTrainsGoneToday();
 
     //Прибывшие поезда сегодня
     public ArrayList<Train> getTrainsArrivedToday();
