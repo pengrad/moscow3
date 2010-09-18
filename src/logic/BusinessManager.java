@@ -209,8 +209,7 @@ public class BusinessManager implements BusinessLogic {
             ArrayList<Train> res = new ArrayList<Train>(list.size());
             for (Object o : list) {
                 TrainEntity te = (TrainEntity) o;
-//                todo
-//                res.add(new Train(te.getIdTrain(), te.getDtDeparture(), te.getDtDestination()));
+                res.add(new Train(te.getIdTrain(), te.getDtDeparture(), te.getDtDestination(), te.getTrainChief()));
             }
             SessionManager.closeSession();
             return res;
@@ -245,7 +244,7 @@ public class BusinessManager implements BusinessLogic {
         }
         Timestamp timeDep = new Timestamp(train.getDtDeparture().getTime());
         Timestamp timeDest = new Timestamp(train.getDtDestination().getTime());
-        // todo
+//        todo
 //        TrainEntity te = new TrainEntity(timeDep, timeDest, rs);
 //        SessionManager.getSession().saveOrUpdate(te);
         SessionManager.closeSession();
@@ -261,7 +260,7 @@ public class BusinessManager implements BusinessLogic {
         }
         Timestamp timeDep = new Timestamp(train.getDtDeparture().getTime());
         Timestamp timeDest = new Timestamp(train.getDtDestination().getTime());
-        //todo
+//        todo
 //        TrainEntity te = new TrainEntity(timeDep, timeDest, rs);
 //        te.setIdTrain(train.getId());
 //        SessionManager.getSession().saveOrUpdate(te);
