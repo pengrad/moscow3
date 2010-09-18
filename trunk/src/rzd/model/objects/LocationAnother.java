@@ -7,11 +7,11 @@ package rzd.model.objects;
  * Time: 0:42:18
  * To change this template use File | Settings | File Templates.
  */
-public class CarAnotherLocation {
+public class LocationAnother {
     private int id;
     private String parking;
 
-    public CarAnotherLocation(int id, String parking) {
+    public LocationAnother(int id, String parking) {
         this.id = id;
         this.parking = parking;
     }

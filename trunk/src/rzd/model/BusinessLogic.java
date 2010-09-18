@@ -63,9 +63,9 @@ public interface BusinessLogic {
 
     public ArrayList<Car> getCars();
 
-    public boolean addCar(Car car, CarLocation carLocation);
+    public boolean addCar(Car car, Location carLocation);
 
-    public boolean updateCar(Car car, CarLocation carLocation);
+    public boolean updateCar(Car car, Location carLocation);
 
     public boolean removeCar(Car car);
 
@@ -73,7 +73,7 @@ public interface BusinessLogic {
 
     public ArrayList<Car> getCarsByRoad(Road train);
 
-    public ArrayList<Car> getCarsByAnotherLocation(CarAnotherLocation carAnotherLocation);
+    public ArrayList<Car> getCarsByAnotherLocation(LocationAnother carAnotherLocation);
 
     public boolean addCarInTrain(Car road, Train train);
 
@@ -83,8 +83,8 @@ public interface BusinessLogic {
 
     // public boolean removeCarFromRoad(Road road, Car car);
 
-    public boolean addCarInAnotherLocation(Car car, CarAnotherLocation carAnotherLocation);
+    public boolean addCarInAnotherLocation(Car car, LocationAnother carAnotherLocation);
 
-    //  public boolean removeCarFromAnotherLocation(CarAnotherLocation carAnotherLocation, Car car);
+    //  public boolean removeCarFromAnotherLocation(LocationAnother carAnotherLocation, Car car);
 
 }

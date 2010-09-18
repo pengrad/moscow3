@@ -4,22 +4,20 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-@Table(name = "car", catalog = "rzd")
+/**
+ * User: Стас
+ * Date: 19.09.2010
+ * Time: 2:16:10
+ */
+
+@javax.persistence.Table(name = "car", catalog = "rzd")
 @Entity
 public class CarEntity {
 
-    public CarEntity() {
-    }
-
-    public CarEntity(int number, Timestamp dateUpdate, CarLocationEntity carLocationByIdLocation) {
-        this.number = number;
-        this.dateUpdate = dateUpdate;
-        this.carLocationByIdLocation = carLocationByIdLocation;
-    }
 
     private int number;
 
-    @Column(name = "number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getNumber() {
         return number;
@@ -31,7 +29,7 @@ public class CarEntity {
 
     private Timestamp dateUpdate;
 
-    @Column(name = "date_update", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @javax.persistence.Column(name = "date_update", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateUpdate() {
         return dateUpdate;
@@ -50,6 +48,7 @@ public class CarEntity {
 
         if (number != carEntity.number) return false;
         if (dateUpdate != null ? !dateUpdate.equals(carEntity.dateUpdate) : carEntity.dateUpdate != null) return false;
+
         return true;
     }
 
@@ -60,38 +59,40 @@ public class CarEntity {
         return result;
     }
 
-    private CarLocationEntity carLocationByIdLocation;
+    private LocationEntity location;
 
     @ManyToOne
     public
-    @JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
-    CarLocationEntity getCarLocationByIdLocation() {
-        return carLocationByIdLocation;
+    @javax.persistence.JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
+    LocationEntity getLocation() {
+        return location;
     }
 
-    public void setCarLocationByIdLocation(CarLocationEntity carLocationByIdLocation) {
-        this.carLocationByIdLocation = carLocationByIdLocation;
+    public void setLocation(LocationEntity location) {
+        this.location = location;
     }
 
-    private Collection<TrainCarsEntity> trainCarsesByNumber;
+    private TrainEntity train;
 
-    @OneToMany(mappedBy = "carByIdCar")
-    public Collection<TrainCarsEntity> getTrainCarsesByNumber() {
-        return trainCarsesByNumber;
+    @ManyToOne
+    public
+    @javax.persistence.JoinColumn(name = "id_train", referencedColumnName = "id_train")
+    TrainEntity getTrain() {
+        return train;
     }
 
-    public void setTrainCarsesByNumber(Collection<TrainCarsEntity> trainCarsesByNumber) {
-        this.trainCarsesByNumber = trainCarsesByNumber;
+    public void setTrain(TrainEntity train) {
+        this.train = train;
     }
 
-    private Collection<CarLocationHistoryEntity> carLocationHistoriesByNumber;
+    private Collection<CarLocationHistoryEntity> carLocationHistories;
 
-    @OneToMany(mappedBy = "carByIdCar")
-    public Collection<CarLocationHistoryEntity> getCarLocationHistoriesByNumber() {
-        return carLocationHistoriesByNumber;
+    @OneToMany(mappedBy = "car")
+    public Collection<CarLocationHistoryEntity> getCarLocationHistories() {
+        return carLocationHistories;
     }
 
-    public void setCarLocationHistoriesByNumber(Collection<CarLocationHistoryEntity> carLocationHistoriesByNumber) {
-        this.carLocationHistoriesByNumber = carLocationHistoriesByNumber;
+    public void setCarLocationHistories(Collection<CarLocationHistoryEntity> carLocationHistories) {
+        this.carLocationHistories = carLocationHistories;
     }
 }

@@ -1,7 +1,16 @@
 package logic.model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Collection;
+
+/**
+ * User: Стас
+ * Date: 19.09.2010
+ * Time: 2:16:12
+ */
 
 @javax.persistence.Table(name = "route", catalog = "rzd")
 @Entity
@@ -20,7 +29,6 @@ public class RouteEntity {
 
     @javax.persistence.Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    @GeneratedValue
     public int getIdRoute() {
         return idRoute;
     }
@@ -91,14 +99,14 @@ public class RouteEntity {
         return result;
     }
 
-    private Collection<RouteScheduleEntity> routeSchedulesByIdRoute;
+    private Collection<RouteScheduleEntity> routeSchedules;
 
-    @OneToMany(mappedBy = "routeByIdRoute")
-    public Collection<RouteScheduleEntity> getRouteSchedulesByIdRoute() {
-        return routeSchedulesByIdRoute;
+    @OneToMany(mappedBy = "route")
+    public Collection<RouteScheduleEntity> getRouteSchedules() {
+        return routeSchedules;
     }
 
-    public void setRouteSchedulesByIdRoute(Collection<RouteScheduleEntity> routeSchedulesByIdRoute) {
-        this.routeSchedulesByIdRoute = routeSchedulesByIdRoute;
-    }    
+    public void setRouteSchedules(Collection<RouteScheduleEntity> routeSchedules) {
+        this.routeSchedules = routeSchedules;
+    }
 }
