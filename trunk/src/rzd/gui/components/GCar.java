@@ -35,7 +35,10 @@ public class GCar extends Figure {
     public void paint(Graphics2D g) {
         g.setColor(ColorHelper.COLOR_VAGON_BORDER);
         g.fill(new Rectangle2D.Double(shape.getBounds().getX() - 1, shape.getBounds().getY() - 1, shape.getBounds().getWidth() + 2, shape.getBounds().getHeight() + 2));
-        g.setColor(ColorHelper.COLOR_VAGON);
+        if (!selected)
+            g.setColor(ColorHelper.COLOR_VAGON);
+        else
+            g.setColor(Color.RED);
         g.fill(shape);
         g.setFont(new Font("Tahoma", Font.PLAIN, 11));
         g.setColor(ColorHelper.COLOR_VAGON_NAMBER);
