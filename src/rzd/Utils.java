@@ -1,5 +1,7 @@
 package rzd;
 
+import javax.swing.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -50,13 +52,26 @@ public class Utils {
         int yy = new Integer(t.nextToken(" "));
         int hh = new Integer(t.nextToken(":"));
         int mm = new Integer(t.nextToken());
-       
+
         return new GregorianCalendar(yy, MM, dd, hh, mm).getTime();
     }
 
-    public static String getDateByDateBeginAndPeriod(Date dateBegin,int dayMove,int dayStop){
-
+    public static String getDateByDateBeginAndPeriod(Date dateBegin, int dayMove, int dayStop) {
         return "";
     }
 
+    public static boolean searchByTable(JTable t, int column, String value) {
+        if (t == null || value == null || column < 0 || column > t.getColumnCount()) return false;
+        int rowCount = t.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            if (t.getValueAt(i, column).equals(value)) {
+                Rectangle rect = t.getCellRect(i, column, false);
+                JViewport viewport = (JViewport) t.getParent();
+                viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));
+                t.setRowSelectionInterval(i, i);
+                return true;
+            }
+        }
+        return false;
+    }
 }

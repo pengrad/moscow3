@@ -24,6 +24,7 @@ public class PCars extends javax.swing.JPanel {
         initComponents();
         tCars.addMouseListener(c);
         bAddCar.addActionListener(c);
+        fSearch.addActionListener(c);
     }
 
     /** This method is called from within the constructor to

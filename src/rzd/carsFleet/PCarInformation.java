@@ -37,7 +37,7 @@ public class PCarInformation extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 204));
+        setBackground(new java.awt.Color(252, 252, 240));
 
         jLabel1.setText("Детальная информация о вагоне");
 

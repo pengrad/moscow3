@@ -11,6 +11,8 @@
 
 package rzd.stationFleet;
 
+import java.awt.Point;
+
 /**
  *
  * @author ЧерныхЕА
@@ -62,8 +64,17 @@ public void removeRoad(PRoad r){
     pContainerRoads.remove(r);
 }
 
+public void setViewRoad(PRoad r){
+    if(pContainerRoads.isAncestorOf(r)){
+ jScrollPane1.getVerticalScrollBar().setValue((int)r.getLocation().getY());
+
+        //     jScrollPane1.getViewport().setViewPosition(r.getLocation());
+    }
+
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pContainer;
     private javax.swing.JPanel pContainerRoads;
     // End of variables declaration//GEN-END:variables

@@ -25,6 +25,16 @@ public class TestModel implements BusinessLogic {
         roads.add(new Road(1, "Путь 1", "", 10));
         roads.add(new Road(2, "Путь 2", "", 20));
         roads.add(new Road(3, "Путь 3", "", 30));
+        roads.add(new Road(3, "Путь 3", "", 30));
+        roads.add(new Road(4, "Путь 3", "", 30));
+        roads.add(new Road(5, "Путь 3", "", 30));
+        roads.add(new Road(6, "Путь 3", "", 30));
+        roads.add(new Road(7, "Путь 3", "", 30));
+        roads.add(new Road(8, "Путь 3", "", 30));
+        roads.add(new Road(9, "Путь 3", "", 30));
+        roads.add(new Road(10, "Путь 3", "", 30));
+        roads.add(new Road(11, "Путь 3", "", 30));
+
         roadTypes.put(roadType, roads);
         roadType = new RoadType(2, "Тип 1");
         roads = new ArrayList<Road>();
@@ -154,8 +164,8 @@ public class TestModel implements BusinessLogic {
     }
 
     public Train getTrainByRoad(Road road) {
-//        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()));
-        return null;
+        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()), "");
+        //  return null;
     }
 
     public ArrayList<Car> getCars() {
@@ -182,7 +192,7 @@ public class TestModel implements BusinessLogic {
         ArrayList<Car> cars = new ArrayList<Car>();
         cars.add(new Car(00000000));
         cars.add(new Car(11111111));
-        cars.add(new Car(33333333));
+        cars.add(new Car(333));
         return cars;
     }
 
@@ -191,6 +201,34 @@ public class TestModel implements BusinessLogic {
         cars.add(new Car(12345678));
         cars.add(new Car(22345678));
         cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(32345678));
+        cars.add(new Car(111));
+
         return cars;
     }
 

@@ -64,10 +64,10 @@
                                   </Group>
                               </Group>
                           </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="339" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jLabel1" alignment="0" pref="386" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
