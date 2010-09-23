@@ -6,15 +6,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import rzd.ModelTable;
-import rzd.Utils;
+import rzd.utils.Utils;
 import rzd.model.TestModel;
 import rzd.model.objects.Schedule;
-import rzd.model.objects.Train;
 
 
 import javax.swing.*;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import rzd.model.objects.Route;
