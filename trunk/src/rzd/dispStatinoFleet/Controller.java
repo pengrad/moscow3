@@ -5,7 +5,7 @@
 package rzd.dispStatinoFleet;
 
 import rzd.ModelTable;
-import rzd.Utils;
+import rzd.utils.Utils;
 import rzd.model.TestModel;
 import rzd.model.objects.*;
 
