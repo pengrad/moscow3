@@ -10,13 +10,10 @@
  */
 package rzd.stationFleet;
 
-import rzd.gui.components.*;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
 
-import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JScrollBar;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -103,7 +100,7 @@ public class PRoad extends javax.swing.JPanel {
 
     public void addTrain(Train train) {
         if (train != null)
-            road.add(new GTrainSt(train));
+            road.add(new GTrainStation(train));
     }
 
     public void addCar(Car car) {

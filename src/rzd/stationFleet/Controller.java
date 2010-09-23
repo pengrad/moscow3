@@ -4,8 +4,8 @@
  */
 package rzd.stationFleet;
 
-import rzd.gui.components.GCar;
-import rzd.gui.components.GTrainSt;
+import rzd.stationFleet.GCar;
+import rzd.stationFleet.GTrainStation;
 import rzd.model.TestModel;
 import rzd.model.objects.Road;
 import rzd.model.objects.RoadType;
@@ -41,9 +41,7 @@ public class Controller implements ActionListener {
                     throw new Exception();
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
                 JOptionPane.showMessageDialog(pStationFleet, "Ничего не найдено");
-
             }
         }
     }
@@ -122,8 +120,8 @@ public class Controller implements ActionListener {
                 if (components != null && components.length > 0) {
                     for (int i = 0; i < components.length; i++) {
                         //Если это поезд
-                        if (components[i] instanceof GTrainSt) {
-                            GTrainSt train = (GTrainSt) components[i];
+                        if (components[i] instanceof GTrainStation) {
+                            GTrainStation train = (GTrainStation) components[i];
                             ArrayList<GCar> cars = train.getCars();
                             if (cars != null && cars.size() > 0) {
                                 for (GCar car : cars) {
