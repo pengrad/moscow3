@@ -15,7 +15,7 @@ import rzd.model.objects.Route;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import rzd.Utils;
+import rzd.utils.Utils;
 import rzd.model.objects.Schedule;
 
 /**
