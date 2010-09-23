@@ -16,12 +16,11 @@ import java.util.Iterator;
 import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import rzd.Utils;
+import rzd.utils.Utils;
 import rzd.model.objects.Car;
 import rzd.model.objects.Road;
 import rzd.model.objects.RoadType;
 import rzd.model.objects.Route;
-import rzd.model.objects.Schedule;
 import rzd.model.objects.Train;
 
 /**
