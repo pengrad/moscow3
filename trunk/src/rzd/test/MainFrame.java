@@ -14,8 +14,8 @@ import rzd.routeFleet.PRoute;
 import rzd.carsFleet.PCars;
 import rzd.dispStatinoFleet.PDispStation;
 import rzd.stationFleet.PStationFleet;
-import rzd.test.v2.PRaspisanie;
-
+import rzd.scheduleFleet.PRaspisanie;
+import rzd.scheduleFleet.PSchedule;
 
 /**
  *
@@ -30,12 +30,11 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
-        pPaint2.add(new PRaspisanie());
 //      PStancia pStancia=new PStancia();
 //      pPaint1.add(pStancia);
 
         tabbedtMain.add("Станция", new PStationFleet());
-tabbedtMain.add("Диспетчер станции", new PDispStation());
+        tabbedtMain.add("Диспетчер станции", new PDispStation());
 
         // p1p1.add(new GTrainV1());
         // l1p1.addMouseListener(Controller.get());
@@ -43,7 +42,7 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
 
         tabbedtMain.add("Парк вагонов", new PCars());
         tabbedtMain.add("Маршруты", new PRoute());
-
+        tabbedtMain.add("Расписание", new PSchedule());
     }
 
     /** This method is called from within the constructor to
@@ -56,17 +55,6 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
     private void initComponents() {
 
         tabbedtMain = new javax.swing.JTabbedPane();
-        pTimeShedule = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        pPaint2 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -77,98 +65,6 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
 
         tabbedtMain.setBackground(new java.awt.Color(204, 204, 255));
 
-        pPaint2.setBackground(new java.awt.Color(255, 255, 255));
-        pPaint2.setLayout(new javax.swing.BoxLayout(pPaint2, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane2.setViewportView(pPaint2);
-
-        jTextField2.setText("27.07.2010");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("c");
-
-        jLabel2.setText("по");
-
-        jTextField3.setText("30.09.2010");
-
-        jButton1.setText("Смотреть");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Задайте отчетный период:");
-
-        jTextField4.setFont(new java.awt.Font("Tahoma", 2, 10));
-        jTextField4.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField4.setText("Поиск по номеру поезда");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 574, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout pTimeSheduleLayout = new javax.swing.GroupLayout(pTimeShedule);
-        pTimeShedule.setLayout(pTimeSheduleLayout);
-        pTimeSheduleLayout.setHorizontalGroup(
-            pTimeSheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pTimeSheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE))
-        );
-        pTimeSheduleLayout.setVerticalGroup(
-            pTimeSheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTimeSheduleLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(586, Short.MAX_VALUE))
-            .addGroup(pTimeSheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pTimeSheduleLayout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)))
-        );
-
-        tabbedtMain.addTab("Рассписание", pTimeShedule);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -177,7 +73,7 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 638, Short.MAX_VALUE)
         );
 
         tabbedtMain.addTab("Парк поездов", jPanel3);
@@ -190,7 +86,7 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 638, Short.MAX_VALUE)
         );
 
         tabbedtMain.addTab("Парк локомотивов", jPanel2);
@@ -217,14 +113,6 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_jTextField2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -238,22 +126,11 @@ tabbedtMain.add("Диспетчер станции", new PDispStation());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JPanel pPaint2;
-    private javax.swing.JPanel pTimeShedule;
     private javax.swing.JTabbedPane tabbedtMain;
     // End of variables declaration//GEN-END:variables
 }
