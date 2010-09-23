@@ -4,7 +4,7 @@
  */
 package rzd.test;
 
-import rzd.gui.components.GCar;
+import rzd.stationFleet.GCar;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
