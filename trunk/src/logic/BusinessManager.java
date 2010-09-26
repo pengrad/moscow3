@@ -36,7 +36,7 @@ public class BusinessManager implements BusinessLogic {
         if (objects == null) return null;
         ArrayList<RoadType> list = new ArrayList<RoadType>(objects.size());
         for (RoadTypeEntity rt : objects) {
-            list.add(new RoadType(rt.getIdType(), rt.getName()));
+//            list.add(new RoadType(rt.getIdType(), rt.getName()));
         }
         return list;
     }
@@ -49,7 +49,7 @@ public class BusinessManager implements BusinessLogic {
         Collection<RoadEntity> roads = rt.getRoads();
         ArrayList<Road> list = new ArrayList<Road>(roads.size());
         for (RoadEntity road : roads) {
-            list.add(new Road(road.getIdRoad(), road.getName(), road.getComments(), road.getPosition()));
+//            list.add(new Road(road.getIdRoad(), road.getName(), road.getComments(), road.getPosition()));
         }
         return list;
     }
@@ -57,8 +57,9 @@ public class BusinessManager implements BusinessLogic {
     public Road getRoadByTrain(Train train) {
         try {
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
-            RoadEntity re = te.getLocation().getRoad();
-            return new Road(re.getIdRoad(), re.getName(), re.getComments(), re.getPosition());
+//            RoadEntity re = te.getLocation().getRoad();
+//            return new Road(re.getIdRoad(), re.getName(), re.getComments(), re.getPosition());
+            return null;
         } catch (Throwable t) {
             return null;
         } finally {
@@ -69,8 +70,9 @@ public class BusinessManager implements BusinessLogic {
     public Road getRoadByCar(Car car) {
         try {
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-            RoadEntity re = ce.getLocation().getRoad();
-            return new Road(re.getIdRoad(), re.getName(), re.getComments(), re.getPosition());
+//            RoadEntity re = ce.getLocation().getRoad();
+//            return new Road(re.getIdRoad(), re.getName(), re.getComments(), re.getPosition());
+            return null;
         } catch (Throwable t) {
             return null;
         } finally {
@@ -84,24 +86,24 @@ public class BusinessManager implements BusinessLogic {
         if (objects == null) return null;
         ArrayList<Route> list = new ArrayList<Route>(objects.size());
         for (RouteEntity re : objects) {
-            list.add(new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination()));
+//            list.add(new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination()));
         }
         return list;
     }
 
     public boolean addRoute(Route route) {
         if (route == null) return false;
-        RouteEntity r = new RouteEntity(route.getNumber(), route.getPointDeparture(), route.getPointDestination());
-        SessionManager.getSession().saveOrUpdate(r);
+//        RouteEntity r = new RouteEntity(route.getNumber(), route.getPointDeparture(), route.getPointDestination());
+//        SessionManager.getSession().saveOrUpdate(r);
         SessionManager.closeSession();
         return true;
     }
 
     public boolean updateRoute(Route route) {
         if (route == null) return false;
-        RouteEntity r = new RouteEntity(route.getNumber(), route.getPointDeparture(), route.getPointDestination());
-        r.setIdRoute(route.getId());
-        SessionManager.getSession().saveOrUpdate(r);
+//        RouteEntity r = new RouteEntity(route.getNumber(), route.getPointDeparture(), route.getPointDestination());
+//        r.setIdRoute(route.getId());
+//        SessionManager.getSession().saveOrUpdate(r);
         SessionManager.closeSession();
         return true;
     }
@@ -119,15 +121,16 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Schedule> getSchedules() {
-        Collection<RouteScheduleEntity> objects = SessionManager.getAllObjects(new RouteScheduleEntity());
+//        Collection<RouteScheduleEntity> objects = SessionManager.getAllObjects(new RouteScheduleEntity());
         SessionManager.closeSession();
-        if (objects == null) return null;
-        ArrayList<Schedule> list = new ArrayList<Schedule>(objects.size());
-        for (RouteScheduleEntity rs : objects) {
-            list.add(new Schedule(rs.getIdSchedule(), rs.getTimeDeparture(), rs.getTimeDestination(), rs.getDateBegin(),
-                    rs.getDayMove(), rs.getDayStop()));
-        }
-        return list;
+//        if (objects == null) return null;
+//        ArrayList<Schedule> list = new ArrayList<Schedule>(objects.size());
+//        for (RouteScheduleEntity rs : objects) {
+//            list.add(new Schedule(rs.getIdSchedule(), rs.getTimeDeparture(), rs.getTimeDestination(), rs.getDateBegin(),
+//                    rs.getDayMove(), rs.getDayStop()));
+//        }
+//        return list;
+        return null;
     }
 
     public boolean addSchedule(Schedule schedule, Route route) {
@@ -140,9 +143,9 @@ public class BusinessManager implements BusinessLogic {
         java.sql.Date dateBegin = new java.sql.Date(schedule.getDateBegin().getTime());
         Time timeDep = new Time(schedule.getTimeDeparture().getTime());
         Time timeDest = new Time(schedule.getTimeDestination().getTime());
-        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
-                schedule.getDayMove(), schedule.getDayStop(), r);
-        SessionManager.getSession().saveOrUpdate(r);
+//        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
+//                schedule.getDayMove(), schedule.getDayStop(), r);
+//        SessionManager.getSession().saveOrUpdate(rs);
         SessionManager.closeSession();
         return true;
     }
@@ -157,22 +160,22 @@ public class BusinessManager implements BusinessLogic {
         java.sql.Date dateBegin = new java.sql.Date(schedule.getDateBegin().getTime());
         Time timeDep = new Time(schedule.getTimeDeparture().getTime());
         Time timeDest = new Time(schedule.getTimeDestination().getTime());
-        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
-                schedule.getDayMove(), schedule.getDayStop(), r);
-        rs.setIdSchedule(schedule.getId());
-        SessionManager.getSession().saveOrUpdate(r);
+//        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
+//                schedule.getDayMove(), schedule.getDayStop(), r);
+//        rs.setIdSchedule(schedule.getId());
+//        SessionManager.getSession().saveOrUpdate(rs);
         SessionManager.closeSession();
         return true;
     }
 
     public boolean removeSchedule(Schedule schedule) {
         if (schedule == null) return false;
-        RouteScheduleEntity r = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
-        if (r == null) {
-            SessionManager.closeSession();
-            return false;
-        }
-        SessionManager.getSession().delete(r);
+//        RouteScheduleEntity r = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+//        if (r == null) {
+//            SessionManager.closeSession();
+//            return false;
+//        }
+//        SessionManager.getSession().delete(r);
         SessionManager.closeSession();
         return true;
     }
@@ -182,23 +185,24 @@ public class BusinessManager implements BusinessLogic {
         RouteEntity rt = SessionManager.getEntityById(new RouteEntity(), route.getId());
         SessionManager.closeSession();
         if (rt == null) return null;
-        Collection<RouteScheduleEntity> rs = rt.getRouteSchedules();
-        ArrayList<Schedule> list = new ArrayList<Schedule>(rs.size());
-        for (RouteScheduleEntity s : rs) {
-            list.add(new Schedule(s.getIdSchedule(), s.getTimeDeparture(), s.getTimeDestination(), s.getDateBegin(),
-                    s.getDayMove(), s.getDayStop()));
-        }
-        return list;
+//        Collection<RouteScheduleEntity> rs = rt.getRouteSchedules();
+//        ArrayList<Schedule> list = new ArrayList<Schedule>(rs.size());
+//        for (RouteScheduleEntity s : rs) {
+//            list.add(new Schedule(s.getIdSchedule(), s.getTimeDeparture(), s.getTimeDestination(), s.getDateBegin(),
+//                    s.getDayMove(), s.getDayStop()));
+//        }
+        return null;
     }
 
     public Route getRouteBySchedule(Schedule schedule) {
         if (schedule == null) return null;
-        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
-        SessionManager.closeSession();
-        if (rs == null) return null;
-        RouteEntity re = rs.getRoute();
-        if (re == null) return null;
-        return new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination());
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+//        SessionManager.closeSession();
+//        if (rs == null) return null;
+//        RouteEntity re = rs.getRoute();
+//        if (re == null) return null;
+//        return new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination());
+        return null;
     }
 
     public ArrayList<Train> getTrains(Date dBegin, Date dEnd) {
@@ -209,7 +213,7 @@ public class BusinessManager implements BusinessLogic {
             ArrayList<Train> res = new ArrayList<Train>(list.size());
             for (Object o : list) {
                 TrainEntity te = (TrainEntity) o;
-                res.add(new Train(te.getIdTrain(), te.getDtDeparture(), te.getDtDestination(), te.getTrainChief()));
+//                res.add(new Train(te.getIdTrain(), te.getDtDeparture(), te.getDtDestination(), te.getTrainChief()));
             }
             SessionManager.closeSession();
             return res;
@@ -237,11 +241,11 @@ public class BusinessManager implements BusinessLogic {
 
     public boolean addTrain(Train train, Schedule schedule) {
         if (train == null || schedule == null) return false;
-        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
-        if (rs == null) {
-            SessionManager.closeSession();
-            return false;
-        }
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+//        if (rs == null) {
+//            SessionManager.closeSession();
+//            return false;
+//        }
         Timestamp timeDep = new Timestamp(train.getDtDeparture().getTime());
         Timestamp timeDest = new Timestamp(train.getDtDestination().getTime());
 //        todo
@@ -253,11 +257,11 @@ public class BusinessManager implements BusinessLogic {
 
     public boolean updateTrain(Train train, Schedule schedule) {
         if (train == null || schedule == null) return false;
-        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
-        if (rs == null) {
-            SessionManager.closeSession();
-            return false;
-        }
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+//        if (rs == null) {
+//            SessionManager.closeSession();
+//            return false;
+//        }
         Timestamp timeDep = new Timestamp(train.getDtDeparture().getTime());
         Timestamp timeDest = new Timestamp(train.getDtDestination().getTime());
 //        todo
@@ -271,8 +275,9 @@ public class BusinessManager implements BusinessLogic {
     public Route getRouteByTrain(Train train) {
         try {
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
-            RouteEntity re = te.getRouteSchedule().getRoute();
-            return new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination());
+//            RouteEntity re = te.getRouteSchedule().getRoute();
+//            return new Route(re.getIdRoute(), re.getNumber(), re.getPointDeparture(), re.getPointDestination());
+            return null;
         } catch (Throwable t) {
             return null;
         } finally {
@@ -298,7 +303,7 @@ public class BusinessManager implements BusinessLogic {
         if (objects == null) return null;
         ArrayList<Car> list = new ArrayList<Car>(objects.size());
         for (CarEntity ce : objects) {
-            list.add(new Car(ce.getNumber()));
+//            list.add(new Car(ce.getNumber()));
         }
         return list;
     }

@@ -8,8 +8,8 @@ import java.util.Collection;
 
 /**
  * User: Стас
- * Date: 19.09.2010
- * Time: 2:16:12
+ * Date: 27.09.2010
+ * Time: 1:56:37
  */
 
 @javax.persistence.Table(name = "road_type", catalog = "rzd")
@@ -29,16 +29,16 @@ public class RoadTypeEntity {
         this.idType = idType;
     }
 
-    private String name;
+    private String typeName;
 
-    @javax.persistence.Column(name = "name", nullable = false, insertable = true, updatable = true, length = 200, precision = 0)
+    @javax.persistence.Column(name = "type_name", nullable = false, insertable = true, updatable = true, length = 200, precision = 0)
     @Basic
-    public String getName() {
-        return name;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RoadTypeEntity {
         RoadTypeEntity that = (RoadTypeEntity) o;
 
         if (idType != that.idType) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
 
         return true;
     }
@@ -57,7 +57,7 @@ public class RoadTypeEntity {
     @Override
     public int hashCode() {
         int result = idType;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
         return result;
     }
 

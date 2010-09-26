@@ -1,13 +1,15 @@
 package logic.model;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Collection;
 
 /**
  * User: Стас
- * Date: 19.09.2010
- * Time: 2:16:10
+ * Date: 27.09.2010
+ * Time: 1:56:35
  */
 
 @javax.persistence.Table(name = "car", catalog = "rzd")
@@ -15,28 +17,16 @@ import java.util.Collection;
 public class CarEntity {
 
 
-    private int number;
+    private int carNumber;
 
-    @javax.persistence.Column(name = "number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "car_number", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    public int getNumber() {
-        return number;
+    public int getCarNumber() {
+        return carNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    private Timestamp dateUpdate;
-
-    @javax.persistence.Column(name = "date_update", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
-    @Basic
-    public Timestamp getDateUpdate() {
-        return dateUpdate;
-    }
-
-    public void setDateUpdate(Timestamp dateUpdate) {
-        this.dateUpdate = dateUpdate;
+    public void setCarNumber(int carNumber) {
+        this.carNumber = carNumber;
     }
 
     @Override
@@ -46,17 +36,14 @@ public class CarEntity {
 
         CarEntity carEntity = (CarEntity) o;
 
-        if (number != carEntity.number) return false;
-        if (dateUpdate != null ? !dateUpdate.equals(carEntity.dateUpdate) : carEntity.dateUpdate != null) return false;
+        if (carNumber != carEntity.carNumber) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = number;
-        result = 31 * result + (dateUpdate != null ? dateUpdate.hashCode() : 0);
-        return result;
+        return carNumber;
     }
 
     private LocationEntity location;
@@ -72,27 +59,36 @@ public class CarEntity {
         this.location = location;
     }
 
-    private TrainEntity train;
-
-    @ManyToOne
-    public
-    @javax.persistence.JoinColumn(name = "id_train", referencedColumnName = "id_train")
-    TrainEntity getTrain() {
-        return train;
-    }
-
-    public void setTrain(TrainEntity train) {
-        this.train = train;
-    }
-
-    private Collection<CarLocationHistoryEntity> carLocationHistories;
+    private Collection<CarHistoryEntity> carHistories;
 
     @OneToMany(mappedBy = "car")
-    public Collection<CarLocationHistoryEntity> getCarLocationHistories() {
-        return carLocationHistories;
+    public Collection<CarHistoryEntity> getCarHistories() {
+        return carHistories;
     }
 
-    public void setCarLocationHistories(Collection<CarLocationHistoryEntity> carLocationHistories) {
-        this.carLocationHistories = carLocationHistories;
+    public void setCarHistories(Collection<CarHistoryEntity> carHistories) {
+        this.carHistories = carHistories;
+    }
+
+    private Collection<RoadDetEntity> roadDets;
+
+    @OneToMany(mappedBy = "car")
+    public Collection<RoadDetEntity> getRoadDets() {
+        return roadDets;
+    }
+
+    public void setRoadDets(Collection<RoadDetEntity> roadDets) {
+        this.roadDets = roadDets;
+    }
+
+    private Collection<TrainDetEntity> trainDets;
+
+    @OneToMany(mappedBy = "car")
+    public Collection<TrainDetEntity> getTrainDets() {
+        return trainDets;
+    }
+
+    public void setTrainDets(Collection<TrainDetEntity> trainDets) {
+        this.trainDets = trainDets;
     }
 }

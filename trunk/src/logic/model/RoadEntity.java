@@ -5,8 +5,8 @@ import java.util.Collection;
 
 /**
  * User: Стас
- * Date: 19.09.2010
- * Time: 2:16:11
+ * Date: 27.09.2010
+ * Time: 1:56:36
  */
 
 @javax.persistence.Table(name = "road", catalog = "rzd")
@@ -26,16 +26,16 @@ public class RoadEntity {
         this.idRoad = idRoad;
     }
 
-    private String name;
+    private String roadName;
 
-    @javax.persistence.Column(name = "name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @javax.persistence.Column(name = "road_name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
-    public String getName() {
-        return name;
+    public String getRoadName() {
+        return roadName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
     }
 
     private String comments;
@@ -72,7 +72,7 @@ public class RoadEntity {
         if (idRoad != that.idRoad) return false;
         if (position != that.position) return false;
         if (comments != null ? !comments.equals(that.comments) : that.comments != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (roadName != null ? !roadName.equals(that.roadName) : that.roadName != null) return false;
 
         return true;
     }
@@ -80,21 +80,21 @@ public class RoadEntity {
     @Override
     public int hashCode() {
         int result = idRoad;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (roadName != null ? roadName.hashCode() : 0);
         result = 31 * result + (comments != null ? comments.hashCode() : 0);
         result = 31 * result + position;
         return result;
     }
 
-    private Collection<LocationEntity> locations;
+    private Collection<CarHistoryEntity> carHistories;
 
     @OneToMany(mappedBy = "road")
-    public Collection<LocationEntity> getLocations() {
-        return locations;
+    public Collection<CarHistoryEntity> getCarHistories() {
+        return carHistories;
     }
 
-    public void setLocations(Collection<LocationEntity> locations) {
-        this.locations = locations;
+    public void setCarHistories(Collection<CarHistoryEntity> carHistories) {
+        this.carHistories = carHistories;
     }
 
     private RoadTypeEntity roadType;
@@ -108,5 +108,16 @@ public class RoadEntity {
 
     public void setRoadType(RoadTypeEntity roadType) {
         this.roadType = roadType;
+    }
+
+    private Collection<RoadDetEntity> roadDets;
+
+    @OneToMany(mappedBy = "road")
+    public Collection<RoadDetEntity> getRoadDets() {
+        return roadDets;
+    }
+
+    public void setRoadDets(Collection<RoadDetEntity> roadDets) {
+        this.roadDets = roadDets;
     }
 }
