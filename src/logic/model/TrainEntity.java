@@ -6,24 +6,14 @@ import java.util.Collection;
 
 /**
  * User: Стас
- * Date: 19.09.2010
- * Time: 2:16:14
+ * Date: 27.09.2010
+ * Time: 1:56:39
  */
 
 @javax.persistence.Table(name = "train", catalog = "rzd")
 @Entity
 public class TrainEntity {
 
-    public TrainEntity() {
-    }
-
-    public TrainEntity(String trainChief, Timestamp dtDeparture, Timestamp dtDestination, LocationEntity location, RouteScheduleEntity routeSchedule) {        
-        this.trainChief = trainChief;
-        this.dtDeparture = dtDeparture;
-        this.dtDestination = dtDestination;
-        this.location = location;
-        this.routeSchedule = routeSchedule;
-    }
 
     private int idTrain;
 
@@ -39,7 +29,7 @@ public class TrainEntity {
 
     private String trainChief;
 
-    @javax.persistence.Column(name = "train_chief", nullable = true, insertable = true, updatable = true, length = 100, precision = 0)
+    @javax.persistence.Column(name = "train_chief", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getTrainChief() {
         return trainChief;
@@ -49,28 +39,28 @@ public class TrainEntity {
         this.trainChief = trainChief;
     }
 
-    private Timestamp dtDeparture;
+    private Timestamp dateFrom;
 
-    @javax.persistence.Column(name = "dt_departure", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @javax.persistence.Column(name = "date_from", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
-    public Timestamp getDtDeparture() {
-        return dtDeparture;
+    public Timestamp getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDtDeparture(Timestamp dtDeparture) {
-        this.dtDeparture = dtDeparture;
+    public void setDateFrom(Timestamp dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    private Timestamp dtDestination;
+    private Timestamp dateTo;
 
-    @javax.persistence.Column(name = "dt_destination", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @javax.persistence.Column(name = "date_to", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
-    public Timestamp getDtDestination() {
-        return dtDestination;
+    public Timestamp getDateTo() {
+        return dateTo;
     }
 
-    public void setDtDestination(Timestamp dtDestination) {
-        this.dtDestination = dtDestination;
+    public void setDateTo(Timestamp dateTo) {
+        this.dateTo = dateTo;
     }
 
     @Override
@@ -81,9 +71,8 @@ public class TrainEntity {
         TrainEntity that = (TrainEntity) o;
 
         if (idTrain != that.idTrain) return false;
-        if (dtDeparture != null ? !dtDeparture.equals(that.dtDeparture) : that.dtDeparture != null) return false;
-        if (dtDestination != null ? !dtDestination.equals(that.dtDestination) : that.dtDestination != null)
-            return false;
+        if (dateFrom != null ? !dateFrom.equals(that.dateFrom) : that.dateFrom != null) return false;
+        if (dateTo != null ? !dateTo.equals(that.dateTo) : that.dateTo != null) return false;
         if (trainChief != null ? !trainChief.equals(that.trainChief) : that.trainChief != null) return false;
 
         return true;
@@ -93,56 +82,67 @@ public class TrainEntity {
     public int hashCode() {
         int result = idTrain;
         result = 31 * result + (trainChief != null ? trainChief.hashCode() : 0);
-        result = 31 * result + (dtDeparture != null ? dtDeparture.hashCode() : 0);
-        result = 31 * result + (dtDestination != null ? dtDestination.hashCode() : 0);
+        result = 31 * result + (dateFrom != null ? dateFrom.hashCode() : 0);
+        result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
         return result;
     }
 
-    private Collection<CarEntity> cars;
+    private Collection<CarHistoryEntity> carHistories;
 
     @OneToMany(mappedBy = "train")
-    public Collection<CarEntity> getCars() {
-        return cars;
+    public Collection<CarHistoryEntity> getCarHistories() {
+        return carHistories;
     }
 
-    public void setCars(Collection<CarEntity> cars) {
-        this.cars = cars;
+    public void setCarHistories(Collection<CarHistoryEntity> carHistories) {
+        this.carHistories = carHistories;
     }
 
-    private Collection<CarLocationHistoryEntity> carLocationHistories;
+    private Collection<RoadDetEntity> roadDets;
 
     @OneToMany(mappedBy = "train")
-    public Collection<CarLocationHistoryEntity> getCarLocationHistories() {
-        return carLocationHistories;
+    public Collection<RoadDetEntity> getRoadDets() {
+        return roadDets;
     }
 
-    public void setCarLocationHistories(Collection<CarLocationHistoryEntity> carLocationHistories) {
-        this.carLocationHistories = carLocationHistories;
+    public void setRoadDets(Collection<RoadDetEntity> roadDets) {
+        this.roadDets = roadDets;
     }
 
-    private LocationEntity location;
+    private SheduleEntity shedule;
 
     @ManyToOne
     public
-    @JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
-    LocationEntity getLocation() {
-        return location;
+    @JoinColumn(name = "id_shedule", referencedColumnName = "id_shedule", nullable = false)
+    SheduleEntity getShedule() {
+        return shedule;
     }
 
-    public void setLocation(LocationEntity location) {
-        this.location = location;
+    public void setShedule(SheduleEntity shedule) {
+        this.shedule = shedule;
     }
 
-    private RouteScheduleEntity routeSchedule;
+    private TrainStatusEntity trainStatus;
 
     @ManyToOne
     public
-    @JoinColumn(name = "id_schedule", referencedColumnName = "id_schedule", nullable = false)
-    RouteScheduleEntity getRouteSchedule() {
-        return routeSchedule;
+    @JoinColumn(name = "id_status", referencedColumnName = "id_status", nullable = false)
+    TrainStatusEntity getTrainStatus() {
+        return trainStatus;
     }
 
-    public void setRouteSchedule(RouteScheduleEntity routeSchedule) {
-        this.routeSchedule = routeSchedule;
+    public void setTrainStatus(TrainStatusEntity trainStatus) {
+        this.trainStatus = trainStatus;
+    }
+
+    private Collection<TrainDetEntity> trainDets;
+
+    @OneToMany(mappedBy = "train")
+    public Collection<TrainDetEntity> getTrainDets() {
+        return trainDets;
+    }
+
+    public void setTrainDets(Collection<TrainDetEntity> trainDets) {
+        this.trainDets = trainDets;
     }
 }

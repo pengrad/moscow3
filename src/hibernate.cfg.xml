@@ -11,14 +11,18 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <mapping class="logic.model.CarEntity"/>
-        <mapping class="logic.model.CarLocationHistoryEntity"/>
         <mapping class="logic.model.LocationEntity"/>
-        <mapping class="logic.model.LocationOtherEntity"/>
         <mapping class="logic.model.RoadEntity"/>
         <mapping class="logic.model.RoadTypeEntity"/>
-        <mapping class="logic.model.RouteEntity"/>
-        <mapping class="logic.model.RouteScheduleEntity"/>
+        <mapping class="logic.model.RouteEntity"/>        
         <mapping class="logic.model.TrainEntity"/>
+        <mapping class="logic.model.CarHistoryEntity"/>
+        <mapping class="logic.model.RoadDetEntity"/>
+        <mapping class="logic.model.SheduleEntity"/>
+        <mapping class="logic.model.SheduleDaysEntity"/>
+        <mapping class="logic.model.SheduleTypeEntity"/>
+        <mapping class="logic.model.TrainDetEntity"/>
+        <mapping class="logic.model.TrainStatusEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

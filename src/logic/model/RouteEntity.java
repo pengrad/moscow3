@@ -3,27 +3,18 @@ package logic.model;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Collection;
+import javax.persistence.ManyToOne;
 
 /**
  * User: Стас
- * Date: 19.09.2010
- * Time: 2:16:12
+ * Date: 27.09.2010
+ * Time: 1:56:37
  */
 
 @javax.persistence.Table(name = "route", catalog = "rzd")
 @Entity
 public class RouteEntity {
 
-    public RouteEntity() {
-    }
-
-    public RouteEntity(String number, String pointDeparture, String pointDestination) {
-        this.number = number;
-        this.pointDeparture = pointDeparture;
-        this.pointDestination = pointDestination;
-    }
 
     private int idRoute;
 
@@ -37,40 +28,40 @@ public class RouteEntity {
         this.idRoute = idRoute;
     }
 
-    private String number;
+    private String routeNumber;
 
-    @javax.persistence.Column(name = "number", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @javax.persistence.Column(name = "route_number", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
-    public String getNumber() {
-        return number;
+    public String getRouteNumber() {
+        return routeNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setRouteNumber(String routeNumber) {
+        this.routeNumber = routeNumber;
     }
 
-    private String pointDeparture;
+    private int cityFrom;
 
-    @javax.persistence.Column(name = "point_departure", nullable = false, insertable = true, updatable = true, length = 500, precision = 0)
+    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public String getPointDeparture() {
-        return pointDeparture;
+    public int getCityFrom() {
+        return cityFrom;
     }
 
-    public void setPointDeparture(String pointDeparture) {
-        this.pointDeparture = pointDeparture;
+    public void setCityFrom(int cityFrom) {
+        this.cityFrom = cityFrom;
     }
 
-    private String pointDestination;
+    private int cityTo;
 
-    @javax.persistence.Column(name = "point_destination", nullable = false, insertable = true, updatable = true, length = 500, precision = 0)
+    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public String getPointDestination() {
-        return pointDestination;
+    public int getCityTo() {
+        return cityTo;
     }
 
-    public void setPointDestination(String pointDestination) {
-        this.pointDestination = pointDestination;
+    public void setCityTo(int cityTo) {
+        this.cityTo = cityTo;
     }
 
     @Override
@@ -80,12 +71,10 @@ public class RouteEntity {
 
         RouteEntity that = (RouteEntity) o;
 
+        if (cityFrom != that.cityFrom) return false;
+        if (cityTo != that.cityTo) return false;
         if (idRoute != that.idRoute) return false;
-        if (number != null ? !number.equals(that.number) : that.number != null) return false;
-        if (pointDeparture != null ? !pointDeparture.equals(that.pointDeparture) : that.pointDeparture != null)
-            return false;
-        if (pointDestination != null ? !pointDestination.equals(that.pointDestination) : that.pointDestination != null)
-            return false;
+        if (routeNumber != null ? !routeNumber.equals(that.routeNumber) : that.routeNumber != null) return false;
 
         return true;
     }
@@ -93,20 +82,35 @@ public class RouteEntity {
     @Override
     public int hashCode() {
         int result = idRoute;
-        result = 31 * result + (number != null ? number.hashCode() : 0);
-        result = 31 * result + (pointDeparture != null ? pointDeparture.hashCode() : 0);
-        result = 31 * result + (pointDestination != null ? pointDestination.hashCode() : 0);
+        result = 31 * result + (routeNumber != null ? routeNumber.hashCode() : 0);
+        result = 31 * result + cityFrom;
+        result = 31 * result + cityTo;
         return result;
     }
 
-    private Collection<RouteScheduleEntity> routeSchedules;
+    private SheduleEntity sheduleBack;
 
-    @OneToMany(mappedBy = "route")
-    public Collection<RouteScheduleEntity> getRouteSchedules() {
-        return routeSchedules;
+    @ManyToOne
+    public
+    @javax.persistence.JoinColumn(name = "shedule_back", referencedColumnName = "id_shedule", nullable = false)
+    SheduleEntity getSheduleBack() {
+        return sheduleBack;
     }
 
-    public void setRouteSchedules(Collection<RouteScheduleEntity> routeSchedules) {
-        this.routeSchedules = routeSchedules;
+    public void setSheduleBack(SheduleEntity sheduleBack) {
+        this.sheduleBack = sheduleBack;
+    }
+
+    private SheduleEntity sheduleForward;
+
+    @ManyToOne
+    public
+    @javax.persistence.JoinColumn(name = "shedule_forward", referencedColumnName = "id_shedule", nullable = false)
+    SheduleEntity getSheduleForward() {
+        return sheduleForward;
+    }
+
+    public void setSheduleForward(SheduleEntity sheduleForward) {
+        this.sheduleForward = sheduleForward;
     }
 }
