@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
  * @author ЧерныхЕА
@@ -23,18 +24,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws HibernateInitializeException {
-        Date dB = new Date();
-        Date dE = new GregorianCalendar(2010, 11, 25).getTime();
-        Calendar dd=Calendar.getInstance();
-        dd.setTime(dB);
-        Calendar c = Calendar.getInstance();
-        c.setTime(new GregorianCalendar(2010, 11, 25).getTime());
-        System.out.println("y=" + c.get(Calendar.MONTH));
-        while (dd.before(dE)){
+    public static void main(String[] args) {
+    Integer[] i=new Integer[]{1,2,3};
+      
 
-        
-        }
     }
-
 }
