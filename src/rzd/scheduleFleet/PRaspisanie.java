@@ -1,5 +1,8 @@
 package rzd.scheduleFleet;
 
+import rzd.model.TestModel;
+import rzd.model.objects.Route;
+import rzd.model.objects.Train;
 import rzd.scheduleFleet.Controller;
 import rzd.scheduleFleet.GTrainV2;
 
@@ -7,10 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,44 +21,129 @@ import java.util.StringTokenizer;
  * To change this template use File | Settings | File Templates.
  */
 public class PRaspisanie extends JComponent {
-    private int width = 1000;
-    private int height = 1000;
+    private int sizeDay = 40;
+    private int sizeRoute = 100;
+    private ArrayList<Route> routes = TestModel.get().getRoutes();
+    private int widthPanel;
+    private int heightPanel;
     private Controller c;
     private String[] months = new String[]{"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-    private Date dBeg;
-    private Date dEnd;
-
-    public boolean addPoezd(int namberPuti, GTrainV2 poezd) {
-        return true;
-    }
-
-    public boolean removePoezd(GTrainV2 poezd) {
-        return true;
-    }
+    private Date dBeg = new GregorianCalendar(2010, 9, 1).getTime();
+    private Date dEnd = new GregorianCalendar(2010, 11, 26).getTime();
 
     public PRaspisanie() {
         super();
-        setPreferredSize(new Dimension(2000, 800));
-        GTrainV2 pv2 = new GTrainV2();
-        pv2.setLocation(200, 100, 50);
-        add(pv2);
-        pv2 = new GTrainV2();
-        pv2.setLocation(310, 100, 50);
-        add(pv2);
-        pv2 = new GTrainV2();
-        pv2.setLocation(600, 100, 50);
-        add(pv2);
-        pv2 = new GTrainV2();
-        pv2.setLocation(800, 100, 50);
-        add(pv2);
-        pv2 = new GTrainV2();
-        pv2.setLocation(50, 200, 100);
-        add(pv2);
-        pv2 = new GTrainV2();
-        pv2.setLocation(200, 200, 100);
-        add(pv2);
+        setData(dBeg, dEnd);
+        addTrain(null);
+//        GTrainV2 pv2 = new GTrainV2();
+//        pv2.setLocation(5 * sizeDay, 100, 50);
+//        add(pv2);
+//        pv2 = new GTrainV2();
+//        pv2.setLocation(310, 100, 50);
+//        add(pv2);
+//        pv2 = new GTrainV2();
+//        pv2.setLocation(600, 100, 50);
+//        add(pv2);
+//        pv2 = new GTrainV2();
+//        pv2.setLocation(800, 100, 50);
+//        add(pv2);
+//        pv2 = new GTrainV2();
+//        pv2.setLocation(50, 200, 100);
+//        add(pv2);
+//        pv2 = new GTrainV2();
+//        pv2.setLocation(200, 200, 100);
+//        add(pv2);
 //        this.c = new Controller(this);
     }
+
+    public void addTrain(Train train) {
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(dBeg);
+        int ddB = cl.get(Calendar.DAY_OF_MONTH);
+        int mmB = cl.get(Calendar.MONTH);
+        int yyB = cl.get(Calendar.YEAR);
+        cl.setTime(new GregorianCalendar(2010, 9, 26, 0, 0).getTime());
+        int ddPB = cl.get(Calendar.DAY_OF_MONTH);
+        int mmPB = cl.get(Calendar.MONTH);
+        int yyPB = cl.get(Calendar.YEAR);
+        int minPB = cl.get(Calendar.HOUR_OF_DAY) * 60 + cl.get(Calendar.MINUTE);
+        cl.setTime(new GregorianCalendar(2010, 9, 28, 23, 59).getTime());
+        int ddPE = cl.get(Calendar.DAY_OF_MONTH);
+        int mmPE = cl.get(Calendar.MONTH);
+        int yyPE = cl.get(Calendar.YEAR);
+        int minPE = cl.get(Calendar.HOUR_OF_DAY) * 60 + cl.get(Calendar.MINUTE);
+        //Считаем день отправления
+        int countDay = 0;
+        int mB = 0, mE = 0;
+        for (int yy = yyB; yy <= yyPB; yy++) {
+            if (yy == yyB)
+                mB = mmB;
+            else mB = 0;
+            if (yy == yyPB)
+                mE = mmPB;
+            else
+                mE = 11;
+            //Перебераем месяца
+            for (int mm = mB; mm <= mE; mm++) {
+                countDay = countDay + new GregorianCalendar(yy, mm, 1).getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+            }
+        }
+        ddPB = countDay + ddPB;
+        //Считаем день прибытия
+        for (int yy = yyB; yy <= yyPE; yy++) {
+            if (yy == yyB)
+                mB = mmB;
+            else mB = 0;
+            if (yy == yyPE)
+                mE = mmPE;
+            else
+                mE = 11;
+            //Перебераем месяца
+            for (int mm = mB; mm < mE; mm++) {
+                countDay = countDay + new GregorianCalendar(yy, mm, 1).getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+            }
+        }
+        ddPE = countDay + ddPE;
+        //-------------------------------------
+        GTrainV2 pv2 = new GTrainV2();
+        pv2.setLocation(ddPB * sizeDay + ((int) ((((double) minPB) / (24 * 60)) * sizeDay)), 100, (ddPE - ddPB) * sizeDay + ((int) ((((double) minPE) / (24 * 60)) * sizeDay)));
+        add(pv2);
+    }
+
+//    private int countDaysBetweenDate(Date d1, Date d2) {
+//        int mB, mE;
+//        Calendar cl = Calendar.getInstance();
+//        cl.setTime(d1);
+//        int ddB = cl.get(Calendar.DAY_OF_MONTH);
+//        int mmB = cl.get(Calendar.MONTH);
+//        int yyB = cl.get(Calendar.YEAR);
+//        cl.setTime(d2);
+//        int ddE = cl.get(Calendar.DAY_OF_MONTH);
+//        int mmE = cl.get(Calendar.MONTH);
+//        int yyE = cl.get(Calendar.YEAR);
+//        int countDay = 0;
+//        //Перебераем года
+//        for (int yy = yyB; yy <= yyE; yy++) {
+//            if (yyB == yyE)
+//                mB = mmB;
+//            else mB = 0;
+//            if (yy == yyE)
+//                mE = mmE;
+//            else
+//                mE = 11;
+//            //Перебераем месяца
+//            for (int mm = mB; mm <= mE; mm++) {
+//                countDay = countDay + new GregorianCalendar(yy, mm, 1).getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+//                if (yy == yyB && mm == mB && yyB == yyE && mB == mE)
+//                    countDay = ddE - ddB;
+//                else if (yy == yyB && mm == mB)
+//                    countDay = countDay - ddB-1;
+//                else if (yy == yyE && mm == mE)
+//                    countDay = countDay - ddE;
+//            }
+//        }
+//        return countDay;
+//    }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -65,22 +151,43 @@ public class PRaspisanie extends JComponent {
         drawTable(g2);
     }
 
+    public void setData(Date dBegin, Date dEnd) {
+        int mB, mE;
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(dBegin);
+        int ddB = cl.get(Calendar.DAY_OF_MONTH);
+        int mmB = cl.get(Calendar.MONTH);
+        int yyB = cl.get(Calendar.YEAR);
+        cl.setTime(dEnd);
+        int ddE = cl.get(Calendar.DAY_OF_MONTH);
+        int mmE = cl.get(Calendar.MONTH);
+        int yyE = cl.get(Calendar.YEAR);
+        //Считаем ширину экрана
+        {
+            int countDay = 0;
+            for (int yy = yyB; yy <= yyE; yy++) {
+                if (yy == yyB)
+                    mB = mmB;
+                else mB = 0;
+                if (yy == yyE)
+                    mE = mmE;
+                else
+                    mE = 11;
+                //Перебераем месяца
+                for (int mm = mB; mm <= mE; mm++) {
+                    countDay = countDay + new GregorianCalendar(yy, mm, 1).getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+                }
+            }
+            widthPanel = (int) (sizeDay * countDay);
+        }
+        //Считаем ширину экрана
+        heightPanel = (int) (routes.size() * sizeRoute);
+        setPreferredSize(new Dimension(widthPanel, heightPanel));
+
+    }
 
     private void drawTable(Graphics2D g2) {
-        int width = this.getWidth();
-        int height = this.getHeight();
-        int dxManth = 1000;
-        g2.setColor(Color.BLACK);
-        int dy = height / 10;
-        Line2D line;
-        g2.setColor(Color.BLACK);
-        line = new Line2D.Double(0, 1, width, 1);
-        g2.draw(line);
-        line = new Line2D.Double(0, 15, width, 15);
-        g2.draw(line);
-
         int mB, mE;
-        StringTokenizer st;
         Calendar cl = Calendar.getInstance();
         cl.setTime(dBeg);
         int ddB = cl.get(Calendar.DAY_OF_MONTH);
@@ -90,34 +197,72 @@ public class PRaspisanie extends JComponent {
         int ddE = cl.get(Calendar.DAY_OF_MONTH);
         int mmE = cl.get(Calendar.MONTH);
         int yyE = cl.get(Calendar.YEAR);
+        Line2D line;
+        int left = 0;
+        //Перебераем года-------------------------------------
         for (int yy = yyB; yy <= yyE; yy++) {
-            if (yyB == yyE)
+            //Рисуем год
+            g2.setColor(Color.RED);
+            g2.drawString(new Integer(yy).toString(), left + 10, 13);
+            g2.setColor(Color.BLACK);
+            //---------
+            if (yy == yyB)
                 mB = mmB;
             else mB = 0;
             if (yy == yyE)
                 mE = mmE;
             else
                 mE = 11;
+            //Перебераем месяца
             for (int mm = mB; mm <= mE; mm++) {
-                //     new GregorianCalendar(yy, mm, 10).
+
+                int minDD = 1;
+                int maxDD = new GregorianCalendar(yy, mm, 1).getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+                //Рисуем месяц
+                g2.setColor(Color.BLACK);
+                g2.draw(new Line2D.Double(left, 15, left + maxDD * sizeDay, 15));
+                g2.setColor(Color.RED);
+                g2.drawString(months[mm], left + 10 + sizeDay, 28);
+                g2.setColor(Color.BLACK);
+                g2.draw(new Line2D.Double(left, 30, left + maxDD * sizeDay, 30));
+                g2.draw(new Line2D.Double(left + maxDD * sizeDay + sizeDay, 15, left + maxDD * sizeDay + sizeDay, 30));
+                g2.setColor(Color.BLACK);
+                //---------
+                //Перебераем дни
+                for (int dd = minDD; dd <= maxDD; dd++) {
+                    left = left + sizeDay;
+                    //Рисуем дни
+                    g2.setColor(Color.BLUE);
+                    g2.drawString(new Integer(dd).toString(), left - 3, 43);
+                    if (dd == minDD) g2.setColor(Color.RED);
+                    else
+                        g2.setColor(Color.BLACK);
+                    g2.draw(new Line2D.Double(left, 45, left, heightPanel));
+                    //---------
+                    //Рисуем часы
+                    int dh = (int) (((double) sizeDay) / 4.0);
+                    int lh = left - sizeDay;
+                    for (int hh = 6; hh < 24; hh = hh + 6) {
+                        lh = lh + dh;
+                        Color tc = g2.getColor();
+                        g2.setColor(Color.lightGray);
+                        line = new Line2D.Double(lh, 45, lh, heightPanel);
+                        g2.draw(line);
+                        g2.setColor(tc);
+                    }
+                }
             }
         }
-        for (int m = 0; m < months.length; m++) {
-            line = new Line2D.Double(m * dxManth, 0, m * dxManth, height);
-            Color c = g2.getColor();
-            g2.setColor(Color.RED);
-            g2.draw(line);
-            g2.setColor(c);
-            g2.drawString(months[m], (int) (m * dxManth + 10), 13);
-            int days = 30;
-            double dxDay = dxManth / days;
-            for (int i = 1; i <= days; i++) {
-                g2.drawString(new Integer(i).toString(), (int) m * dxManth + (int) dxDay * i - 3, 28);
-                line = new Line2D.Double(m * dxManth + dxDay * i, 30, m * dxManth + dxDay * i, width);
-                g2.draw(line);
-            }
+        //----------------------------------------------------
+        for (int i = 1; i < routes.size(); i++) {
+            g2.setColor(Color.BLUE);
+            int tx = ((JScrollPane) ((JViewport) getParent().getParent()).getParent()).getHorizontalScrollBar().getValue();
+            System.out.println("tx=" + tx);
+            g2.drawString("Москва - Владивосток", tx + 20, i * sizeRoute - 1);
+            g2.setColor(Color.gray);
+            g2.draw(new Line2D.Double(0, i * sizeRoute, widthPanel, i * sizeRoute));
         }
-        line = new Line2D.Double(0, height - 1, width, height - 1);
-        g2.draw(line);
     }
+
+
 }

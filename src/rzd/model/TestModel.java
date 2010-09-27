@@ -67,7 +67,12 @@ public class TestModel implements BusinessLogic {
     }
 
     public ArrayList<Route> getRoutes() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+     ArrayList<Route> r=new ArrayList<Route>(5);
+        r.add(new Route(12,"","",""));
+        r.add(new Route(12,"","",""));
+          r.add(new Route(12,"","",""));
+          r.add(new Route(12,"","",""));
+        return r;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public boolean addRoute(Route route) {

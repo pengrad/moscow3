@@ -11,6 +11,7 @@ import java.util.Date;
  */
 public class Schedule {
     private int id;
+    private int type;
     private Date timeDeparture;
     private Date timeDestination;
     private Date dateBegin;

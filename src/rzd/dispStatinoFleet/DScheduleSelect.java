@@ -10,8 +10,10 @@
  */
 package rzd.dispStatinoFleet;
 
+import rzd.model.objects.Schedule;
+
 import java.util.ArrayList;
-import javax.ejb.Schedule;
+
 
 /**
  *
