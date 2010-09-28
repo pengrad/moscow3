@@ -149,6 +149,43 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public boolean updateRoute(Route r) {
-        return false;
+        try {
+            SessionManager.beginTran();
+            RouteEntity re = SessionManager.getEntityById(new RouteEntity(), r.getId());
+            if (re == null) throw new Exception("Route not found");
+            Shedule sb = r.getScheduleBack();
+            Shedule sf = r.getScheduleForward();
+            SheduleEntity sfe = re.getSheduleForward();
+            SheduleEntity sbe = re.getSheduleBack();
+            for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.deleteEntities(sde);
+            for (SheduleDaysEntity sde : sbe.getSheduleDays()) SessionManager.deleteEntities(sde);
+            SessionManager.getSession().flush();
+            SessionManager.getSession().clear();
+            int[] days = sf.getDays();
+            if (days != null)
+                for (int day : days) SessionManager.saveOrUpdateEntities(new SheduleDaysEntity(day, sfe));
+            days = sb.getDays();
+            if (days != null)
+                for (int day : days) SessionManager.saveOrUpdateEntities(new SheduleDaysEntity(day, sbe));
+            SheduleTypeEntity sfte = SessionManager.getEntityById(new SheduleTypeEntity(), sf.getScheduleType().getId());
+            SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
+            int saveId = sfe.getIdShedule();
+            sfe = new SheduleEntity(sf.getTimeDeparture(), sf.getTimeDestination(), sf.getTimeInWay(), sfte);
+            sfe.setIdShedule(saveId);
+            saveId = sbe.getIdShedule();
+            sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
+            sbe.setIdShedule(saveId);
+            re = new RouteEntity(r.getNumberForward(), r.getNumberBack(), r.getPointDeparture(), r.getPointDestination(), sbe, sfe);
+            re.setIdRoute(r.getId());
+            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            SessionManager.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 }

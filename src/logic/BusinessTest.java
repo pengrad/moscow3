@@ -27,9 +27,10 @@ public class BusinessTest {
     }
 
     public static void main(String[] args) throws HibernateInitializeException {
-        testGetRoutes();
-        testGetSheduleTypes();
-        testAddRoute();
+//        testGetRoutes();
+//        testGetSheduleTypes();
+//        testAddRoute();
+        testUpdateRoute();
     }
 
     public static void testGetRoutes() {
@@ -53,6 +54,15 @@ public class BusinessTest {
         Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
         Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb);
         manager.addRoute(r);
+    }
+
+    public static void testUpdateRoute() {
+        Time time = new Time(new Date().getTime());
+        SheduleType st = new SheduleType(1, "nonPair");
+        Shedule sf = new Shedule(9, time, time, time, st, new int[]{1999});
+        Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
+        Route r = new Route(5, "love", "hate", "Evgen", "Ekaterina", sf, sb);
+        manager.updateRoute(r);
     }
 
 }
