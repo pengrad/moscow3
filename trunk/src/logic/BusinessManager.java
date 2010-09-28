@@ -116,18 +116,32 @@ public class BusinessManager implements BusinessLogic {
 
     public boolean addRoute(Route r) {
         try {
+            SessionManager.beginTran();
             Shedule sb = r.getScheduleBack();
             Shedule sf = r.getScheduleForward();
             SheduleTypeEntity sfte = SessionManager.getEntityById(new SheduleTypeEntity(), sf.getScheduleType().getId());
             SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
-            
-            SheduleEntity sfe = new SheduleEntity(null, null, null, sfte);
-            SheduleEntity sbe = new SheduleEntity(null, null, null, sbte);
+            SheduleEntity sfe = new SheduleEntity(sf.getTimeDeparture(), sf.getTimeDestination(), sf.getTimeInWay(), sfte);
+            SheduleEntity sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
             RouteEntity re = new RouteEntity(r.getNumberForward(), r.getNumberBack(), r.getPointDeparture(), r.getPointDestination(), sbe, sfe);
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            int[] days = sf.getDays();
+            if (days != null)
+                for (int day : days) {
+                    SheduleDaysEntity sde = new SheduleDaysEntity(day, sfe);
+                    SessionManager.saveOrUpdateEntities(sde);
+                }
+            days = sb.getDays();
+            if (days != null)
+                for (int day : days) {
+                    SheduleDaysEntity sde = new SheduleDaysEntity(day, sbe);
+                    SessionManager.saveOrUpdateEntities(sde);
+                }
+            SessionManager.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return false;
         } finally {
             SessionManager.closeSession();
