@@ -47,11 +47,11 @@ class SessionManager {
     }
 
     public static void beginTran() {
-        localSession.get().beginTransaction();
+        getSession().beginTransaction();
     }
 
     public static void rollback() {
-        localSession.get().getTransaction().rollback();
+        getSession().getTransaction().rollback();
     }
 
     public static void commit() {

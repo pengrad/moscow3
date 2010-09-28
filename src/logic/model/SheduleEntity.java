@@ -14,6 +14,15 @@ import java.util.Collection;
 @Entity
 public class SheduleEntity {
 
+    public SheduleEntity() {
+    }
+
+    public SheduleEntity(Time timeFrom, Time timeTo, Time timeInWay, SheduleTypeEntity sheduleType) {
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.timeInWay = timeInWay;
+        this.sheduleType = sheduleType;
+    }
 
     private int idShedule;
 
