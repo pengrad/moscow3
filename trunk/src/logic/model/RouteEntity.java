@@ -1,9 +1,6 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * User: Стас
@@ -15,11 +12,23 @@ import javax.persistence.ManyToOne;
 @Entity
 public class RouteEntity {
 
+    public RouteEntity() {
+    }
+
+    public RouteEntity(String numberForward, String numberBack, String cityFrom, String cityTo, SheduleEntity sheduleBack, SheduleEntity sheduleForward) {        
+        this.numberForward = numberForward;
+        this.numberBack = numberBack;
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
+        this.sheduleBack = sheduleBack;
+        this.sheduleForward = sheduleForward;
+    }
 
     private int idRoute;
 
     @javax.persistence.Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdRoute() {
         return idRoute;
     }

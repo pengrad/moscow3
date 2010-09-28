@@ -1,6 +1,7 @@
 package logic;
 
 import rzd.model.objects.Route;
+import rzd.model.objects.SheduleType;
 
 import java.util.ArrayList;
 
@@ -24,12 +25,20 @@ public class BusinessTest {
 
     public static void main(String[] args) throws HibernateInitializeException {
         testGetRoutes();
+        testGetSheduleTypes();
     }
 
     public static void testGetRoutes() {
         ArrayList<Route> r = manager.getRoutes();
         for(Route rr : r) {
-            System.out.println(rr.getPointDeparture() + " - " + rr.getPointDestination());
+            System.out.println(rr.getPointDeparture() + " - " + rr.getPointDestination() + " : " + rr.getNumberForward() + "/" + rr.getNumberBack());
+        }
+    }
+
+    public static void testGetSheduleTypes() {
+        ArrayList<SheduleType> r = manager.getSheduleTypes();
+        for(SheduleType rr : r) {
+            System.out.println(rr.getId() + " - " + rr.getName());
         }
     }
 

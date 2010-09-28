@@ -1,5 +1,6 @@
 package rzd.model.objects;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -11,13 +12,13 @@ import java.util.Date;
  */
 public class Shedule {
     private int id;
-    private Date timeDeparture;
-    private Date timeDestination;
-    private Date timeInWay;
+    private Time timeDeparture;
+    private Time timeDestination;
+    private Time timeInWay;
     private SheduleType sheduleType;
     private int[] days;
 
-    public Shedule(int id, Date timeDeparture, Date timeDestination, Date timeInWay, SheduleType sheduleType, int[] days) {
+    public Shedule(int id, Time timeDeparture, Time timeDestination, Time timeInWay, SheduleType sheduleType, int[] days) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
@@ -34,27 +35,27 @@ public class Shedule {
         this.id = id;
     }
 
-    public Date getTimeDeparture() {
+    public Time getTimeDeparture() {
         return timeDeparture;
     }
 
-    public void setTimeDeparture(Date timeDeparture) {
+    public void setTimeDeparture(Time timeDeparture) {
         this.timeDeparture = timeDeparture;
     }
 
-    public Date getTimeDestination() {
+    public Time getTimeDestination() {
         return timeDestination;
     }
 
-    public void setTimeDestination(Date timeDestination) {
+    public void setTimeDestination(Time timeDestination) {
         this.timeDestination = timeDestination;
     }
 
-    public Date getTimeInWay() {
+    public Time getTimeInWay() {
         return timeInWay;
     }
 
-    public void setTimeInWay(Date timeInWay) {
+    public void setTimeInWay(Time timeInWay) {
         this.timeInWay = timeInWay;
     }
 

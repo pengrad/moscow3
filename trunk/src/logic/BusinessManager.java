@@ -29,10 +29,47 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Route> getRoutes() {
-        Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
-        if (objects == null) return null;
-        ArrayList<Route> list = new ArrayList<Route>(objects.size());
-        for (RouteEntity re : objects) {
+        ArrayList<Route> list = null;
+        try {
+            Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
+            list = new ArrayList<Route>(objects.size());
+            for (RouteEntity re : objects) {
+                SheduleTypeEntity ste = re.getSheduleForward().getSheduleType();
+                SheduleType stF = new SheduleType(ste.getIdSheduleType(), ste.getcSheduleType());
+                ste = re.getSheduleBack().getSheduleType();
+                SheduleType stB = new SheduleType(ste.getIdSheduleType(), ste.getcSheduleType());
+                SheduleEntity se = re.getSheduleForward();
+                int[] days = null;
+                Collection<SheduleDaysEntity> sde = se.getSheduleDays();
+                if (sde != null && sde.size() > 0) {
+                    days = new int[sde.size()];
+                    for (int i = 0; i < sde.size(); i++)
+                        days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
+                }
+                Shedule sF = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stF, days);
+                se = re.getSheduleBack();
+                sde = se.getSheduleDays();
+                if (sde != null && sde.size() > 0) {
+                    days = new int[sde.size()];
+                    for (int i = 0; i < sde.size(); i++)
+                        days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
+                }
+                Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
+                Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB);
+                list.add(route);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
+    }
+
+    public Route getRouteById(int idRoute) {
+        Route route = null;
+        try {
+            RouteEntity re = SessionManager.getEntityById(new RouteEntity(), idRoute);
             SheduleTypeEntity ste = re.getSheduleForward().getSheduleType();
             SheduleType stF = new SheduleType(ste.getIdSheduleType(), ste.getcSheduleType());
             ste = re.getSheduleBack().getSheduleType();
@@ -54,23 +91,47 @@ public class BusinessManager implements BusinessLogic {
                     days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
             }
             Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
-            Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB);
-            list.add(route);
+            route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SessionManager.closeSession();
         }
-        SessionManager.closeSession();
-        return list;
-    }
-
-    public Route getRouteById(int idRoute) {
-        return null;
+        return route;
     }
 
     public ArrayList<SheduleType> getSheduleTypes() {
-        return null;
+        ArrayList<SheduleType> types = null;
+        try {
+            Collection<SheduleTypeEntity> ste = SessionManager.getAllObjects(new SheduleTypeEntity());
+            types = new ArrayList<SheduleType>(ste.size());
+            for (SheduleTypeEntity s : ste) types.add(new SheduleType(s.getIdSheduleType(), s.getcSheduleType()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return types;
     }
 
     public boolean addRoute(Route r) {
-        return false;
+        try {
+            Shedule sb = r.getScheduleBack();
+            Shedule sf = r.getScheduleForward();
+            SheduleTypeEntity sfte = SessionManager.getEntityById(new SheduleTypeEntity(), sf.getScheduleType().getId());
+            SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
+            
+            SheduleEntity sfe = new SheduleEntity(null, null, null, sfte);
+            SheduleEntity sbe = new SheduleEntity(null, null, null, sbte);
+            RouteEntity re = new RouteEntity(r.getNumberForward(), r.getNumberBack(), r.getPointDeparture(), r.getPointDestination(), sbe, sfe);
+            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public boolean updateRoute(Route r) {
