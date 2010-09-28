@@ -30,6 +30,23 @@ public class BusinessManager implements BusinessLogic {
 //        Object o = null; o.getClass().getField("ss").get()
     }
 
+    public ArrayList<Route> getRoutes() {
+        return null;
+    }
 
+    public Route getRouteById(int idRoute) {
+        return null;
+    }
 
+    public ArrayList<ScheduleType> getSheduleTypes() {
+        return null;
+    }
+
+    public boolean addRoute(Route r) {
+        return false;
+    }
+
+    public boolean updateRoute(Route r) {
+        return false;
+    }
 }
