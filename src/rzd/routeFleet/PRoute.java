@@ -25,10 +25,7 @@ public class PRoute extends javax.swing.JPanel {
         initComponents();
         this.c = new Controller(this);
         bCreateRoute.addActionListener(c);
-        bCreateSchedule.addActionListener(c);
         tRoute.addMouseListener(c);
-        tSchedule.addMouseListener(c);
-
     }
 
     /** This method is called from within the constructor to
@@ -43,9 +40,6 @@ public class PRoute extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tRoute = new javax.swing.JTable();
         bCreateRoute = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tSchedule = new javax.swing.JTable();
-        bCreateSchedule = new javax.swing.JButton();
 
         tRoute.setModel(new ModelTable() );
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -53,25 +47,15 @@ public class PRoute extends javax.swing.JPanel {
 
         bCreateRoute.setText("Создать маршрут");
 
-        tSchedule.setModel(new ModelTable() );
-        jScrollPane2.setViewportView(tSchedule);
-
-        bCreateSchedule.setText("Создать расписание");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(378, Short.MAX_VALUE)
-                .addComponent(bCreateSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(382, Short.MAX_VALUE)
                 .addComponent(bCreateRoute, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,20 +63,13 @@ public class PRoute extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(bCreateRoute)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(bCreateSchedule)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreateRoute;
-    public javax.swing.JButton bCreateSchedule;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable tRoute;
-    public javax.swing.JTable tSchedule;
     // End of variables declaration//GEN-END:variables
 }
