@@ -4,7 +4,9 @@ import rzd.model.objects.Route;
 import rzd.model.objects.Shedule;
 import rzd.model.objects.SheduleType;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * User: Стас
@@ -45,9 +47,12 @@ public class BusinessTest {
     }
 
     public static void testAddRoute() {
-//        Shedule sf = new Shedule(9, );
-//        Shedule sb;
-//        Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb);
+        Time time = new Time(new Date().getTime());
+        SheduleType st = new SheduleType(1, "nonPair");
+        Shedule sf = new Shedule(9, time, time, time, st, new int[]{1,2,34,4});
+        Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
+        Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb);
+        manager.addRoute(r);
     }
 
 }
