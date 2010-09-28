@@ -2,6 +2,7 @@ package rzd.utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -39,11 +40,11 @@ public class Utils {
         return sdf.format(dt);
     }
 
-    public static Date convertStrToTime(String time) {
+    public static Time convertStrToTime(String time) {
         StringTokenizer t = new StringTokenizer(time, ":");
         int hh = new Integer(t.nextToken());
         int mm = new Integer(t.nextToken());
-        return new GregorianCalendar(0, 0, 0, hh, mm).getTime();
+        return new Time(new GregorianCalendar(0, 0, 0, hh, mm).getTime().getTime());
     }
 
     public static Date convertStrToDateTime(String dt) {

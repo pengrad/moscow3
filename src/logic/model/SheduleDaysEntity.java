@@ -15,6 +15,14 @@ import javax.persistence.ManyToOne;
 @Entity
 public class SheduleDaysEntity {
 
+    public SheduleDaysEntity() {        
+    }
+
+    public SheduleDaysEntity(int day, SheduleEntity shedule) {
+        this.day = day;
+        setShedule(shedule);
+    }
+
     private int idShedule;
 
     @javax.persistence.Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
