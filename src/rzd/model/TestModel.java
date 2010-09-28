@@ -67,12 +67,13 @@ public class TestModel implements BusinessLogic_old {
     }
 
     public ArrayList<Route> getRoutes() {
-     ArrayList<Route> r=new ArrayList<Route>(5);
-        r.add(new Route(12,"","",""));
-        r.add(new Route(12,"","",""));
-          r.add(new Route(12,"","",""));
-          r.add(new Route(12,"","",""));
-        return r;  //To change body of implemented methods use File | Settings | File Templates.
+//     ArrayList<Route> r=new ArrayList<Route>(5);
+//        r.add(new Route(12,"","",""));
+//        r.add(new Route(12,"","",""));
+//          r.add(new Route(12,"","",""));
+//          r.add(new Route(12,"","",""));
+//        return r;  //To change body of implemented methods use File | Settings | File Templates.
+    return null;
     }
 
     public boolean addRoute(Route route) {

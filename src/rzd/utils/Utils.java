@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
  * To change this template use File | Settings | File Templates.
  */
 public class Utils {
+
     public static String convertDateToStr(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         return sdf.format(date);
@@ -61,7 +62,9 @@ public class Utils {
     }
 
     public static boolean searchByTable(JTable t, int column, String value) {
-        if (t == null || value == null || column < 0 || column > t.getColumnCount()) return false;
+        if (t == null || value == null || column < 0 || column > t.getColumnCount()) {
+            return false;
+        }
         int rowCount = t.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             if (t.getValueAt(i, column).equals(value)) {
@@ -73,5 +76,84 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    public static String convertMasToDayOfWeek(int[] days) {
+        String res = "";
+        for (int i = 0; i < days.length; i++) {
+            if (days[i] == 0) {
+                res = res + "ПН ";
+            }
+            if (days[i] == 1) {
+                res = res + "ВТ ";
+            }
+            if (days[i] == 2) {
+                res = res + "СР ";
+            }
+            if (days[i] == 3) {
+                res = res + "ЧТ ";
+            }
+            if (days[i] == 4) {
+                res = res + "ПТ ";
+            }
+            if (days[i] == 5) {
+                res = res + "СБ ";
+            }
+            if (days[i] == 6) {
+                res = res + "ВС ";
+            }
+        }
+        return res;
+    }
+
+    public static int[] convertDayOfWeekToMas(String days) {
+        StringTokenizer tk = new StringTokenizer(days, " ");
+        int[] res = new int[tk.countTokens()];
+        int i = 0;
+        while (tk.hasMoreElements()) {
+            String t = tk.nextElement().toString();
+            if (t.equals("ПН")) {
+                res[i] = 0;
+            }
+            if (t.equals("ВТ")) {
+                res[i] = 1;
+            }
+            if (t.equals("СР")) {
+                res[i] = 2;
+            }
+            if (t.equals("ЧТ")) {
+                res[i] = 3;
+            }
+            if (t.equals("ПТ")) {
+                res[i] = 4;
+            }
+            if (t.equals("СБ")) {
+                res[i] = 5;
+            }
+            if (t.equals("ВС")) {
+                res[i] = 6;
+            }
+            i++;
+        }
+        return res;
+    }
+
+    public static String convertMasToStr(int[] mas) {
+        String res = "";
+        for (int i = 0; i < mas.length; i++) {
+            res = res + mas[i] + " ";
+        }
+        return res;
+    }
+
+    public static int[] convertStrToMas(String s) {
+        StringTokenizer tk = new StringTokenizer(s, " ");
+        int[] res = new int[tk.countTokens()];
+        int i = 0;
+        while (tk.hasMoreElements()) {
+            res[i] = new Integer(tk.nextElement().toString());
+            i++;
+        }
+        return res;
     }
 }

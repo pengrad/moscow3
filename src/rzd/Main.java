@@ -8,12 +8,10 @@ package rzd;
 import logic.BusinessManager;
 import logic.HibernateInitializeException;
 import rzd.model.objects.Route;
+import rzd.utils.Utils;
 
 import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
@@ -25,8 +23,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    Integer[] i=new Integer[]{1,2,3};
-      
+        int[] dd=new int[]{0,10,20};
+        String r= Utils.convertMasToStr(dd);
+        System.out.println(r);
+        int[] d=Utils.convertStrToMas(r);
+        System.out.println(Arrays.toString(d));
+      r= Utils.convertMasToStr(d);
+                System.out.println(r);
+
 
     }
 }
