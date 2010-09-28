@@ -33,7 +33,8 @@ public class Main {
         SheduleDaysEntity sd = new SheduleDaysEntity();
         SheduleEntity s = (SheduleEntity)getSession().createCriteria(SheduleEntity.class).uniqueResult();
         sd.setShedule(s);
-        sd.setDay(12);
+        sd.setDay(5);
+//        session.saveOrUpdate(tde);
         session.saveOrUpdate(sd);
         session.getTransaction().commit();
 

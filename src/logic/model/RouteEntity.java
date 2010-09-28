@@ -7,8 +7,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * User: Стас
- * Date: 27.09.2010
- * Time: 1:56:37
+ * Date: 28.09.2010
+ * Time: 22:09:50
  */
 
 @javax.persistence.Table(name = "route", catalog = "rzd")
@@ -28,16 +28,28 @@ public class RouteEntity {
         this.idRoute = idRoute;
     }
 
-    private String routeNumber;
+    private String numberForward;
 
-    @javax.persistence.Column(name = "route_number", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @javax.persistence.Column(name = "number_forward", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
-    public String getRouteNumber() {
-        return routeNumber;
+    public String getNumberForward() {
+        return numberForward;
     }
 
-    public void setRouteNumber(String routeNumber) {
-        this.routeNumber = routeNumber;
+    public void setNumberForward(String numberForward) {
+        this.numberForward = numberForward;
+    }
+
+    private String numberBack;
+
+    @javax.persistence.Column(name = "number_back", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Basic
+    public String getNumberBack() {
+        return numberBack;
+    }
+
+    public void setNumberBack(String numberBack) {
+        this.numberBack = numberBack;
     }
 
     private int cityFrom;
@@ -74,7 +86,9 @@ public class RouteEntity {
         if (cityFrom != that.cityFrom) return false;
         if (cityTo != that.cityTo) return false;
         if (idRoute != that.idRoute) return false;
-        if (routeNumber != null ? !routeNumber.equals(that.routeNumber) : that.routeNumber != null) return false;
+        if (numberBack != null ? !numberBack.equals(that.numberBack) : that.numberBack != null) return false;
+        if (numberForward != null ? !numberForward.equals(that.numberForward) : that.numberForward != null)
+            return false;
 
         return true;
     }
@@ -82,7 +96,8 @@ public class RouteEntity {
     @Override
     public int hashCode() {
         int result = idRoute;
-        result = 31 * result + (routeNumber != null ? routeNumber.hashCode() : 0);
+        result = 31 * result + (numberForward != null ? numberForward.hashCode() : 0);
+        result = 31 * result + (numberBack != null ? numberBack.hashCode() : 0);
         result = 31 * result + cityFrom;
         result = 31 * result + cityTo;
         return result;
