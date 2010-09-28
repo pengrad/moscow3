@@ -17,7 +17,7 @@ public class Shedule {
     private SheduleType sheduleType;
     private int[] days;
 
-    public Shedule(int id, int type, Date timeDeparture, Date timeDestination, Date timeInWay, SheduleType sheduleType, int[] days) {
+    public Shedule(int id, Date timeDeparture, Date timeDestination, Date timeInWay, SheduleType sheduleType, int[] days) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
