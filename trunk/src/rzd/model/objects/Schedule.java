@@ -11,20 +11,19 @@ import java.util.Date;
  */
 public class Schedule {
     private int id;
-    private int type;
     private Date timeDeparture;
     private Date timeDestination;
-    private Date dateBegin;
-    private int dayMove;
-    private int dayStop;
+    private Date timeInWay;
+    private ScheduleType scheduleType;
+    private int[] days;
 
-    public Schedule(int id, Date timeDeparture, Date timeDestination, Date dateBegin, int dayMove, int dayStop) {
+    public Schedule(int id, int type, Date timeDeparture, Date timeDestination, Date timeInWay, ScheduleType scheduleType, int[] days) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
-        this.dateBegin = dateBegin;
-        this.dayMove = dayMove;
-        this.dayStop = dayStop;
+        this.timeInWay = timeInWay;
+        this.scheduleType = scheduleType;
+        this.days = days;
     }
 
     public int getId() {
@@ -51,27 +50,27 @@ public class Schedule {
         this.timeDestination = timeDestination;
     }
 
-    public Date getDateBegin() {
-        return dateBegin;
+    public Date getTimeInWay() {
+        return timeInWay;
     }
 
-    public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
+    public void setTimeInWay(Date timeInWay) {
+        this.timeInWay = timeInWay;
     }
 
-    public int getDayMove() {
-        return dayMove;
+    public ScheduleType getScheduleType() {
+        return scheduleType;
     }
 
-    public void setDayMove(int dayMove) {
-        this.dayMove = dayMove;
+    public void setScheduleType(ScheduleType scheduleType) {
+        this.scheduleType = scheduleType;
     }
 
-    public int getDayStop() {
-        return dayStop;
+    public int[] getDays() {
+        return days;
     }
 
-    public void setDayStop(int dayStop) {
-        this.dayStop = dayStop;
+    public void setDays(int[] days) {
+        this.days = days;
     }
 }
