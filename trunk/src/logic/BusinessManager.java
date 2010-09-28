@@ -1,17 +1,10 @@
 package logic;
 
 import logic.model.*;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-import rzd.model.BusinessLogic_old;
 import rzd.model.objects.*;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -31,14 +24,21 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Route> getRoutes() {
-        return null;
+        Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
+        SessionManager.closeSession();
+        if (objects == null) return null;
+        ArrayList<Route> list = new ArrayList<Route>(objects.size());
+        for (RouteEntity re : objects) {
+//            Route route = new Route();
+        }
+        return list;
     }
 
     public Route getRouteById(int idRoute) {
         return null;
     }
 
-    public ArrayList<ScheduleType> getSheduleTypes() {
+    public ArrayList<SheduleType> getSheduleTypes() {
         return null;
     }
 

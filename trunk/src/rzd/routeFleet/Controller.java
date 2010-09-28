@@ -6,9 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import rzd.ModelTable;
-import rzd.utils.Utils;
 import rzd.model.TestModel;
-import rzd.model.objects.Schedule;
+import rzd.model.objects.Shedule;
 
 
 import javax.swing.*;
@@ -173,7 +172,7 @@ public class Controller implements ActionListener, MouseListener {
         //Object[] data = dEditSchedule.open(null, TestModel.get().getRoutes(), null);
 //        if (data != null) {
 //            try {
-//                boolean b = TestModel.get().addSchedule((Schedule) data[0], (Route) data[1]);
+//                boolean b = TestModel.get().addSchedule((Shedule) data[0], (Route) data[1]);
 //                if (b) {
 //                    ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
 //                }
@@ -187,13 +186,13 @@ public class Controller implements ActionListener, MouseListener {
     private void editSchedule() {
 //        int row = pTrains.tSchedule.getSelectedRow();
 //        if (row != -1) {
-//            Schedule schedule = getScheduleByTabRow(row);
+//            Shedule schedule = getScheduleByTabRow(row);
 //            Route route = TestModel.get().getRouteBySchedule(schedule);
 //            dEditSchedule.setLocationRelativeTo(pTrains);
 //            Object[] data = dEditSchedule.open(schedule, TestModel.get().getRoutes(), route);
 //            if (data != null) {
 //                try {
-//                    boolean b = TestModel.get().updateSchedule((Schedule) data[0], (Route) data[1]);
+//                    boolean b = TestModel.get().updateSchedule((Shedule) data[0], (Route) data[1]);
 //                    if (b) {
 //                        ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
 //                    }
@@ -242,10 +241,10 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     public ArrayList<Object[]> getScheduleTabView() {
-        ArrayList<Schedule> schedules = TestModel.get().getSchedules();
-        if (schedules != null) {
-            ArrayList<Object[]> res = new ArrayList<Object[]>(schedules.size());
-            for (Schedule s : schedules) {
+        ArrayList<Shedule> shedules = TestModel.get().getSchedules();
+        if (shedules != null) {
+            ArrayList<Object[]> res = new ArrayList<Object[]>(shedules.size());
+            for (Shedule s : shedules) {
                 Route r = TestModel.get().getRouteBySchedule(s);
                 Object[] o = new Object[7];
                 o[0] = s.getId();
@@ -276,9 +275,9 @@ public class Controller implements ActionListener, MouseListener {
 //        );
 //    }
 
-//    public Schedule getScheduleByTabRow(int row) {
+//    public Shedule getScheduleByTabRow(int row) {
 //        if (row < 0 || row > pTrains.tSchedule.getModel().getRowCount()) return null;
-//        return new Schedule(
+//        return new Shedule(
 //                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 0).toString()),
 //                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 1).toString()),
 //                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 2).toString()),

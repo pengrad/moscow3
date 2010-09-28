@@ -10,7 +10,7 @@
  */
 package rzd.dispStatinoFleet;
 
-import rzd.model.objects.Schedule;
+import rzd.model.objects.Shedule;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class DScheduleSelect extends javax.swing.JDialog {
 
-    private Schedule schedule;
+    private Shedule shedule;
 
     /** Creates new form DScheduleSelect */
     public DScheduleSelect(java.awt.Frame parent, boolean modal) {
@@ -65,7 +65,7 @@ public class DScheduleSelect extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lScheduleValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lScheduleValueChanged
-        schedule = (Schedule) lSchedule.getSelectedValue();
+        shedule = (Shedule) lSchedule.getSelectedValue();
         setVisible(false);
     }//GEN-LAST:event_lScheduleValueChanged
 
@@ -88,10 +88,10 @@ public class DScheduleSelect extends javax.swing.JDialog {
         });
     }
 
-    public Schedule open(ArrayList<Schedule> schedules) {
-        schedule = null;
+    public Shedule open(ArrayList<Shedule> shedules) {
+        shedule = null;
         setVisible(true);
-        return schedule;
+        return shedule;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

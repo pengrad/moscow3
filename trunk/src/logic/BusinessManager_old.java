@@ -112,57 +112,57 @@ public class BusinessManager_old implements BusinessLogic_old {
         return true;
     }
 
-    public ArrayList<Schedule> getSchedules() {
+    public ArrayList<Shedule> getSchedules() {
 //        Collection<RouteScheduleEntity> objects = SessionManager.getAllObjects(new RouteScheduleEntity());
         SessionManager.closeSession();
 //        if (objects == null) return null;
-//        ArrayList<Schedule> list = new ArrayList<Schedule>(objects.size());
+//        ArrayList<Shedule> list = new ArrayList<Shedule>(objects.size());
 //        for (RouteScheduleEntity rs : objects) {
-//            list.add(new Schedule(rs.getIdSchedule(), rs.getTimeDeparture(), rs.getTimeDestination(), rs.getDateBegin(),
+//            list.add(new Shedule(rs.getIdSchedule(), rs.getTimeDeparture(), rs.getTimeDestination(), rs.getDateBegin(),
 //                    rs.getDayMove(), rs.getDayStop()));
 //        }
 //        return list;
         return null;
     }
 
-    public boolean addSchedule(Schedule schedule, Route route) {
-        if (schedule == null || route == null) return false;
+    public boolean addSchedule(Shedule shedule, Route route) {
+        if (shedule == null || route == null) return false;
         RouteEntity r = SessionManager.getEntityById(new RouteEntity(), route.getId());
         if (r == null) {
             SessionManager.closeSession();
             return false;
         }
-        java.sql.Date dateBegin = new java.sql.Date(schedule.getDateBegin().getTime());
-        Time timeDep = new Time(schedule.getTimeDeparture().getTime());
-        Time timeDest = new Time(schedule.getTimeDestination().getTime());
+//        java.sql.Date dateBegin = new java.sql.Date(shedule.getDateBegin().getTime());
+        Time timeDep = new Time(shedule.getTimeDeparture().getTime());
+        Time timeDest = new Time(shedule.getTimeDestination().getTime());
 //        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
-//                schedule.getDayMove(), schedule.getDayStop(), r);
+//                shedule.getDayMove(), shedule.getDayStop(), r);
 //        SessionManager.getSession().saveOrUpdate(rs);
         SessionManager.closeSession();
         return true;
     }
 
-    public boolean updateSchedule(Schedule schedule, Route route) {
-        if (schedule == null || route == null) return false;
+    public boolean updateSchedule(Shedule shedule, Route route) {
+        if (shedule == null || route == null) return false;
         RouteEntity r = SessionManager.getEntityById(new RouteEntity(), route.getId());
         if (r == null) {
             SessionManager.closeSession();
             return false;
         }
-        java.sql.Date dateBegin = new java.sql.Date(schedule.getDateBegin().getTime());
-        Time timeDep = new Time(schedule.getTimeDeparture().getTime());
-        Time timeDest = new Time(schedule.getTimeDestination().getTime());
+//        java.sql.Date dateBegin = new java.sql.Date(shedule.getDateBegin().getTime());
+        Time timeDep = new Time(shedule.getTimeDeparture().getTime());
+        Time timeDest = new Time(shedule.getTimeDestination().getTime());
 //        RouteScheduleEntity rs = new RouteScheduleEntity(timeDep, timeDest, dateBegin,
-//                schedule.getDayMove(), schedule.getDayStop(), r);
-//        rs.setIdSchedule(schedule.getId());
+//                shedule.getDayMove(), shedule.getDayStop(), r);
+//        rs.setIdSchedule(shedule.getId());
 //        SessionManager.getSession().saveOrUpdate(rs);
         SessionManager.closeSession();
         return true;
     }
 
-    public boolean removeSchedule(Schedule schedule) {
-        if (schedule == null) return false;
-//        RouteScheduleEntity r = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+    public boolean removeSchedule(Shedule shedule) {
+        if (shedule == null) return false;
+//        RouteScheduleEntity r = SessionManager.getEntityById(new RouteScheduleEntity(), shedule.getId());
 //        if (r == null) {
 //            SessionManager.closeSession();
 //            return false;
@@ -172,23 +172,23 @@ public class BusinessManager_old implements BusinessLogic_old {
         return true;
     }
 
-    public ArrayList<Schedule> getSchedulesByRoute(Route route) {
+    public ArrayList<Shedule> getSchedulesByRoute(Route route) {
         if (route == null) return null;
         RouteEntity rt = SessionManager.getEntityById(new RouteEntity(), route.getId());
         SessionManager.closeSession();
         if (rt == null) return null;
 //        Collection<RouteScheduleEntity> rs = rt.getRouteSchedules();
-//        ArrayList<Schedule> list = new ArrayList<Schedule>(rs.size());
+//        ArrayList<Shedule> list = new ArrayList<Shedule>(rs.size());
 //        for (RouteScheduleEntity s : rs) {
-//            list.add(new Schedule(s.getIdSchedule(), s.getTimeDeparture(), s.getTimeDestination(), s.getDateBegin(),
+//            list.add(new Shedule(s.getIdSchedule(), s.getTimeDeparture(), s.getTimeDestination(), s.getDateBegin(),
 //                    s.getDayMove(), s.getDayStop()));
 //        }
         return null;
     }
 
-    public Route getRouteBySchedule(Schedule schedule) {
-        if (schedule == null) return null;
-//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+    public Route getRouteBySchedule(Shedule shedule) {
+        if (shedule == null) return null;
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), shedule.getId());
 //        SessionManager.closeSession();
 //        if (rs == null) return null;
 //        RouteEntity re = rs.getRoute();
@@ -231,9 +231,9 @@ public class BusinessManager_old implements BusinessLogic_old {
         return null;
     }
 
-    public boolean addTrain(Train train, Schedule schedule) {
-        if (train == null || schedule == null) return false;
-//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+    public boolean addTrain(Train train, Shedule shedule) {
+        if (train == null || shedule == null) return false;
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), shedule.getId());
 //        if (rs == null) {
 //            SessionManager.closeSession();
 //            return false;
@@ -247,9 +247,9 @@ public class BusinessManager_old implements BusinessLogic_old {
         return true;
     }
 
-    public boolean updateTrain(Train train, Schedule schedule) {
-        if (train == null || schedule == null) return false;
-//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), schedule.getId());
+    public boolean updateTrain(Train train, Shedule shedule) {
+        if (train == null || shedule == null) return false;
+//        RouteScheduleEntity rs = SessionManager.getEntityById(new RouteScheduleEntity(), shedule.getId());
 //        if (rs == null) {
 //            SessionManager.closeSession();
 //            return false;
