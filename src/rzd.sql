@@ -65,7 +65,7 @@ CREATE TABLE `road` (
   PRIMARY KEY (`id_road`),
   KEY `id_type` (`id_type`),
   CONSTRAINT `road_fk_new` FOREIGN KEY (`id_type`) REFERENCES `road_type` (`id_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `shedule_type` table : 
@@ -90,7 +90,7 @@ CREATE TABLE `shedule` (
   PRIMARY KEY (`id_shedule`),
   KEY `id_shedule_type` (`id_shedule_type`),
   CONSTRAINT `id_shedule_type` FOREIGN KEY (`id_shedule_type`) REFERENCES `shedule_type` (`id_shedule_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=cp1251;
 
 #
 # Structure for the `train_status` table : 
@@ -116,8 +116,8 @@ CREATE TABLE `train` (
   PRIMARY KEY (`id_train`),
   KEY `id_shedule` (`id_shedule`),
   KEY `id_status` (`id_status`),
-  CONSTRAINT `train_fk1` FOREIGN KEY (`id_status`) REFERENCES `train_status` (`id_status`),
-  CONSTRAINT `train_fk` FOREIGN KEY (`id_shedule`) REFERENCES `shedule` (`id_shedule`)
+  CONSTRAINT `train_fk` FOREIGN KEY (`id_shedule`) REFERENCES `shedule` (`id_shedule`),
+  CONSTRAINT `train_fk1` FOREIGN KEY (`id_status`) REFERENCES `train_status` (`id_status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
 
 #
@@ -136,10 +136,10 @@ CREATE TABLE `car_history` (
   KEY `id_train` (`id_train`),
   KEY `id_road` (`id_road`),
   KEY `car_number` (`car_number`),
-  CONSTRAINT `car_history_fk3` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`),
   CONSTRAINT `car_history_fk` FOREIGN KEY (`id_location`) REFERENCES `location` (`id_location`),
   CONSTRAINT `car_history_fk1` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
-  CONSTRAINT `car_history_fk2` FOREIGN KEY (`id_road`) REFERENCES `road` (`id_road`)
+  CONSTRAINT `car_history_fk2` FOREIGN KEY (`id_road`) REFERENCES `road` (`id_road`),
+  CONSTRAINT `car_history_fk3` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 #
@@ -155,9 +155,9 @@ CREATE TABLE `road_det` (
   KEY `id_road` (`id_road`),
   KEY `id_train` (`id_train`),
   KEY `car_number` (`car_number`),
-  CONSTRAINT `road_det_fk2` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`),
   CONSTRAINT `road_det_fk` FOREIGN KEY (`id_road`) REFERENCES `road` (`id_road`),
-  CONSTRAINT `road_det_fk1` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`)
+  CONSTRAINT `road_det_fk1` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
+  CONSTRAINT `road_det_fk2` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 #
@@ -166,9 +166,10 @@ CREATE TABLE `road_det` (
 
 CREATE TABLE `route` (
   `id_route` int(11) NOT NULL AUTO_INCREMENT,
-  `route_number` varchar(20) NOT NULL,
-  `city_from` int(11) NOT NULL,
-  `city_to` int(11) NOT NULL,
+  `number_forward` varchar(20) NOT NULL,
+  `number_back` varchar(20) NOT NULL,
+  `city_from` varchar(50) NOT NULL,
+  `city_to` varchar(50) NOT NULL,
   `shedule_forward` int(11) NOT NULL,
   `shedule_back` int(11) NOT NULL,
   PRIMARY KEY (`id_route`),
@@ -176,7 +177,7 @@ CREATE TABLE `route` (
   KEY `shedule_back` (`shedule_back`),
   CONSTRAINT `shedule_back` FOREIGN KEY (`shedule_back`) REFERENCES `shedule` (`id_shedule`),
   CONSTRAINT `shedule_forward` FOREIGN KEY (`shedule_forward`) REFERENCES `shedule` (`id_shedule`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
 
 #
 # Structure for the `shedule_days` table : 
@@ -200,8 +201,8 @@ CREATE TABLE `train_det` (
   PRIMARY KEY (`car_number`,`id_train`),
   KEY `id_train` (`id_train`),
   KEY `car_number` (`car_number`),
-  CONSTRAINT `train_det_fk1` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`),
-  CONSTRAINT `train_det_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`)
+  CONSTRAINT `train_det_fk` FOREIGN KEY (`id_train`) REFERENCES `train` (`id_train`),
+  CONSTRAINT `train_det_fk1` FOREIGN KEY (`car_number`) REFERENCES `car` (`car_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 #
@@ -221,19 +222,14 @@ INSERT INTO `car` (`car_number`, `id_location`) VALUES
 COMMIT;
 
 #
-# Data for the `train_status` table  (LIMIT 0,500)
-#
-
-INSERT INTO `train_status` (`id_status`, `c_status`) VALUES 
-  (1,'asdf');
-COMMIT;
-
-#
 # Data for the `shedule_type` table  (LIMIT 0,500)
 #
 
 INSERT INTO `shedule_type` (`id_shedule_type`, `c_shedule_type`) VALUES 
-  (1,'qaqqa');
+  (1,'Нечетные числа'),
+  (2,'Четные числа'),
+  (3,'Дни недели'),
+  (4,'Числа месяца');
 COMMIT;
 
 #
@@ -241,7 +237,21 @@ COMMIT;
 #
 
 INSERT INTO `shedule` (`id_shedule`, `time_from`, `time_to`, `time_in_way`, `id_shedule_type`) VALUES 
-  (2,'12:12:12','12:12:12','12:12:12',1);
+  (2,'12:12:12','12:12:12','12:12:12',1),
+  (3,'00:45:33','00:45:33','00:45:33',1),
+  (4,'00:45:33','00:45:33','00:45:33',1),
+  (7,'00:46:41','00:46:41','00:46:41',1),
+  (8,'00:46:41','00:46:41','00:46:41',1),
+  (9,'02:04:39','02:04:39','02:04:39',1),
+  (10,'02:04:39','02:04:39','02:04:39',1);
+COMMIT;
+
+#
+# Data for the `train_status` table  (LIMIT 0,500)
+#
+
+INSERT INTO `train_status` (`id_status`, `c_status`) VALUES 
+  (1,'asdf');
 COMMIT;
 
 #
@@ -306,12 +316,37 @@ INSERT INTO `road` (`id_road`, `road_name`, `id_type`, `comments`, `position`) V
 COMMIT;
 
 #
+# Data for the `route` table  (LIMIT 0,500)
+#
+
+INSERT INTO `route` (`id_route`, `number_forward`, `number_back`, `city_from`, `city_to`, `shedule_forward`, `shedule_back`) VALUES 
+  (1,'101','102','Москва','Владик',2,2),
+  (2,'love','love','Evgen','Ekaterina',3,4),
+  (4,'love','love','Evgen','Ekaterina',7,8),
+  (5,'love','hate','Evgen','Ekaterina',9,10);
+COMMIT;
+
+#
 # Data for the `shedule_days` table  (LIMIT 0,500)
 #
 
 INSERT INTO `shedule_days` (`id_shedule`, `day`) VALUES 
+  (2,5),
   (2,11),
-  (2,12);
+  (2,12),
+  (7,1),
+  (7,2),
+  (7,4),
+  (7,34),
+  (8,0),
+  (8,1),
+  (8,3),
+  (8,6),
+  (9,1999),
+  (10,0),
+  (10,1),
+  (10,3),
+  (10,6);
 COMMIT;
 
 #
