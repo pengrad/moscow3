@@ -52,27 +52,27 @@ public class RouteEntity {
         this.numberBack = numberBack;
     }
 
-    private int cityFrom;
+    private String cityFrom;
 
-    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
-    public int getCityFrom() {
+    public String getCityFrom() {
         return cityFrom;
     }
 
-    public void setCityFrom(int cityFrom) {
+    public void setCityFrom(String cityFrom) {
         this.cityFrom = cityFrom;
     }
 
-    private int cityTo;
+    private String cityTo;
 
-    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
-    public int getCityTo() {
+    public String getCityTo() {
         return cityTo;
     }
 
-    public void setCityTo(int cityTo) {
+    public void setCityTo(String cityTo) {
         this.cityTo = cityTo;
     }
 
@@ -98,8 +98,8 @@ public class RouteEntity {
         int result = idRoute;
         result = 31 * result + (numberForward != null ? numberForward.hashCode() : 0);
         result = 31 * result + (numberBack != null ? numberBack.hashCode() : 0);
-        result = 31 * result + cityFrom;
-        result = 31 * result + cityTo;
+        result = 31 * result + cityFrom.hashCode();
+        result = 31 * result + cityTo.hashCode();
         return result;
     }
 

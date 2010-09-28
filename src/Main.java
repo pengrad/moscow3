@@ -38,6 +38,9 @@ public class Main {
         session.saveOrUpdate(sd);
         session.getTransaction().commit();
 
+
+
+
 //        TrainEntity train = (TrainEntity) session.get(TrainEntity.class, 4);
 //        CarEntity car = (CarEntity) session.get(CarEntity.class, 111);
 //        CarLocationEntity cl = (CarLocationEntity) session.get(CarLocationEntity.class, 1);
