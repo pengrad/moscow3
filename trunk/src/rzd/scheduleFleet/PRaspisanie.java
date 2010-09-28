@@ -181,7 +181,9 @@ public class PRaspisanie extends JComponent {
             widthPanel = (int) (sizeDay * countDay);
         }
         //Считаем ширину экрана
-        heightPanel = (int) (routes.size() * sizeRoute);
+        if (routes != null) {
+            heightPanel = (int) (routes.size() * sizeRoute);
+        }
         setPreferredSize(new Dimension(widthPanel, heightPanel));
 
     }
