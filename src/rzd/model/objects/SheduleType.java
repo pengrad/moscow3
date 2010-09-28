@@ -7,11 +7,11 @@ package rzd.model.objects;
  * Time: 23:41:44
  * To change this template use File | Settings | File Templates.
  */
-public class ScheduleType {
+public class SheduleType {
     private int id;
     private String name;
 
-    public ScheduleType(int id, String name) {
+    public SheduleType(int id, String name) {
         this.id = id;
         this.name = name;
     }

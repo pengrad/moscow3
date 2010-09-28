@@ -1,10 +1,5 @@
 package rzd.model.objects;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
-import java.sql.Date;
-import java.sql.Time;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Евгений
@@ -19,17 +14,17 @@ public class Route {
     private String numberBack;
     private String pointDeparture;
     private String pointDestination;
-    private Schedule scheduleForward;
-    private Schedule scheduleBack;
+    private Shedule sheduleForward;
+    private Shedule sheduleBack;
 
-    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Schedule scheduleForward, Schedule scheduleBack) {
+    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Shedule sheduleForward, Shedule sheduleBack) {
         this.id = id;
         this.numberForward = numberForward;
         this.numberBack = numberBack;
         this.pointDeparture = pointDeparture;
         this.pointDestination = pointDestination;
-        this.scheduleForward = scheduleForward;
-        this.scheduleBack = scheduleBack;
+        this.sheduleForward = sheduleForward;
+        this.sheduleBack = sheduleBack;
     }
 
     public int getId() {
@@ -72,20 +67,20 @@ public class Route {
         this.pointDestination = pointDestination;
     }
 
-    public Schedule getScheduleForward() {
-        return scheduleForward;
+    public Shedule getScheduleForward() {
+        return sheduleForward;
     }
 
-    public void setScheduleForward(Schedule scheduleForward) {
-        this.scheduleForward = scheduleForward;
+    public void setScheduleForward(Shedule sheduleForward) {
+        this.sheduleForward = sheduleForward;
     }
 
-    public Schedule getScheduleBack() {
-        return scheduleBack;
+    public Shedule getScheduleBack() {
+        return sheduleBack;
     }
 
-    public void setScheduleBack(Schedule scheduleBack) {
-        this.scheduleBack = scheduleBack;
+    public void setScheduleBack(Shedule sheduleBack) {
+        this.sheduleBack = sheduleBack;
     }
 
     @Override

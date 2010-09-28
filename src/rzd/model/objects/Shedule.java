@@ -9,20 +9,20 @@ import java.util.Date;
  * Time: 16:27:02
  * To change this template use File | Settings | File Templates.
  */
-public class Schedule {
+public class Shedule {
     private int id;
     private Date timeDeparture;
     private Date timeDestination;
     private Date timeInWay;
-    private ScheduleType scheduleType;
+    private SheduleType sheduleType;
     private int[] days;
 
-    public Schedule(int id, int type, Date timeDeparture, Date timeDestination, Date timeInWay, ScheduleType scheduleType, int[] days) {
+    public Shedule(int id, int type, Date timeDeparture, Date timeDestination, Date timeInWay, SheduleType sheduleType, int[] days) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
         this.timeInWay = timeInWay;
-        this.scheduleType = scheduleType;
+        this.sheduleType = sheduleType;
         this.days = days;
     }
 
@@ -58,12 +58,12 @@ public class Schedule {
         this.timeInWay = timeInWay;
     }
 
-    public ScheduleType getScheduleType() {
-        return scheduleType;
+    public SheduleType getScheduleType() {
+        return sheduleType;
     }
 
-    public void setScheduleType(ScheduleType scheduleType) {
-        this.scheduleType = scheduleType;
+    public void setScheduleType(SheduleType sheduleType) {
+        this.sheduleType = sheduleType;
     }
 
     public int[] getDays() {

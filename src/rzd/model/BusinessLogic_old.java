@@ -23,17 +23,17 @@ public interface BusinessLogic_old {
 
     public boolean removeRoute(Route route);
 
-    public ArrayList<Schedule> getSchedules();
+    public ArrayList<Shedule> getSchedules();
 
-    public boolean addSchedule(Schedule schedule, Route route);
+    public boolean addSchedule(Shedule shedule, Route route);
 
-    public boolean updateSchedule(Schedule schedule, Route route);
+    public boolean updateSchedule(Shedule shedule, Route route);
 
-    public boolean removeSchedule(Schedule schedule);
+    public boolean removeSchedule(Shedule shedule);
 
-    public ArrayList<Schedule> getSchedulesByRoute(Route route);
+    public ArrayList<Shedule> getSchedulesByRoute(Route route);
 
-    public Route getRouteBySchedule(Schedule schedule);
+    public Route getRouteBySchedule(Shedule shedule);
 
     public ArrayList<Train> getTrains(Date dBegin, Date dEnd);
 
@@ -49,9 +49,9 @@ public interface BusinessLogic_old {
     //Прибывшие поезда сегодня
     public ArrayList<Train> getTrainsArrivedToday();
 
-    public boolean addTrain(Train train, Schedule route);
+    public boolean addTrain(Train train, Shedule route);
 
-    public boolean updateTrain(Train train, Schedule route);
+    public boolean updateTrain(Train train, Shedule route);
 
     public Route getRouteByTrain(Train train);
 

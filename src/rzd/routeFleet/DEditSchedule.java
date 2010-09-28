@@ -15,16 +15,16 @@ import rzd.model.objects.Route;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+import rzd.model.objects.Shedule;
+import rzd.model.objects.SheduleType;
 import rzd.utils.Utils;
-import rzd.model.objects.Schedule;
-import rzd.model.objects.ScheduleType;
 
 /**
  * @author ЧерныхЕА
  */
 public class DEditSchedule extends javax.swing.JDialog {
 
-    private ArrayList<ScheduleType> scheduleTypes;
+    private ArrayList<SheduleType> sheduleTypes;
     private Route route;
 
     /**
@@ -592,7 +592,7 @@ public class DEditSchedule extends javax.swing.JDialog {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         if (isCorrectInputData()) {
 //            if (schedule == null) {
-//                schedule = new Schedule(
+//                schedule = new Shedule(
 //                        0,
 //                        Utils.convertStrToTime(fTimeDeparture1.getText().trim()),
 //                        Utils.convertStrToTime(fTimeDestination1.getText().trim()),
@@ -654,13 +654,13 @@ public class DEditSchedule extends javax.swing.JDialog {
         });
     }
 
-    public Route open(Route route, ArrayList<ScheduleType> scheduleTypes) {
-        if (scheduleTypes == null) return null;
+    public Route open(Route route, ArrayList<SheduleType> sheduleTypes) {
+        if (sheduleTypes == null) return null;
         this.route = route;
-        this.scheduleTypes = scheduleTypes;
+        this.sheduleTypes = sheduleTypes;
         cTypeSchedule1.removeAllItems();
         cTypeSchedule2.removeAllItems();
-        for (ScheduleType st : scheduleTypes) {
+        for (SheduleType st : sheduleTypes) {
             cTypeSchedule1.addItem(st);
             cTypeSchedule2.addItem(st);
         }
@@ -678,8 +678,8 @@ public class DEditSchedule extends javax.swing.JDialog {
             fTimeDestination1.setText("");
             fTimeDestination2.setText("");
         } else {
-            Schedule s1 = route.getScheduleForward();
-            Schedule s2 = route.getScheduleBack();
+            Shedule s1 = route.getScheduleForward();
+            Shedule s2 = route.getScheduleBack();
             fStationDeparture.setText(route.getPointDeparture());
             fStationDestination.setText(route.getPointDestination());
             fNumberRoute1.setText(route.getNumberForward());

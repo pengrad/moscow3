@@ -89,27 +89,27 @@ public class TestModel implements BusinessLogic_old {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public ArrayList<Schedule> getSchedules() {
+    public ArrayList<Shedule> getSchedules() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addSchedule(Schedule schedule, Route route) {
+    public boolean addSchedule(Shedule shedule, Route route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean updateSchedule(Schedule schedule, Route route) {
+    public boolean updateSchedule(Shedule shedule, Route route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean removeSchedule(Schedule schedule) {
+    public boolean removeSchedule(Shedule shedule) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public ArrayList<Schedule> getSchedulesByRoute(Route route) {
+    public ArrayList<Shedule> getSchedulesByRoute(Route route) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public Route getRouteBySchedule(Schedule schedule) {
+    public Route getRouteBySchedule(Shedule shedule) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -137,7 +137,7 @@ public class TestModel implements BusinessLogic_old {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addRouteInSchedule(Route route, Schedule schedule) {
+    public boolean addRouteInSchedule(Route route, Shedule shedule) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -145,7 +145,7 @@ public class TestModel implements BusinessLogic_old {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean addTrain(Train train, Schedule route) {
+    public boolean addTrain(Train train, Shedule route) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -153,7 +153,7 @@ public class TestModel implements BusinessLogic_old {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean updateTrain(Train train, Schedule schedule) {
+    public boolean updateTrain(Train train, Shedule shedule) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
