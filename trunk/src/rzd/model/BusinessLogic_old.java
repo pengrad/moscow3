@@ -5,7 +5,7 @@ import java.util.Date;
 
 import rzd.model.objects.*;
 
-public interface BusinessLogic {
+public interface BusinessLogic_old {
 
     public ArrayList<RoadType> getRoadTypes();
 
