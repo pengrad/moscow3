@@ -1,6 +1,7 @@
 package rzd.model.objects;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -14,15 +15,21 @@ import java.sql.Time;
 public class Route {
 
     private int id;
-    private String number;
+    private String numberForward;
+    private String numberBack;
     private String pointDeparture;
     private String pointDestination;
-   
-    public Route(int id, String number, String pointDeparture, String pointDestination) {
+    private Schedule scheduleForward;
+    private Schedule scheduleBack;
+
+    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Schedule scheduleForward, Schedule scheduleBack) {
         this.id = id;
-        this.number = number;
+        this.numberForward = numberForward;
+        this.numberBack = numberBack;
         this.pointDeparture = pointDeparture;
         this.pointDestination = pointDestination;
+        this.scheduleForward = scheduleForward;
+        this.scheduleBack = scheduleBack;
     }
 
     public int getId() {
@@ -33,12 +40,20 @@ public class Route {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getNumberBack() {
+        return numberBack;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNumberBack(String numberBack) {
+        this.numberBack = numberBack;
+    }
+
+    public String getNumberForward() {
+        return numberForward;
+    }
+
+    public void setNumberTo(String numberForward) {
+        this.numberForward = numberForward;
     }
 
     public String getPointDeparture() {
@@ -57,9 +72,25 @@ public class Route {
         this.pointDestination = pointDestination;
     }
 
+    public Schedule getScheduleForward() {
+        return scheduleForward;
+    }
+
+    public void setScheduleForward(Schedule scheduleForward) {
+        this.scheduleForward = scheduleForward;
+    }
+
+    public Schedule getScheduleBack() {
+        return scheduleBack;
+    }
+
+    public void setScheduleBack(Schedule scheduleBack) {
+        this.scheduleBack = scheduleBack;
+    }
+
     @Override
     public String toString() {
-        return number + " " + pointDeparture + " - " + pointDestination;
+        return numberForward + "  " + numberBack + " " + pointDeparture + " - " + pointDestination;
     }
 
     @Override
