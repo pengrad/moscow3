@@ -211,11 +211,11 @@ public class DEditRoute extends javax.swing.JDialog {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         if (isCorrectInputData()) {
             if (route != null) {
-                route.setNumber(fNumber.getText().trim());
+             //   route.setNumber(fNumber.getText().trim());
                 route.setPointDeparture(fPointOfDeparture.getText().trim());
                 route.setPointDestination(fPointOfDestination.getText().trim());
             } else {
-                route = new Route(0, fNumber.getText().trim(), fPointOfDeparture.getText().trim(), fPointOfDestination.getText().trim());
+            //    route = new Route(0, fNumber.getText().trim(), fPointOfDeparture.getText().trim(), fPointOfDestination.getText().trim());
             }
             setVisible(false);
         } else {
@@ -254,7 +254,7 @@ public class DEditRoute extends javax.swing.JDialog {
             fPointOfDeparture.setText("");
             fPointOfDestination.setText("");
         } else {
-            fNumber.setText(data.getNumber());
+            //fNumber.setText(data.getNumber());
             fPointOfDeparture.setText(data.getPointDeparture());
             fPointOfDestination.setText(data.getPointDestination());
         }
