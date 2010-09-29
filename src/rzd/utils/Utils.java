@@ -82,25 +82,25 @@ public class Utils {
     public static String convertMasToDayOfWeek(int[] days) {
         String res = "";
         for (int i = 0; i < days.length; i++) {
-            if (days[i] == 0) {
+            if (days[i] == 1) {
                 res = res + "ПН ";
             }
-            if (days[i] == 1) {
+            if (days[i] == 2) {
                 res = res + "ВТ ";
             }
-            if (days[i] == 2) {
+            if (days[i] == 3) {
                 res = res + "СР ";
             }
-            if (days[i] == 3) {
+            if (days[i] == 4) {
                 res = res + "ЧТ ";
             }
-            if (days[i] == 4) {
+            if (days[i] == 5) {
                 res = res + "ПТ ";
             }
-            if (days[i] == 5) {
+            if (days[i] == 6) {
                 res = res + "СБ ";
             }
-            if (days[i] == 6) {
+            if (days[i] == 7) {
                 res = res + "ВС ";
             }
         }
@@ -114,25 +114,25 @@ public class Utils {
         while (tk.hasMoreElements()) {
             String t = tk.nextElement().toString();
             if (t.equals("ПН")) {
-                res[i] = 0;
-            }
-            if (t.equals("ВТ")) {
                 res[i] = 1;
             }
-            if (t.equals("СР")) {
+            if (t.equals("ВТ")) {
                 res[i] = 2;
             }
-            if (t.equals("ЧТ")) {
+            if (t.equals("СР")) {
                 res[i] = 3;
             }
-            if (t.equals("ПТ")) {
+            if (t.equals("ЧТ")) {
                 res[i] = 4;
             }
-            if (t.equals("СБ")) {
+            if (t.equals("ПТ")) {
                 res[i] = 5;
             }
-            if (t.equals("ВС")) {
+            if (t.equals("СБ")) {
                 res[i] = 6;
+            }
+            if (t.equals("ВС")) {
+                res[i] = 7;
             }
             i++;
         }

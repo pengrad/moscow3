@@ -23,12 +23,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int[] dd=new int[]{0,10,20};
-        String r= Utils.convertMasToStr(dd);
+        int[] dd=new int[]{};
+        String r= Utils.convertMasToDayOfWeek(dd);
         System.out.println(r);
-        int[] d=Utils.convertStrToMas(r);
+        int[] d=Utils.convertDayOfWeekToMas(r);
         System.out.println(Arrays.toString(d));
-      r= Utils.convertMasToStr(d);
+      r= Utils.convertMasToDayOfWeek(d);
                 System.out.println(r);
 
 
