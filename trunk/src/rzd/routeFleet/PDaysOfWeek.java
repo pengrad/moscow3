@@ -8,8 +8,14 @@
  *
  * Created on 26.09.2010, 22:43:41
  */
-
 package rzd.routeFleet;
+
+import java.util.ArrayList;
+import javax.rmi.CORBA.Util;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import rzd.utils.Utils;
 
 /**
  *
@@ -17,9 +23,12 @@ package rzd.routeFleet;
  */
 public class PDaysOfWeek extends javax.swing.JPanel {
 
+    private JTextField textField;
+
     /** Creates new form PDaysOfWeek */
     public PDaysOfWeek() {
         initComponents();
+
     }
 
     /** This method is called from within the constructor to
@@ -55,6 +64,11 @@ public class PDaysOfWeek extends javax.swing.JPanel {
         jCheckBox6.setText(" - субота");
 
         jButton1.setText("Сохранить");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Отмена");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -124,10 +138,79 @@ public class PDaysOfWeek extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setSelectedDays(int[] days, JTextField textFild) {
+        if (days == null) {
+            return;
+        }
+        this.textField = textFild;
+        jCheckBox1.setSelected(false);
+        jCheckBox2.setSelected(false);
+        jCheckBox3.setSelected(false);
+        jCheckBox4.setSelected(false);
+        jCheckBox5.setSelected(false);
+        jCheckBox6.setSelected(false);
+        jCheckBox7.setSelected(false);
+
+        for (int i = 0; i < days.length; i++) {
+            if (days[i] == 1) {
+                jCheckBox1.setSelected(true);
+            }
+            if (days[i] == 2) {
+                jCheckBox2.setSelected(true);
+            }
+            if (days[i] == 3) {
+                jCheckBox3.setSelected(true);
+            }
+            if (days[i] == 4) {
+                jCheckBox4.setSelected(true);
+            }
+            if (days[i] == 5) {
+                jCheckBox5.setSelected(true);
+            }
+            if (days[i] == 6) {
+                jCheckBox6.setSelected(true);
+            }
+            if (days[i] == 7) {
+                jCheckBox7.setSelected(true);
+            }
+        }
+
+    }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        ((JPopupMenu) this.getParent()).setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (jCheckBox1.isSelected()) {
+            res.add(1);
+        }
+        if (jCheckBox2.isSelected()) {
+            res.add(2);
+        }
+        if (jCheckBox3.isSelected()) {
+            res.add(4);
+        }
+        if (jCheckBox4.isSelected()) {
+            res.add(4);
+        }
+        if (jCheckBox5.isSelected()) {
+            res.add(6);
+        }
+        if (jCheckBox6.isSelected()) {
+            res.add(6);
+        }
+        if (jCheckBox7.isSelected()) {
+            res.add(7);
+        }
+        int[] m = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            m[i] = res.get(i);
+        }
+           textField.setText(Utils.convertMasToDayOfWeek(m));
+        ((JPopupMenu) this.getParent()).setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -140,5 +223,4 @@ public class PDaysOfWeek extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     // End of variables declaration//GEN-END:variables
-
 }

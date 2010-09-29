@@ -27,10 +27,10 @@ public class PDispStation extends javax.swing.JPanel {
         c = new Controller(this);
         tTrainDeparture.addMouseListener(c);
         tTrainDestination.addMouseListener(c);
-        tTrainDepartureToday.addMouseListener(c);
-        tTrainDestinationToday.addMouseListener(c);
-        bAddDeparture.addActionListener(c);
-        bAddDestination.addActionListener(c);
+//        tTrainDepartureToday.addMouseListener(c);
+ //       tTrainDestinationToday.addMouseListener(c);
+  //      bAddDeparture.addActionListener(c);
+  //      bAddDestination.addActionListener(c);
     }
 
     /**
@@ -43,106 +43,107 @@ public class PDispStation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tTrainDeparture = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tTrainDepartureToday = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         tTrainDestination = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tTrainDestinationToday = new javax.swing.JTable();
-        bAddDeparture = new javax.swing.JButton();
-        bAddDestination = new javax.swing.JButton();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tTrainDeparture1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("Прибывающие поезда");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14));
-        jLabel2.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel2.setText("Отправляемые поезда");
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 204));
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         tTrainDeparture.setModel(new ModelTable() );
         jScrollPane1.setViewportView(tTrainDeparture);
 
         jTabbedPane1.addTab("Прибывающие поезда", jScrollPane1);
 
-        tTrainDepartureToday.setModel(new ModelTable());
-        jScrollPane3.setViewportView(tTrainDepartureToday);
-
-        jTabbedPane1.addTab("Прибывшие сегодня", jScrollPane3);
+        jTabbedPane2.setForeground(new java.awt.Color(0, 0, 204));
+        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         tTrainDestination.setModel(new ModelTable());
         jScrollPane2.setViewportView(tTrainDestination);
 
         jTabbedPane2.addTab("Отправляемые поезда", jScrollPane2);
 
-        tTrainDestinationToday.setModel(new ModelTable());
-        jScrollPane4.setViewportView(tTrainDestinationToday);
+        jTabbedPane3.setBackground(new java.awt.Color(0, 51, 204));
+        jTabbedPane3.setForeground(new java.awt.Color(0, 0, 204));
+        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        jTabbedPane2.addTab("Отправленные сегодня", jScrollPane4);
+        tTrainDeparture1.setModel(new ModelTable() );
+        jScrollPane3.setViewportView(tTrainDeparture1);
 
-        bAddDeparture.setText("Добавить");
+        jTabbedPane3.addTab("Поезда на путях", jScrollPane3);
 
-        bAddDestination.setText("Добавить");
+        jLabel1.setText("Отображать за часов до прибытия");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
+
+        jLabel2.setText("Отображать за часов до прибытия");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addComponent(bAddDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(350, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                .addComponent(bAddDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(350, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
             .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(bAddDeparture))
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(bAddDestination))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bAddDeparture;
-    public javax.swing.JButton bAddDestination;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     public javax.swing.JTable tTrainDeparture;
-    public javax.swing.JTable tTrainDepartureToday;
+    public javax.swing.JTable tTrainDeparture1;
     public javax.swing.JTable tTrainDestination;
-    public javax.swing.JTable tTrainDestinationToday;
     // End of variables declaration//GEN-END:variables
 
 }

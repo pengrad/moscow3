@@ -30,19 +30,11 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
-//      PStancia pStancia=new PStancia();
-//      pPaint1.add(pStancia);
-
         tabbedtMain.add("Станция", new PStationFleet());
+        tabbedtMain.add("Расписание", new PSchedule());
         tabbedtMain.add("Диспетчер станции", new PDispStation());
-
-        // p1p1.add(new GTrainV1());
-        // l1p1.addMouseListener(Controller.get());
-//}
-
         tabbedtMain.add("Парк вагонов", new PCars());
         tabbedtMain.add("Маршруты", new PRoute());
-        tabbedtMain.add("Расписание", new PSchedule());
     }
 
     /** This method is called from within the constructor to
@@ -55,8 +47,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         tabbedtMain = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -64,32 +54,6 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabbedtMain.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
-        );
-
-        tabbedtMain.addTab("Парк поездов", jPanel3);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
-        );
-
-        tabbedtMain.addTab("Парк локомотивов", jPanel2);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -129,8 +93,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane tabbedtMain;
     // End of variables declaration//GEN-END:variables
 }

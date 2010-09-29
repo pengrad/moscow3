@@ -63,26 +63,26 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pDispStation.bAddDeparture) {
-            addDepartureTrain();
-        } else if (e.getSource() == pDispStation.bAddDestination) {
-            addDestinationTrain();
-        } else if (e.getSource() == editTrain) {
-            editTrain(activeTable);
-        } else if (e.getSource() == viewTrain) {
-            viewTrain(activeTable);
-        }
+//        if (e.getSource() == pDispStation.bAddDeparture) {
+//            addDepartureTrain();
+//        } else if (e.getSource() == pDispStation.bAddDestination) {
+//            addDestinationTrain();
+//        } else if (e.getSource() == editTrain) {
+//            editTrain(activeTable);
+//        } else if (e.getSource() == viewTrain) {
+//            viewTrain(activeTable);
+//        }
     }
 
     public void update() {
-        ArrayList<Train> trainsGoing = TestModel.get().getTrainsGoing();
-        ((ModelTable) pDispStation.tTrainDeparture.getModel()).setDate(getTrainTabView(trainsGoing));
-        ArrayList<Train> trainsArriving = TestModel.get().getTrainsArriving();
-        ((ModelTable) pDispStation.tTrainDestination.getModel()).setDate(getTrainTabView(trainsArriving));
-        ArrayList<Train> trainsSentToday = TestModel.get().getTrainsSentToday();
-        ((ModelTable) pDispStation.tTrainDepartureToday.getModel()).setDate(getTrainTabView(trainsSentToday));
-        ArrayList<Train> trainsArrivedToday = TestModel.get().getTrainsArrivedToday();
-        ((ModelTable) pDispStation.tTrainDestinationToday.getModel()).setDate(getTrainTabView(trainsArrivedToday));
+//        ArrayList<Train> trainsGoing = TestModel.get().getTrainsGoing();
+//        ((ModelTable) pDispStation.tTrainDeparture.getModel()).setDate(getTrainTabView(trainsGoing));
+//        ArrayList<Train> trainsArriving = TestModel.get().getTrainsArriving();
+//        ((ModelTable) pDispStation.tTrainDestination.getModel()).setDate(getTrainTabView(trainsArriving));
+//        ArrayList<Train> trainsSentToday = TestModel.get().getTrainsSentToday();
+//        ((ModelTable) pDispStation.tTrainDepartureToday.getModel()).setDate(getTrainTabView(trainsSentToday));
+//        ArrayList<Train> trainsArrivedToday = TestModel.get().getTrainsArrivedToday();
+//        ((ModelTable) pDispStation.tTrainDestinationToday.getModel()).setDate(getTrainTabView(trainsArrivedToday));
     }
 
     private void addDepartureTrain() {
