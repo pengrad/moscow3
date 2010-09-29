@@ -58,10 +58,10 @@ public class PDaysOfWeek extends javax.swing.JPanel {
 
         jCheckBox4.setText(" - четверг");
 
-        jCheckBox5.setText(" - пятнеца");
+        jCheckBox5.setText(" - пятница");
 
         jCheckBox6.setForeground(new java.awt.Color(255, 0, 0));
-        jCheckBox6.setText(" - субота");
+        jCheckBox6.setText(" - суббота");
 
         jButton1.setText("Сохранить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class PDaysOfWeek extends javax.swing.JPanel {
         });
 
         jCheckBox7.setForeground(new java.awt.Color(255, 0, 0));
-        jCheckBox7.setText(" - воскрксенье");
+        jCheckBox7.setText(" - воскресенье");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
