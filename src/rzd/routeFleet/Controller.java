@@ -111,13 +111,17 @@ public class Controller implements ActionListener, MouseListener {
     private void editRoute() {
         int row = pRoute.tRoute.getSelectedRow();
         if (row != -1) {
+          //  System.out.println(pRoute.tRoute.getValueAt(row, 0).toString());
             Route data = Model.getModel().getRouteById(new Integer(pRoute.tRoute.getValueAt(row, 0).toString()));
             dEditRoute.setLocationRelativeTo(pRoute);
             data = dEditRoute.open(data, Model.getModel().getSheduleTypes());
+         //   System.out.println("editRoute");
             if (data != null) {
                 try {
-                    boolean b = TestModel.get().updateRoute(data);
+          //          System.out.println("!!updateRoute");
+                    boolean b = Model.getModel().updateRoute(data);
                     if (b) {
+            //              System.out.println("updateRoute");
                         ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
                     }
                 } catch (Exception e) {
@@ -144,60 +148,7 @@ public class Controller implements ActionListener, MouseListener {
         }
     }
 
-    private void insertSchedule() {
-//        dEditSchedule.setLocationRelativeTo(pTrains);
-        //Object[] data = dEditSchedule.open(null, TestModel.get().getRoutes(), null);
-//        if (data != null) {
-//            try {
-//                boolean b = TestModel.get().addSchedule((Shedule) data[0], (Route) data[1]);
-//                if (b) {
-//                    ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(pTrains, e.getMessage());
-//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//            }
-//        }
-    }
-
-    private void editSchedule() {
-//        int row = pTrains.tSchedule.getSelectedRow();
-//        if (row != -1) {
-//            Shedule schedule = getScheduleByTabRow(row);
-//            Route route = TestModel.get().getRouteBySchedule(schedule);
-//            dEditSchedule.setLocationRelativeTo(pTrains);
-//            Object[] data = dEditSchedule.open(schedule, TestModel.get().getRoutes(), route);
-//            if (data != null) {
-//                try {
-//                    boolean b = TestModel.get().updateSchedule((Shedule) data[0], (Route) data[1]);
-//                    if (b) {
-//                        ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
-//                    }
-//                } catch (Exception e) {
-//                    JOptionPane.showMessageDialog(pTrains, e.getMessage());
-//                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        }
-    }
-
-    private void deleteSchedule() {
-//        int row = pTrains.tSchedule.getSelectedRow();
-//        if (row != -1) {
-//            try {
-//                boolean b = TestModel.get().removeSchedule(getScheduleByTabRow(row));
-//                if (b) {
-//                    ((ModelTable) pTrains.tSchedule.getModel()).setDate(getScheduleTabView());
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(pTrains, e.getMessage());
-//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//            }
-//        }
-    }
-
-
-    //Методы конверторы
+     //Методы конверторы
 
     public ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = Model.getModel().getRoutes();

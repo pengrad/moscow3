@@ -45,6 +45,7 @@ public class PRoute extends javax.swing.JPanel {
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tRoute);
 
+        bCreateRoute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/add16px.png"))); // NOI18N
         bCreateRoute.setText("Создать маршрут");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -63,7 +64,7 @@ public class PRoute extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(bCreateRoute)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

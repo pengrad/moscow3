@@ -4,7 +4,7 @@
  */
 package rzd;
 
-import rzd.test.MainFrame;
+import rzd.MainFrame;
 
 /**
  *
