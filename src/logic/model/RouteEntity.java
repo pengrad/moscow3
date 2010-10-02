@@ -18,16 +18,16 @@ public class RouteEntity {
     public RouteEntity() {
     }
 
-    public RouteEntity(SheduleEntity sheduleForward, String cityFrom, String cityTo, String numberForward, String numberBack, int lengthForward, int lengthBack, boolean enabled, SheduleEntity sheduleBack) {
-        this.sheduleForward = sheduleForward;
+    public RouteEntity(String cityFrom, String cityTo, String numberForward, String numberBack, int lengthForward, int lengthBack, SheduleEntity sheduleForward, SheduleEntity sheduleBack, boolean enabled) {        
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
         this.numberForward = numberForward;
         this.numberBack = numberBack;
         this.lengthForward = lengthForward;
         this.lengthBack = lengthBack;
-        this.enabled = enabled;
+        this.sheduleForward = sheduleForward;
         this.sheduleBack = sheduleBack;
+        this.enabled = enabled;
     }
 
     private int idRoute;
