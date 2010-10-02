@@ -29,8 +29,8 @@ public class BusinessTest {
     public static void main(String[] args) throws HibernateInitializeException {
 //        testGetRoutes();
 //        testGetSheduleTypes();
-//        testAddRoute();
-        testUpdateRoute();
+        testAddRoute();
+//        testUpdateRoute();
     }
 
     public static void testGetRoutes() {
