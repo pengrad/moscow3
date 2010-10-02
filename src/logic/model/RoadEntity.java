@@ -9,14 +9,14 @@ import java.util.Collection;
  * Time: 1:56:36
  */
 
-@javax.persistence.Table(name = "road", catalog = "rzd")
+@Table(name = "road", catalog = "rzd")
 @Entity
 public class RoadEntity {
 
 
     private int idRoad;
 
-    @javax.persistence.Column(name = "id_road", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_road", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdRoad() {
         return idRoad;
@@ -28,7 +28,7 @@ public class RoadEntity {
 
     private String roadName;
 
-    @javax.persistence.Column(name = "road_name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @Column(name = "road_name", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getRoadName() {
         return roadName;
@@ -40,7 +40,7 @@ public class RoadEntity {
 
     private String comments;
 
-    @javax.persistence.Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
+    @Column(name = "comments", nullable = true, insertable = true, updatable = true, length = 2000, precision = 0)
     @Basic
     public String getComments() {
         return comments;
@@ -52,7 +52,7 @@ public class RoadEntity {
 
     private int position;
 
-    @javax.persistence.Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public int getPosition() {
         return position;
@@ -119,5 +119,16 @@ public class RoadEntity {
 
     public void setRoadDets(Collection<RoadDetEntity> roadDets) {
         this.roadDets = roadDets;
+    }
+
+    private Collection<RepairEntity> repairsByIdRoad;
+
+    @OneToMany(mappedBy = "road")
+    public Collection<RepairEntity> getRepairsByIdRoad() {
+        return repairsByIdRoad;
+    }
+
+    public void setRepairsByIdRoad(Collection<RepairEntity> repairsByIdRoad) {
+        this.repairsByIdRoad = repairsByIdRoad;
     }
 }

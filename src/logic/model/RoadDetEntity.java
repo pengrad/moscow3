@@ -1,8 +1,6 @@
 package logic.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * User: Стас
@@ -10,14 +8,14 @@ import javax.persistence.ManyToOne;
  * Time: 1:56:37
  */
 
-@javax.persistence.Table(name = "road_det", catalog = "rzd")
+@Table(name = "road_det", catalog = "rzd")
 @Entity
 public class RoadDetEntity {
 
 
     private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getId() {
         return id;
@@ -48,7 +46,7 @@ public class RoadDetEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_road", referencedColumnName = "id_road", nullable = false)
+    @JoinColumn(name = "id_road", referencedColumnName = "id_road", nullable = false)
     RoadEntity getRoad() {
         return road;
     }
@@ -61,7 +59,7 @@ public class RoadDetEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "car_number", referencedColumnName = "car_number")
+    @JoinColumn(name = "car_number", referencedColumnName = "car_number")
     CarEntity getCar() {
         return car;
     }
@@ -74,7 +72,7 @@ public class RoadDetEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_train", referencedColumnName = "id_train")
+    @JoinColumn(name = "id_train", referencedColumnName = "id_train")
     TrainEntity getTrain() {
         return train;
     }

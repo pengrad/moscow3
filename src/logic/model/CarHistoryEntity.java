@@ -8,8 +8,8 @@ import java.sql.Date;
 
 /**
  * User: Стас
- * Date: 27.09.2010
- * Time: 1:56:35
+ * Date: 03.10.2010
+ * Time: 3:38:32
  */
 
 @javax.persistence.Table(name = "car_history", catalog = "rzd")
@@ -61,17 +61,17 @@ public class CarHistoryEntity {
         return result;
     }
 
-    private LocationEntity location;
+    private CarLocationEntity carLocation;
 
     @ManyToOne
     public
     @javax.persistence.JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
-    LocationEntity getLocation() {
-        return location;
+    CarLocationEntity getCarLocation() {
+        return carLocation;
     }
 
-    public void setLocation(LocationEntity location) {
-        this.location = location;
+    public void setCarLocation(CarLocationEntity carLocation) {
+        this.carLocation = carLocation;
     }
 
     private TrainEntity train;
@@ -111,5 +111,18 @@ public class CarHistoryEntity {
 
     public void setCar(CarEntity car) {
         this.car = car;
+    }
+
+    private RepairEntity repair;
+
+    @ManyToOne
+    public
+    @javax.persistence.JoinColumn(name = "id_repair", referencedColumnName = "id_repair")
+    RepairEntity getRepair() {
+        return repair;
+    }
+
+    public void setRepair(RepairEntity repair) {
+        this.repair = repair;
     }
 }
