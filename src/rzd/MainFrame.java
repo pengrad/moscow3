@@ -30,11 +30,6 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
-        tabbedtMain.add("Станция", new PStationFleet());
-        tabbedtMain.add("Расписание", new PSchedule());
-        tabbedtMain.add("Диспетчер станции", new PDispStation());
-        tabbedtMain.add("Парк вагонов", new PCars());
-        tabbedtMain.add("Маршруты", new PRoute());
     }
 
     /** This method is called from within the constructor to
@@ -93,6 +88,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTabbedPane tabbedtMain;
+    public javax.swing.JTabbedPane tabbedtMain;
     // End of variables declaration//GEN-END:variables
 }

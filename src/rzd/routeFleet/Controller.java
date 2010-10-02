@@ -50,7 +50,7 @@ public class Controller implements ActionListener, MouseListener {
 
     public void update() {
         try {
-            ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+//            ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pRoute, e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -150,7 +150,7 @@ public class Controller implements ActionListener, MouseListener {
 
      //Методы конверторы
 
-    public ArrayList<Object[]> getRoutesTabView() {
+    private  ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = Model.getModel().getRoutes();
         if (routes != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());
