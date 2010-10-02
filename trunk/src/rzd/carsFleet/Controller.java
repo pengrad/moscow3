@@ -4,6 +4,7 @@ import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.model.TestModel;
 import rzd.model.objects.Car;
+import rzd.utils.MakerDefaultTextInField;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -57,6 +58,7 @@ public class Controller implements MouseListener, ActionListener {
         popCarMenu.add(editCar);
         popCarMenu.add(deleteCar);
         popCarMenu.add(histLocationCar);
+        new MakerDefaultTextInField("Поиск по номеру вагона",pCarFleet.fSearch);
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -46,69 +46,58 @@ public class PStationFleet extends javax.swing.JPanel {
         tabbedStation = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         fSearchCarByNumber = new javax.swing.JTextField();
+        bSearch = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
-        fSearchCarByNumber.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        fSearchCarByNumber.setText("Поиск по номеру вагона");
+        fSearchCarByNumber.setFont(new java.awt.Font("Tahoma", 2, 11));
         fSearchCarByNumber.setToolTipText("Поиск по номеру вагона");
-        fSearchCarByNumber.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fSearchCarByNumberFocusGained(evt);
-            }
 
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fSearchCarByNumberFocusLost(evt);
-            }
-        });
+        bSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/search.gif"))); // NOI18N
+        bSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bSearch.setBorderPainted(false);
+        bSearch.setContentAreaFilled(false);
+        bSearch.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(fSearchCarByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(254, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(fSearchCarByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bSearch)
+                .addContainerGap(220, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(fSearchCarByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(7, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fSearchCarByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tabbedStation, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabbedStation, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tabbedStation, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabbedStation, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fSearchCarByNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fSearchCarByNumberFocusGained
-        if (fSearchCarByNumber.getText().trim().equals(strSearch)) {
-            fSearchCarByNumber.setText("");
-        }
-    }//GEN-LAST:event_fSearchCarByNumberFocusGained
-
-    private void fSearchCarByNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fSearchCarByNumberFocusLost
-        if (fSearchCarByNumber.getText().trim().equals("")) {
-            fSearchCarByNumber.setText(strSearch);
-        }
-
-    }//GEN-LAST:event_fSearchCarByNumberFocusLost
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton bSearch;
     public javax.swing.JTextField fSearchCarByNumber;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
