@@ -55,7 +55,7 @@ public class BusinessManager implements BusinessLogic {
                         days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
                 }
                 Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
-                Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB);
+                Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
                 list.add(route);
             }
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class BusinessManager implements BusinessLogic {
                     days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
             }
             Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
-            route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB);
+            route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -117,14 +117,14 @@ public class BusinessManager implements BusinessLogic {
     public boolean addRoute(Route r) {
         try {
             SessionManager.beginTran();
-            Shedule sb = r.getScheduleBack();
-            Shedule sf = r.getScheduleForward();
+            Shedule sb = r.getSheduleBack();
+            Shedule sf = r.getSheduleForward();
             SheduleTypeEntity sfte = SessionManager.getEntityById(new SheduleTypeEntity(), sf.getScheduleType().getId());
             SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
             SheduleEntity sfe = new SheduleEntity(sf.getTimeDeparture(), sf.getTimeDestination(), sf.getTimeInWay(), sfte);
             SheduleEntity sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
-//            RouteEntity re = new RouteEntity(r.getNumberForward(), r.getNumberBack(), r.getPointDeparture(), r.getPointDestination(), sbe, sfe);
-//            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            RouteEntity re = new RouteEntity(r.getPointDeparture(), r.getPointDestination(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             int[] days = sf.getDays();
             if (days != null)
                 for (int day : days) {
@@ -153,8 +153,8 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.beginTran();
             RouteEntity re = SessionManager.getEntityById(new RouteEntity(), r.getId());
             if (re == null) throw new Exception("Route not found");
-            Shedule sb = r.getScheduleBack();
-            Shedule sf = r.getScheduleForward();
+            Shedule sb = r.getSheduleBack();
+            Shedule sf = r.getSheduleForward();
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
             for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.deleteEntities(sde);
@@ -175,9 +175,9 @@ public class BusinessManager implements BusinessLogic {
             saveId = sbe.getIdShedule();
             sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
             sbe.setIdShedule(saveId);
-//            re = new RouteEntity(r.getNumberForward(), r.getNumberBack(), r.getPointDeparture(), r.getPointDestination(), sbe, sfe);
-//            re.setIdRoute(r.getId());
-//            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            re = new RouteEntity(r.getPointDeparture(), r.getPointDestination(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            re.setIdRoute(r.getId());
+            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             SessionManager.commit();
             return true;
         } catch (Exception e) {
