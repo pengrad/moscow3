@@ -47,7 +47,6 @@ public class ControllerMain {
     }
 
     public boolean searchCar(int numberCar) {
-        mf.tabbedtMain.setSelectedComponent(pStationFleet);
         boolean search = pStationFleet.getController().searchCar(numberCar);
         if (search) {
             mf.tabbedtMain.setSelectedComponent(pStationFleet);
