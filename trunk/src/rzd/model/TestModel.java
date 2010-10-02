@@ -16,7 +16,6 @@ public class TestModel implements BusinessLogic_old {
     public static TestModel get() {
         return tm;
     }
-
     HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
 
     private TestModel() {
@@ -171,11 +170,17 @@ public class TestModel implements BusinessLogic_old {
 
     public Train getTrainByRoad(Road road) {
         return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()), "");
-        //  return null;
+    //  return null;
     }
 
     public ArrayList<Car> getCars() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<Car> cars = new ArrayList<Car>();
+        cars.add(new Car(111));
+        cars.add(new Car(100));
+        cars.add(new Car(333));
+        cars.add(new Car(100));
+        cars.add(new Car(100));
+       return cars;
     }
 
     public boolean addCar(Car car, Location carLocation) {

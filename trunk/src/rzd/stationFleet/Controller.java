@@ -4,6 +4,7 @@
  */
 package rzd.stationFleet;
 
+import rzd.ControllerMain;
 import rzd.stationFleet.GCar;
 import rzd.stationFleet.GTrainStation;
 import rzd.model.TestModel;
@@ -33,7 +34,7 @@ public class Controller implements ActionListener {
         makeTabs();
         update();
     }
-
+   
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pStationFleet.fSearchCarByNumber && !pStationFleet.fSearchCarByNumber.getText().trim().equals("") && !pStationFleet.fSearchCarByNumber.getText().trim().equals("Поиск по номеру вагона")) {
             try {
@@ -157,6 +158,7 @@ public class Controller implements ActionListener {
         }
         return false;
     }
+
 
     private class ViewSearchCar extends SwingWorker {
         private GCar gCar;

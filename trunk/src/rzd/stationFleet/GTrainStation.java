@@ -46,8 +46,9 @@ public class GTrainStation extends Figure {
 
     public void paint(Graphics2D g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.YELLOW);
+        g2.setStroke(new BasicStroke(2.0f));
+        g2.setColor(Color.RED);
 //        System.out.println(getX() + "   " + getY() + "    " + getWidth() + "    " + getHeight());
-        g2.fill(new Rectangle(2, 2, getWidth() - 4, getHeight() - 4));
+        g2.draw(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
     }
 }
