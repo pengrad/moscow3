@@ -10,14 +10,14 @@ import java.util.Collection;
  * Time: 1:56:39
  */
 
-@javax.persistence.Table(name = "train", catalog = "rzd")
+@Table(name = "train", catalog = "rzd")
 @Entity
 public class TrainEntity {
 
 
     private int idTrain;
 
-    @javax.persistence.Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdTrain() {
         return idTrain;
@@ -29,7 +29,7 @@ public class TrainEntity {
 
     private String trainChief;
 
-    @javax.persistence.Column(name = "train_chief", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @Column(name = "train_chief", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getTrainChief() {
         return trainChief;
@@ -41,7 +41,7 @@ public class TrainEntity {
 
     private Timestamp dateFrom;
 
-    @javax.persistence.Column(name = "date_from", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_from", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateFrom() {
         return dateFrom;
@@ -53,7 +53,7 @@ public class TrainEntity {
 
     private Timestamp dateTo;
 
-    @javax.persistence.Column(name = "date_to", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_to", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateTo() {
         return dateTo;

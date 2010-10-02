@@ -11,7 +11,6 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <mapping class="logic.model.CarEntity"/>
-        <mapping class="logic.model.LocationEntity"/>
         <mapping class="logic.model.RoadEntity"/>
         <mapping class="logic.model.RoadTypeEntity"/>
         <mapping class="logic.model.RouteEntity"/>        
@@ -23,6 +22,10 @@
         <mapping class="logic.model.SheduleTypeEntity"/>
         <mapping class="logic.model.TrainDetEntity"/>
         <mapping class="logic.model.TrainStatusEntity"/>
+        <mapping class="logic.model.CarLocationEntity"/>
+        <mapping class="logic.model.CarTypeEntity"/>
+        <mapping class="logic.model.RepairEntity"/>
+        <mapping class="logic.model.RepairTypeEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

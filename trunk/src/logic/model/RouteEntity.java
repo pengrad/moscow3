@@ -1,11 +1,14 @@
 package logic.model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * User: Стас
- * Date: 28.09.2010
- * Time: 22:09:50
+ * Date: 03.10.2010
+ * Time: 3:38:34
  */
 
 @javax.persistence.Table(name = "route", catalog = "rzd")
@@ -15,26 +18,52 @@ public class RouteEntity {
     public RouteEntity() {
     }
 
-    public RouteEntity(String numberForward, String numberBack, String cityFrom, String cityTo, SheduleEntity sheduleBack, SheduleEntity sheduleForward) {        
-        this.numberForward = numberForward;
-        this.numberBack = numberBack;
+    public RouteEntity(SheduleEntity sheduleForward, String cityFrom, String cityTo, String numberForward, String numberBack, int lengthForward, int lengthBack, boolean enabled, SheduleEntity sheduleBack) {
+        this.sheduleForward = sheduleForward;
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
+        this.numberForward = numberForward;
+        this.numberBack = numberBack;
+        this.lengthForward = lengthForward;
+        this.lengthBack = lengthBack;
+        this.enabled = enabled;
         this.sheduleBack = sheduleBack;
-        this.sheduleForward = sheduleForward;
     }
 
     private int idRoute;
 
     @javax.persistence.Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    @GeneratedValue
     public int getIdRoute() {
         return idRoute;
     }
 
     public void setIdRoute(int idRoute) {
         this.idRoute = idRoute;
+    }
+
+    private String cityFrom;
+
+    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
+    @Basic
+    public String getCityFrom() {
+        return cityFrom;
+    }
+
+    public void setCityFrom(String cityFrom) {
+        this.cityFrom = cityFrom;
+    }
+
+    private String cityTo;
+
+    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
+    @Basic
+    public String getCityTo() {
+        return cityTo;
+    }
+
+    public void setCityTo(String cityTo) {
+        this.cityTo = cityTo;
     }
 
     private String numberForward;
@@ -61,28 +90,40 @@ public class RouteEntity {
         this.numberBack = numberBack;
     }
 
-    private String cityFrom;
+    private int lengthForward;
 
-    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @javax.persistence.Column(name = "length_forward", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public String getCityFrom() {
-        return cityFrom;
+    public int getLengthForward() {
+        return lengthForward;
     }
 
-    public void setCityFrom(String cityFrom) {
-        this.cityFrom = cityFrom;
+    public void setLengthForward(int lengthForward) {
+        this.lengthForward = lengthForward;
     }
 
-    private String cityTo;
+    private int lengthBack;
 
-    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @javax.persistence.Column(name = "length_back", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public String getCityTo() {
-        return cityTo;
+    public int getLengthBack() {
+        return lengthBack;
     }
 
-    public void setCityTo(String cityTo) {
-        this.cityTo = cityTo;
+    public void setLengthBack(int lengthBack) {
+        this.lengthBack = lengthBack;
+    }
+
+    private boolean enabled;
+
+    @javax.persistence.Column(name = "enabled", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
+    @Basic
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -92,9 +133,12 @@ public class RouteEntity {
 
         RouteEntity that = (RouteEntity) o;
 
-        if (cityFrom != that.cityFrom) return false;
-        if (cityTo != that.cityTo) return false;
+        if (enabled != that.enabled) return false;
         if (idRoute != that.idRoute) return false;
+        if (lengthBack != that.lengthBack) return false;
+        if (lengthForward != that.lengthForward) return false;
+        if (cityFrom != null ? !cityFrom.equals(that.cityFrom) : that.cityFrom != null) return false;
+        if (cityTo != null ? !cityTo.equals(that.cityTo) : that.cityTo != null) return false;
         if (numberBack != null ? !numberBack.equals(that.numberBack) : that.numberBack != null) return false;
         if (numberForward != null ? !numberForward.equals(that.numberForward) : that.numberForward != null)
             return false;
@@ -105,10 +149,13 @@ public class RouteEntity {
     @Override
     public int hashCode() {
         int result = idRoute;
+        result = 31 * result + (cityFrom != null ? cityFrom.hashCode() : 0);
+        result = 31 * result + (cityTo != null ? cityTo.hashCode() : 0);
         result = 31 * result + (numberForward != null ? numberForward.hashCode() : 0);
         result = 31 * result + (numberBack != null ? numberBack.hashCode() : 0);
-        result = 31 * result + cityFrom.hashCode();
-        result = 31 * result + cityTo.hashCode();
+        result = 31 * result + lengthForward;
+        result = 31 * result + lengthBack;
+        result = 31 * result + (enabled ? 1 : 0);
         return result;
     }
 

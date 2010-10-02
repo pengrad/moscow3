@@ -8,6 +8,7 @@ import javax.persistence.*;
  * Time: 1:56:39
  */
 
+@IdClass(logic.model.TrainDetEntityPK.class)
 @Table(name = "train_det", catalog = "rzd")
 @Entity
 public class TrainDetEntity {
