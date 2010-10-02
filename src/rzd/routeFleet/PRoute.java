@@ -40,6 +40,10 @@ public class PRoute extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tRoute = new javax.swing.JTable();
         bCreateRoute = new javax.swing.JButton();
+        bSearch = new javax.swing.JButton();
+        fSearch = new javax.swing.JTextField();
+
+        setPreferredSize(new java.awt.Dimension(416, 304));
 
         tRoute.setModel(new ModelTable() );
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -48,12 +52,24 @@ public class PRoute extends javax.swing.JPanel {
         bCreateRoute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/add16px.png"))); // NOI18N
         bCreateRoute.setText("Создать маршрут");
 
+        bSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/search.gif"))); // NOI18N
+        bSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bSearch.setBorderPainted(false);
+        bSearch.setContentAreaFilled(false);
+        bSearch.setFocusPainted(false);
+
+        fSearch.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(382, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addComponent(bCreateRoute, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
@@ -62,14 +78,20 @@ public class PRoute extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bCreateRoute)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bCreateRoute)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreateRoute;
+    public javax.swing.JButton bSearch;
+    public javax.swing.JTextField fSearch;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tRoute;
     // End of variables declaration//GEN-END:variables

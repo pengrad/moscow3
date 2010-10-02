@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import rzd.model.Model;
 import rzd.model.objects.Route;
+import rzd.utils.MakerDefaultTextInField;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,6 +45,7 @@ public class Controller implements ActionListener, MouseListener {
         deleteRoute.addActionListener(this);
         menuRoute.add(editRoute);
         menuRoute.add(deleteRoute);
+        new MakerDefaultTextInField("Поиск по номеру маршрута", pRoute.fSearch);
         update();
 
     }
@@ -111,17 +113,17 @@ public class Controller implements ActionListener, MouseListener {
     private void editRoute() {
         int row = pRoute.tRoute.getSelectedRow();
         if (row != -1) {
-          //  System.out.println(pRoute.tRoute.getValueAt(row, 0).toString());
+            //  System.out.println(pRoute.tRoute.getValueAt(row, 0).toString());
             Route data = Model.getModel().getRouteById(new Integer(pRoute.tRoute.getValueAt(row, 0).toString()));
             dEditRoute.setLocationRelativeTo(pRoute);
             data = dEditRoute.open(data, Model.getModel().getSheduleTypes());
-         //   System.out.println("editRoute");
+            //   System.out.println("editRoute");
             if (data != null) {
                 try {
-          //          System.out.println("!!updateRoute");
+                    //          System.out.println("!!updateRoute");
                     boolean b = Model.getModel().updateRoute(data);
                     if (b) {
-            //              System.out.println("updateRoute");
+                        //              System.out.println("updateRoute");
                         ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
                     }
                 } catch (Exception e) {
@@ -148,9 +150,9 @@ public class Controller implements ActionListener, MouseListener {
         }
     }
 
-     //Методы конверторы
+    //Методы конверторы
 
-    private  ArrayList<Object[]> getRoutesTabView() {
+    private ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = Model.getModel().getRoutes();
         if (routes != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());

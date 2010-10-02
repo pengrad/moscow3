@@ -16,16 +16,18 @@ import rzd.stationFleet.GCar;
  * @author ЧерныхЕА
  */
 public class GTrainStation extends Figure {
+    private Controller c;
     private Train train;
     private ArrayList<GCar> gVagons;
 
-    public GTrainStation(Train train) {
+    public GTrainStation(Train train,Controller c) {
+        this.c=c;
         gVagons = new ArrayList<GCar>();
         setBackground(Color.pink);
         this.train = train;
         setLayout(new FlowLayout());
         for (int i = 0; i < 5; i++) {
-            GCar gc = new GCar(new Car(333));
+            GCar gc = new GCar(new Car(333),c);
             add(gc);
             gVagons.add(gc);
         }

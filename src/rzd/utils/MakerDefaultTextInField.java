@@ -25,7 +25,7 @@ public class MakerDefaultTextInField implements FocusListener {
 
     public void focusGained(FocusEvent e) {
         if (tf.getText().trim().equals(defString)) {
-            tf.setFont(new Font("Arial", 13, Font.PLAIN));
+            tf.setFont(new Font("Tahoma",Font.PLAIN,11));
             tf.setForeground(Color.BLACK);
             tf.setText("");
         }
@@ -33,7 +33,7 @@ public class MakerDefaultTextInField implements FocusListener {
 
     public void focusLost(FocusEvent e) {
         if (tf.getText().trim().equals("")) {
-            tf.setFont(new Font("Arial", 13, Font.ITALIC));
+            tf.setFont(new Font("Tahoma",Font.ITALIC,11));
             tf.setForeground(Color.GRAY);
             tf.setText(defString);
         }

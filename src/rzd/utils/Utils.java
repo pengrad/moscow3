@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
@@ -62,18 +63,21 @@ public class Utils {
         return "";
     }
 
-    public static boolean searchByTable(JTable t, int column, String value) {
-        if (t == null || value == null || column < 0 || column > t.getColumnCount()) {
+    public static boolean searchByTable(JTable t, String value, int... columns) {
+        Arrays.sort(columns);
+        if (t == null || value == null || columns == null || columns.length == 0 || columns[0] < 0 || columns[columns.length - 1] > t.getColumnCount()) {
             return false;
         }
         int rowCount = t.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            if (t.getValueAt(i, column).equals(value)) {
-                Rectangle rect = t.getCellRect(i, column, false);
-                JViewport viewport = (JViewport) t.getParent();
-                viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));
-                t.setRowSelectionInterval(i, i);
-                return true;
+            for (int j = 0; j < columns.length; j++) {
+                if (t.getValueAt(i, columns[j]).equals(value)) {
+                    Rectangle rect = t.getCellRect(i, columns[j], false);
+                    JViewport viewport = (JViewport) t.getParent();
+                    viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));
+                    t.setRowSelectionInterval(i, i);
+                    return true;
+                }
             }
         }
         return false;

@@ -5,6 +5,9 @@
 package rzd.stationFleet;
 
 import rzd.ControllerMain;
+import rzd.carsFleet.PCarInformation;
+import rzd.model.objects.Car;
+import rzd.model.objects.Train;
 import rzd.stationFleet.GCar;
 import rzd.stationFleet.GTrainStation;
 import rzd.model.TestModel;
@@ -15,26 +18,36 @@ import java.awt.*;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.*;
 import javax.swing.*;
+
+import rzd.utils.MakerDefaultTextInField;
 
 /**
  * @author ЧерныхЕА
  */
-public class Controller implements ActionListener {
+public class Controller implements ActionListener, MouseListener {
 
     private PStationFleet pStationFleet;
     private HashMap<PRoad, ContainerRoad> roadContainers;
     private HashMap<RoadType, HashMap> roadType;
+    private JPopupMenu popupCarInformation;
+    private PCarInformation pCarInformation;
 
     public Controller(PStationFleet p) {
         this.pStationFleet = p;
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
+        pCarInformation = new PCarInformation();
+        popupCarInformation = new JPopupMenu();
+        popupCarInformation.add(pCarInformation);
         makeTabs();
+        new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
         update();
     }
-   
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pStationFleet.fSearchCarByNumber && !pStationFleet.fSearchCarByNumber.getText().trim().equals("") && !pStationFleet.fSearchCarByNumber.getText().trim().equals("Поиск по номеру вагона")) {
             try {
@@ -45,6 +58,30 @@ public class Controller implements ActionListener {
                 JOptionPane.showMessageDialog(pStationFleet, "Ничего не найдено");
             }
         }
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() instanceof GCar) {
+            GCar v = (GCar) e.getSource();
+            //  pCarInformation.setData();
+            popupCarInformation.show(v, e.getX() + 20, e.getY() + 20);
+        }
+    }
+
+    public void mousePressed(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void mouseExited(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     //Метод обновления состояния всех путей станции
@@ -62,9 +99,21 @@ public class Controller implements ActionListener {
                 while (itRoad.hasNext()) {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
-                    roads.get(k).addCars(TestModel.get().getCarsByRoad(k));
+                    //todo работа с тестовой реализацийей
+                    ArrayList<Car> cars = TestModel.get().getCarsByRoad(k);
+                    if (cars != null) {
+                        ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
+                        for (Car c : cars) {
+                            gCars.add(new GCar(c, this));
+                        }
+                        roads.get(k).addCars(gCars);
+                    }
                     //todo Надо заполнить поезда вагонпи не забыть!!!!
-                    roads.get(k).addTrain(TestModel.get().getTrainByRoad(k));
+
+                    Train train = TestModel.get().getTrainByRoad(k);
+                    if (train != null) {
+                        roads.get(k).addTrain(new GTrainStation(train,this));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -161,6 +210,7 @@ public class Controller implements ActionListener {
 
 
     private class ViewSearchCar extends SwingWorker {
+
         private GCar gCar;
 
         public ViewSearchCar(GCar gCar) {

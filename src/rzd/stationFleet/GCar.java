@@ -20,13 +20,15 @@ import rzd.model.objects.Car;
 public class GCar extends Figure {
     private Car car;
     private int number = 12345678;
+    private Controller c;
 
-    public GCar(Car car) {
+    public GCar(Car car, Controller c) {
         this.car = car;
+        this.c = c;
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setPreferredSize(new Dimension(55, 19));
         setShape(new Rectangle2D.Double(2, 2, 51, 14));
-        addMouseListener(ControllerStation.get());
+        addMouseListener(c);
     }
 
     public Car getCar() {
@@ -35,7 +37,7 @@ public class GCar extends Figure {
 
     public void paint(Graphics2D g) {
         g.setStroke(new BasicStroke(1.5f));
-                                                          g.setColor(ColorHelper.COLOR_VAGON_BORDER);
+        g.setColor(ColorHelper.COLOR_VAGON_BORDER);
         g.draw(new Rectangle2D.Double(shape.getBounds().getX() - 1, shape.getBounds().getY() - 1, shape.getBounds().getWidth() + 2, shape.getBounds().getHeight() + 2));
         if (!selected) {
             g.setColor(ColorHelper.COLOR_VAGON);
