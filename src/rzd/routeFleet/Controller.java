@@ -25,7 +25,7 @@ import rzd.model.objects.Route;
 public class Controller implements ActionListener, MouseListener {
 
     private PRoute pRoute;
-    private DEditRoute dEditRoute;
+    private DRouteEdit dEditRoute;
 
 
     private JPopupMenu menuRoute;
@@ -35,7 +35,7 @@ public class Controller implements ActionListener, MouseListener {
 
     public Controller(PRoute p) {
         this.pRoute = p;
-        dEditRoute = new DEditRoute(null, true);
+        dEditRoute = new DRouteEdit(null, true);
 
         menuRoute = new JPopupMenu();
         editRoute = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));

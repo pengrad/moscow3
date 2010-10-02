@@ -259,7 +259,7 @@ public class PRaspisanie extends JComponent {
         for (int i = 1; i < routes.size(); i++) {
             g2.setColor(Color.BLUE);
             int tx = ((JScrollPane) ((JViewport) getParent().getParent()).getParent()).getHorizontalScrollBar().getValue();
-            System.out.println("tx=" + tx);
+            g2.setFont(new Font("Arial", Font.BOLD, 12));
             g2.drawString("Москва - Владивосток", tx + 20, i * sizeRoute - 1);
             g2.setColor(Color.gray);
             g2.draw(new Line2D.Double(0, i * sizeRoute, widthPanel, i * sizeRoute));

@@ -17,6 +17,8 @@ import rzd.stationFleet.PStationFleet;
 import rzd.scheduleFleet.PRaspisanie;
 import rzd.scheduleFleet.PSchedule;
 
+import javax.swing.*;
+
 /**
  *
  * @author ЧерныхЕА
@@ -47,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/rzd/resurce/rzd.jpg")).getImage());
 
         tabbedtMain.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -71,6 +74,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
 
     /**
      * @param args the command line arguments

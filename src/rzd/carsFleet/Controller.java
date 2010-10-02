@@ -31,11 +31,11 @@ public class Controller implements MouseListener, ActionListener {
     private JMenuItem deleteCar;
     private JMenuItem locationCar;
     private PCarInformation carInformation;
-    private DCarEditInf carEditInf;
+    private DCarEdit carEditInf;
 
     public Controller(PCars p) {
         this.pCarFleet = p;
-        carEditInf = new DCarEditInf(null, true);
+        carEditInf = new DCarEdit(null, true);
         carInformation = new PCarInformation();
         popCarMenu = new JPopupMenu();
         popCarInfMenu = new JPopupMenu();
@@ -118,7 +118,7 @@ public class Controller implements MouseListener, ActionListener {
         int row = pCarFleet.tCars.getSelectedRow();
         boolean b = ControllerMain.getInstans().searchCar(new Integer(pCarFleet.tCars.getValueAt(row, 0).toString()));
         if (!b) {
-            JOptionPane.showMessageDialog(pCarFleet, "Выгон не найден");
+            JOptionPane.showMessageDialog(pCarFleet, "Выгон не найден","Сообщение...",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
         }
     }
 
