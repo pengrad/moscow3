@@ -16,8 +16,12 @@ public class Route {
     private String pointDestination;
     private Shedule sheduleForward;
     private Shedule sheduleBack;
+    private boolean enabled;
+    private int lengthForward;
+    private int lengthBack;
 
-    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Shedule sheduleForward, Shedule sheduleBack) {
+
+    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Shedule sheduleForward, Shedule sheduleBack, boolean enabled, int lengthForward, int lengthBack) {
         this.id = id;
         this.numberForward = numberForward;
         this.numberBack = numberBack;
@@ -25,6 +29,9 @@ public class Route {
         this.pointDestination = pointDestination;
         this.sheduleForward = sheduleForward;
         this.sheduleBack = sheduleBack;
+        this.enabled = enabled;
+        this.lengthForward = lengthForward;
+        this.lengthBack = lengthBack;
     }
 
     public int getId() {
@@ -35,20 +42,20 @@ public class Route {
         this.id = id;
     }
 
+    public String getNumberForward() {
+        return numberForward;
+    }
+
+    public void setNumberForward(String numberForward) {
+        this.numberForward = numberForward;
+    }
+
     public String getNumberBack() {
         return numberBack;
     }
 
     public void setNumberBack(String numberBack) {
         this.numberBack = numberBack;
-    }
-
-    public String getNumberForward() {
-        return numberForward;
-    }
-
-    public void setNumberTo(String numberForward) {
-        this.numberForward = numberForward;
     }
 
     public String getPointDeparture() {
@@ -67,20 +74,44 @@ public class Route {
         this.pointDestination = pointDestination;
     }
 
-    public Shedule getScheduleForward() {
+    public Shedule getSheduleForward() {
         return sheduleForward;
     }
 
-    public void setScheduleForward(Shedule sheduleForward) {
+    public void setSheduleForward(Shedule sheduleForward) {
         this.sheduleForward = sheduleForward;
     }
 
-    public Shedule getScheduleBack() {
+    public Shedule getSheduleBack() {
         return sheduleBack;
     }
 
-    public void setScheduleBack(Shedule sheduleBack) {
+    public void setSheduleBack(Shedule sheduleBack) {
         this.sheduleBack = sheduleBack;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public int getLengthForward() {
+        return lengthForward;
+    }
+
+    public void setLengthForward(int lengthForward) {
+        this.lengthForward = lengthForward;
+    }
+
+    public int getLengthBack() {
+        return lengthBack;
+    }
+
+    public void setLengthBack(int lengthBack) {
+        this.lengthBack = lengthBack;
     }
 
     @Override
