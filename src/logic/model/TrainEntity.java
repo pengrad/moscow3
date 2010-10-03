@@ -19,6 +19,7 @@ public class TrainEntity {
 
     @Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdTrain() {
         return idTrain;
     }

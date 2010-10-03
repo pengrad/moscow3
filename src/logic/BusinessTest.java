@@ -52,7 +52,7 @@ public class BusinessTest {
         SheduleType st = new SheduleType(1, "nonPair");
         Shedule sf = new Shedule(9, time, time, time, st, new int[]{1,2,34,4});
         Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
-        Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb);
+        Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
         manager.addRoute(r);
     }
 
@@ -61,7 +61,7 @@ public class BusinessTest {
         SheduleType st = new SheduleType(1, "nonPair");
         Shedule sf = new Shedule(9, time, time, time, st, new int[]{1999});
         Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
-        Route r = new Route(5, "love", "hate", "Evgen", "Ekaterina", sf, sb);
+        Route r = new Route(5, "love", "hate", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
         manager.updateRoute(r);
     }
 

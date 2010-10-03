@@ -9,14 +9,14 @@ import java.util.Collection;
  * Time: 3:38:32
  */
 
-@javax.persistence.Table(name = "car_type", catalog = "rzd")
+@Table(name = "car_type", catalog = "rzd", schema = "")
 @Entity
 public class CarTypeEntity {
 
 
     private int idType;
 
-    @javax.persistence.Column(name = "id_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdType() {
         return idType;
@@ -28,7 +28,7 @@ public class CarTypeEntity {
 
     private String cType;
 
-    @javax.persistence.Column(name = "c_type", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
+    @Column(name = "c_type", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
     @Basic
     public String getcType() {
         return cType;

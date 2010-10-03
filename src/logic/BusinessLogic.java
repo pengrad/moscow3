@@ -1,5 +1,6 @@
 package logic;
 
+import rzd.model.objects.Car;
 import rzd.model.objects.Route;
 import rzd.model.objects.SheduleType;
 
@@ -27,5 +28,16 @@ public interface BusinessLogic {
     public boolean addRoute(Route r);
 
     public boolean updateRoute(Route r);
+
+    public ArrayList<Car> getCars();
+
+    public Car getCarByNumber(int carNumber);
+
+//    public ArrayList<CarType> getCarTypes();
+
+    public boolean addCar(Car car);
+
+    public boolean editCar(Car car);
+
 
 }

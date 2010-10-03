@@ -18,6 +18,7 @@ public class RoadEntity {
 
     @Column(name = "id_road", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdRoad() {
         return idRoad;
     }

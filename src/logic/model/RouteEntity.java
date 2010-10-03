@@ -1,9 +1,6 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * User: Стас
@@ -34,6 +31,7 @@ public class RouteEntity {
 
     @javax.persistence.Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdRoute() {
         return idRoute;
     }

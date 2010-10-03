@@ -1,9 +1,6 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -12,14 +9,14 @@ import java.util.Collection;
  * Time: 3:38:32
  */
 
-@javax.persistence.Table(name = "car_location", catalog = "rzd")
+@Table(name = "car_location", catalog = "rzd", schema = "")
 @Entity
 public class CarLocationEntity {
 
 
     private int idLocation;
 
-    @javax.persistence.Column(name = "id_location", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_location", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdLocation() {
         return idLocation;
@@ -31,7 +28,7 @@ public class CarLocationEntity {
 
     private String cLocation;
 
-    @javax.persistence.Column(name = "c_location", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @Column(name = "c_location", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getcLocation() {
         return cLocation;
