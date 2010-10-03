@@ -1,11 +1,7 @@
 package logic;
 
-import logic.model.CarEntity;
-import logic.model.CarLocationEntity;
-import logic.model.CarTypeEntity;
-import rzd.model.objects.Car;
-import rzd.model.objects.CarLocation;
-import rzd.model.objects.CarType;
+import logic.model.*;
+import rzd.model.objects.*;
 
 /**
  * User: Стас
@@ -65,6 +61,23 @@ public class EntityConverter {
             CarLocationEntity cle = new CarLocationEntity();
             cle.setIdLocation(cl.getIdLocation());
             return cle;
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static RoadEntity convertRoad(Road r) {
+        try {
+            return new RoadEntity(r.getName(), r.getComment(), r.getPosition(), null);
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static RepairEntity convertRepair(Repair r) {
+        try {
+            RepairEntity repair = new RepairEntity();
+            return repair;
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
