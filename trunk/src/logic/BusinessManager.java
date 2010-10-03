@@ -200,7 +200,7 @@ public class BusinessManager implements BusinessLogic {
             Collection<CarEntity> objects = SessionManager.getAllObjects(new CarEntity());
             list = new ArrayList<Car>(objects.size());
             for (CarEntity ce : objects) {
-                Car car = EntityConverter.convertCarEntity(ce);
+                Car car = EntityConverter.convertCar(ce);
                 list.add(car);
             }
         } catch (Exception e) {
@@ -217,7 +217,7 @@ public class BusinessManager implements BusinessLogic {
         try {
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), carNumber);
             if (ce == null) throw new Exception("Вагон не найден!");
-            car = EntityConverter.convertCarEntity(ce);
+            car = EntityConverter.convertCar(ce);
         } catch (Exception e) {
             e.printStackTrace();
             car = null;
@@ -236,7 +236,7 @@ public class BusinessManager implements BusinessLogic {
             List list = crit.list();
             types = new ArrayList<CarType>(list.size());
             for (Object o : list) {
-                types.add(EntityConverter.convertCarTypeEntity((CarTypeEntity) o));
+                types.add(EntityConverter.convertCarType((CarTypeEntity) o));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -253,7 +253,7 @@ public class BusinessManager implements BusinessLogic {
             CarTypeEntity cte = SessionManager.getEntityById(new CarTypeEntity(), parentType.getIdType());
             types = new ArrayList<CarType>(cte.getCarSubTypes().size());
             for (CarTypeEntity subType : cte.getCarSubTypes()) {
-                types.add(EntityConverter.convertCarTypeEntity(subType));
+                types.add(EntityConverter.convertCarType(subType));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -265,14 +265,52 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public CarType getCarParentType(CarType subType) {
-        return null;
+        try {
+            CarTypeEntity cte = SessionManager.getEntityById(new CarTypeEntity(), subType.getIdType());
+            CarTypeEntity parentType = cte.getCarParentType();
+            return EntityConverter.convertCarType(parentType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public boolean addCar(Car car) {
-        return false;
+        try {
+            SessionManager.beginTran();
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            if(ce != null) throw new Exception("Вагон уже существует!");
+            ce = EntityConverter.convertCar(car);
+            SessionManager.saveOrUpdateEntities(ce);
+            SessionManager.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public boolean editCar(Car car) {
-        return false;
+        try {
+            SessionManager.beginTran();
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            if(ce == null) throw new Exception("Вагона не существует!");
+            SessionManager.getSession().evict(ce);
+            ce = EntityConverter.convertCar(car);
+            SessionManager.saveOrUpdateEntities(ce);
+            SessionManager.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 }
