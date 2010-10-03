@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import rzd.model.Model;
+
 /**
  * Created by IntelliJ IDEA.
  * User: ЧерныхЕА
@@ -32,11 +34,11 @@ public class Controller implements MouseListener, ActionListener {
     private JMenuItem deleteCar;
     private JMenuItem locationCar;
     private PCarInformation carInformation;
-    private DCarEdit carEditInf;
+    private DCarEdit dCarEdit;
 
     public Controller(PCars p) {
         this.pCarFleet = p;
-        carEditInf = new DCarEdit(null, true);
+        dCarEdit = new DCarEdit(null, true);
         carInformation = new PCarInformation();
         popCarMenu = new JPopupMenu();
         popCarInfMenu = new JPopupMenu();
@@ -58,15 +60,15 @@ public class Controller implements MouseListener, ActionListener {
         popCarMenu.add(editCar);
         popCarMenu.add(deleteCar);
         popCarMenu.add(histLocationCar);
-        new MakerDefaultTextInField("Поиск по номеру вагона",pCarFleet.fSearch);
+        new MakerDefaultTextInField("Поиск по номеру вагона", pCarFleet.fSearch);
+        update();
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == viewCar) {
             viewCar();
         } else if (e.getSource() == pCarFleet.bAddCar) {
-            ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
-            mt.setDate(getCarsTabView());
+            addCar();
         } else if (e.getSource() == editCar) {
             editCar();
         } else if (e.getSource() == deleteCar) {
@@ -120,16 +122,33 @@ public class Controller implements MouseListener, ActionListener {
         int row = pCarFleet.tCars.getSelectedRow();
         boolean b = ControllerMain.getInstans().searchCar(new Integer(pCarFleet.tCars.getValueAt(row, 0).toString()));
         if (!b) {
-            JOptionPane.showMessageDialog(pCarFleet, "Выгон не найден","Сообщение...",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+            JOptionPane.showMessageDialog(pCarFleet, "Выгон не найден", "Сообщение...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
         }
     }
 
-    private void createCar() {
-//        carEditInf.open(new Car());
+    private void addCar() {
+        dCarEdit.setLocationRelativeTo(pCarFleet);
+        Car car = dCarEdit.open(null);
+        if (car != null) {
+            boolean b = Model.getModel().addCar(car);
+            if (b) {
+                ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
+                mt.setDate(getCarsTabView());
+            }
+        }
     }
 
     private void editCar() {
-//        carEditInf.open(new Car());
+        dCarEdit.setLocationRelativeTo(pCarFleet);
+        int row = pCarFleet.tCars.getSelectedRow();
+        int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
+        Car car = dCarEdit.open(Model.getModel().getCarByNumber(number));
+        if (car != null) {
+            boolean b = Model.getModel().editCar(car);
+            if (b) {
+         update();
+            }
+        }
     }
 
     private void deleteCar() {
@@ -142,18 +161,26 @@ public class Controller implements MouseListener, ActionListener {
         System.out.println("***");
         popHistLocationCar.show(pCarFleet, popCarMenu.getX(), popCarMenu.getY());
     }
+
+    public void update() {
+        ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
+        mt.setDate(getCarsTabView());
+    }
     //Методы конверторы
 
     private ArrayList<Object[]> getCarsTabView() {
-        ArrayList<Car> cars = TestModel.get().getCars();
+        ArrayList<Car> cars = Model.getModel().getCars();
         if (cars != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {
-                Object[] o = new Object[1];
+                Object[] o = new Object[3];
                 o[0] = c.getNumber();
+                o[1] = c.getCarType().getType();
+                o[2] = c.getModel();
+
                 res.add(o);
             }
-            res.add(new Object[]{"Номер"});
+            res.add(new Object[]{"Номер","Тип","Моедль"});
             return res;
         }
         return null;
