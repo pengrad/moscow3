@@ -45,4 +45,5 @@ public interface BusinessLogic {
 
     public ArrayList<Road> getRoadsByType(RoadType roadType);
 
+    
 }
