@@ -1,13 +1,7 @@
 package logic;
 
-import logic.model.RouteEntity;
-import logic.model.SheduleDaysEntity;
-import logic.model.SheduleEntity;
-import logic.model.SheduleTypeEntity;
-import rzd.model.objects.Car;
-import rzd.model.objects.Route;
-import rzd.model.objects.Shedule;
-import rzd.model.objects.SheduleType;
+import logic.model.*;
+import rzd.model.objects.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,11 +50,13 @@ public class BusinessManager implements BusinessLogic {
                         days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
                 }
                 Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
-                Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
+                Route route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(),
+                        re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
                 list.add(route);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            list = null;
         } finally {
             SessionManager.closeSession();
         }
@@ -92,9 +88,11 @@ public class BusinessManager implements BusinessLogic {
                     days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
             }
             Shedule sB = new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getTimeInWay(), stB, days);
-            route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(), re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
+            route = new Route(re.getIdRoute(), re.getNumberForward(), re.getNumberBack(), re.getCityFrom(),
+                    re.getCityTo(), sF, sB, re.isEnabled(), re.getLengthForward(), re.getLengthBack());
         } catch (Exception e) {
             e.printStackTrace();
+            route = null;
         } finally {
             SessionManager.closeSession();
         }
@@ -109,6 +107,7 @@ public class BusinessManager implements BusinessLogic {
             for (SheduleTypeEntity s : ste) types.add(new SheduleType(s.getIdSheduleType(), s.getcSheduleType()));
         } catch (Exception e) {
             e.printStackTrace();
+            types = null;
         } finally {
             SessionManager.closeSession();
         }
@@ -124,7 +123,8 @@ public class BusinessManager implements BusinessLogic {
             SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
             SheduleEntity sfe = new SheduleEntity(sf.getTimeDeparture(), sf.getTimeDestination(), sf.getTimeInWay(), sfte);
             SheduleEntity sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
-            RouteEntity re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            RouteEntity re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(),
+                    r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             int[] days = sf.getDays();
             if (days != null)
@@ -176,7 +176,8 @@ public class BusinessManager implements BusinessLogic {
             saveId = sbe.getIdShedule();
             sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
             sbe.setIdShedule(saveId);
-            re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(),
+                    r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
             re.setIdRoute(r.getId());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             SessionManager.commit();
@@ -191,16 +192,70 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Car> getCars() {
-        return null;
+        ArrayList<Car> list = null;
+        try {
+            Collection<CarEntity> objects = SessionManager.getAllObjects(new CarEntity());
+            list = new ArrayList<Car>(objects.size());
+            for (CarEntity ce : objects) {
+                CarLocationEntity cle = ce.getCarLocation();
+                CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
+                CarTypeEntity cte = ce.getCarType();
+                CarType ct = new CarType(cte.getIdType(), cte.getcType());
+                Car c = new Car(ce.getCarNumber(), ce.getModel(), cl, ct, ce.getConditioner(), ce.getGenerator(),
+                        ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
+                        ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
+                list.add(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            list = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
     }
 
     public Car getCarByNumber(int carNumber) {
-        return null;
+        Car car = null;
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), carNumber);
+            if(ce == null) throw new Exception("Вагон не найден!");
+            CarLocationEntity cle = ce.getCarLocation();
+            CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
+            CarTypeEntity cte = ce.getCarType();
+            CarType ct = new CarType(cte.getIdType(), cte.getcType());
+            car = new Car(ce.getCarNumber(), ce.getModel(), cl, ct, ce.getConditioner(), ce.getGenerator(),
+                    ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
+                    ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            car = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return car;
     }
 
-//    public ArrayList<CarType> getCarTypes() {
-//        return null;
-//    }
+    public ArrayList<CarType> getCarParentTypes() {
+        ArrayList<CarType> types = null;
+        try {
+            Collection<SheduleTypeEntity> ste = SessionManager.getAllObjects(new SheduleTypeEntity());
+            Collection<CarTypeEntity> cte = SessionManager.getAllObjects(new CarTypeEntity());
+            types = new ArrayList<CarType>(ste.size());
+//            for (SheduleTypeEntity s : ste) types.add(new SheduleType(s.getIdSheduleType(), s.getcSheduleType()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            types = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return types;
+    }
+
+    public ArrayList<CarType> getCarSubTypes(CarType parentType) {
+        return null;
+    }
 
     public boolean addCar(Car car) {
         return false;
