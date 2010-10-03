@@ -1,8 +1,6 @@
 package logic;
 
-import rzd.model.objects.Car;
-import rzd.model.objects.Route;
-import rzd.model.objects.SheduleType;
+import rzd.model.objects.*;
 
 import java.util.ArrayList;
 
@@ -33,7 +31,9 @@ public interface BusinessLogic {
 
     public Car getCarByNumber(int carNumber);
 
-//    public ArrayList<CarType> getCarTypes();
+    public ArrayList<CarType> getCarParentTypes();
+
+    public ArrayList<CarType> getCarSubTypes(CarType parentType);
 
     public boolean addCar(Car car);
 
