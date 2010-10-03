@@ -6,7 +6,7 @@ package logic;
  * Time: 17:06:38
  */
 
-public class ConverterBeans {
+public class EntityConverter {
 
 
 }
