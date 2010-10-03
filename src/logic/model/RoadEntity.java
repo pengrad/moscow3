@@ -60,15 +60,15 @@ public class RoadEntity {
         this.comments = comments;
     }
 
-    private Integer position;
+    private int position;
 
     @Column(name = "position", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
