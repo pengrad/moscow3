@@ -335,7 +335,7 @@ public class BusinessManager implements BusinessLogic {
             RoadTypeEntity rt = SessionManager.getEntityById(new RoadTypeEntity(), roadType.getId());
             Collection<RoadEntity> roads = rt.getRoads();
             list = new ArrayList<Road>(roads.size());
-            for (RoadEntity road : roads) {
+            for (RoadEntity road : roads) {                
                 list.add(EntityConverter.convertRoad(road));
             }
         } catch (Exception e) {

@@ -30,7 +30,8 @@ public class BusinessTest {
 //        testAddRoute();
 //        testUpdateRoute();
 //        testGetParentsTypes();
-        testAddUpdateCar();
+//        testAddUpdateCar();
+        testRoads();
     }
 
     public static void testGetRoutes() {
@@ -76,5 +77,15 @@ public class BusinessTest {
         System.out.println(manager.addCar(car));
         car.setBodyColor("green");
         System.out.println(manager.editCar(car));
+    }
+
+    public static void testRoads() {
+        for(RoadType rt : manager.getRoadTypes()) {
+            System.out.println(rt.getId() + " : " + rt.getName());
+            for(Road r : manager.getRoadsByType(new RoadType(rt.getId(), rt.getName()))) {
+                System.out.println("    " + r.getName());
+            }
+        }
+
     }
 }
