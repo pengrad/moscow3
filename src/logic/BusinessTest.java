@@ -1,9 +1,6 @@
 package logic;
 
-import rzd.model.objects.CarType;
-import rzd.model.objects.Route;
-import rzd.model.objects.Shedule;
-import rzd.model.objects.SheduleType;
+import rzd.model.objects.*;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -32,7 +29,8 @@ public class BusinessTest {
 //        testGetSheduleTypes();
 //        testAddRoute();
 //        testUpdateRoute();
-        testGetParentsTypes();
+//        testGetParentsTypes();
+        testAddUpdateCar();
     }
 
     public static void testGetRoutes() {
@@ -73,4 +71,10 @@ public class BusinessTest {
         }
     }
 
+    public static void testAddUpdateCar() {
+        Car car = new Car(12312345, "1", new CarLocation(1, "1"), new CarType(1, "1"), "c", "g", "gp", "a", "ed", "red", true, 101, 100, 101, 100); 
+        System.out.println(manager.addCar(car));
+        car.setBodyColor("green");
+        System.out.println(manager.editCar(car));
+    }
 }

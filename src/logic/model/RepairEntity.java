@@ -14,7 +14,16 @@ import java.util.Collection;
 @Entity
 public class RepairEntity {
 
-    
+    public RepairEntity() {
+    }
+
+    public RepairEntity(Timestamp dateBegin, Timestamp dateEnd, CarEntity car, RepairTypeEntity repairType, RoadEntity road) {
+        this.dateBegin = dateBegin;
+        this.dateEnd = dateEnd;
+        this.car = car;
+        this.repairType = repairType;
+        this.road = road;
+    }
 
     private int idRepair;
 

@@ -13,6 +13,15 @@ import java.util.Collection;
 @Entity
 public class RoadEntity {
 
+    public RoadEntity() {
+    }
+
+    public RoadEntity(String roadName, String comments, int position, RoadTypeEntity roadType) {
+        this.roadName = roadName;
+        this.comments = comments;
+        this.position = position;
+        this.roadType = roadType;
+    }
 
     private int idRoad;
 

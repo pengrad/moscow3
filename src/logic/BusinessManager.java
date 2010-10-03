@@ -23,7 +23,7 @@ public class BusinessManager implements BusinessLogic {
     }
 
     private <H, M> void convertHB2Model(Collection<H> src) {
-//        Object o = null; o.getClass().getField("ss").get()
+//        Object o = null; o.getClass().getField("ss").get
     }
 
     public ArrayList<Route> getRoutes() {
