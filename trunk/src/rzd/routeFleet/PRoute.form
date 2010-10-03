@@ -26,11 +26,11 @@
               <Component id="fSearch" min="-2" pref="136" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="bSearch" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="203" max="32767" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
               <Component id="bCreateRoute" min="-2" pref="172" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane1" alignment="0" pref="566" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="416" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -45,7 +45,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="259" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
