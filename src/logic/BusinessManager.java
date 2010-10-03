@@ -235,8 +235,8 @@ public class BusinessManager implements BusinessLogic {
                     add(Restrictions.isNull("carParentType"));
             List list = crit.list();
             types = new ArrayList<CarType>(list.size());
-            for(Object o : list) {
-                types.add(EntityConverter.convertCarTypeEntity((CarTypeEntity)o));
+            for (Object o : list) {
+                types.add(EntityConverter.convertCarTypeEntity((CarTypeEntity) o));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -248,7 +248,20 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<CarType> getCarSubTypes(CarType parentType) {
-        return null;
+        ArrayList<CarType> types = null;
+        try {
+            CarTypeEntity cte = SessionManager.getEntityById(new CarTypeEntity(), parentType.getIdType());
+            types = new ArrayList<CarType>(cte.getCarSubTypes().size());
+            for (CarTypeEntity subType : cte.getCarSubTypes()) {
+                types.add(EntityConverter.convertCarTypeEntity(subType));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            types = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return types;
     }
 
     public CarType getCarParentType(CarType subType) {
