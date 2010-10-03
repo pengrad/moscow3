@@ -35,4 +35,10 @@ public class SheduleType {
     public String toString(){
     return name;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof SheduleType)) return false;
+        else if (id == ((SheduleType)o).getId()) return true;
+        else return false;
+    }
 }

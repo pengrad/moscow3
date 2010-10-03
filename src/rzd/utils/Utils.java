@@ -59,9 +59,14 @@ public class Utils {
         return new GregorianCalendar(yy, MM, dd, hh, mm).getTime();
     }
 
-    public static String getDateByDateBeginAndPeriod(Date dateBegin, int dayMove, int dayStop) {
-        return "";
-    }
+//       public static String[] convertStrTimeToMas(String time) {
+//        StringTokenizer t = new StringTokenizer(time, ":");
+//        int hh = new Integer(t.nextToken());
+//        int mm = new Integer(t.nextToken());
+//        return new String[]{t.nextToken(),t.nextToken()};
+//    }
+
+
 
     public static boolean searchByTable(JTable t, String value, int... columns) {
         Arrays.sort(columns);
