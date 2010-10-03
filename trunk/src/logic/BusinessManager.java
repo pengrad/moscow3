@@ -330,6 +330,20 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Road> getRoadsByType(RoadType roadType) {
-        return null;
+        ArrayList<Road> list;
+        try {
+            RoadTypeEntity rt = SessionManager.getEntityById(new RoadTypeEntity(), roadType.getId());
+            Collection<RoadEntity> roads = rt.getRoads();
+            list = new ArrayList<Road>(roads.size());
+            for (RoadEntity road : roads) {
+                list.add(EntityConverter.convertRoad(road));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            list = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
     }
 }
