@@ -21,25 +21,25 @@ public class TestModel {
     private TestModel() {
         RoadType roadType = new RoadType(1, "Тип 1");
         ArrayList<Road> roads = new ArrayList<Road>();
-        roads.add(new Road(1, "Путь 1", "", 10));
-        roads.add(new Road(2, "Путь 2", "", 20));
-        roads.add(new Road(3, "Путь 3", "", 30));
-        roads.add(new Road(3, "Путь 3", "", 30));
-        roads.add(new Road(4, "Путь 3", "", 30));
-        roads.add(new Road(5, "Путь 3", "", 30));
-        roads.add(new Road(6, "Путь 3", "", 30));
-        roads.add(new Road(7, "Путь 3", "", 30));
-        roads.add(new Road(8, "Путь 3", "", 30));
-        roads.add(new Road(9, "Путь 3", "", 30));
-        roads.add(new Road(10, "Путь 3", "", 30));
-        roads.add(new Road(11, "Путь 3", "", 30));
+        roads.add(new Road(1, "Путь 1", "",null, 10));
+        roads.add(new Road(2, "Путь 2", "",null, 20));
+        roads.add(new Road(3, "Путь 3", "",null, 30));
+        roads.add(new Road(3, "Путь 3", "",null, 30));
+        roads.add(new Road(4, "Путь 3", "",null, 30));
+        roads.add(new Road(5, "Путь 3", "",null, 30));
+        roads.add(new Road(6, "Путь 3", "",null, 30));
+        roads.add(new Road(7, "Путь 3", "",null, 30));
+        roads.add(new Road(8, "Путь 3", "",null, 30));
+        roads.add(new Road(9, "Путь 3", "",null, 30));
+        roads.add(new Road(10, "Путь 3", "",null, 30));
+        roads.add(new Road(11, "Путь 3", "",null, 30));
 
         roadTypes.put(roadType, roads);
         roadType = new RoadType(2, "Тип 1");
         roads = new ArrayList<Road>();
-        roads.add(new Road(4, "Путь 4", "", 40));
-        roads.add(new Road(5, "Путь 5", "", 50));
-        roads.add(new Road(6, "Путь 6", "", 60));
+        roads.add(new Road(4, "Путь 4", "",null, 40));
+        roads.add(new Road(5, "Путь 5", "",null, 50));
+        roads.add(new Road(6, "Путь 6", "",null, 60));
         roadTypes.put(roadType, roads);
     }
 

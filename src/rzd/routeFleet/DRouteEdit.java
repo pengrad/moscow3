@@ -120,17 +120,25 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel7.setText("   Номер маршрута");
         jLabel7.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fNumberRoute1.setBackground(new java.awt.Color(255, 255, 204));
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel3.setText("   Время отправления");
         jLabel3.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fTimeDeparture1.setBackground(new java.awt.Color(255, 255, 204));
         fTimeDeparture1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel8.setText("   Время в пути (в часах)");
         jLabel8.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fHourMove1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        fHourMove1.setBackground(new java.awt.Color(255, 255, 204));
+        try {
+            fHourMove1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel4.setText("   Время прибытия");
@@ -161,9 +169,10 @@ public class DRouteEdit extends javax.swing.JDialog {
         });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel17.setText("Расстояние (км)");
+        jLabel17.setText("   Расстояние (км)");
         jLabel17.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fLengthForward.setBackground(new java.awt.Color(255, 255, 204));
         fLengthForward.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -237,6 +246,8 @@ public class DRouteEdit extends javax.swing.JDialog {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        fStationDeparture.setBackground(new java.awt.Color(255, 255, 204));
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel6.setText("   Станция отправления");
         jLabel6.setPreferredSize(new java.awt.Dimension(20, 14));
@@ -245,6 +256,8 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel16.setText("   Станция назначения");
         jLabel16.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fStationDestination.setBackground(new java.awt.Color(255, 255, 204));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)), "Следование из станции назначения в станцию отпрвления:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel2.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -252,17 +265,25 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel18.setText("   Номер маршрута");
         jLabel18.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fNumberRoute2.setBackground(new java.awt.Color(255, 255, 204));
+
         jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel10.setText("   Время отправления");
         jLabel10.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fTimeDeparture2.setBackground(new java.awt.Color(255, 255, 204));
         fTimeDeparture2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel12.setText("   Время в пути (в часах)");
         jLabel12.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fHourMove2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        fHourMove2.setBackground(new java.awt.Color(255, 255, 204));
+        try {
+            fHourMove2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel14.setText("   Время прибытия");
@@ -293,9 +314,10 @@ public class DRouteEdit extends javax.swing.JDialog {
         });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel19.setText("Расстояние (км)");
+        jLabel19.setText("   Расстояние (км)");
         jLabel19.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        fLengthBack.setBackground(new java.awt.Color(255, 255, 204));
         fLengthBack.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -613,7 +635,7 @@ public class DRouteEdit extends javax.swing.JDialog {
             fDaysMove1.setText("");
             if (((SheduleType) cTypeSchedule1.getSelectedItem()).getId() == BusinessLogic.DAYS_WEEK || ((SheduleType) cTypeSchedule1.getSelectedItem()).getId() == BusinessLogic.DAYS_MONTH) {
                 fDaysMove1.setEnabled(true);
-                fDaysMove1.setBackground(new Color(255, 255, 255));
+                fDaysMove1.setBackground(new Color(255, 255, 204));
             } else {
                 fDaysMove1.setEnabled(false);
                 fDaysMove1.setBackground(new Color(240, 240, 240));
@@ -623,8 +645,7 @@ public class DRouteEdit extends javax.swing.JDialog {
             fDaysMove2.setText("");
             if (((SheduleType) cTypeSchedule2.getSelectedItem()).getId() == BusinessLogic.DAYS_WEEK || ((SheduleType) cTypeSchedule2.getSelectedItem()).getId() == BusinessLogic.DAYS_MONTH) {
                 fDaysMove2.setEnabled(true);
-                fDaysMove2.setBackground(new Color(255, 255, 255));
-
+                fDaysMove2.setBackground(new Color(255, 255, 204));
             } else {
                 fDaysMove2.setEnabled(false);
                 fDaysMove2.setBackground(new Color(240, 240, 240));

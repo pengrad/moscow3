@@ -12,12 +12,14 @@ public class Road {
     private int id;
     private String name;
     private String comment;
+    private RoadType roadType;
     private int position;
 
-    public Road(int id, String name, String comment, int position) {
+    public Road(int id, String name, String comment, RoadType roadType, int position) {
         this.id = id;
         this.name = name;
         this.comment = comment;
+        this.roadType = roadType;
         this.position = position;
     }
 
@@ -43,6 +45,14 @@ public class Road {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public RoadType getRoadType() {
+        return roadType;
+    }
+
+    public void setRoadType(RoadType roadType) {
+        this.roadType = roadType;
     }
 
     public int getPosition() {

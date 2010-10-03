@@ -84,7 +84,7 @@ public class Controller implements ActionListener, MouseListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pRoute.bCreateRoute) {
-            insertRoute();
+            addRoute();
         } else if (e.getSource() == editRoute) {
             editRoute();
         } else if (e.getSource() == deleteRoute) {
@@ -93,7 +93,7 @@ public class Controller implements ActionListener, MouseListener {
     }
 
 
-    private void insertRoute() {
+    private void addRoute() {
         dEditRoute.setLocationRelativeTo(pRoute);
         Route data = dEditRoute.open(null, Model.getModel().getSheduleTypes());
         if (data != null) {

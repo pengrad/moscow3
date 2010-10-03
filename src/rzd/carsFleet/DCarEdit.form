@@ -24,95 +24,101 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          <Component id="pContainer" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="pContainer" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pContainer">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="560" max="-2" attributes="0"/>
+                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" alignment="0" pref="178" max="32767" attributes="1"/>
+                                      <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  </Group>
+                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="fConditioner" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fModelCar" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="cTypeChilld" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="cTypeParent" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fNumberCar" alignment="0" pref="276" max="32767" attributes="1"/>
+                                  <Component id="fGenerator" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fGeneratorPrivod" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fAccumulator" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fElectricDevice" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="fBodyColor" alignment="0" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace min="83" pref="83" max="83" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="205" pref="205" max="205" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cEcologicCoilet" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="fRunNorm" min="-2" pref="103" max="-2" attributes="1"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" min="-2" pref="128" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="fRunTozNorn" min="-2" pref="103" max="-2" attributes="1"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel14" min="-2" pref="128" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="fRun" min="0" pref="0" max="32767" attributes="1"/>
+                                  <Component id="fRunToz" alignment="0" min="-2" pref="105" max="-2" attributes="1"/>
+                              </Group>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel11" alignment="0" pref="178" max="32767" attributes="1"/>
-                              <Component id="jLabel13" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jFormattedTextField2" min="-2" pref="103" max="-2" attributes="1"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel12" min="-2" pref="128" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jFormattedTextField4" min="-2" pref="103" max="-2" attributes="1"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel14" min="-2" pref="128" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jFormattedTextField3" min="0" pref="0" max="32767" attributes="1"/>
-                                              <Component id="jFormattedTextField5" alignment="0" min="-2" pref="105" max="-2" attributes="1"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jTextField7" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jTextField6" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jTextField5" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jTextField4" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="f" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="fCondVent" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="fModelCar" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jComboBox1" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="fNumberCar" alignment="0" pref="283" max="32767" attributes="1"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jComboBox2" min="-2" pref="287" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -121,7 +127,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="cTypeParent" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cTypeChilld" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -131,65 +142,60 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fCondVent" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fConditioner" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="f" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fGenerator" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fGeneratorPrivod" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fAccumulator" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fElectricDevice" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField7" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="fBodyColor" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jCheckBox1" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="cEcologicCoilet" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jFormattedTextField2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="fRunNorm" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="3" max="32767" attributes="0"/>
                               <Component id="jLabel12" alignment="3" max="32767" attributes="0"/>
-                              <Component id="jFormattedTextField3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="fRun" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jFormattedTextField4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="fRunTozNorn" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="3" max="32767" attributes="0"/>
-                              <Component id="jFormattedTextField5" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="fRunToz" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="3" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,6 +227,9 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="fNumberCar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="########" subtype="-1" type="5"/>
             </Property>
@@ -282,7 +291,7 @@
             <Property name="text" type="java.lang.String" value="&#x42d;&#x43b;&#x435;&#x43a;&#x442;&#x440;&#x43e;&#x43e;&#x431;&#x43e;&#x443;&#x434;&#x43e;&#x432;&#x430;&#x43d;&#x438;&#x435;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cTypeParent">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -293,6 +302,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cTypeParentItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -310,21 +322,21 @@
             <Property name="text" type="java.lang.String" value="&#x42d;&#x43a;&#x43e;&#x43b;&#x43e;&#x433;., &#x442;&#x443;&#x430;&#x43b;&#x435;&#x442;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="cEcologicCoilet">
         </Component>
         <Component class="javax.swing.JTextField" name="fModelCar">
         </Component>
-        <Component class="javax.swing.JTextField" name="fCondVent">
+        <Component class="javax.swing.JTextField" name="fConditioner">
         </Component>
-        <Component class="javax.swing.JTextField" name="f">
+        <Component class="javax.swing.JTextField" name="fGenerator">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="fGeneratorPrivod">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="fAccumulator">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="fElectricDevice">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="fBodyColor">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -334,8 +346,11 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x431;&#x435;&#x433; (&#x43a;&#x43c;) &#x43d;&#x43e;&#x440;&#x43c;&#x430; &#x43e;&#x442; &#x43f;&#x43b;. &#x440;."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+        <Component class="javax.swing.JFormattedTextField" name="fRunNorm">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
@@ -349,8 +364,11 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x431;&#x435;&#x433; (&#x43a;&#x43c;) &#x43e;&#x442; &#x43f;&#x43b;. &#x440;."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField3">
+        <Component class="javax.swing.JFormattedTextField" name="fRun">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
@@ -364,8 +382,11 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x431;&#x435;&#x433; (&#x43a;&#x43c;) &#x43d;&#x43e;&#x440;&#x43c;&#x430; &#x43e;&#x442; &#x422;&#x41e;&#x417;."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField4">
+        <Component class="javax.swing.JFormattedTextField" name="fRunTozNorn">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
@@ -379,22 +400,17 @@
             <Property name="text" type="java.lang.String" value="&#x41f;&#x440;&#x431;&#x435;&#x433; (&#x43a;&#x43c;) &#x43e;&#x442; &#x422;&#x41e;&#x417;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField5">
+        <Component class="javax.swing.JFormattedTextField" name="fRunToz">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="13" style="2"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&#x41c;&#x435;&#x441;&#x442;&#x43e;&#x43f;&#x43e;&#x43b;&#x43e;&#x436;&#x435;&#x43d;&#x438;&#x435;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="cTypeChilld">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -405,6 +421,16 @@
               </StringArray>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="2"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x442;&#x438;&#x43f;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel17">
         </Component>
       </SubComponents>
     </Container>
