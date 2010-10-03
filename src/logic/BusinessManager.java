@@ -1,10 +1,13 @@
 package logic;
 
 import logic.model.*;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -197,14 +200,8 @@ public class BusinessManager implements BusinessLogic {
             Collection<CarEntity> objects = SessionManager.getAllObjects(new CarEntity());
             list = new ArrayList<Car>(objects.size());
             for (CarEntity ce : objects) {
-                CarLocationEntity cle = ce.getCarLocation();
-                CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
-                CarTypeEntity cte = ce.getCarType();
-                CarType ct = new CarType(cte.getIdType(), cte.getcType());
-                Car c = new Car(ce.getCarNumber(), ce.getModel(), cl, ct, ce.getConditioner(), ce.getGenerator(),
-                        ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
-                        ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
-                list.add(c);
+                Car car = EntityConverter.convertCarEntity(ce);
+                list.add(car);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,15 +216,8 @@ public class BusinessManager implements BusinessLogic {
         Car car = null;
         try {
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), carNumber);
-            if(ce == null) throw new Exception("Вагон не найден!");
-            CarLocationEntity cle = ce.getCarLocation();
-            CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
-            CarTypeEntity cte = ce.getCarType();
-            CarType ct = new CarType(cte.getIdType(), cte.getcType());
-            car = new Car(ce.getCarNumber(), ce.getModel(), cl, ct, ce.getConditioner(), ce.getGenerator(),
-                    ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
-                    ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
-
+            if (ce == null) throw new Exception("Вагон не найден!");
+            car = EntityConverter.convertCarEntity(ce);
         } catch (Exception e) {
             e.printStackTrace();
             car = null;
@@ -240,10 +230,14 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<CarType> getCarParentTypes() {
         ArrayList<CarType> types = null;
         try {
-            Collection<SheduleTypeEntity> ste = SessionManager.getAllObjects(new SheduleTypeEntity());
             Collection<CarTypeEntity> cte = SessionManager.getAllObjects(new CarTypeEntity());
-            types = new ArrayList<CarType>(ste.size());
-//            for (SheduleTypeEntity s : ste) types.add(new SheduleType(s.getIdSheduleType(), s.getcSheduleType()));
+            Criteria crit = SessionManager.getSession().createCriteria(CarTypeEntity.class).
+                    add(Restrictions.isNull("carParentType"));
+            List list = crit.list();
+            types = new ArrayList<CarType>(list.size());
+            for(Object o : list) {
+                types.add(EntityConverter.convertCarTypeEntity((CarTypeEntity)o));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             types = null;

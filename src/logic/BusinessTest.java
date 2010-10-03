@@ -1,5 +1,6 @@
 package logic;
 
+import rzd.model.objects.CarType;
 import rzd.model.objects.Route;
 import rzd.model.objects.Shedule;
 import rzd.model.objects.SheduleType;
@@ -29,8 +30,9 @@ public class BusinessTest {
     public static void main(String[] args) throws HibernateInitializeException {
 //        testGetRoutes();
 //        testGetSheduleTypes();
-        testAddRoute();
+//        testAddRoute();
 //        testUpdateRoute();
+        testGetParentsTypes();
     }
 
     public static void testGetRoutes() {
@@ -63,6 +65,12 @@ public class BusinessTest {
         Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
         Route r = new Route(5, "love", "hate", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
         manager.updateRoute(r);
+    }
+
+    public static void testGetParentsTypes() {
+        for(CarType ct : manager.getCarParentTypes()) {
+            System.out.println(ct.getType());
+        }
     }
 
 }

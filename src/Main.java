@@ -30,12 +30,13 @@ public class Main {
 //        TrainEntity t = (TrainEntity)getSession().createCriteria(TrainEntity.class).uniqueResult();
 //        tde.setCar(car);
 //        tde.setTrain(t);
-        SheduleDaysEntity sd = new SheduleDaysEntity();
-        SheduleEntity s = (SheduleEntity)getSession().createCriteria(SheduleEntity.class).uniqueResult();
-        sd.setShedule(s);
-        sd.setDay(5);
+//        SheduleDaysEntity sd = new SheduleDaysEntity();
+//        SheduleEntity s = (SheduleEntity)getSession().createCriteria(SheduleEntity.class).uniqueResult();
+//        sd.setShedule(s);
+        
+//        sd.setDay(5);
 //        session.saveOrUpdate(tde);
-        session.saveOrUpdate(sd);
+//        session.saveOrUpdate(sd);
         session.getTransaction().commit();
 
 
