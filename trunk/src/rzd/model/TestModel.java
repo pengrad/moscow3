@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class TestModel implements BusinessLogic_old {
+public class TestModel {
 
     private final static TestModel tm = new TestModel();
 
@@ -175,19 +175,16 @@ public class TestModel implements BusinessLogic_old {
 
     public ArrayList<Car> getCars() {
         ArrayList<Car> cars = new ArrayList<Car>();
-        cars.add(new Car(111));
-        cars.add(new Car(100));
-        cars.add(new Car(333));
-        cars.add(new Car(100));
-        cars.add(new Car(100));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+
        return cars;
     }
 
-    public boolean addCar(Car car, Location carLocation) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public boolean updateCar(Car car, Location carLocation) {
+    public boolean addCar(Car car) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -195,67 +192,30 @@ public class TestModel implements BusinessLogic_old {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+
     public boolean removeCar(Car car) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public ArrayList<Car> getCarsByTrain(Train train) {
         ArrayList<Car> cars = new ArrayList<Car>();
-        cars.add(new Car(00000000));
-        cars.add(new Car(11111111));
-        cars.add(new Car(333));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+
         return cars;
     }
 
     public ArrayList<Car> getCarsByRoad(Road train) {
         ArrayList<Car> cars = new ArrayList<Car>();
-        cars.add(new Car(12345678));
-        cars.add(new Car(22345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(32345678));
-        cars.add(new Car(111));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
+        cars.add(new Car(111,"",null,null,"","","","","","",false,10,10,10,10));
 
         return cars;
     }
 
-    public ArrayList<Car> getCarsByAnotherLocation(LocationAnother carAnotherLocation) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public boolean addCarInTrain(Car road, Train train) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public boolean addCarInRoad(Car car, Road road) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public boolean addCarInAnotherLocation(Car car, LocationAnother carAnotherLocation) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+    
 }
