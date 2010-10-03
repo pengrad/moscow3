@@ -281,7 +281,7 @@ public class BusinessManager implements BusinessLogic {
         try {
             SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-            if(ce != null) throw new Exception("Вагон уже существует!");
+            if (ce != null) throw new Exception("Вагон уже существует!");
             ce = EntityConverter.convertCar(car);
             SessionManager.saveOrUpdateEntities(ce);
             SessionManager.commit();
@@ -299,7 +299,7 @@ public class BusinessManager implements BusinessLogic {
         try {
             SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-            if(ce == null) throw new Exception("Вагона не существует!");
+            if (ce == null) throw new Exception("Вагона не существует!");
             SessionManager.getSession().evict(ce);
             ce = EntityConverter.convertCar(car);
             SessionManager.saveOrUpdateEntities(ce);
@@ -312,5 +312,24 @@ public class BusinessManager implements BusinessLogic {
         } finally {
             SessionManager.closeSession();
         }
+    }
+
+    public ArrayList<RoadType> getRoadTypes() {
+        ArrayList<RoadType> list = null;
+        try {
+            Collection<RoadTypeEntity> types = SessionManager.getAllObjects(new RoadTypeEntity());
+            list = new ArrayList<RoadType>(types.size());
+            for (RoadTypeEntity rte : types) list.add(new RoadType(rte.getIdType(), rte.getTypeName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            list = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
+    }
+
+    public ArrayList<Road> getRoadsByType(RoadType roadType) {
+        return null;
     }
 }
