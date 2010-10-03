@@ -15,7 +15,7 @@ import rzd.model.objects.CarType;
 
 public class EntityConverter {
 
-    public static Car convertCarEntity(CarEntity ce) throws HibernateConvertExcpetion {
+    public static Car convertCar(CarEntity ce) throws HibernateConvertExcpetion {
         try {
             CarLocationEntity cle = ce.getCarLocation();
             CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
@@ -26,12 +26,45 @@ public class EntityConverter {
                     ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
-        }        
+        }
     }
 
-    public static CarType convertCarTypeEntity(CarTypeEntity cte) throws HibernateConvertExcpetion {
+    public static CarEntity convertCar(Car car) throws HibernateConvertExcpetion {
+        try {
+            CarTypeEntity cte = convertCarType(car.getCarType());
+            CarLocationEntity cle = convertCarLocation(car.getCarLocation());
+            return new CarEntity(car.getNumber(), car.getModel(), car.getConditioner(), car.getGenerator(),
+                    car.getGeneratorPrivod(), car.getAccumulator(), car.getElectricDevice(), car.getBodyColor(),
+                    car.isEcologicCoilet(), car.getRun(), car.getRunToz(), car.getRunNorm(), car.getRunTozNorm(),
+                    cle, cte);
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static CarType convertCarType(CarTypeEntity cte) throws HibernateConvertExcpetion {
         try {
             return new CarType(cte.getIdType(), cte.getcType());
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static CarTypeEntity convertCarType(CarType ct) throws HibernateConvertExcpetion {
+        try {
+            CarTypeEntity cte = new CarTypeEntity();
+            cte.setIdType(ct.getIdType());
+            return cte;
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static CarLocationEntity convertCarLocation(CarLocation cl) throws HibernateConvertExcpetion {
+        try {
+            CarLocationEntity cle = new CarLocationEntity();
+            cle.setIdLocation(cl.getIdLocation());
+            return cle;
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
