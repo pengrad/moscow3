@@ -12,8 +12,8 @@ public class Route {
     private int id;
     private String numberForward;
     private String numberBack;
-    private String pointDeparture;
-    private String pointDestination;
+    private String cityFrom;
+    private String cityTo;
     private Shedule sheduleForward;
     private Shedule sheduleBack;
     private boolean enabled;
@@ -21,12 +21,12 @@ public class Route {
     private int lengthBack;
 
 
-    public Route(int id, String numberForward, String numberBack, String pointDeparture, String pointDestination, Shedule sheduleForward, Shedule sheduleBack, boolean enabled, int lengthForward, int lengthBack) {
+    public Route(int id, String numberForward, String numberBack, String cityFrom, String cityTo, Shedule sheduleForward, Shedule sheduleBack, boolean enabled, int lengthForward, int lengthBack) {
         this.id = id;
         this.numberForward = numberForward;
         this.numberBack = numberBack;
-        this.pointDeparture = pointDeparture;
-        this.pointDestination = pointDestination;
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
         this.sheduleForward = sheduleForward;
         this.sheduleBack = sheduleBack;
         this.enabled = enabled;
@@ -58,20 +58,20 @@ public class Route {
         this.numberBack = numberBack;
     }
 
-    public String getPointDeparture() {
-        return pointDeparture;
+    public String getCityFrom() {
+        return cityFrom;
     }
 
-    public void setPointDeparture(String pointDeparture) {
-        this.pointDeparture = pointDeparture;
+    public void setCityFrom(String cityFrom) {
+        this.cityFrom = cityFrom;
     }
 
-    public String getPointDestination() {
-        return pointDestination;
+    public String getCityTo() {
+        return cityTo;
     }
 
-    public void setPointDestination(String pointDestination) {
-        this.pointDestination = pointDestination;
+    public void setCityTo(String cityTo) {
+        this.cityTo = cityTo;
     }
 
     public Shedule getSheduleForward() {
@@ -116,7 +116,7 @@ public class Route {
 
     @Override
     public String toString() {
-        return numberForward + "  " + numberBack + " " + pointDeparture + " - " + pointDestination;
+        return numberForward + "  " + numberBack + " " + cityFrom + " - " + cityTo;
     }
 
     @Override

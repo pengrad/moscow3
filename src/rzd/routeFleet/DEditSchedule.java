@@ -678,10 +678,10 @@ public class DEditSchedule extends javax.swing.JDialog {
             fTimeDestination1.setText("");
             fTimeDestination2.setText("");
         } else {
-            Shedule s1 = route.getScheduleForward();
-            Shedule s2 = route.getScheduleBack();
-            fStationDeparture.setText(route.getPointDeparture());
-            fStationDestination.setText(route.getPointDestination());
+            Shedule s1 = route.getSheduleForward();
+            Shedule s2 = route.getSheduleBack();
+            fStationDeparture.setText(route.getCityFrom());
+            fStationDestination.setText(route.getCityTo());
             fNumberRoute1.setText(route.getNumberForward());
             fNumberRoute2.setText(route.getNumberBack());
             fTimeDeparture1.setText(Utils.convertTimeToStr(s1.getTimeDeparture()));

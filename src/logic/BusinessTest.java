@@ -36,7 +36,7 @@ public class BusinessTest {
     public static void testGetRoutes() {
         ArrayList<Route> r = manager.getRoutes();
         for(Route rr : r) {
-            System.out.println(rr.getPointDeparture() + " - " + rr.getPointDestination() + " : " + rr.getNumberForward() + "/" + rr.getNumberBack());
+            System.out.println(rr.getCityFrom() + " - " + rr.getCityTo() + " : " + rr.getNumberForward() + "/" + rr.getNumberBack());
         }
     }
 
