@@ -123,7 +123,7 @@ public class BusinessManager implements BusinessLogic {
             SheduleTypeEntity sbte = SessionManager.getEntityById(new SheduleTypeEntity(), sb.getScheduleType().getId());
             SheduleEntity sfe = new SheduleEntity(sf.getTimeDeparture(), sf.getTimeDestination(), sf.getTimeInWay(), sfte);
             SheduleEntity sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
-            RouteEntity re = new RouteEntity(r.getPointDeparture(), r.getPointDestination(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            RouteEntity re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             int[] days = sf.getDays();
             if (days != null)
@@ -175,7 +175,7 @@ public class BusinessManager implements BusinessLogic {
             saveId = sbe.getIdShedule();
             sbe = new SheduleEntity(sb.getTimeDeparture(), sb.getTimeDestination(), sb.getTimeInWay(), sbte);
             sbe.setIdShedule(saveId);
-            re = new RouteEntity(r.getPointDeparture(), r.getPointDestination(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
+            re = new RouteEntity(r.getCityFrom(), r.getCityTo(), r.getNumberForward(), r.getNumberBack(), r.getLengthForward(), r.getLengthBack(), sfe, sbe, r.isEnabled());
             re.setIdRoute(r.getId());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             SessionManager.commit();
