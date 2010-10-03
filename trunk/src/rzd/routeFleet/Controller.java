@@ -51,7 +51,7 @@ public class Controller implements ActionListener, MouseListener {
 
     public void update() {
         try {
-//            ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+        ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pRoute, e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -98,13 +98,16 @@ public class Controller implements ActionListener, MouseListener {
         Route data = dEditRoute.open(null, Model.getModel().getSheduleTypes());
         if (data != null) {
             try {
+                System.out.println("doAddRout");
                 boolean b = Model.getModel().addRoute(data);
+
                 if (b) {
+                    System.out.println("sddRout");
                     update();
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pRoute, e.getMessage());
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
     }
@@ -121,8 +124,8 @@ public class Controller implements ActionListener, MouseListener {
                 try {
                     //          System.out.println("!!updateRoute");
                     boolean b = Model.getModel().updateRoute(data);
-                    if (b) {
-                        //              System.out.println("updateRoute");
+                    if (b){
+                        System.out.println("updateRoute");
                         ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
                     }
                 } catch (Exception e) {

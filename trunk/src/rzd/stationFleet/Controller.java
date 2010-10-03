@@ -6,6 +6,7 @@ package rzd.stationFleet;
 
 import rzd.ControllerMain;
 import rzd.carsFleet.PCarInformation;
+import rzd.model.Model;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
 import rzd.stationFleet.GCar;
@@ -45,7 +46,7 @@ public class Controller implements ActionListener, MouseListener {
         popupCarInformation.add(pCarInformation);
         makeTabs();
         new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
-        update();
+      //  update();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -126,13 +127,13 @@ public class Controller implements ActionListener, MouseListener {
     private void makeTabs() {
         JTabbedPane tabPanel = pStationFleet.tabbedStation;
         try {
-            ArrayList<RoadType> rTypes = TestModel.get().getRoadTypes();
+            ArrayList<RoadType> rTypes = Model.getModel().getRoadTypes();
             if (rTypes != null) {
                 ContainerRoad cRoad;
                 HashMap<Road, PRoad> roads;
                 for (int i = 0; i < rTypes.size(); i++) {
                     RoadType rType = rTypes.get(i);
-                    ArrayList<Road> r = TestModel.get().getRoadsByType(rType);
+                    ArrayList<Road> r = Model.getModel().getRoadsByType(rType);
                     if (r != null) {
                         cRoad = new ContainerRoad();
                         roads = new HashMap<Road, PRoad>();
