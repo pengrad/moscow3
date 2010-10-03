@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import rzd.ModelTable;
-import rzd.model.TestModel;
 
 
 import javax.swing.*;
@@ -161,8 +160,8 @@ public class Controller implements ActionListener, MouseListener {
                 o[0] = r.getId();
                 o[1] = r.getNumberForward();
                 o[2] = r.getNumberBack();
-                o[3] = r.getPointDeparture();
-                o[4] = r.getPointDestination();
+                o[3] = r.getCityFrom();
+                o[4] = r.getCityTo();
                 res.add(o);
             }
             res.add(new Object[]{"ID", "Номер маршрута", "Номер обратного маршрута", "Станция отправления", "Станция назначения"});
