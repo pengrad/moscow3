@@ -10,15 +10,17 @@ import java.util.Collection;
  * Time: 3:38:33
  */
 
-@javax.persistence.Table(name = "repair", catalog = "rzd")
+@Table(name = "repair", catalog = "rzd", schema = "")
 @Entity
 public class RepairEntity {
 
+    
 
     private int idRepair;
 
-    @javax.persistence.Column(name = "id_repair", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_repair", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdRepair() {
         return idRepair;
     }
@@ -29,7 +31,7 @@ public class RepairEntity {
 
     private Timestamp dateBegin;
 
-    @javax.persistence.Column(name = "date_begin", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_begin", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateBegin() {
         return dateBegin;
@@ -41,7 +43,7 @@ public class RepairEntity {
 
     private Timestamp dateEnd;
 
-    @javax.persistence.Column(name = "date_end", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "date_end", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
     @Basic
     public Timestamp getDateEnd() {
         return dateEnd;

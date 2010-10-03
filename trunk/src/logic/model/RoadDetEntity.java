@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Time: 1:56:37
  */
 
-@Table(name = "road_det", catalog = "rzd")
+@Table(name = "road_det", catalog = "rzd", schema = "")
 @Entity
 public class RoadDetEntity {
 
@@ -17,6 +17,7 @@ public class RoadDetEntity {
 
     @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getId() {
         return id;
     }

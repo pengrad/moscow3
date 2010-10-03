@@ -4,6 +4,7 @@ import logic.model.RouteEntity;
 import logic.model.SheduleDaysEntity;
 import logic.model.SheduleEntity;
 import logic.model.SheduleTypeEntity;
+import rzd.model.objects.Car;
 import rzd.model.objects.Route;
 import rzd.model.objects.Shedule;
 import rzd.model.objects.SheduleType;
@@ -187,5 +188,25 @@ public class BusinessManager implements BusinessLogic {
         } finally {
             SessionManager.closeSession();
         }
+    }
+
+    public ArrayList<Car> getCars() {
+        return null;
+    }
+
+    public Car getCarByNumber(int carNumber) {
+        return null;
+    }
+
+//    public ArrayList<CarType> getCarTypes() {
+//        return null;
+//    }
+
+    public boolean addCar(Car car) {
+        return false;
+    }
+
+    public boolean editCar(Car car) {
+        return false;
     }
 }

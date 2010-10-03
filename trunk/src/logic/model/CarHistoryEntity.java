@@ -1,9 +1,6 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
@@ -12,15 +9,27 @@ import java.sql.Date;
  * Time: 3:38:32
  */
 
-@javax.persistence.Table(name = "car_history", catalog = "rzd")
+@Table(name = "car_history", catalog = "rzd", schema = "")
 @Entity
 public class CarHistoryEntity {
 
+    public CarHistoryEntity() {
+    }
+
+    public CarHistoryEntity(Date date, CarLocationEntity carLocation, TrainEntity train, RoadEntity road, CarEntity car, RepairEntity repair) {
+        this.date = date;
+        this.carLocation = carLocation;
+        this.train = train;
+        this.road = road;
+        this.car = car;
+        this.repair = repair;
+    }
 
     private int id;
 
-    @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getId() {
         return id;
     }
@@ -31,7 +40,7 @@ public class CarHistoryEntity {
 
     private Date date;
 
-    @javax.persistence.Column(name = "date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Date getDate() {
         return date;
@@ -65,7 +74,7 @@ public class CarHistoryEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
+    @JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
     CarLocationEntity getCarLocation() {
         return carLocation;
     }
@@ -78,7 +87,7 @@ public class CarHistoryEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_train", referencedColumnName = "id_train")
+    @JoinColumn(name = "id_train", referencedColumnName = "id_train")
     TrainEntity getTrain() {
         return train;
     }
@@ -91,7 +100,7 @@ public class CarHistoryEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_road", referencedColumnName = "id_road")
+    @JoinColumn(name = "id_road", referencedColumnName = "id_road")
     RoadEntity getRoad() {
         return road;
     }
@@ -104,7 +113,7 @@ public class CarHistoryEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "car_number", referencedColumnName = "car_number", nullable = false)
+    @JoinColumn(name = "car_number", referencedColumnName = "car_number", nullable = false)
     CarEntity getCar() {
         return car;
     }
@@ -117,7 +126,7 @@ public class CarHistoryEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_repair", referencedColumnName = "id_repair")
+    @JoinColumn(name = "id_repair", referencedColumnName = "id_repair")
     RepairEntity getRepair() {
         return repair;
     }
