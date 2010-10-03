@@ -13,6 +13,13 @@ import java.util.Collection;
 @Entity
 public class RoadTypeEntity {
 
+    public RoadTypeEntity() {
+    }
+
+    public RoadTypeEntity(int idType, String typeName) {
+        this.idType = idType;
+        this.typeName = typeName;
+    }
 
     private int idType;
 

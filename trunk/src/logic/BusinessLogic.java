@@ -39,6 +39,10 @@ public interface BusinessLogic {
 
     public boolean addCar(Car car);
 
-    public boolean editCar(Car car);    
+    public boolean editCar(Car car);
+
+    public ArrayList<RoadType> getRoadTypes();
+
+    public ArrayList<Road> getRoadsByType(RoadType roadType);
 
 }
