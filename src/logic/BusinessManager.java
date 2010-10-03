@@ -257,6 +257,10 @@ public class BusinessManager implements BusinessLogic {
         return null;
     }
 
+    public CarType getCarParentType(CarType subType) {
+        return null;
+    }
+
     public boolean addCar(Car car) {
         return false;
     }

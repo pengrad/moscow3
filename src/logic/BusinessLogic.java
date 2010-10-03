@@ -35,6 +35,8 @@ public interface BusinessLogic {
 
     public ArrayList<CarType> getCarSubTypes(CarType parentType);
 
+    public CarType getCarParentType(CarType subType);
+
     public boolean addCar(Car car);
 
     public boolean editCar(Car car);
