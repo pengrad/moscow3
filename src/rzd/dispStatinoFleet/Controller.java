@@ -5,8 +5,8 @@
 package rzd.dispStatinoFleet;
 
 import rzd.ModelTable;
-import rzd.utils.Utils;
 import rzd.model.TestModel;
+import rzd.utils.Utils;
 import rzd.model.objects.*;
 
 import javax.swing.*;

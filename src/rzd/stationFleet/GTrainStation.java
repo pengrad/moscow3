@@ -27,7 +27,7 @@ public class GTrainStation extends Figure {
         this.train = train;
         setLayout(new FlowLayout());
         for (int i = 0; i < 5; i++) {
-            GCar gc = new GCar(new Car(333), c);
+            GCar gc = new GCar(new Car(111, "", null, null, "", "", "", "", "", "", false, 10, 10, 10, 10), c);
             add(gc);
             gVagons.add(gc);
         }
