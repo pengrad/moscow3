@@ -8,47 +8,27 @@ package rzd.model.objects;
  * To change this template use File | Settings | File Templates.
  */
 public class CarLocation {
-    private int id;
-    private Train train;
-    private Road road;
-    private CarAnotherLocation otherLocation;
+    private int idLocation;
+    private String location;
 
-    public CarLocation(int id, Train train, Road road, CarAnotherLocation otherLocation) {
-        this.id = id;
-        this.train = train;
-        this.road = road;
-        this.otherLocation = otherLocation;
+    public CarLocation(int idLocation, String location) {
+        this.idLocation = idLocation;
+        this.location = location;
     }
 
-    public int getId() {
-        return id;
+    public int getIdLocation() {
+        return idLocation;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdLocation(int idLocation) {
+        this.idLocation = idLocation;
     }
 
-    public Train getTrain() {
-        return train;
+    public String getLocation() {
+        return location;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
-    }
-
-    public Road getRoad() {
-        return road;
-    }
-
-    public void setRoad(Road road) {
-        this.road = road;
-    }
-
-    public CarAnotherLocation getOtherLocation() {
-        return otherLocation;
-    }
-
-    public void setOtherLocation(CarAnotherLocation otherLocation) {
-        this.otherLocation = otherLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
