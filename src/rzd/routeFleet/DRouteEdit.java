@@ -653,7 +653,6 @@ public class DRouteEdit extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bSaveActionPerformed
 
-
     private void updateDate1(java.awt.event.ItemEvent evt) {
         if (cMForward.getSelectedItem() != null && cMForwardInWay.getSelectedItem() != null && cHForward.getSelectedItem() != null && cHForwardInWay.getSelectedItem() != null) {
             int min = new Integer(cMForward.getSelectedItem().toString()) + new Integer(cMForwardInWay.getSelectedItem().toString());
@@ -721,7 +720,7 @@ public class DRouteEdit extends javax.swing.JDialog {
             cTypeSchedule1.addItem(st);
         }
         setEnabledSheduleType1();
-                setEnabledSheduleType2();
+        setEnabledSheduleType2();
         if (route == null) {
             fDaysMove1.setText("");
             fDaysMove2.setText("");
@@ -737,8 +736,6 @@ public class DRouteEdit extends javax.swing.JDialog {
             fNumberRoute2.setText("");
             fStationDeparture.setText("");
             fStationDestination.setText("");
-//            fTimeDeparture1.setSelectedIndex(0);
-//            fTimeDeparture2.setSelectedIndex(0);
             fTimeForward.setText("");
             fTimeBack.setText("");
             fLengthForward.setText("");
