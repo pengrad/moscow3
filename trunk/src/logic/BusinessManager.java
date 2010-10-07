@@ -5,9 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -24,6 +22,10 @@ public class BusinessManager implements BusinessLogic {
 
     private <H, M> void convertHB2Model(Collection<H> src) {
 //        Object o = null; o.getClass().getField("ss").get
+    }
+
+    public Date getDate() {
+        return HibernateUtils.getDate(SessionManager.getSession());
     }
 
     public ArrayList<Route> getRoutes() {
@@ -141,6 +143,11 @@ public class BusinessManager implements BusinessLogic {
                     SheduleDaysEntity sde = new SheduleDaysEntity(day, sbe);
                     SessionManager.saveOrUpdateEntities(sde);
                 }
+            Date d = HibernateUtils.getDate(SessionManager.getSession());
+            GregorianCalendar now = new GregorianCalendar();
+            now.setTime(d);
+            GregorianCalendar t = new GregorianCalendar();
+            t.setTime(sfe.getTimeFrom());
             SessionManager.commit();
             return true;
         } catch (Exception e) {
@@ -335,7 +342,7 @@ public class BusinessManager implements BusinessLogic {
             RoadTypeEntity rt = SessionManager.getEntityById(new RoadTypeEntity(), roadType.getId());
             Collection<RoadEntity> roads = rt.getRoads();
             list = new ArrayList<Road>(roads.size());
-            for (RoadEntity road : roads) {                
+            for (RoadEntity road : roads) {
                 list.add(EntityConverter.convertRoad(road));
             }
         } catch (Exception e) {
@@ -345,5 +352,42 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.closeSession();
         }
         return list;
+    }
+
+    public void generateTrains(SheduleEntity forward, SheduleEntity back) {
+        Date current = HibernateUtils.getDate(SessionManager.getSession());
+        GregorianCalendar firstForward = new GregorianCalendar();
+        GregorianCalendar firstBack = new GregorianCalendar();
+        firstForward.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(forward.getTimeFrom()));
+        firstForward.set(Calendar.MINUTE, DateUtils.getMinutes(forward.getTimeFrom()));
+        firstBack.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(back.getTimeFrom()));
+        firstBack.set(Calendar.MINUTE, DateUtils.getMinutes(back.getTimeFrom()));
+        switch (forward.getSheduleType().getIdSheduleType()) {
+            case BusinessLogic.NONPAIR:
+                if (firstForward.get(Calendar.DAY_OF_MONTH) % 2 == 1) {
+                    if (current.getTime() > firstForward.getTimeInMillis()) firstForward.add(Calendar.DAY_OF_MONTH, 2);
+                } else {
+                    firstForward.add(Calendar.DAY_OF_MONTH, 1);
+                }
+                break;
+            case BusinessLogic.PAIR:
+                if (firstForward.get(Calendar.DAY_OF_MONTH) % 2 == 0) {
+                    if (current.getTime() > firstForward.getTimeInMillis()) firstForward.add(Calendar.DAY_OF_MONTH, 2);
+                } else {
+                    firstForward.add(Calendar.DAY_OF_MONTH, 1);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void test() {
+        SheduleEntity e = (SheduleEntity) SessionManager.getAllObjects(new SheduleEntity()).toArray()[0];
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        c.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(e.getTimeFrom()));
+        c.set(Calendar.MINUTE, DateUtils.getMinutes(e.getTimeFrom()));
+        System.out.println(c.getTime());
     }
 }

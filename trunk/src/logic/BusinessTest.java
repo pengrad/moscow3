@@ -31,7 +31,14 @@ public class BusinessTest {
 //        testUpdateRoute();
 //        testGetParentsTypes();
 //        testAddUpdateCar();
-        testRoads();
+//        testRoads();
+//        testDate();
+        test();
+    }
+
+
+    public static void test() {
+        manager.test();
     }
 
     public static void testGetRoutes() {
@@ -86,6 +93,9 @@ public class BusinessTest {
                 System.out.println("    " + r.getName());
             }
         }
+    }
 
+    public static void testDate() {
+        System.out.println(manager.getDate().toString());
     }
 }
