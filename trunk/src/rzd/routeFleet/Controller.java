@@ -26,10 +26,7 @@ public class Controller implements ActionListener, MouseListener {
 
     private PRoute pRoute;
     private DRouteEdit dEditRoute;
-
-
     private JPopupMenu menuRoute;
-
     private JMenuItem editRoute;
     private JMenuItem deleteRoute;
 
@@ -51,7 +48,7 @@ public class Controller implements ActionListener, MouseListener {
 
     public void update() {
         try {
-        ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+            ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(pRoute, e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -92,18 +89,17 @@ public class Controller implements ActionListener, MouseListener {
         }
     }
 
-
     private void addRoute() {
         dEditRoute.setLocationRelativeTo(pRoute);
         Route data = dEditRoute.open(null, Model.getModel().getSheduleTypes());
         if (data != null) {
             try {
-                System.out.println("doAddRout");
                 boolean b = Model.getModel().addRoute(data);
-
                 if (b) {
-                    System.out.println("sddRout");
+                    JOptionPane.showMessageDialog(pRoute, "Расписание успешно добавлено.");
                     update();
+                } else {
+                    JOptionPane.showMessageDialog(pRoute, "Ошибка...попробуйте еще раз.");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pRoute, e.getMessage());
@@ -124,9 +120,11 @@ public class Controller implements ActionListener, MouseListener {
                 try {
                     //          System.out.println("!!updateRoute");
                     boolean b = Model.getModel().updateRoute(data);
-                    if (b){
-                        System.out.println("updateRoute");
+                    if (b) {
+                        JOptionPane.showMessageDialog(pRoute, "Расписание успешно изменено.");
                         ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+                    } else {
+                        JOptionPane.showMessageDialog(pRoute, "Ошибка...попробуйте еще раз.");
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pRoute, e.getMessage());
@@ -137,11 +135,11 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     private void deleteRoute() {
-        int row = pRoute.tRoute.getSelectedRow();
-        if (row != -1) {
-//            Route data = Mo(row);
+//        int row = pRoute.tRoute.getSelectedRow();
+//        if (row != -1) {
+//
 //            try {
-//                boolean b = TestModel.get().removeRoute(data);
+//                boolean b = Model.getModel().removeRoute(data);
 //                if (b) {
 //                    ((ModelTable) pTrains.tRoute.getModel()).setDate(getRoutesTabView());
 //                }
@@ -149,11 +147,10 @@ public class Controller implements ActionListener, MouseListener {
 //                JOptionPane.showMessageDialog(pTrains, e.getMessage());
 //                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 //            }
-        }
+//        }
     }
 
     //Методы конверторы
-
     private ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = Model.getModel().getRoutes();
         if (routes != null) {
