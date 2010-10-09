@@ -41,11 +41,21 @@ public class Utils {
         return sdf.format(dt);
     }
 
-    public static int[] convertStrToTime(String time) {
+    public static Time convertStrToTime(String time) {
         StringTokenizer t = new StringTokenizer(time, ":");
         int hh = new Integer(t.nextToken());
         int mm = new Integer(t.nextToken());
         return new Time(new GregorianCalendar(0, 0, 0, hh, mm).getTime().getTime());
+    }
+     public static int[] convertStrToTimeHHMM(String time) {
+        StringTokenizer t = new StringTokenizer(time, ":");
+        int hh = new Integer(t.nextToken());
+        int mm = new Integer(t.nextToken());
+        return new int[]{hh,mm};
+    }
+     public static String convertTimeToStr(int hh,int mm) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        return hh+":"+mm;
     }
 
     public static Date convertStrToDateTime(String dt) {

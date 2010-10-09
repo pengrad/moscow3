@@ -619,10 +619,12 @@ public class DRouteEdit extends javax.swing.JDialog {
                     days = Utils.convertDayOfWeekToMas(fDaysMove1.getText());
                 }
             }
-            Shedule s1 = new Shedule(route == null ? 0 : route.getSheduleForward().getId(),
+            Shedule s1 = new Shedule(
+                    route == null ? 0 : route.getSheduleForward().getId(),
                     Utils.convertStrToTime(cHForward.getSelectedItem().toString() + ":" + cMForward.getSelectedItem().toString()),
-                    Utils.convertStrToTime(fTimeForward.getText().trim()),
                     Utils.convertStrToTime(cHForwardInWay.getSelectedItem().toString() + ":" + cMForwardInWay.getSelectedItem().toString()),
+                    Utils.convertStrToTimeHHMM(fTimeForward.getText().trim())[0],
+                    Utils.convertStrToTimeHHMM(fTimeForward.getText().trim())[1],
                     (SheduleType) cTypeSchedule1.getSelectedItem(),
                     days);
             days = null;
@@ -635,8 +637,9 @@ public class DRouteEdit extends javax.swing.JDialog {
             }
             Shedule s2 = new Shedule(route == null ? 0 : route.getSheduleBack().getId(),
                     Utils.convertStrToTime(cHBack.getSelectedItem().toString() + ":" + cMBack.getSelectedItem().toString()),
-                    Utils.convertStrToTime(fTimeBack.getText().trim()),
                     Utils.convertStrToTime(cHBackInWay.getSelectedItem().toString() + ":" + cMBackInWay.getSelectedItem().toString()),
+                    Utils.convertStrToTimeHHMM(fTimeBack.getText().trim())[0],
+                    Utils.convertStrToTimeHHMM(fTimeBack.getText().trim())[1],
                     (SheduleType) cTypeSchedule2.getSelectedItem(),
                     days);
             route = new Route(
@@ -760,30 +763,24 @@ public class DRouteEdit extends javax.swing.JDialog {
             mm = t.nextToken();
             cHBack.setSelectedItem(new Integer(hh));
             cMBack.setSelectedItem(new Integer(mm));
-            t = new StringTokenizer(Utils.convertTimeToStr(s1.getTimeInWay()), ":");
-            hh = t.nextToken();
-            mm = t.nextToken();
-            cHForwardInWay.setSelectedItem(new Integer(hh));
-            cMForwardInWay.setSelectedItem(new Integer(mm));
-            t = new StringTokenizer(Utils.convertTimeToStr(s2.getTimeInWay()), ":");
-            hh = t.nextToken();
-            mm = t.nextToken();
-            cHBackInWay.setSelectedItem(new Integer(hh));
-            cMBackInWay.setSelectedItem(new Integer(mm));
+            cHForwardInWay.setSelectedItem(s1.getHoursTimeInWay());
+            cMForwardInWay.setSelectedItem(s1.getMinutesTimeInWay());
+            cHBackInWay.setSelectedItem(s2.getHoursTimeInWay());
+            cMBackInWay.setSelectedItem(s2.getMinutesTimeInWay());
             fTimeForward.setText(Utils.convertTimeToStr(s1.getTimeDestination()));
             fTimeBack.setText(Utils.convertTimeToStr(s2.getTimeDestination()));
-            cTypeSchedule1.setSelectedItem(s1.getScheduleType());
-            cTypeSchedule2.setSelectedItem(s2.getScheduleType());
-            if (s1.getScheduleType().getId() == BusinessLogic.DAYS_MONTH) {
+            cTypeSchedule1.setSelectedItem(s1.getSheduleType());
+            cTypeSchedule2.setSelectedItem(s2.getSheduleType());
+            if (s1.getSheduleType().getId() == BusinessLogic.DAYS_MONTH) {
                 fDaysMove1.setText(Utils.convertMasToStr(s1.getDays()));
             }
-            if (s1.getScheduleType().getId() == BusinessLogic.DAYS_WEEK) {
+            if (s1.getSheduleType().getId() == BusinessLogic.DAYS_WEEK) {
                 fDaysMove1.setText(Utils.convertMasToDayOfWeek(s1.getDays()));
             }
-            if (s2.getScheduleType().getId() == BusinessLogic.DAYS_MONTH) {
+            if (s2.getSheduleType().getId() == BusinessLogic.DAYS_MONTH) {
                 fDaysMove2.setText(Utils.convertMasToStr(s2.getDays()));
             }
-            if (s2.getScheduleType().getId() == BusinessLogic.DAYS_WEEK) {
+            if (s2.getSheduleType().getId() == BusinessLogic.DAYS_WEEK) {
                 fDaysMove2.setText(Utils.convertMasToDayOfWeek(s2.getDays()));
             }
             fLengthForward.setText(new Integer(route.getLengthForward()).toString());
