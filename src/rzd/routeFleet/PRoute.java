@@ -26,6 +26,8 @@ public class PRoute extends javax.swing.JPanel {
         this.c = new Controller(this);
         bCreateRoute.addActionListener(c);
         tRoute.addMouseListener(c);
+        fSearch.addActionListener(c);
+        bSearch.addActionListener(c);
     }
 
     /** This method is called from within the constructor to
@@ -46,6 +48,7 @@ public class PRoute extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(416, 304));
 
         tRoute.setModel(new ModelTable() );
+        tRoute.setDefaultRenderer(Object.class, new TableRouteRenderer());
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tRoute);
 

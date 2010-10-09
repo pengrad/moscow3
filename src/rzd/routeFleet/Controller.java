@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import rzd.model.Model;
 import rzd.model.objects.Route;
 import rzd.utils.MakerDefaultTextInField;
+import rzd.utils.Utils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -80,7 +81,9 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pRoute.bCreateRoute) {
+        if (e.getSource() == pRoute.fSearch || e.getSource() == pRoute.bSearch) {
+            search();
+        } else if (e.getSource() == pRoute.bCreateRoute) {
             addRoute();
         } else if (e.getSource() == editRoute) {
             editRoute();
@@ -105,6 +108,13 @@ public class Controller implements ActionListener, MouseListener {
                 JOptionPane.showMessageDialog(pRoute, e.getMessage());
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void search() {
+        boolean b = Utils.searchByTable(pRoute.tRoute, pRoute.fSearch.getText(), 1, 2);
+        if (!b) {
+            JOptionPane.showMessageDialog(pRoute, "Ничего не найдено", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -151,24 +161,27 @@ public class Controller implements ActionListener, MouseListener {
     }
 
     //Методы конверторы
+
     private ArrayList<Object[]> getRoutesTabView() {
         ArrayList<Route> routes = Model.getModel().getRoutes();
         if (routes != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());
             for (Route r : routes) {
-                Object[] o = new Object[5];
+                Object[] o = new Object[6];
                 o[0] = r.getId();
                 o[1] = r.getNumberForward();
                 o[2] = r.getNumberBack();
                 o[3] = r.getCityFrom();
                 o[4] = r.getCityTo();
+                o[5] = r.isEnabled();
                 res.add(o);
             }
-            res.add(new Object[]{"ID", "Номер маршрута", "Номер обратного маршрута", "Станция отправления", "Станция назначения"});
+            res.add(new Object[]{"ID", "Номер маршрута", "Номер обратного маршрута", "Станция отправления", "Станция назначения", "Активность"});
             return res;
         }
         return null;
     }
+   
 //
 //    public ArrayList<Object[]> getScheduleTabView() {
 //        ArrayList<Shedule> shedules = TestModel.get().getSchedules();

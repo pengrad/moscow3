@@ -75,14 +75,12 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     }
 
     public void update() {
-//        ArrayList<Train> trainsGoing = TestModel.get().getTrainsGoing();
-//        ((ModelTable) pDispStation.tTrainDeparture.getModel()).setDate(getTrainTabView(trainsGoing));
-//        ArrayList<Train> trainsArriving = TestModel.get().getTrainsArriving();
-//        ((ModelTable) pDispStation.tTrainDestination.getModel()).setDate(getTrainTabView(trainsArriving));
-//        ArrayList<Train> trainsSentToday = TestModel.get().getTrainsSentToday();
-//        ((ModelTable) pDispStation.tTrainDepartureToday.getModel()).setDate(getTrainTabView(trainsSentToday));
-//        ArrayList<Train> trainsArrivedToday = TestModel.get().getTrainsArrivedToday();
-//        ((ModelTable) pDispStation.tTrainDestinationToday.getModel()).setDate(getTrainTabView(trainsArrivedToday));
+        ArrayList<Train> trainsOnRoad = TestModel.get().getTrainsGoing();
+        ((ModelTable) pDispStation.tTrainOnRoad.getModel()).setDate(getTrainTabView(trainsOnRoad));
+        ArrayList<Train> trainsForward = TestModel.get().getTrainsArriving();
+        ((ModelTable) pDispStation.tTrainForward.getModel()).setDate(getTrainTabView(trainsForward));
+        ArrayList<Train> trainsBack = TestModel.get().getTrainsSentToday();
+        ((ModelTable) pDispStation.tTrainBack.getModel()).setDate(getTrainTabView(trainsBack));
     }
 
     private void addDepartureTrain() {
