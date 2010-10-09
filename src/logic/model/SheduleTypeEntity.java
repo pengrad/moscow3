@@ -13,6 +13,13 @@ import java.util.Collection;
 @Entity
 public class SheduleTypeEntity {
 
+    public SheduleTypeEntity() {
+    }
+
+    public SheduleTypeEntity(int idSheduleType, String cSheduleType) {
+        this.idSheduleType = idSheduleType;
+        this.cSheduleType = cSheduleType;
+    }
 
     private int idSheduleType;
 

@@ -1,5 +1,6 @@
 package logic;
 
+import logic.model.TrainEntity;
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
@@ -56,5 +57,5 @@ public interface BusinessLogic {
 
     public ArrayList<Road> getRoadsByType(RoadType roadType);
 
-    
+    public ArrayList<Train> getGoingTrains(int forHours);
 }

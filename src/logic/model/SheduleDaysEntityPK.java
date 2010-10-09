@@ -56,4 +56,9 @@ public class SheduleDaysEntityPK implements Serializable {
         result = 31 * result + day;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return idShedule + ":" + day;
+    }
 }
