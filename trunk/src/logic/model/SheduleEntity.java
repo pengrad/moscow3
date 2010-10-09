@@ -14,11 +14,22 @@ import java.util.Collection;
 @Entity
 public class SheduleEntity {
 
+    public SheduleEntity() {
+    }
+
+    public SheduleEntity(Time timeFrom, Time timeTo, int hoursInWay, int minutesInWay, SheduleTypeEntity sheduleType) {
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.hoursInWay = hoursInWay;
+        this.minutesInWay = minutesInWay;
+        this.sheduleType = sheduleType;
+    }
 
     private int idShedule;
 
     @javax.persistence.Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue
     public int getIdShedule() {
         return idShedule;
     }

@@ -1,6 +1,5 @@
 package logic;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -46,15 +45,23 @@ public class DateUtils {
         return dates;
     }
 
-    public static Timestamp getDatePlusTime(Date date, Time time) {
-        return getDatePlusMinusTime(date, time, true);
+    public static Timestamp getDatePlusTime(Date date, int hours, int minutes) {
+        return getDatePlusMinusTime(date, hours, minutes, true);
     }
 
-    public static Timestamp getDateMinusTime(Date date, Time time) {
-        return getDatePlusMinusTime(date, time, false);
+    public static Timestamp getDateMinusTime(Date date, int hours, int minutes) {
+        return getDatePlusMinusTime(date, hours, minutes, false);
     }
 
-    private static Timestamp getDatePlusMinusTime(Date date, Time time, boolean plus) {
-        return plus ? new Timestamp(date.getTime() + time.getTime()) : new Timestamp(date.getTime() - time.getTime());
+    private static Timestamp getDatePlusMinusTime(Date date, int hours, int minutes, boolean plus) {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(date);
+        if (!plus) {
+            hours = -hours;
+            minutes = -minutes;
+        }
+        c.add(Calendar.HOUR_OF_DAY, hours);
+        c.add(Calendar.MINUTE, minutes);
+        return new Timestamp(c.getTimeInMillis());
     }
 }
