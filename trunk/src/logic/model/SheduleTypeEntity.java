@@ -1,9 +1,6 @@
 package logic.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -12,14 +9,14 @@ import java.util.Collection;
  * Time: 1:56:38
  */
 
-@javax.persistence.Table(name = "shedule_type", catalog = "rzd")
+@Table(name = "shedule_type", catalog = "rzd")
 @Entity
 public class SheduleTypeEntity {
 
 
     private int idSheduleType;
 
-    @javax.persistence.Column(name = "id_shedule_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_shedule_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdSheduleType() {
         return idSheduleType;
@@ -31,7 +28,7 @@ public class SheduleTypeEntity {
 
     private String cSheduleType;
 
-    @javax.persistence.Column(name = "c_shedule_type", nullable = false, insertable = true, updatable = true, length = 30, precision = 0)
+    @Column(name = "c_shedule_type", nullable = false, insertable = true, updatable = true, length = 30, precision = 0)
     @Basic
     public String getcSheduleType() {
         return cSheduleType;

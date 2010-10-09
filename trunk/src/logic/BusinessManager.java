@@ -2,6 +2,7 @@ package logic;
 
 import logic.model.*;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
@@ -23,6 +24,10 @@ public class BusinessManager implements BusinessLogic {
 
     private <H, M> void convertHB2Model(Collection<H> src) {
 //        Object o = null; o.getClass().getField("ss").get
+    }
+
+    Session getSession() {
+        return SessionManager.getSession();
     }
 
     public Date getCurrentDate() {
@@ -144,12 +149,22 @@ public class BusinessManager implements BusinessLogic {
                     SheduleDaysEntity sde = new SheduleDaysEntity(day, sbe);
                     SessionManager.saveOrUpdateEntities(sde);
                 }
-            Date currentDate = getCurrentDate();
-            TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
-            // генерируем отправляющиеся поезда с текущего момента
-            for(Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
-                Timestamp dateTo = null; //todo вызов метода прибавления к дате - времени
-                TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned);
+            if (re.isEnabled()) {
+                Date currentDate = getCurrentDate();
+                TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+                // генерируем отправляющиеся поезда с текущего момента
+                for (Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
+                    Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getTimeInWay());
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned);
+                    SessionManager.saveOrUpdateEntities(train);
+                }
+                // генерируем прибывающие поезда с момента: текущее время - время в пути. (чтобы прибыл уже ближайший)
+                currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getTimeInWay());
+                for (Timestamp dateFrom : generateDatesOfDeparture(sbe, currentDate, 20)) {
+                    Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getTimeInWay());
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned);
+                    SessionManager.saveOrUpdateEntities(train);
+                }
             }
             SessionManager.getSession().flush();
             SessionManager.commit();
