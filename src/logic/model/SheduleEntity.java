@@ -6,29 +6,19 @@ import java.util.Collection;
 
 /**
  * User: Стас
- * Date: 27.09.2010
- * Time: 1:56:38
+ * Date: 10.10.2010
+ * Time: 0:43:45
  */
 
-@Table(name = "shedule", catalog = "rzd")
+@javax.persistence.Table(name = "shedule", catalog = "rzd")
 @Entity
 public class SheduleEntity {
 
-    public SheduleEntity() {
-    }
-
-    public SheduleEntity(Time timeFrom, Time timeTo, Time timeInWay, SheduleTypeEntity sheduleType) {
-        this.timeFrom = timeFrom;
-        this.timeTo = timeTo;
-        this.timeInWay = timeInWay;
-        this.sheduleType = sheduleType;
-    }
 
     private int idShedule;
 
-    @Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @javax.persistence.Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    @GeneratedValue
     public int getIdShedule() {
         return idShedule;
     }
@@ -39,7 +29,7 @@ public class SheduleEntity {
 
     private Time timeFrom;
 
-    @Column(name = "time_from", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
+    @javax.persistence.Column(name = "time_from", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     @Basic
     public Time getTimeFrom() {
         return timeFrom;
@@ -51,7 +41,7 @@ public class SheduleEntity {
 
     private Time timeTo;
 
-    @Column(name = "time_to", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
+    @javax.persistence.Column(name = "time_to", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     @Basic
     public Time getTimeTo() {
         return timeTo;
@@ -61,16 +51,28 @@ public class SheduleEntity {
         this.timeTo = timeTo;
     }
 
-    private Time timeInWay;
+    private int hoursInWay;
 
-    @Column(name = "time_in_way", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
+    @javax.persistence.Column(name = "hours_in_way", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public Time getTimeInWay() {
-        return timeInWay;
+    public int getHoursInWay() {
+        return hoursInWay;
     }
 
-    public void setTimeInWay(Time timeInWay) {
-        this.timeInWay = timeInWay;
+    public void setHoursInWay(int hoursInWay) {
+        this.hoursInWay = hoursInWay;
+    }
+
+    private int minutesInWay;
+
+    @javax.persistence.Column(name = "minutes_in_way", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
+    public int getMinutesInWay() {
+        return minutesInWay;
+    }
+
+    public void setMinutesInWay(int minutesInWay) {
+        this.minutesInWay = minutesInWay;
     }
 
     @Override
@@ -80,9 +82,10 @@ public class SheduleEntity {
 
         SheduleEntity that = (SheduleEntity) o;
 
+        if (hoursInWay != that.hoursInWay) return false;
         if (idShedule != that.idShedule) return false;
+        if (minutesInWay != that.minutesInWay) return false;
         if (timeFrom != null ? !timeFrom.equals(that.timeFrom) : that.timeFrom != null) return false;
-        if (timeInWay != null ? !timeInWay.equals(that.timeInWay) : that.timeInWay != null) return false;
         if (timeTo != null ? !timeTo.equals(that.timeTo) : that.timeTo != null) return false;
 
         return true;
@@ -93,30 +96,31 @@ public class SheduleEntity {
         int result = idShedule;
         result = 31 * result + (timeFrom != null ? timeFrom.hashCode() : 0);
         result = 31 * result + (timeTo != null ? timeTo.hashCode() : 0);
-        result = 31 * result + (timeInWay != null ? timeInWay.hashCode() : 0);
+        result = 31 * result + hoursInWay;
+        result = 31 * result + minutesInWay;
         return result;
     }
 
-    private Collection<RouteEntity> routesBack;
+    private Collection<RouteEntity> routesBySheduleBack;
 
-    @OneToMany(mappedBy = "sheduleBack")
-    public Collection<RouteEntity> getRoutesBack() {
-        return routesBack;
+    @OneToMany(mappedBy = "sheduleBySheduleBack")
+    public Collection<RouteEntity> getRoutesBySheduleBack() {
+        return routesBySheduleBack;
     }
 
-    public void setRoutesBack(Collection<RouteEntity> routesBack) {
-        this.routesBack = routesBack;
+    public void setRoutesBySheduleBack(Collection<RouteEntity> routesBySheduleBack) {
+        this.routesBySheduleBack = routesBySheduleBack;
     }
 
-    private Collection<RouteEntity> routesForward;
+    private Collection<RouteEntity> routesBySheduleForward;
 
-    @OneToMany(mappedBy = "sheduleForward")
-    public Collection<RouteEntity> getRoutesForward() {
-        return routesForward;
+    @OneToMany(mappedBy = "sheduleBySheduleForward")
+    public Collection<RouteEntity> getRoutesBySheduleForward() {
+        return routesBySheduleForward;
     }
 
-    public void setRoutesForward(Collection<RouteEntity> routesForward) {
-        this.routesForward = routesForward;
+    public void setRoutesBySheduleForward(Collection<RouteEntity> routesBySheduleForward) {
+        this.routesBySheduleForward = routesBySheduleForward;
     }
 
     private SheduleTypeEntity sheduleType;
@@ -134,7 +138,7 @@ public class SheduleEntity {
 
     private Collection<SheduleDaysEntity> sheduleDays;
 
-    @OneToMany(mappedBy = "shedule")
+    @OneToMany(mappedBy = "sheduleByIdShedule")
     public Collection<SheduleDaysEntity> getSheduleDays() {
         return sheduleDays;
     }
@@ -143,14 +147,14 @@ public class SheduleEntity {
         this.sheduleDays = sheduleDays;
     }
 
-    private Collection<TrainEntity> trainsByIdShedule;
+    private Collection<TrainEntity> trains;
 
-    @OneToMany(mappedBy = "shedule")
-    public Collection<TrainEntity> getTrainsByIdShedule() {
-        return trainsByIdShedule;
+    @OneToMany(mappedBy = "sheduleByIdShedule")
+    public Collection<TrainEntity> getTrains() {
+        return trains;
     }
 
-    public void setTrainsByIdShedule(Collection<TrainEntity> trainsByIdShedule) {
-        this.trainsByIdShedule = trainsByIdShedule;
+    public void setTrains(Collection<TrainEntity> trains) {
+        this.trains = trains;
     }
 }

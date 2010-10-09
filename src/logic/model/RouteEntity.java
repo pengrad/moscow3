@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Time: 3:38:34
  */
 
-@javax.persistence.Table(name = "route", catalog = "rzd")
+@Table(name = "route", catalog = "rzd")
 @Entity
 public class RouteEntity {
 
@@ -29,7 +29,7 @@ public class RouteEntity {
 
     private int idRoute;
 
-    @javax.persistence.Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_route", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     @GeneratedValue
     public int getIdRoute() {
@@ -42,7 +42,7 @@ public class RouteEntity {
 
     private String cityFrom;
 
-    @javax.persistence.Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
+    @Column(name = "city_from", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
     @Basic
     public String getCityFrom() {
         return cityFrom;
@@ -54,7 +54,7 @@ public class RouteEntity {
 
     private String cityTo;
 
-    @javax.persistence.Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
+    @Column(name = "city_to", nullable = false, insertable = true, updatable = true, length = 50, precision = 0)
     @Basic
     public String getCityTo() {
         return cityTo;
@@ -66,7 +66,7 @@ public class RouteEntity {
 
     private String numberForward;
 
-    @javax.persistence.Column(name = "number_forward", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Column(name = "number_forward", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
     public String getNumberForward() {
         return numberForward;
@@ -78,7 +78,7 @@ public class RouteEntity {
 
     private String numberBack;
 
-    @javax.persistence.Column(name = "number_back", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Column(name = "number_back", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Basic
     public String getNumberBack() {
         return numberBack;
@@ -90,7 +90,7 @@ public class RouteEntity {
 
     private int lengthForward;
 
-    @javax.persistence.Column(name = "length_forward", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "length_forward", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public int getLengthForward() {
         return lengthForward;
@@ -102,7 +102,7 @@ public class RouteEntity {
 
     private int lengthBack;
 
-    @javax.persistence.Column(name = "length_back", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "length_back", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public int getLengthBack() {
         return lengthBack;
@@ -114,7 +114,7 @@ public class RouteEntity {
 
     private boolean enabled;
 
-    @javax.persistence.Column(name = "enabled", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
+    @Column(name = "enabled", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
     @Basic
     public boolean isEnabled() {
         return enabled;
@@ -161,7 +161,7 @@ public class RouteEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "shedule_back", referencedColumnName = "id_shedule", nullable = false)
+    @JoinColumn(name = "shedule_back", referencedColumnName = "id_shedule", nullable = false)
     SheduleEntity getSheduleBack() {
         return sheduleBack;
     }
@@ -174,7 +174,7 @@ public class RouteEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "shedule_forward", referencedColumnName = "id_shedule", nullable = false)
+    @JoinColumn(name = "shedule_forward", referencedColumnName = "id_shedule", nullable = false)
     SheduleEntity getSheduleForward() {
         return sheduleForward;
     }

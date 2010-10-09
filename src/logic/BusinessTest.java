@@ -1,12 +1,10 @@
 package logic;
 
+import logic.model.SheduleEntity;
 import rzd.model.objects.*;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * User: Стас
@@ -35,18 +33,35 @@ public class BusinessTest {
 //        testAddUpdateCar();
 //        testRoads();
 //        testDate();
-//        test();
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(new Date());
-        for(int i = 0; i< 50; i++) {
-            gc.add(Calendar.DAY_OF_MONTH, 1);
-            System.out.println(gc.getTime());
-        }
+        test();
     }
 
 
     public static void test() {
-        manager.test();
+//        Time time = (Time)manager.getSession().createSQLQuery("select time_in_way from `shedule` where id_shedule = 1;").uniqueResult();
+        SheduleEntity se = (SheduleEntity)manager.getSession().get(SheduleEntity.class, 1);
+        System.out.println(se.getHoursInWay());
+        GregorianCalendar ct = new GregorianCalendar();
+//        ct.setTime(time);
+        System.out.println(ct.getTime());
+        Time t = new Time(28, 11, 0);
+        GregorianCalendar c = new GregorianCalendar();
+//        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(t);
+        System.out.println(c.getTime());
+        Date d = new Date();
+        GregorianCalendar cc = new GregorianCalendar();
+        cc.setTime(d);
+        cc.add(Calendar.HOUR_OF_DAY, 28);
+//        Date dd = new Date(cc.getTimeInMillis()+c.getTimeInMillis());
+        Date dd = new Date(cc.getTimeInMillis());
+        System.out.println(dd.toString());
+//        System.out.println("begin");
+//        for(Timestamp t : DateUtils.getDates(new Date(), Arrays.asList(11, 15, 20, 30), 10, Calendar.DAY_OF_MONTH)) {
+//            System.out.print(t.toString());
+//            System.out.print("    -     ");
+//            System.out.println(DateUtils.getDatePlusTime(t, new Time(8, 45, 2)).toString());
+//        }
     }
 
     public static void testGetRoutes() {
@@ -65,10 +80,11 @@ public class BusinessTest {
 
     public static void testAddRoute() {
         Time time = new Time(new Date().getTime());
+        Time timeWay = new Time(8, 11, 11);
         SheduleType st = new SheduleType(1, "nonPair");
-        Shedule sf = new Shedule(9, time, time, time, st, new int[]{1,2,34,4});
-        Shedule sb = new Shedule(9, time, time, time, st, new int[]{0,6,1,3});
-        Route r = new Route(9, "love", "love", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
+        Shedule sf = new Shedule(9, time, time, timeWay, st, null);//new int[]{1,2,34,4});
+        Shedule sb = new Shedule(9, time, time, timeWay, st, null);//new int[]{0,6,1,3});
+        Route r = new Route(9, "тест", "тест", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
         manager.addRoute(r);
     }
 

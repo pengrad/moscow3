@@ -1,8 +1,6 @@
 package logic.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * User: Стас
@@ -10,8 +8,8 @@ import javax.persistence.ManyToOne;
  * Time: 2:28:11
  */
 
-@javax.persistence.IdClass(logic.model.SheduleDaysEntityPK.class)
-@javax.persistence.Table(name = "shedule_days", catalog = "rzd")
+@IdClass(SheduleDaysEntityPK.class)
+@Table(name = "shedule_days", catalog = "rzd")
 @Entity
 public class SheduleDaysEntity {
 
@@ -25,7 +23,7 @@ public class SheduleDaysEntity {
 
     private int idShedule;
 
-    @javax.persistence.Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "id_shedule", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getIdShedule() {
         return idShedule;
@@ -37,7 +35,7 @@ public class SheduleDaysEntity {
 
     private int day;
 
-    @javax.persistence.Column(name = "day", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "day", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     public int getDay() {
         return day;
@@ -71,7 +69,7 @@ public class SheduleDaysEntity {
 
     @ManyToOne
     public
-    @javax.persistence.JoinColumn(name = "id_shedule", referencedColumnName = "id_shedule", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "id_shedule", referencedColumnName = "id_shedule", nullable = false, insertable = false, updatable = false)
     SheduleEntity getShedule() {
         return shedule;
     }
