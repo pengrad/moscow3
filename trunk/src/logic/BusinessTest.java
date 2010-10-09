@@ -104,6 +104,6 @@ public class BusinessTest {
     }
 
     public static void testDate() {
-        System.out.println(manager.getDate().toString());
+        System.out.println(manager.getCurrentDate().toString());
     }
 }

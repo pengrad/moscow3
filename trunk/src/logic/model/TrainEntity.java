@@ -14,6 +14,16 @@ import java.util.Collection;
 @Entity
 public class TrainEntity {
 
+    public TrainEntity() {
+    }
+
+    public TrainEntity(String trainChief, Timestamp dateFrom, Timestamp dateTo, SheduleEntity shedule, TrainStatusEntity trainStatus) {
+        this.trainChief = trainChief;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.shedule = shedule;
+        this.trainStatus = trainStatus;
+    }
 
     private int idTrain;
 
@@ -30,7 +40,7 @@ public class TrainEntity {
 
     private String trainChief;
 
-    @Column(name = "train_chief", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
+    @Column(name = "train_chief", nullable = true, insertable = true, updatable = true, length = 100, precision = 0)
     @Basic
     public String getTrainChief() {
         return trainChief;
