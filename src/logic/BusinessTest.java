@@ -4,7 +4,9 @@ import rzd.model.objects.*;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * User: Стас
@@ -33,7 +35,13 @@ public class BusinessTest {
 //        testAddUpdateCar();
 //        testRoads();
 //        testDate();
-        test();
+//        test();
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(new Date());
+        for(int i = 0; i< 50; i++) {
+            gc.add(Calendar.DAY_OF_MONTH, 1);
+            System.out.println(gc.getTime());
+        }
     }
 
 

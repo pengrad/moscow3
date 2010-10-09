@@ -1,8 +1,6 @@
 package logic;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -31,15 +29,18 @@ public class DateUtils {
         return c.get(Calendar.DAY_OF_MONTH);
     }
 
-    public static Collection<Timestamp> getDates(Date dateFrom, Collection<Integer> days, int count) {
+    public static Collection<Timestamp> getDates(Date dateFrom, Collection<Integer> days, int count, int calendarType) {
+        if (calendarType < 0 || calendarType >= Calendar.ZONE_OFFSET) {
+            return null;           
+        }
         ArrayList<Timestamp> dates = new ArrayList<Timestamp>(count);
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(dateFrom);
-        while(dates.size() < count) {
-            if(days.contains(getDay(dateFrom))) {
+        while (dates.size() < count) {
+            if (days.contains(getDay(dateFrom))) {
                 dates.add(new Timestamp(dateFrom.getTime()));
             }
-            c.add(Calendar.DAY_OF_MONTH, 1);
+            c.add(calendarType, 1);
         }
         return dates;
     }
