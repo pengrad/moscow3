@@ -101,15 +101,15 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         Route route = TestModel.get().getRouteByTrain(train);
         ArrayList<Car> carInTran = TestModel.get().getCarsByTrain(train);
         ArrayList<Car> carAll = TestModel.get().getCars();
-        Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
-        if (res != null) {
-            train = (Train) res[0];
-            route = (Route) res[1];
-            road = (Road) res[2];
-            carInTran = (ArrayList<Car>) res[3];
+      //  Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
+//        if (res != null) {
+//            train = (Train) res[0];
+//            route = (Route) res[1];
+//            road = (Road) res[2];
+//            carInTran = (ArrayList<Car>) res[3];
     //   boolean  b=TestModel.get().addTrain(train,)
             //   TestModel.get().add
-        }
+      //  }
 
     }
 
@@ -154,10 +154,11 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         if (row < 0 || row > table.getModel().getRowCount()) {
             return null;
         }
-        return new Train(
-                new Integer(table.getModel().getValueAt(row, 0).toString()),
-                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 2).toString()),
-                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()),
-                table.getModel().getValueAt(row, 4).toString());
+//        return new Train(
+//                new Integer(table.getModel().getValueAt(row, 0).toString()),
+//                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 2).toString()),
+//                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()),
+//                table.getModel().getValueAt(row, 4).toString());
+    return null;
     }
 }

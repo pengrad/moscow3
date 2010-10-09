@@ -51,16 +51,12 @@
                           <Component id="bCancel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="1" max="32767" attributes="1"/>
-                          <Component id="fDateDeparture" alignment="0" min="-2" pref="142" max="-2" attributes="1"/>
-                          <Component id="fDateDestination" alignment="0" min="-2" pref="142" max="-2" attributes="1"/>
-                          <Component id="cRoute" alignment="0" pref="228" max="32767" attributes="1"/>
-                          <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
-                          <Component id="fChief" alignment="0" min="-2" pref="193" max="-2" attributes="1"/>
-                      </Group>
+                      <Component id="fDate" alignment="0" min="-2" pref="142" max="-2" attributes="1"/>
+                      <Component id="jLabel1" alignment="0" pref="228" max="32767" attributes="0"/>
+                      <Component id="fRoute" alignment="0" pref="228" max="32767" attributes="0"/>
+                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="1" pref="228" max="32767" attributes="1"/>
+                      <Component id="fChief" alignment="0" min="-2" pref="193" max="-2" attributes="1"/>
                       <Component id="cRoad" alignment="0" pref="228" max="32767" attributes="1"/>
                       <Component id="cRoadType" alignment="0" pref="228" max="32767" attributes="0"/>
                   </Group>
@@ -92,17 +88,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="cRoute" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="fRoute" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="fDateDeparture" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="fDateDestination" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="fDate" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="fChief" min="-2" pref="22" max="-2" attributes="0"/>
@@ -112,7 +104,7 @@
                           <Component id="cRoadType" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cRoad" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="163" max="32767" attributes="0"/>
+                          <EmptySpace pref="213" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="bSave" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -150,26 +142,13 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x414;&#x430;&#x442;&#x430; &#x438; &#x432;&#x440;&#x435;&#x43c;&#x44f; &#x43e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f;"/>
+            <Property name="text" type="java.lang.String" value="&#x414;&#x430;&#x442;&#x430; &#x438; &#x432;&#x440;&#x435;&#x43c;&#x44f; &#x43e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f;/&#x43f;&#x440;&#x438;&#x431;&#x44b;&#x442;&#x438;&#x44f;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="fDateDeparture">
+        <Component class="javax.swing.JFormattedTextField" name="fDate">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="dd.MM.yyyy H:mm" subtype="-1" type="1"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x41d;&#x430;&#x43f;&#x440;&#x438;&#x43c;&#x435;&#x440; 23.11.2010 12:45"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x414;&#x430;&#x442;&#x430; &#x438; &#x432;&#x440;&#x435;&#x43c;&#x44f; &#x43e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="fDateDestination">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="dd.MM.yyyy H:mm" subtype="-1" type="1"/>
+              <Format format="" subtype="-1" type="1"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="&#x41d;&#x430;&#x43f;&#x440;&#x438;&#x43c;&#x435;&#x440; 23.11.2010 12:45"/>
           </Properties>
@@ -276,21 +255,6 @@
             <Property name="text" type="java.lang.String" value="&#x412;&#x441;&#x435; &#x432;&#x430;&#x433;&#x43e;&#x43d;&#x44b;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cRoute">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cRouteItemStateChanged"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41c;&#x430;&#x440;&#x448;&#x440;&#x443;&#x442;"/>
@@ -310,6 +274,8 @@
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cRoadTypeItemStateChanged"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="fRoute">
         </Component>
       </SubComponents>
     </Container>
