@@ -41,7 +41,7 @@ public class Utils {
         return sdf.format(dt);
     }
 
-    public static Time convertStrToTime(String time) {
+    public static int[] convertStrToTime(String time) {
         StringTokenizer t = new StringTokenizer(time, ":");
         int hh = new Integer(t.nextToken());
         int mm = new Integer(t.nextToken());
@@ -81,6 +81,8 @@ public class Utils {
                     JViewport viewport = (JViewport) t.getParent();
                     viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));
                     t.setRowSelectionInterval(i, i);
+                   viewport.revalidate();
+                 //   viewport.repaint();
                     return true;
                 }
             }

@@ -251,9 +251,9 @@ public class DEditTrain extends javax.swing.JDialog {
             if (train == null) {
                 //     train = new Train(0, Utils.convertStrToDateTime(fDateDeparture.getText()), Utils.convertStrToDateTime(fDateDestination.getText()), fChief.getText());
             } else {
-                train.setDtDeparture(Utils.convertStrToDateTime(fDate.getText()));
+           //     train.setDtDeparture(Utils.convertStrToDateTime(fDate.getText()));
                 //      train.setDtDestination(Utils.convertStrToDateTime(fDateDestination.getText()));
-                train.setChief(fChief.getText());
+           //     train.setChief(fChief.getText());
             }
             //  route = (Route) cRoute.getSelectedItem();
             //     road = (Road) cRoad.getSelectedItem();

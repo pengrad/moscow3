@@ -14,15 +14,17 @@ public class Shedule {
     private int id;
     private Time timeDeparture;
     private Time timeDestination;
-    private Time timeInWay;
+    private int hoursTimeInWay;
+    private int minutesTimeInWay;
     private SheduleType sheduleType;
     private int[] days;
 
-    public Shedule(int id, Time timeDeparture, Time timeDestination, Time timeInWay, SheduleType sheduleType, int[] days) {
+    public Shedule(int id, Time timeDeparture, Time timeDestination, int hoursTimeInWay, int minutesTimeInWay, SheduleType sheduleType, int[] days) {
         this.id = id;
         this.timeDeparture = timeDeparture;
         this.timeDestination = timeDestination;
-        this.timeInWay = timeInWay;
+        this.hoursTimeInWay = hoursTimeInWay;
+        this.minutesTimeInWay = minutesTimeInWay;
         this.sheduleType = sheduleType;
         this.days = days;
     }
@@ -51,19 +53,27 @@ public class Shedule {
         this.timeDestination = timeDestination;
     }
 
-    public Time getTimeInWay() {
-        return timeInWay;
+    public int getHoursTimeInWay() {
+        return hoursTimeInWay;
     }
 
-    public void setTimeInWay(Time timeInWay) {
-        this.timeInWay = timeInWay;
+    public void setHoursTimeInWay(int hoursTimeInWay) {
+        this.hoursTimeInWay = hoursTimeInWay;
     }
 
-    public SheduleType getScheduleType() {
+    public int getMinutesTimeInWay() {
+        return minutesTimeInWay;
+    }
+
+    public void setMinutesTimeInWay(int minutesTimeInWay) {
+        this.minutesTimeInWay = minutesTimeInWay;
+    }
+
+    public SheduleType getSheduleType() {
         return sheduleType;
     }
 
-    public void setScheduleType(SheduleType sheduleType) {
+    public void setSheduleType(SheduleType sheduleType) {
         this.sheduleType = sheduleType;
     }
 

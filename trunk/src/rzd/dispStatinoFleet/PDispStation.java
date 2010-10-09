@@ -25,8 +25,8 @@ public class PDispStation extends javax.swing.JPanel {
     public PDispStation() {
         initComponents();
         c = new Controller(this);
-        tTrainDeparture.addMouseListener(c);
-        tTrainDestination.addMouseListener(c);
+        tTrainBack.addMouseListener(c);
+        tTrainForward.addMouseListener(c);
 //        tTrainDepartureToday.addMouseListener(c);
  //       tTrainDestinationToday.addMouseListener(c);
   //      bAddDeparture.addActionListener(c);
@@ -45,40 +45,40 @@ public class PDispStation extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tTrainDeparture = new javax.swing.JTable();
+        tTrainBack = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tTrainDestination = new javax.swing.JTable();
+        tTrainForward = new javax.swing.JTable();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tTrainDeparture1 = new javax.swing.JTable();
+        tTrainOnRoad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
 
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11));
 
-        tTrainDeparture.setModel(new ModelTable() );
-        jScrollPane1.setViewportView(tTrainDeparture);
+        tTrainBack.setModel(new ModelTable() );
+        jScrollPane1.setViewportView(tTrainBack);
 
         jTabbedPane1.addTab("Прибывающие поезда", jScrollPane1);
 
         jTabbedPane2.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 1, 11));
 
-        tTrainDestination.setModel(new ModelTable());
-        jScrollPane2.setViewportView(tTrainDestination);
+        tTrainForward.setModel(new ModelTable());
+        jScrollPane2.setViewportView(tTrainForward);
 
         jTabbedPane2.addTab("Отправляемые поезда", jScrollPane2);
 
         jTabbedPane3.setBackground(new java.awt.Color(0, 51, 204));
         jTabbedPane3.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 1, 11));
 
-        tTrainDeparture1.setModel(new ModelTable() );
-        jScrollPane3.setViewportView(tTrainDeparture1);
+        tTrainOnRoad.setModel(new ModelTable() );
+        jScrollPane3.setViewportView(tTrainOnRoad);
 
         jTabbedPane3.addTab("Поезда на путях", jScrollPane3);
 
@@ -94,21 +94,21 @@ public class PDispStation extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,9 +141,9 @@ public class PDispStation extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    public javax.swing.JTable tTrainDeparture;
-    public javax.swing.JTable tTrainDeparture1;
-    public javax.swing.JTable tTrainDestination;
+    public javax.swing.JTable tTrainBack;
+    public javax.swing.JTable tTrainForward;
+    public javax.swing.JTable tTrainOnRoad;
     // End of variables declaration//GEN-END:variables
 
 }
