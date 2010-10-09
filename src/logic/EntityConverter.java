@@ -3,6 +3,8 @@ package logic;
 import logic.model.*;
 import rzd.model.objects.*;
 
+import java.util.Collection;
+
 /**
  * User: Стас
  * Date: 03.10.2010
@@ -15,10 +17,8 @@ public class EntityConverter {
         try {
             CarLocationEntity cle = ce.getCarLocation();
             CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
-            CarTypeEntity cte = ce.getCarType();
-            CarType ct = new CarType(cte.getIdType(), cte.getcType());
-            return new Car(ce.getCarNumber(), ce.getModel(), cl, ct, ce.getConditioner(), ce.getGenerator(),
-                    ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
+            return new Car(ce.getCarNumber(), ce.getModel(), cl, convertCarType(ce.getCarType()), ce.getConditioner(),
+                    ce.getGenerator(), ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
                     ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
@@ -86,8 +86,41 @@ public class EntityConverter {
 
     public static RepairEntity convertRepair(Repair r) {
         try {
-            RepairEntity repair = new RepairEntity();
-            return repair;
+            return new RepairEntity();
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static SheduleType convertSheduleType(SheduleTypeEntity st) {
+        try {
+            return new SheduleType(st.getIdSheduleType(), st.getcSheduleType());
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static Shedule convertShedule(SheduleEntity se) {
+        try {
+            int[] days = null;
+            Collection<SheduleDaysEntity> sde = se.getSheduleDays();
+            if (sde != null && sde.size() > 0) {
+                days = new int[sde.size()];
+                for (int i = 0; i < sde.size(); i++)
+                    days[i] = sde.toArray(new SheduleDaysEntity[1])[i].getDay();
+            }
+            return new Shedule(se.getIdShedule(), se.getTimeFrom(), se.getTimeTo(), se.getHoursInWay(),
+                    se.getMinutesInWay(), convertSheduleType(se.getSheduleType()), days);
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static Route convertRoute(RouteEntity r) {
+        try {
+            return new Route(r.getIdRoute(), r.getNumberForward(), r.getNumberBack(), r.getCityFrom(), 
+                    r.getCityTo(), convertShedule(r.getSheduleForward()), convertShedule(r.getSheduleBack()),
+                    r.isEnabled(), r.getLengthForward(), r.getLengthBack());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
