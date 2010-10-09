@@ -11,6 +11,11 @@
 
 package rzd.carsFleet;
 
+import javax.jws.WebParam.Mode;
+import rzd.model.Model;
+import rzd.model.objects.Car;
+import rzd.model.objects.CarType;
+
 /**
  *
  * @author ЧерныхЕА
@@ -22,7 +27,24 @@ public class PCarInformation extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void setData(){
+    public void setData(Car car){
+        fNumberCar.setText(new Integer(car.getNumber()).toString());
+            CarType carType = car.getCarType();
+            CarType carParentType = Model.getModel().getCarParentType(carType);
+            fTypeParent.setText(carParentType.getType());
+            fTypeChilld.setText(carType.getType());
+            fModelCar.setText(car.getModel());
+            fConditioner.setText(car.getConditioner());
+            fGenerator.setText(car.getGenerator());
+            fGeneratorPrivod.setText(car.getGeneratorPrivod());
+            fAccumulator.setText(car.getAccumulator());
+            fElectricDevice.setText(car.getElectricDevice());
+            fBodyColor.setText(car.getBodyColor());
+            cEcologicCoilet.setSelected(car.isEcologicCoilet());
+            fRunNorm.setText(new Integer(car.getRunNorm()).toString());
+            fRun.setText(new Integer(car.getRun()).toString());
+            fRunTozNorn.setText(new Integer(car.getRunTozNorm()).toString());
+            fRunToz.setText(new Integer(car.getRunToz()).toString());
 
     }
 
@@ -35,33 +57,320 @@ public class PCarInformation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        fConditioner = new javax.swing.JTextField();
+        fModelCar = new javax.swing.JTextField();
+        fGenerator = new javax.swing.JTextField();
+        fGeneratorPrivod = new javax.swing.JTextField();
+        fAccumulator = new javax.swing.JTextField();
+        fElectricDevice = new javax.swing.JTextField();
+        fBodyColor = new javax.swing.JTextField();
+        cEcologicCoilet = new javax.swing.JCheckBox();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        fTypeParent = new javax.swing.JTextField();
+        fTypeChilld = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        fNumberCar = new javax.swing.JTextField();
+        fRunNorm = new javax.swing.JTextField();
+        fRunTozNorn = new javax.swing.JTextField();
+        fRun = new javax.swing.JTextField();
+        fRunToz = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(252, 252, 240));
 
-        jLabel1.setText("Детальная информация о вагоне");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel3.setText("Модель");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel4.setText("Вент/конд");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel5.setText("Генератор");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel6.setText("Привод генератора");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel7.setText("Аккумулятор");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel8.setText("Электрообоудование");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel9.setText("Окраска кузова");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel10.setText("Эколог., туалет");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel11.setText("Прбег (км) норма от пл. р.");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel13.setText("Прбег (км) норма от ТОЗ.");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel1.setText("Номер вагона");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel2.setText("Тип");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel16.setText("Подтип");
+
+        fConditioner.setBackground(new java.awt.Color(255, 255, 255));
+        fConditioner.setEditable(false);
+        fConditioner.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fModelCar.setBackground(new java.awt.Color(255, 255, 255));
+        fModelCar.setEditable(false);
+        fModelCar.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fGenerator.setBackground(new java.awt.Color(255, 255, 255));
+        fGenerator.setEditable(false);
+        fGenerator.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fGeneratorPrivod.setBackground(new java.awt.Color(255, 255, 255));
+        fGeneratorPrivod.setEditable(false);
+        fGeneratorPrivod.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fAccumulator.setBackground(new java.awt.Color(255, 255, 255));
+        fAccumulator.setEditable(false);
+        fAccumulator.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fElectricDevice.setBackground(new java.awt.Color(255, 255, 255));
+        fElectricDevice.setEditable(false);
+        fElectricDevice.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fBodyColor.setBackground(new java.awt.Color(255, 255, 255));
+        fBodyColor.setEditable(false);
+        fBodyColor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        cEcologicCoilet.setBackground(new java.awt.Color(252, 252, 240));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel12.setText("Прбег (км) от пл. р.");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 13));
+        jLabel14.setText("Прбег (км) от ТОЗ");
+
+        fTypeParent.setBackground(new java.awt.Color(255, 255, 255));
+        fTypeParent.setEditable(false);
+        fTypeParent.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        fTypeChilld.setBackground(new java.awt.Color(255, 255, 255));
+        fTypeChilld.setEditable(false);
+        fTypeChilld.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 51));
+        jButton1.setText("X");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        fNumberCar.setBackground(new java.awt.Color(255, 255, 255));
+        fNumberCar.setEditable(false);
+
+        fRunNorm.setBackground(new java.awt.Color(255, 255, 255));
+        fRunNorm.setEditable(false);
+
+        fRunTozNorn.setBackground(new java.awt.Color(255, 255, 255));
+        fRunTozNorn.setEditable(false);
+
+        fRun.setBackground(new java.awt.Color(255, 255, 255));
+        fRun.setEditable(false);
+
+        fRunToz.setBackground(new java.awt.Color(255, 255, 255));
+        fRunToz.setEditable(false);
+        fRunToz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fRunTozActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(111, 111, 111))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel16)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                .addComponent(jLabel13)))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cEcologicCoilet)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(fTypeParent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fNumberCar, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fTypeChilld, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fModelCar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fConditioner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fGenerator, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fGeneratorPrivod, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fAccumulator, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fElectricDevice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                            .addComponent(fBodyColor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(92, 92, 92))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(fRunNorm)
+                                    .addComponent(fRunTozNorn, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fRun)
+                                    .addComponent(fRunToz, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(fNumberCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(fTypeParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(fTypeChilld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fModelCar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(fConditioner, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(fGenerator, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(fGeneratorPrivod, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(fAccumulator, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(fElectricDevice, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(fBodyColor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cEcologicCoilet, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fRunNorm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fRunTozNorn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fRunToz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(55, 55, 55))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fRunTozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fRunTozActionPerformed
+        // TODO add your handling code here:
+}//GEN-LAST:event_fRunTozActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.getParent().setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cEcologicCoilet;
+    private javax.swing.JTextField fAccumulator;
+    private javax.swing.JTextField fBodyColor;
+    private javax.swing.JTextField fConditioner;
+    private javax.swing.JTextField fElectricDevice;
+    private javax.swing.JTextField fGenerator;
+    private javax.swing.JTextField fGeneratorPrivod;
+    private javax.swing.JTextField fModelCar;
+    private javax.swing.JTextField fNumberCar;
+    private javax.swing.JTextField fRun;
+    private javax.swing.JTextField fRunNorm;
+    private javax.swing.JTextField fRunToz;
+    private javax.swing.JTextField fRunTozNorn;
+    private javax.swing.JTextField fTypeChilld;
+    private javax.swing.JTextField fTypeParent;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
 }

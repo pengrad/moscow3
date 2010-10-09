@@ -622,10 +622,10 @@ public class DRouteEdit extends javax.swing.JDialog {
             Shedule s1 = new Shedule(
                     route == null ? 0 : route.getSheduleForward().getId(),
                     Utils.convertStrToTime(cHForward.getSelectedItem().toString() + ":" + cMForward.getSelectedItem().toString()),
-                    Utils.convertStrToTime(cHForwardInWay.getSelectedItem().toString() + ":" + cMForwardInWay.getSelectedItem().toString()),
-                    Utils.convertStrToTimeHHMM(fTimeForward.getText().trim())[0],
-                    Utils.convertStrToTimeHHMM(fTimeForward.getText().trim())[1],
-                    (SheduleType) cTypeSchedule1.getSelectedItem(),
+                    Utils.convertStrToTime(fTimeForward.getText()),
+                    new Integer(cHForwardInWay.getSelectedItem().toString()),
+                    new Integer(cMForwardInWay.getSelectedItem().toString()),
+                  (SheduleType) cTypeSchedule1.getSelectedItem(),
                     days);
             days = null;
             if (((SheduleType) cTypeSchedule2.getSelectedItem()).getId() == BusinessLogic.DAYS_MONTH) {
@@ -637,9 +637,9 @@ public class DRouteEdit extends javax.swing.JDialog {
             }
             Shedule s2 = new Shedule(route == null ? 0 : route.getSheduleBack().getId(),
                     Utils.convertStrToTime(cHBack.getSelectedItem().toString() + ":" + cMBack.getSelectedItem().toString()),
-                    Utils.convertStrToTime(cHBackInWay.getSelectedItem().toString() + ":" + cMBackInWay.getSelectedItem().toString()),
-                    Utils.convertStrToTimeHHMM(fTimeBack.getText().trim())[0],
-                    Utils.convertStrToTimeHHMM(fTimeBack.getText().trim())[1],
+                    Utils.convertStrToTime(fTimeBack.getText()),
+                    new Integer(cHBackInWay.getSelectedItem().toString()),
+                    new Integer(cMBackInWay.getSelectedItem().toString()),
                     (SheduleType) cTypeSchedule2.getSelectedItem(),
                     days);
             route = new Route(
