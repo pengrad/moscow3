@@ -47,17 +47,6 @@ public class Utils {
         int mm = new Integer(t.nextToken());
         return new Time(new GregorianCalendar(0, 0, 0, hh, mm).getTime().getTime());
     }
-     public static int[] convertStrToTimeHHMM(String time) {
-        StringTokenizer t = new StringTokenizer(time, ":");
-        int hh = new Integer(t.nextToken());
-        int mm = new Integer(t.nextToken());
-        return new int[]{hh,mm};
-    }
-     public static String convertTimeToStr(int hh,int mm) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        return hh+":"+mm;
-    }
-
     public static Date convertStrToDateTime(String dt) {
         StringTokenizer t = new StringTokenizer(dt);
         int dd = new Integer(t.nextToken("."));
@@ -91,8 +80,8 @@ public class Utils {
                     JViewport viewport = (JViewport) t.getParent();
                     viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));
                     t.setRowSelectionInterval(i, i);
-                   viewport.revalidate();
-                 //   viewport.repaint();
+                    viewport.revalidate();
+                    viewport.repaint();
                     return true;
                 }
             }

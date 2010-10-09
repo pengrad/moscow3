@@ -29,6 +29,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     public Controller(PDispStation pDispStation) {
         this.pDispStation = pDispStation;
         menuTrain = new JPopupMenu();
+        //   editTrain = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
         editTrain = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
         viewTrain = new JMenuItem("Посмотреть на карте станции", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
         menuTrain.add(editTrain);
@@ -36,9 +37,11 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         editTrain.addActionListener(this);
         viewTrain.addActionListener(this);
         dEditTrain = new DEditTrain(null, true);
+        update();
     }
 
     public void itemStateChanged(ItemEvent e) {
+
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -77,7 +80,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     public void update() {
         ArrayList<Train> trainsOnRoad = TestModel.get().getTrainsGoing();
         ((ModelTable) pDispStation.tTrainOnRoad.getModel()).setDate(getTrainTabView(trainsOnRoad));
-        ArrayList<Train> trainsForward = TestModel.get().getTrainsArriving();
+        ArrayList<Train> trainsForward =null ;
         ((ModelTable) pDispStation.tTrainForward.getModel()).setDate(getTrainTabView(trainsForward));
         ArrayList<Train> trainsBack = TestModel.get().getTrainsSentToday();
         ((ModelTable) pDispStation.tTrainBack.getModel()).setDate(getTrainTabView(trainsBack));
@@ -99,15 +102,15 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         Route route = TestModel.get().getRouteByTrain(train);
         ArrayList<Car> carInTran = TestModel.get().getCarsByTrain(train);
         ArrayList<Car> carAll = TestModel.get().getCars();
-      //  Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
+        //  Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
 //        if (res != null) {
 //            train = (Train) res[0];
 //            route = (Route) res[1];
 //            road = (Road) res[2];
 //            carInTran = (ArrayList<Car>) res[3];
-    //   boolean  b=TestModel.get().addTrain(train,)
-            //   TestModel.get().add
-      //  }
+        //   boolean  b=TestModel.get().addTrain(train,)
+        //   TestModel.get().add
+        //  }
 
     }
 
@@ -129,20 +132,18 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         if (trains != null) {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());
             for (Train train : trains) {
-                Route route = TestModel.get().getRouteByTrain(train);
-                Road road = TestModel.get().getRoadByTrain(train);
                 ArrayList<Car> cars = TestModel.get().getCarsByTrain(train);
                 data.add(new Object[]{
                         train.getId(),
-                        route.toString(),
+                        train.getRoute().getCityFrom() + train.getRoute().getCityFrom(),
                         Utils.convertDateToStr(train.getDtDeparture()),
                         Utils.convertDateToStr(train.getDtDestination()),
                         train.getChief(),
-                        road.getName(),
+                        (train.getRoad() != null ? train.getRoad().getName() : "Путь не задан"),
                         ((cars == null) ? 0 : cars.size())
                 });
             }
-            data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия", "Дата и время отправления", "Начальник", "Путь", "Кол-во вагонов"});
+            data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия/отправления", "Начальник", "Путь", "Кол-во вагонов"});
             return data;
         }
         return null;
@@ -157,6 +158,6 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
 //                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 2).toString()),
 //                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()),
 //                table.getModel().getValueAt(row, 4).toString());
-    return null;
+        return null;
     }
 }

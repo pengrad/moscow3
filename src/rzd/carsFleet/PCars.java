@@ -28,6 +28,7 @@ public class PCars extends javax.swing.JPanel {
         tCars.addMouseListener(c);
         bAddCar.addActionListener(c);
         fSearch.addActionListener(c);
+        bSearch.addActionListener(c);
 
     }
 

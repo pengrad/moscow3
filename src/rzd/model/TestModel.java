@@ -169,8 +169,8 @@ public class TestModel {
     }
 
     public Train getTrainByRoad(Road road) {
-        return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()), "",null,null,null,null);
-    //  return null;
+     //   return new Train(1, new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime()), "",null,null,null,null);
+      return null;
     }
 
     public ArrayList<Car> getCars() {

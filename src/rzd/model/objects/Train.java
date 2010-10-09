@@ -15,16 +15,18 @@ public class Train {
     private Date dtDeparture;
     private Date dtDestination;
     private String chief;
+    private Shedule shedule;
     private Route route;
     private TrainStatus trainStatus;
     private Road road;
     private ArrayList<Car> carsIn;
 
-    public Train(int id, Date dtDeparture, Date dtDestination, String chief, Route route, TrainStatus trainStatus, Road road, ArrayList<Car> carsIn) {
+    public Train(int id, Date dtDeparture, Date dtDestination, String chief, Shedule shedule, Route route, TrainStatus trainStatus, Road road, ArrayList<Car> carsIn) {
         this.id = id;
         this.dtDeparture = dtDeparture;
         this.dtDestination = dtDestination;
         this.chief = chief;
+        this.shedule = shedule;
         this.route = route;
         this.trainStatus = trainStatus;
         this.road = road;
@@ -63,6 +65,14 @@ public class Train {
         this.chief = chief;
     }
 
+    public Shedule getShedule() {
+        return shedule;
+    }
+
+    public void setShedule(Shedule shedule) {
+        this.shedule = shedule;
+    }
+
     public Route getRoute() {
         return route;
     }
@@ -94,4 +104,5 @@ public class Train {
     public void setCarsIn(ArrayList<Car> carsIn) {
         this.carsIn = carsIn;
     }
+ 
 }

@@ -32,4 +32,8 @@ public class ModelTable extends DefaultTableModel {
         }
         return v;
     }
+     public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+
 }

@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import rzd.model.Model;
+import rzd.utils.Utils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,7 +66,9 @@ public class Controller implements MouseListener, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == viewCar) {
+        if (e.getSource() == pCarFleet.fSearch || e.getSource() == pCarFleet.bSearch) {
+            searchCar();
+        } else if (e.getSource() == viewCar) {
             viewCar();
         } else if (e.getSource() == pCarFleet.bAddCar) {
             addCar();
@@ -87,6 +90,9 @@ public class Controller implements MouseListener, ActionListener {
             popCarMenu.show(pCarFleet.tCars, e.getX(), e.getY());
         }
         if (e.getSource() == pCarFleet.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
+            int row = pCarFleet.tCars.getSelectedRow();
+            int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
+            carInformation.setData(Model.getModel().getCarByNumber(number));
             popCarInfMenu.show(pCarFleet.tCars, e.getX(), e.getY());
         }
     }
@@ -117,6 +123,12 @@ public class Controller implements MouseListener, ActionListener {
 //            JOptionPane.showMessageDialog(pCarFleet, ex.getMessage());
 //        }
 //    }
+    private void searchCar() {
+        boolean b = Utils.searchByTable(pCarFleet.tCars, pCarFleet.fSearch.getText(), 0);
+        if (!b) {
+            JOptionPane.showMessageDialog(pCarFleet, "Ничего не найдено", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     private void viewCar() {
         int row = pCarFleet.tCars.getSelectedRow();
@@ -132,8 +144,11 @@ public class Controller implements MouseListener, ActionListener {
         if (car != null) {
             boolean b = Model.getModel().addCar(car);
             if (b) {
+                JOptionPane.showMessageDialog(pCarFleet, "Ввагон успешно создан.");
                 ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
                 mt.setDate(getCarsTabView());
+            } else {
+                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...попробуйте еще раз.");
             }
         }
     }
@@ -146,15 +161,20 @@ public class Controller implements MouseListener, ActionListener {
         if (car != null) {
             boolean b = Model.getModel().editCar(car);
             if (b) {
-         update();
+                JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
+                update();
+            } else {
+                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...попробуйте еще раз.");
             }
         }
     }
 
     private void deleteCar() {
+
     }
 
     private void locationCar() {
+
     }
 
     private void histLocationCar() {
@@ -180,7 +200,7 @@ public class Controller implements MouseListener, ActionListener {
 
                 res.add(o);
             }
-            res.add(new Object[]{"Номер","Тип","Моедль"});
+            res.add(new Object[]{"Номер", "Тип", "Моедль"});
             return res;
         }
         return null;

@@ -31,6 +31,7 @@ public class PDispStation extends javax.swing.JPanel {
  //       tTrainDestinationToday.addMouseListener(c);
   //      bAddDeparture.addActionListener(c);
   //      bAddDestination.addActionListener(c);
+          c
     }
 
     /**
