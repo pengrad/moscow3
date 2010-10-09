@@ -318,6 +318,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         );
 
         fStationDeparture.setBackground(new java.awt.Color(255, 255, 204));
+        fStationDeparture.setText("Москва");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel6.setText("   Станция отправления");

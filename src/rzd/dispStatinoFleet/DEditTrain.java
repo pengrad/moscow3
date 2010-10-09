@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import rzd.model.Model;
 import rzd.utils.Utils;
 import rzd.model.objects.Car;
 import rzd.model.objects.Road;
@@ -29,14 +30,9 @@ import rzd.model.objects.Train;
  */
 public class DEditTrain extends javax.swing.JDialog {
 
+    public final static int FORVARD = 0;
+    public final static int BACK = 0;
     private Train train;
-    private HashMap<RoadType, ArrayList<Road>> roads;
-    private Road road;
-    private ArrayList<Route> routes;
-    private Route route;
-    private ArrayList<Car> carsAll;
-    private ArrayList<Car> carsInTrain;
-    private Object[] ret;
 
     /** Creates new form DEditTrain */
     public DEditTrain(java.awt.Frame parent, boolean modal) {
@@ -55,9 +51,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        fDateDeparture = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
-        fDateDestination = new javax.swing.JFormattedTextField();
+        fDate = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         cRoad = new javax.swing.JComboBox();
         bSave = new javax.swing.JButton();
@@ -72,23 +66,18 @@ public class DEditTrain extends javax.swing.JDialog {
         bLeft = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cRoute = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         cRoadType = new javax.swing.JComboBox();
+        fRoute = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(346, 239));
 
-        jLabel1.setText("Дата и время отправления");
+        jLabel1.setText("Дата и время отправления/прибытия");
 
-        fDateDeparture.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd.MM.yyyy H:mm"))));
-        fDateDeparture.setToolTipText("Например 23.11.2010 12:45");
-
-        jLabel2.setText("Дата и время отправления");
-
-        fDateDestination.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd.MM.yyyy H:mm"))));
-        fDateDestination.setToolTipText("Например 23.11.2010 12:45");
+        fDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
+        fDate.setToolTipText("Например 23.11.2010 12:45");
 
         jLabel3.setText("Путь отроавления/прибытия");
 
@@ -132,13 +121,6 @@ public class DEditTrain extends javax.swing.JDialog {
 
         jLabel6.setText("Все вагоны");
 
-        cRoute.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cRoute.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cRouteItemStateChanged(evt);
-            }
-        });
-
         jLabel7.setText("Маршрут");
 
         cRoadType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -160,15 +142,12 @@ public class DEditTrain extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(bCancel))
                     .addComponent(jLabel7)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fDateDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fDateDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cRoute, 0, 228, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                    .addComponent(fRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                    .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cRoad, 0, 228, Short.MAX_VALUE)
                     .addComponent(cRoadType, 0, 228, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,17 +172,13 @@ public class DEditTrain extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jLabel7)
-                        .addGap(13, 13, 13)
-                        .addComponent(cRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fDateDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel2)
-                        .addGap(10, 10, 10)
-                        .addComponent(fDateDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,7 +188,7 @@ public class DEditTrain extends javax.swing.JDialog {
                         .addComponent(cRoadType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cRoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bSave)
                             .addComponent(bCancel)))
@@ -251,10 +226,6 @@ public class DEditTrain extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cRouteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cRouteItemStateChanged
-        // TODO add your handling code here:
-}//GEN-LAST:event_cRouteItemStateChanged
-
     private void bRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRightActionPerformed
         Object[] selected = lCarInTrain.getSelectedValues();
         if (selected != null) {
@@ -278,38 +249,38 @@ public class DEditTrain extends javax.swing.JDialog {
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         if (isCorrectInput()) {
             if (train == null) {
-                train = new Train(0, Utils.convertStrToDateTime(fDateDeparture.getText()), Utils.convertStrToDateTime(fDateDestination.getText()), fChief.getText());
+                //     train = new Train(0, Utils.convertStrToDateTime(fDateDeparture.getText()), Utils.convertStrToDateTime(fDateDestination.getText()), fChief.getText());
             } else {
-                train.setDtDeparture(Utils.convertStrToDateTime(fDateDeparture.getText()));
-                train.setDtDestination(Utils.convertStrToDateTime(fDateDestination.getText()));
+                train.setDtDeparture(Utils.convertStrToDateTime(fDate.getText()));
+                //      train.setDtDestination(Utils.convertStrToDateTime(fDateDestination.getText()));
                 train.setChief(fChief.getText());
             }
-            route = (Route) cRoute.getSelectedItem();
-            road = (Road) cRoad.getSelectedItem();
+            //  route = (Route) cRoute.getSelectedItem();
+            //     road = (Road) cRoad.getSelectedItem();
 
             if (((DefaultListModel) lCarInTrain.getModel()).size() > 0) {
-                carsInTrain = new ArrayList<Car>(((DefaultListModel) lCarInTrain.getModel()).size());
+                //    carsInTrain = new ArrayList<Car>(((DefaultListModel) lCarInTrain.getModel()).size());
                 Object[] c = ((DefaultListModel) lCarInTrain.getModel()).toArray();
                 for (int i = 0; i < c.length; i++) {
-                    carsInTrain.add((Car) c[i]);
+                    //      carsInTrain.add((Car) c[i]);
                 }
             } else {
-                carsInTrain = null;
+                //       carsInTrain = null;
             }
-            ret = new Object[]{train, route, road, carsInTrain};
+        //  ret = new Object[]{train, route, road, carsInTrain};
         } else {
             JOptionPane.showMessageDialog(null, "Не все поля заполнены");
         }
     }//GEN-LAST:event_bSaveActionPerformed
 
     private void bCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelActionPerformed
-        ret = null;
+        train = null;
         setVisible(false);
     }//GEN-LAST:event_bCancelActionPerformed
 
     private void cRoadTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cRoadTypeItemStateChanged
         RoadType rt = (RoadType) cRoadType.getSelectedItem();
-        ArrayList<Road> rr = roads.get(rt);
+        ArrayList<Road> rr = Model.getModel().getRoadsByType(rt);
         cRoad.removeAll();
         if (rr != null && rr.size() != 0) {
             for (Road r : rr) {
@@ -338,65 +309,38 @@ public class DEditTrain extends javax.swing.JDialog {
     }
 
     //Возаращеет Train,Route,Road,cars
-    public Object[] open(Train train, HashMap<RoadType, ArrayList<Road>> roads, Road road, ArrayList<Route> routes, Route route, ArrayList<Car> carsInTrain, ArrayList<Car> carsAll) {
-        this.ret = null;
+    public Train open(Train train, int typeTrain) {
         this.train = train;
-        this.roads = roads;
-        this.road = road;
-        this.routes = routes;
-        this.route = route;
-        this.carsAll = carsAll;
-        this.carsInTrain = carsInTrain;
-
         cRoadType.removeAll();
         cRoad.removeAll();
-        if (roads != null && roads.size() != 0) {
-            RoadType rtTmp = null;
-            Set<RoadType> key = roads.keySet();
-            Iterator<RoadType> itRT = key.iterator();
-            while (itRT.hasNext()) {
-                RoadType rt = itRT.next();
-                cRoadType.addItem(rt);
-                ArrayList<Road> lr = roads.get(rt);
-                if (lr != null && road != null) {
-                    if (lr.contains(lr)) {
-                        rtTmp = rt;
-                    }
-                }
-            }
-            if (rtTmp != null) {
-                cRoadType.setSelectedItem(rtTmp);
-                ArrayList<Road> rr = roads.get(rtTmp);
-                for (Road r : rr) {
-                    cRoad.addItem(r);
-                }
-                cRoad.setSelectedItem(road);
-            } else {
-                ArrayList<Road> rr = roads.get(roads.keySet().toArray()[0]);
-                if (rr != null) {
-                    for (Road r : rr) {
-                        cRoad.addItem(r);
-                    }
-                }
-            }
-        } else {
+        RoadType rtTmp = null;
+        ArrayList<RoadType> roadTypes = Model.getModel().getRoadTypes();
+        if (roadTypes == null) {
             JOptionPane.showMessageDialog(null, "Справочник путей пуст");
             return null;
         }
-
-        cRoute.removeAll();
-        if (routes != null && routes.size() != 0) {
-            for (Route r : routes) {
-                cRoute.addItem(r);
+        for (RoadType roadType : roadTypes) {
+            cRoadType.addItem(roadType);
+            if (train.getRoad() != null) {
+                ArrayList<Road> lr = Model.getModel().getRoadsByType(roadType);
+                if (lr != null) {
+                    if (lr.contains(lr)) {
+                        rtTmp = roadType;
+                    }
+                }
             }
-            if (route != null) {
-                cRoute.setSelectedItem(route);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Справочник маршрутов пуст");
-            return null;
         }
+        if (rtTmp != null) {
+            cRoadType.setSelectedItem(rtTmp);
+            ArrayList<Road> roads = Model.getModel().getRoadsByType(rtTmp);
+            for (Road road : roads) {
+                cRoad.addItem(road);
+            }
+            cRoad.setSelectedItem(train.getRoad());
+        }
+
         lCarAll.removeAll();
+        ArrayList<Car> carsAll = Model.getModel().getCars();
         if (carsAll != null && carsAll.size() != 0) {
             for (Car c : carsAll) {
                 ((DefaultListModel) lCarAll.getModel()).addElement(c);
@@ -405,29 +349,41 @@ public class DEditTrain extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Справочник вагонов пуст");
             return null;
         }
+        lCarInTrain.removeAll();
         if (train != null) {
+            if (typeTrain == FORVARD) {
+                fRoute.setText(train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo());
+            } else if (typeTrain == BACK) {
+                fRoute.setText(train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom());
+            } else {
+                JOptionPane.showMessageDialog(null, "Неверный тип маршрут");
+                return null;
+            }
+
             fChief.setText(train.getChief());
-            fDateDeparture.setText(Utils.convertDateTimeToStr(train.getDtDeparture()));
-            fDateDeparture.setText(Utils.convertDateTimeToStr(train.getDtDeparture()));
+            fDate.setText(Utils.convertDateTimeToStr(train.getDtDeparture()));
+            fDate.setText(Utils.convertDateTimeToStr(train.getDtDeparture()));
+            ArrayList<Car> carsInTrain = train.getCarsIn();
             if (carsInTrain != null) {
                 for (Car c : carsInTrain) {
                     ((DefaultListModel) lCarInTrain.getModel()).addElement(c);
-                    ((DefaultListModel) lCarAll.getModel()).removeElement(c);
                 }
             }
-        } else {
-            fChief.setText("");
-            fDateDeparture.setText("");
-            fDateDeparture.setText("");
         }
+//        else {
+//            fChief.setText("");
+//            fDate.setText("");
+//        }
+
         setVisible(true);
-        return ret;
+        return this.train;
     }
 
     private boolean isCorrectInput() {
         if (!fChief.getText().trim().equals("") &&
-                !fDateDeparture.getText().trim().equals("") &&
-                !fDateDestination.getText().trim().equals("") && cRoad.getSelectedItem() != null && cRoute.getSelectedItem() != null) {
+                !fDate.getText().trim().equals("") &&
+                !fDate.getText().trim().equals("") &&
+                cRoad.getSelectedItem() != null) {
             return true;
         } else {
             return false;
@@ -444,12 +400,10 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JButton bSave;
     private javax.swing.JComboBox cRoad;
     private javax.swing.JComboBox cRoadType;
-    private javax.swing.JComboBox cRoute;
     private javax.swing.JTextField fChief;
-    private javax.swing.JFormattedTextField fDateDeparture;
-    private javax.swing.JFormattedTextField fDateDestination;
+    private javax.swing.JFormattedTextField fDate;
+    private javax.swing.JTextField fRoute;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
