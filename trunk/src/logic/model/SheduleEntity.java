@@ -114,7 +114,7 @@ public class SheduleEntity {
 
     private Collection<RouteEntity> routesBySheduleBack;
 
-    @OneToMany(mappedBy = "sheduleBySheduleBack")
+    @OneToMany(mappedBy = "sheduleBack")
     public Collection<RouteEntity> getRoutesBySheduleBack() {
         return routesBySheduleBack;
     }
@@ -125,7 +125,7 @@ public class SheduleEntity {
 
     private Collection<RouteEntity> routesBySheduleForward;
 
-    @OneToMany(mappedBy = "sheduleBySheduleForward")
+    @OneToMany(mappedBy = "sheduleForward")
     public Collection<RouteEntity> getRoutesBySheduleForward() {
         return routesBySheduleForward;
     }
@@ -149,7 +149,7 @@ public class SheduleEntity {
 
     private Collection<SheduleDaysEntity> sheduleDays;
 
-    @OneToMany(mappedBy = "sheduleByIdShedule")
+    @OneToMany(mappedBy = "shedule")
     public Collection<SheduleDaysEntity> getSheduleDays() {
         return sheduleDays;
     }
@@ -160,7 +160,7 @@ public class SheduleEntity {
 
     private Collection<TrainEntity> trains;
 
-    @OneToMany(mappedBy = "sheduleByIdShedule")
+    @OneToMany(mappedBy = "shedule")
     public Collection<TrainEntity> getTrains() {
         return trains;
     }

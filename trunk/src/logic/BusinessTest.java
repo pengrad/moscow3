@@ -27,13 +27,13 @@ public class BusinessTest {
     public static void main(String[] args) throws HibernateInitializeException {
 //        testGetRoutes();
 //        testGetSheduleTypes();
-//        testAddRoute();
+        testAddRoute();
 //        testUpdateRoute();
 //        testGetParentsTypes();
 //        testAddUpdateCar();
 //        testRoads();
 //        testDate();
-        test();
+//        test();
     }
 
 
@@ -80,7 +80,6 @@ public class BusinessTest {
 
     public static void testAddRoute() {
         Time time = new Time(new Date().getTime());
-        Time timeWay = new Time(8, 11, 11);
         SheduleType st = new SheduleType(1, "nonPair");
         Shedule sf = new Shedule(9, time, time, 58, 11, st, null);//new int[]{1,2,34,4});
         Shedule sb = new Shedule(9, time, time, 52, 66, st, null);//new int[]{0,6,1,3});
