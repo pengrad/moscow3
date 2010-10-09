@@ -41,7 +41,12 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     }
 
     public void itemStateChanged(ItemEvent e) {
-
+        if (e.getSource() == pDispStation.cTimeBeforeBack) {
+            update();
+        }
+        if (e.getSource() == pDispStation.cTimeBeforeForward) {
+            update();
+        }
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -80,43 +85,43 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     public void update() {
         ArrayList<Train> trainsOnRoad = TestModel.get().getTrainsGoing();
         ((ModelTable) pDispStation.tTrainOnRoad.getModel()).setDate(getTrainTabView(trainsOnRoad));
-        ArrayList<Train> trainsForward =null ;
+        ArrayList<Train> trainsForward = null;
         ((ModelTable) pDispStation.tTrainForward.getModel()).setDate(getTrainTabView(trainsForward));
         ArrayList<Train> trainsBack = TestModel.get().getTrainsSentToday();
         ((ModelTable) pDispStation.tTrainBack.getModel()).setDate(getTrainTabView(trainsBack));
     }
-
-    private void addDepartureTrain() {
-        dEditTrain.setLocationRelativeTo(pDispStation);
-        Train train = null;
-        HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
-        ArrayList<RoadType> rt = TestModel.get().getRoadTypes();
-        if (roadTypes != null && roadTypes.size() > 0) {
-            for (RoadType rtTmp : rt) {
-                roadTypes.put(rtTmp, TestModel.get().getRoadsByType(rtTmp));
-            }
-
-        }
-        Road road = TestModel.get().getRoadByTrain(train);
-        ArrayList<Route> routes = TestModel.get().getRoutes();
-        Route route = TestModel.get().getRouteByTrain(train);
-        ArrayList<Car> carInTran = TestModel.get().getCarsByTrain(train);
-        ArrayList<Car> carAll = TestModel.get().getCars();
-        //  Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
-//        if (res != null) {
-//            train = (Train) res[0];
-//            route = (Route) res[1];
-//            road = (Road) res[2];
-//            carInTran = (ArrayList<Car>) res[3];
-        //   boolean  b=TestModel.get().addTrain(train,)
-        //   TestModel.get().add
-        //  }
-
-    }
-
-    private void addDestinationTrain() {
-        dEditTrain.setLocationRelativeTo(pDispStation);
-    }
+//
+//    private void addDepartureTrain() {
+//        dEditTrain.setLocationRelativeTo(pDispStation);
+//        Train train = null;
+//        HashMap<RoadType, ArrayList<Road>> roadTypes = new HashMap<RoadType, ArrayList<Road>>();
+//        ArrayList<RoadType> rt = TestModel.get().getRoadTypes();
+//        if (roadTypes != null && roadTypes.size() > 0) {
+//            for (RoadType rtTmp : rt) {
+//                roadTypes.put(rtTmp, TestModel.get().getRoadsByType(rtTmp));
+//            }
+//
+//        }
+//        Road road = TestModel.get().getRoadByTrain(train);
+//        ArrayList<Route> routes = TestModel.get().getRoutes();
+//        Route route = TestModel.get().getRouteByTrain(train);
+//        ArrayList<Car> carInTran = TestModel.get().getCarsByTrain(train);
+//        ArrayList<Car> carAll = TestModel.get().getCars();
+//        //  Object[] res = dEditTrain.open(train, roadTypes, road, routes, route, carInTran, carAll);
+////        if (res != null) {
+////            train = (Train) res[0];
+////            route = (Route) res[1];
+////            road = (Road) res[2];
+////            carInTran = (ArrayList<Car>) res[3];
+//        //   boolean  b=TestModel.get().addTrain(train,)
+//        //   TestModel.get().add
+//        //  }
+//
+//    }
+//
+//    private void addDestinationTrain() {
+//        dEditTrain.setLocationRelativeTo(pDispStation);
+//    }
 
     private void editTrain(JTable activeTab) {
 
@@ -133,6 +138,10 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());
             for (Train train : trains) {
                 ArrayList<Car> cars = TestModel.get().getCarsByTrain(train);
+                String route="";
+                if(train.getRoute().getSheduleBack().equals(train.getShedule())){
+                    
+                }
                 data.add(new Object[]{
                         train.getId(),
                         train.getRoute().getCityFrom() + train.getRoute().getCityFrom(),
@@ -143,21 +152,9 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
                         ((cars == null) ? 0 : cars.size())
                 });
             }
-            data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия/отправления", "Начальник", "Путь", "Кол-во вагонов"});
+            data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия", "Дата и время отправления", "Начальник", "Путь", "Кол-во вагонов"});
             return data;
         }
-        return null;
-    }
-
-    public Train getTrainByTabRow(int row, JTable table) {
-        if (row < 0 || row > table.getModel().getRowCount()) {
-            return null;
-        }
-//        return new Train(
-//                new Integer(table.getModel().getValueAt(row, 0).toString()),
-//                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 2).toString()),
-//                Utils.convertStrToDateTime(table.getModel().getValueAt(row, 3).toString()),
-//                table.getModel().getValueAt(row, 4).toString());
         return null;
     }
 }
