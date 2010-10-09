@@ -5,6 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 public class BusinessManager implements BusinessLogic {
@@ -237,7 +238,6 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<CarType> getCarParentTypes() {
         ArrayList<CarType> types = null;
         try {
-            Collection<CarTypeEntity> cte = SessionManager.getAllObjects(new CarTypeEntity());
             Criteria crit = SessionManager.getSession().createCriteria(CarTypeEntity.class).
                     add(Restrictions.isNull("carParentType"));
             List list = crit.list();
@@ -354,57 +354,32 @@ public class BusinessManager implements BusinessLogic {
         return list;
     }
 
-    public void generate(SheduleEntity shedule) {
-        Date current = HibernateUtils.getDate(SessionManager.getSession());
+    public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin) {
         GregorianCalendar firstDate = new GregorianCalendar();
+        firstDate.setTime(dateBegin);
         firstDate.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(shedule.getTimeFrom()));
         firstDate.set(Calendar.MINUTE, DateUtils.getMinutes(shedule.getTimeFrom()));
-        if (current.getTime() > firstDate.getTimeInMillis()) firstDate.add(Calendar.DAY_OF_MONTH, 1);
+        if (dateBegin.getTime() > firstDate.getTimeInMillis()) firstDate.add(Calendar.DAY_OF_MONTH, 1);
         ArrayList<Integer> days = new ArrayList<Integer>();
+        int calendarType = Calendar.DAY_OF_MONTH;
         switch (shedule.getSheduleType().getIdSheduleType()) {
             case BusinessLogic.NONPAIR:
-                List<Integer> d = Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31);
+                List<Integer> d = Arrays.asList(1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31);
                 days.addAll(d);
                 break;
             case BusinessLogic.PAIR:
-                List<Integer> dd = Arrays.asList(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30);
+                List<Integer> dd = Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30);
                 days.addAll(dd);
                 break;
-            default:
-                for(SheduleDaysEntity sd : shedule.getSheduleDays()) {
+            case BusinessLogic.DAYS_WEEK:
+                calendarType = Calendar.DAY_OF_WEEK;
+            case BusinessLogic.DAYS_MONTH:
+                for (SheduleDaysEntity sd : shedule.getSheduleDays()) {
                     days.add(sd.getDay());
                 }
                 break;
         }
-        DateUtils.getDates(firstDate.getTime(), days, 20);
-    } 
-
-    public void generateTrains(SheduleEntity forward, SheduleEntity back) {
-        Date current = HibernateUtils.getDate(SessionManager.getSession());
-        GregorianCalendar firstForward = new GregorianCalendar();
-        GregorianCalendar firstBack = new GregorianCalendar();
-        firstForward.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(forward.getTimeFrom()));
-        firstForward.set(Calendar.MINUTE, DateUtils.getMinutes(forward.getTimeFrom()));
-        firstBack.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(back.getTimeFrom()));
-        firstBack.set(Calendar.MINUTE, DateUtils.getMinutes(back.getTimeFrom()));
-        switch (forward.getSheduleType().getIdSheduleType()) {
-            case BusinessLogic.NONPAIR:
-                if (firstForward.get(Calendar.DAY_OF_MONTH) % 2 == 1) {
-                    if (current.getTime() > firstForward.getTimeInMillis()) firstForward.add(Calendar.DAY_OF_MONTH, 2);
-                } else {
-                    firstForward.add(Calendar.DAY_OF_MONTH, 1);
-                }
-                break;
-            case BusinessLogic.PAIR:
-                if (firstForward.get(Calendar.DAY_OF_MONTH) % 2 == 0) {
-                    if (current.getTime() > firstForward.getTimeInMillis()) firstForward.add(Calendar.DAY_OF_MONTH, 2);
-                } else {
-                    firstForward.add(Calendar.DAY_OF_MONTH, 1);
-                }
-                break;
-            default:
-                break;
-        }
+        return DateUtils.getDates(firstDate.getTime(), days, 20, calendarType);
     }
 
     public void test() {
