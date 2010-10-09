@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -45,4 +46,11 @@ public class DateUtils {
         return dates;
     }
 
+    public static Timestamp getDatePlusTime(Date date, Time time) {
+        return null; //todo
+    }
+
+    public static Timestamp getDateMinusTime(Date date, Time time) {
+        return null; //todo
+    }
 }

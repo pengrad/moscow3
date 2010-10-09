@@ -16,6 +16,13 @@ import java.util.Collection;
 @Entity
 public class TrainStatusEntity {
 
+    public TrainStatusEntity() {
+    }
+
+    public TrainStatusEntity(int idStatus, String cStatus) {
+        this.idStatus = idStatus;
+        this.cStatus = cStatus;
+    }
 
     private int idStatus;
 

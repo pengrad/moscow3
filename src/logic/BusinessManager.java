@@ -25,7 +25,7 @@ public class BusinessManager implements BusinessLogic {
 //        Object o = null; o.getClass().getField("ss").get
     }
 
-    public Date getDate() {
+    public Date getCurrentDate() {
         return HibernateUtils.getDate(SessionManager.getSession());
     }
 
@@ -144,11 +144,14 @@ public class BusinessManager implements BusinessLogic {
                     SheduleDaysEntity sde = new SheduleDaysEntity(day, sbe);
                     SessionManager.saveOrUpdateEntities(sde);
                 }
-            Date d = HibernateUtils.getDate(SessionManager.getSession());
-            GregorianCalendar now = new GregorianCalendar();
-            now.setTime(d);
-            GregorianCalendar t = new GregorianCalendar();
-            t.setTime(sfe.getTimeFrom());
+            Date currentDate = getCurrentDate();
+            TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+            // генерируем отправляющиеся поезда с текущего момента
+            for(Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
+                Timestamp dateTo = null; //todo вызов метода прибавления к дате - времени
+                TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned);
+            }
+            SessionManager.getSession().flush();
             SessionManager.commit();
             return true;
         } catch (Exception e) {
@@ -354,7 +357,7 @@ public class BusinessManager implements BusinessLogic {
         return list;
     }
 
-    public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin) {
+    public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();
         firstDate.setTime(dateBegin);
         firstDate.set(Calendar.HOUR_OF_DAY, DateUtils.getHours(shedule.getTimeFrom()));
@@ -379,7 +382,7 @@ public class BusinessManager implements BusinessLogic {
                 }
                 break;
         }
-        return DateUtils.getDates(firstDate.getTime(), days, 20, calendarType);
+        return DateUtils.getDates(firstDate.getTime(), days, count, calendarType);
     }
 
     public void test() {
