@@ -27,6 +27,10 @@ public class Car {
     private int runTozNorm;
     private int runToz;
 
+    public Car(int number) {
+        this.number = number;
+    }
+
     public Car(int number, String model, CarLocation carLocation, CarType carType, String conditioner, String generator, String generatorPrivod, String accumulator, String electricDevice, String bodyColor, boolean ecologicCoilet, int runNorm, int run, int runTozNorm, int runToz) {
         this.number = number;
         this.model = model;
