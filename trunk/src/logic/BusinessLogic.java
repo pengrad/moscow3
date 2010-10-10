@@ -58,4 +58,6 @@ public interface BusinessLogic {
     public ArrayList<Road> getRoadsByType(RoadType roadType);
 
     public ArrayList<Train> getGoingTrains(int forHours);
+
+    public ArrayList<Train> getArrivingTrains(int forHours);
 }
