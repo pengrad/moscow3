@@ -339,11 +339,12 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<Train> getArrivingTrains(int forHours) {
         try {
+            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
             for(RouteEntity re : r) se.add(re.getSheduleBack());
             Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
-                    add(Restrictions.in("shedule", se));
+                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
             ArrayList<Train> list = new ArrayList<Train>();
             for(TrainEntity te : (List<TrainEntity>)crit.list()){
                 TrainStatus ts = new TrainStatus(te.getTrainStatus().getIdStatus(), te.getTrainStatus().getcStatus());
