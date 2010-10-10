@@ -26,7 +26,7 @@ public class BusinessManager implements BusinessLogic {
 //        Object o = null; o.getClass().getField("ss").get
     }
 
-    Session getSession() {
+    public Session getSession() {
         return SessionManager.getSession();
     }
 
@@ -321,6 +321,27 @@ public class BusinessManager implements BusinessLogic {
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
             for(RouteEntity re : r) se.add(re.getSheduleForward());
+            Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
+                    add(Restrictions.in("shedule", se));
+            ArrayList<Train> list = new ArrayList<Train>();
+            for(TrainEntity te : (List<TrainEntity>)crit.list()){
+                TrainStatus ts = new TrainStatus(te.getTrainStatus().getIdStatus(), te.getTrainStatus().getcStatus());
+                RouteEntity re = (RouteEntity)te.getShedule().getRoutesBySheduleForward().toArray()[0];
+                Route rr = EntityConverter.convertRoute(re);
+                Train t = new Train(te.getIdTrain(), te.getDateFrom(), te.getDateTo(), te.getTrainChief(), rr.getSheduleForward(), rr, ts, null, null);
+                list.add(t);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ArrayList<Train> getArrivingTrains(int forHours) {
+        try {
+            Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
+            ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
+            for(RouteEntity re : r) se.add(re.getSheduleBack());
             Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
                     add(Restrictions.in("shedule", se));
             ArrayList<Train> list = new ArrayList<Train>();
