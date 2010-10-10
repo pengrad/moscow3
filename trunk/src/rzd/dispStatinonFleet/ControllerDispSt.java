@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rzd.dispStatinoFleet;
+package rzd.dispStatinonFleet;
 
 import rzd.ModelTable;
+import rzd.Updateble;
+import rzd.model.Model;
 import rzd.model.TestModel;
 import rzd.utils.Utils;
 import rzd.model.objects.*;
@@ -12,12 +14,11 @@ import rzd.model.objects.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author ЧерныхЕА
  */
-public class Controller implements MouseListener, ActionListener, ItemListener {
+public class ControllerDispSt implements MouseListener, ActionListener, ItemListener, Updateble {
 
     private PDispStation pDispStation;
     private JPopupMenu menuTrain;
@@ -26,7 +27,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     private JTable activeTable;
     private DEditTrain dEditTrain;
 
-    public Controller(PDispStation pDispStation) {
+    public ControllerDispSt(PDispStation pDispStation) {
         this.pDispStation = pDispStation;
         menuTrain = new JPopupMenu();
         //   editTrain = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
@@ -44,7 +45,7 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
         if (e.getSource() == pDispStation.cTimeBeforeBack) {
             update();
         }
-        if (e.getSource() == pDispStation.cTimeBeforeForward) {
+        if (e.getSource() == pDispStation.cTimeBeforeGoingTrains) {
             update();
         }
     }
@@ -85,8 +86,8 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
     public void update() {
         ArrayList<Train> trainsOnRoad = TestModel.get().getTrainsGoing();
         ((ModelTable) pDispStation.tTrainOnRoad.getModel()).setDate(getTrainTabView(trainsOnRoad));
-        ArrayList<Train> trainsForward = null;
-        ((ModelTable) pDispStation.tTrainForward.getModel()).setDate(getTrainTabView(trainsForward));
+        ArrayList<Train> goingTrains = Model.getModel().getGoingTrains(new Integer(pDispStation.cTimeBeforeGoingTrains.getSelectedItem().toString()));
+        ((ModelTable) pDispStation.tGoingTrains.getModel()).setDate(getTrainTabView(goingTrains));
         ArrayList<Train> trainsBack = TestModel.get().getTrainsSentToday();
         ((ModelTable) pDispStation.tTrainBack.getModel()).setDate(getTrainTabView(trainsBack));
     }
@@ -138,13 +139,16 @@ public class Controller implements MouseListener, ActionListener, ItemListener {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());
             for (Train train : trains) {
                 ArrayList<Car> cars = TestModel.get().getCarsByTrain(train);
-                String route="";
-                if(train.getRoute().getSheduleBack().equals(train.getShedule())){
-                    
+                String route = "";
+                if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
+                    route = train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo();
+                }
+                if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
+                    route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom();
                 }
                 data.add(new Object[]{
                         train.getId(),
-                        train.getRoute().getCityFrom() + train.getRoute().getCityFrom(),
+                        route,
                         Utils.convertDateToStr(train.getDtDeparture()),
                         Utils.convertDateToStr(train.getDtDestination()),
                         train.getChief(),

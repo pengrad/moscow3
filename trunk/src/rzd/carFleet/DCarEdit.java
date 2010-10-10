@@ -8,7 +8,7 @@
  *
  * Created on 10.09.2010, 19:57:36
  */
-package rzd.carsFleet;
+package rzd.carFleet;
 
 import java.awt.Component;
 import java.util.ArrayList;

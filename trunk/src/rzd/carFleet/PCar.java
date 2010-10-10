@@ -8,23 +8,23 @@
  *
  * Created on 10.09.2010, 16:49:33
  */
-package rzd.carsFleet;
+package rzd.carFleet;
 
 import rzd.ModelTable;
 
 /**
  * @author ЧерныхЕА
  */
-public class PCars extends javax.swing.JPanel {
+public class PCar extends javax.swing.JPanel {
 
-    private Controller c;
+    private ControllerCar c;
 
     /**
      * Creates new form PCarFleet
      */
-    public PCars() {
+    public PCar() {
         initComponents();
-        c = new Controller(this);
+        c = new ControllerCar(this);
         tCars.addMouseListener(c);
         bAddCar.addActionListener(c);
         fSearch.addActionListener(c);

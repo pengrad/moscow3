@@ -5,14 +5,11 @@
 package rzd;
 
 import rzd.MainFrame;
-import rzd.carsFleet.PCars;
-import rzd.dispStatinoFleet.PDispStation;
+import rzd.carFleet.PCar;
+import rzd.dispStatinonFleet.PDispStation;
 import rzd.routeFleet.PRoute;
 import rzd.scheduleFleet.PSchedule;
 import rzd.stationFleet.PStationFleet;
-
-import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * @author ЧерныхЕА
@@ -24,9 +21,9 @@ public class ControllerMain {
     private PStationFleet pStationFleet;
     private PSchedule pSchedule;
     private PDispStation pDispStation;
-    private PCars pCars;
+    private PCar pCars;
     private PRoute pRoute;
-
+    
     public static ControllerMain getInstans() {
         return cm;
     }
@@ -36,7 +33,7 @@ public class ControllerMain {
         pStationFleet = new PStationFleet();
         pSchedule = new PSchedule();
         pDispStation = new PDispStation();
-        pCars = new PCars();
+        pCars = new PCar();
         pRoute = new PRoute();
         mf.tabbedtMain.add("Станция", pStationFleet);
         mf.tabbedtMain.add("Расписание", pSchedule);
@@ -57,5 +54,8 @@ public class ControllerMain {
 
     public static void main(String[] args) {
         ControllerMain.getInstans();
+    }
+    public void update(){
+
     }
 }
