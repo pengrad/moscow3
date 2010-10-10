@@ -36,6 +36,7 @@ public class BusinessTest {
 //        testDate();
 //        test();
         testGoingTrains();
+        testArrivingTrains();
     }
 
 
@@ -62,10 +63,13 @@ public class BusinessTest {
 
     public static void testAddRoute() {
         Time time = new Time(new Date().getTime());
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.add(Calendar.HOUR_OF_DAY, 5);
+        Time tback = new Time(gc.getTimeInMillis());
         SheduleType st = new SheduleType(1, "nonPair");
-        Shedule sf = new Shedule(9, time, time, 58, 11, st, null);//new int[]{1,2,34,4});
-        Shedule sb = new Shedule(9, time, time, 52, 66, st, null);//new int[]{0,6,1,3});
-        Route r = new Route(9, "тест", "тест", "Evgen", "Ekaterina", sf, sb, true, 101, 101);
+        Shedule sf = new Shedule(9, time, time, 10, 11, st, null);//new int[]{1,2,34,4});
+        Shedule sb = new Shedule(9, tback, tback, 11, 20, st, null);//new int[]{0,6,1,3});
+        Route r = new Route(9, "тест", "тест", "Москва", "Питер", sf, sb, true, 101, 101);
         manager.addRoute(r);
     }
 
@@ -106,7 +110,13 @@ public class BusinessTest {
 
     public static void testGoingTrains() {
         for(Train te : manager.getGoingTrains(1)) {
-            System.out.println(te.getDtDeparture() + " " + te.getRoute().getCityFrom());
+            System.out.println(te.getDtDeparture() + " " + te.getDtDestination());
+        }
+    }
+
+    public static void testArrivingTrains() {
+        for(Train te : manager.getArrivingTrains(1)) {
+            System.out.println(te.getDtDeparture() + " " + te.getDtDestination());
         }
     }
 }
