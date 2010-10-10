@@ -8,12 +8,9 @@
  *
  * Created on 18.09.2010, 19:16:47
  */
-package rzd.dispStatinoFleet;
+package rzd.dispStatinonFleet;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import rzd.model.Model;
@@ -21,7 +18,6 @@ import rzd.utils.Utils;
 import rzd.model.objects.Car;
 import rzd.model.objects.Road;
 import rzd.model.objects.RoadType;
-import rzd.model.objects.Route;
 import rzd.model.objects.Train;
 
 /**

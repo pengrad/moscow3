@@ -18,12 +18,12 @@ import rzd.ModelTable;
 
 public class PRoute extends javax.swing.JPanel {
 
-    private Controller c;
+    private ControllerRoute c;
 
     /** Creates new form PTrain */
     public PRoute() {
         initComponents();
-        this.c = new Controller(this);
+        this.c = new ControllerRoute(this);
         bCreateRoute.addActionListener(c);
         tRoute.addMouseListener(c);
         fSearch.addActionListener(c);

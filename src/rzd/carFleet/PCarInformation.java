@@ -9,9 +9,8 @@
  * Created on 10.09.2010, 19:33:44
  */
 
-package rzd.carsFleet;
+package rzd.carFleet;
 
-import javax.jws.WebParam.Mode;
 import rzd.model.Model;
 import rzd.model.objects.Car;
 import rzd.model.objects.CarType;

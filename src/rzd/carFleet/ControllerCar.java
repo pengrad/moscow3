@@ -1,8 +1,7 @@
-package rzd.carsFleet;
+package rzd.carFleet;
 
 import rzd.ControllerMain;
 import rzd.ModelTable;
-import rzd.model.TestModel;
 import rzd.model.objects.Car;
 import rzd.utils.MakerDefaultTextInField;
 
@@ -23,9 +22,9 @@ import rzd.utils.Utils;
  * Time: 16:50:30
  * To change this template use File | Settings | File Templates.
  */
-public class Controller implements MouseListener, ActionListener {
+public class ControllerCar implements MouseListener, ActionListener {
 
-    private PCars pCarFleet;
+    private PCar pCarFleet;
     private JPopupMenu popCarMenu;
     private JPopupMenu popCarInfMenu;
     private JPopupMenu popHistLocationCar;
@@ -37,7 +36,7 @@ public class Controller implements MouseListener, ActionListener {
     private PCarInformation carInformation;
     private DCarEdit dCarEdit;
 
-    public Controller(PCars p) {
+    public ControllerCar(PCar p) {
         this.pCarFleet = p;
         dCarEdit = new DCarEdit(null, true);
         carInformation = new PCarInformation();
@@ -45,7 +44,7 @@ public class Controller implements MouseListener, ActionListener {
         popCarInfMenu = new JPopupMenu();
         popCarInfMenu.add(carInformation);
         popHistLocationCar = new JPopupMenu();
-        popHistLocationCar.add(new PHistory());
+        popHistLocationCar.add(new PCarHistory());
         viewCar = new JMenuItem("Посмотреть на карте станции", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
         viewCar.addActionListener(this);
         locationCar = new JMenuItem("Изменить местоположения вагона", new ImageIcon(getClass().getResource("/rzd/resurce/bt11.gif")));

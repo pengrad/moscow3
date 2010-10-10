@@ -84,4 +84,13 @@ public class Shedule {
     public void setDays(int[] days) {
         this.days = days;
     }
+
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Shedule)) {
+            return false;
+        } else {
+            if (((Shedule) o).getId() == getId()) return true;
+        }
+        return false;
+    }
 }

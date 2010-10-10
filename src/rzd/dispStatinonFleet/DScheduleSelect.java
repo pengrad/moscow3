@@ -8,7 +8,7 @@
  *
  * Created on 18.09.2010, 21:51:28
  */
-package rzd.dispStatinoFleet;
+package rzd.dispStatinonFleet;
 
 import rzd.model.objects.Shedule;
 

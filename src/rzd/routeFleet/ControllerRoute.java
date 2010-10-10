@@ -23,7 +23,7 @@ import rzd.utils.Utils;
  * Time: 17:43:47
  * To change this template use File | Settings | File Templates.
  */
-public class Controller implements ActionListener, MouseListener {
+public class ControllerRoute implements ActionListener, MouseListener {
 
     private PRoute pRoute;
     private DRouteEdit dEditRoute;
@@ -31,7 +31,7 @@ public class Controller implements ActionListener, MouseListener {
     private JMenuItem editRoute;
     private JMenuItem deleteRoute;
 
-    public Controller(PRoute p) {
+    public ControllerRoute(PRoute p) {
         this.pRoute = p;
         dEditRoute = new DRouteEdit(null, true);
 

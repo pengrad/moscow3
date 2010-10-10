@@ -9,16 +9,16 @@
  * Created on 11.09.2010, 19:57:42
  */
 
-package rzd.carsFleet;
+package rzd.carFleet;
 
 /**
  *
  * @author ЧерныхЕА
  */
-public class PHistory extends javax.swing.JPanel {
+public class PCarHistory extends javax.swing.JPanel {
 
     /** Creates new form PHistory */
-    public PHistory() {
+    public PCarHistory() {
         initComponents();
     }
 
