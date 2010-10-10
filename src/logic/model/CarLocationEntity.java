@@ -13,6 +13,7 @@ import java.util.Collection;
 @Entity
 public class CarLocationEntity {
 
+    
 
     private int idLocation;
 

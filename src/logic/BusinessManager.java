@@ -365,7 +365,14 @@ public class BusinessManager implements BusinessLogic {
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
             for (Car car : train.getCarsIn()) ces.add(EntityConverter.convertCar(car));
             if (ces.size() == 0) throw new Exception("Нет вагонов!");
-//            for()           
+            ArrayList<TrainDetEntity> tdes = new ArrayList<TrainDetEntity>(ces.size());
+            ArrayList<CarHistoryEntity> ches = new ArrayList<CarHistoryEntity>(ces.size());
+            for (CarEntity ce : ces) {
+                if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
+                    throw new Exception("Некоторые вагоны уже в составе другого поезда");
+                ce.setCarLocation(EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, "")));
+                
+            }
 
             RoadDetEntity rde = new RoadDetEntity(re, null, te);
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
