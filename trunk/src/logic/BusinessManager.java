@@ -6,8 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -363,23 +364,25 @@ public class BusinessManager implements BusinessLogic {
             if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED) throw new Exception("Поезд сформирован!");
             if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
-            for (Car car : train.getCarsIn()) ces.add(EntityConverter.convertCar(car));
+            for (Car car : train.getCarsIn()) ces.add(SessionManager.getEntityById(new CarEntity(), car.getNumber()));
             if (ces.size() == 0) throw new Exception("Нет вагонов!");
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
             te.setTrainChief(train.getChief());
             te.setTrainStatus(tse);
             SessionManager.saveOrUpdateEntities(te);
+            Date currentDate = getCurrentDate();
+            java.sql.Date date = new java.sql.Date(currentDate.getTime());
             for (CarEntity ce : ces) {
                 if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
                     throw new Exception("Некоторые вагоны уже в составе другого поезда");
                 // todo обработка ремонта
-                for(RoadDetEntity rde : ce.getRoadDets()) {
+                for (RoadDetEntity rde : ce.getRoadDets()) {
                     SessionManager.deleteEntities(rde);
                 }
                 CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
                 ce.setCarLocation(cle);
                 TrainDetEntity tde = new TrainDetEntity(ce, te);
-                CarHistoryEntity che = new CarHistoryEntity(null, cle, te, null, ce, null);
+                CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
                 SessionManager.saveOrUpdateEntities(ce, tde, che);
             }
             RoadDetEntity rde = new RoadDetEntity(re, null, te);

@@ -63,7 +63,7 @@ public class TrainDetEntity {
 
     @ManyToOne
     public
-    @JoinColumn(name = "id_train", referencedColumnName = "id_train", nullable = false)
+    @JoinColumn(name = "id_train", referencedColumnName = "id_train", nullable = false, insertable = false, updatable = false)
     TrainEntity getTrain() {
         return train;
     }

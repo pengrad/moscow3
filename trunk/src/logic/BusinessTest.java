@@ -37,8 +37,8 @@ public class BusinessTest {
 //        test();
 //        testGoingTrains();
 //        testArrivingTrains();
-//        testMakeTrainForGoing();
-        testGetTrainsOnRoads();
+        testMakeTrainForGoing();
+//        testGetTrainsOnRoads();
     }
 
 
@@ -124,7 +124,9 @@ public class BusinessTest {
 
     public static void testMakeTrainForGoing() {
         try {
-            manager.makeTrainForGoing(new Train(127, new Road(15), "Petrov", null));
+            ArrayList<Car> cars = new ArrayList<Car>();
+            cars.add(new Car(12312345));
+            manager.makeTrainForGoing(new Train(128, new Road(14), "Petrov", cars));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,5 +136,9 @@ public class BusinessTest {
         for(Train t :manager.getTrainsOnRoads()) {
             System.out.println(t.getChief() + " - " + t.getRoad().getName());
         }
+    }
+
+    public static void testGetTrainByID() {
+        
     }
 }
