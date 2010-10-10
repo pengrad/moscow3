@@ -347,7 +347,7 @@ public class BusinessManager implements BusinessLogic {
             ArrayList<Train> list = new ArrayList<Train>();
             for(TrainEntity te : (List<TrainEntity>)crit.list()){
                 TrainStatus ts = new TrainStatus(te.getTrainStatus().getIdStatus(), te.getTrainStatus().getcStatus());
-                RouteEntity re = (RouteEntity)te.getShedule().getRoutesBySheduleForward().toArray()[0];
+                RouteEntity re = (RouteEntity)te.getShedule().getRoutesBySheduleBack().toArray()[0];
                 Route rr = EntityConverter.convertRoute(re);
                 Train t = new Train(te.getIdTrain(), te.getDateFrom(), te.getDateTo(), te.getTrainChief(), rr.getSheduleForward(), rr, ts, null, null);
                 list.add(t);
