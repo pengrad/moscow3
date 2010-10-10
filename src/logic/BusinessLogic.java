@@ -27,6 +27,12 @@ public interface BusinessLogic {
     public static final int ARRIVED = 4;
     public static final int DESTROYED = 5;
 
+    // Местоположения вагона
+    public static final int UNKNOWN = 1;
+    public static final int IN_TRAIN = 2;
+    public static final int ON_ROAD = 3;
+    public static final int REPAIR = 4;
+
     public Date getCurrentDate();
 
     public ArrayList<Route> getRoutes();
@@ -65,5 +71,5 @@ public interface BusinessLogic {
 
     public ArrayList<Train> getArrivingTrains(int forHours);
 
-    public boolean makeTrainForGoing(Train train, Road road, ArrayList<Car> cars, String trainChief);
+    public boolean makeTrainForGoing(Train train) throws Exception;
 }

@@ -182,13 +182,20 @@ public class EntityConverter {
             // маршрут у расписания должен быть всегда один!
             RouteEntity re = (RouteEntity) routes.toArray()[0];
             Route route = EntityConverter.convertRoute(re);
-            Road road = null;
             // поезд должен быть максимум на одном пути!
+            Road road = null;
             if (train.getRoadDets() != null && train.getRoadDets().size() > 0) {
                 road = convertRoad(((RoadDetEntity) train.getRoadDets().toArray()[0]).getRoad());
             }
+            ArrayList<Car> cars = null;
+            if (train.getTrainDets() != null && train.getTrainDets().size() > 0) {
+                cars = new ArrayList<Car>(train.getTrainDets().size());
+                for (TrainDetEntity tde : train.getTrainDets()) {
+                    cars.add(convertCar(tde.getCar()));
+                }
+            }
             return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(),
-                    convertShedule(train.getShedule()), route, ts, road, null);
+                    convertShedule(train.getShedule()), route, ts, road, cars);
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
