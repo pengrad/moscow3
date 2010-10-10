@@ -355,19 +355,21 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
-    public boolean makeTrainForGoing(Train train, Road road, ArrayList<Car> cars, String trainChief) {
+    public boolean makeTrainForGoing(Train train) throws Exception {
         try {
             SessionManager.beginTran();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
-            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
+            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
             if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED) throw new Exception("Поезд сформирован!");
             if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
-//            ArrayList<CarEntity> ces = new ArrayList<CarEntity>(cars.size());
-//            for (Car car : cars) ces.add(EntityConverter.convertCar(car));
-//            if (ces.size() == 0) throw new Exception("Нет вагонов!");
+            ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
+            for (Car car : train.getCarsIn()) ces.add(EntityConverter.convertCar(car));
+            if (ces.size() == 0) throw new Exception("Нет вагонов!");
+//            for()           
+
             RoadDetEntity rde = new RoadDetEntity(re, null, te);
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
-            te.setTrainChief(trainChief);
+            te.setTrainChief(train.getChief());
             te.setTrainStatus(tse);
             SessionManager.saveOrUpdateEntities(te, rde);
             SessionManager.commit();
@@ -375,7 +377,7 @@ public class BusinessManager implements BusinessLogic {
         } catch (Exception e) {
             e.printStackTrace();
             SessionManager.rollback();
-            return false;
+            throw e;
         } finally {
             SessionManager.closeSession();
         }

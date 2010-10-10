@@ -21,8 +21,8 @@ public class Train {
     private Road road;
     private ArrayList<Car> carsIn;
 
-    public Train(int id) {
-        this(id, null, null, null, null, null, null, null, null);
+    public Train(int id, Road road, String chief, ArrayList<Car> cars) {
+        this(id, null, null, chief, null, null, null, road, cars);
     }
 
     public Train(int id, Date dtDeparture, Date dtDestination, String chief, Shedule shedule, Route route, TrainStatus trainStatus, Road road, ArrayList<Car> carsIn) {
