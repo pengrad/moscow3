@@ -23,7 +23,7 @@ public class ControllerMain {
     private PDispStation pDispStation;
     private PCar pCars;
     private PRoute pRoute;
-    
+
     public static ControllerMain getInstans() {
         return cm;
     }
@@ -55,7 +55,8 @@ public class ControllerMain {
     public static void main(String[] args) {
         ControllerMain.getInstans();
     }
-    public void update(){
+
+    public void update() {
 
     }
 }

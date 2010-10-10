@@ -42,7 +42,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     }
 
     public void itemStateChanged(ItemEvent e) {
-        if (e.getSource() == pDispStation.cTimeBeforeBack) {
+        if (e.getSource() == pDispStation.cTimeBeforeArrivingTrains) {
             update();
         }
         if (e.getSource() == pDispStation.cTimeBeforeGoingTrains) {
@@ -52,6 +52,11 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() instanceof JTable && e.getButton() == 3) {
+            if (e.getSource() == pDispStation.tTrainOnRoad) {
+                viewTrain.setEnabled(true);
+            } else {
+                viewTrain.setEnabled(false);
+            }
             int row = ((JTable) e.getSource()).rowAtPoint(e.getPoint());
             ((JTable) e.getSource()).addRowSelectionInterval(row, row);
             menuTrain.show((JTable) e.getSource(), e.getX(), e.getY());
@@ -72,24 +77,20 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     }
 
     public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() == pDispStation.bAddDeparture) {
-//            addDepartureTrain();
-//        } else if (e.getSource() == pDispStation.bAddDestination) {
-//            addDestinationTrain();
-//        } else if (e.getSource() == editTrain) {
-//            editTrain(activeTable);
-//        } else if (e.getSource() == viewTrain) {
-//            viewTrain(activeTable);
-//        }
+        if (e.getSource() == editTrain) {
+            editTrain(activeTable);
+        } else if (e.getSource() == viewTrain) {
+            viewTrain(activeTable);
+        }
     }
 
     public void update() {
-        ArrayList<Train> trainsOnRoad = TestModel.get().getTrainsGoing();
+        ArrayList<Train> trainsOnRoad = Model.getModel().getTrainsOnRoads();
         ((ModelTable) pDispStation.tTrainOnRoad.getModel()).setDate(getTrainTabView(trainsOnRoad));
         ArrayList<Train> goingTrains = Model.getModel().getGoingTrains(new Integer(pDispStation.cTimeBeforeGoingTrains.getSelectedItem().toString()));
         ((ModelTable) pDispStation.tGoingTrains.getModel()).setDate(getTrainTabView(goingTrains));
-        ArrayList<Train> trainsBack = TestModel.get().getTrainsSentToday();
-        ((ModelTable) pDispStation.tTrainBack.getModel()).setDate(getTrainTabView(trainsBack));
+        ArrayList<Train> arrivingTrains = Model.getModel().getArrivingTrains(new Integer(pDispStation.cTimeBeforeArrivingTrains.getSelectedItem().toString()));
+        ((ModelTable) pDispStation.tArrivingTrains.getModel()).setDate(getTrainTabView(arrivingTrains));
     }
 //
 //    private void addDepartureTrain() {
@@ -125,7 +126,29 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
 //    }
 
     private void editTrain(JTable activeTab) {
-
+        Train train = null;
+        int row = activeTab.getSelectedRow();
+        if (row > -1 && row < activeTab.getRowCount()) {
+            int idTrain = new Integer(activeTab.getValueAt(row, 0).toString());
+            if (activeTab == pDispStation.tGoingTrains)
+                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
+            if (activeTab == pDispStation.tArrivingTrains)
+                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
+            if (activeTab == pDispStation.tTrainOnRoad)
+                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
+            if (train != null) {
+                boolean b = false;
+                try {
+                    b = Model.getModel().makeTrainForGoing(train);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "Внимание...", JOptionPane.INFORMATION_MESSAGE);
+                }
+                if (b) {
+                    JOptionPane.showMessageDialog(pDispStation, "Информация о поезде изменена", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
+                    update();
+                }
+            }
+        }
     }
 
     private void viewTrain(JTable activeTab) {
@@ -149,8 +172,8 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
                 data.add(new Object[]{
                         train.getId(),
                         route,
-                        Utils.convertDateToStr(train.getDtDeparture()),
-                        Utils.convertDateToStr(train.getDtDestination()),
+                        Utils.convertDateTimeToStr(train.getDtDeparture()),
+                        Utils.convertDateTimeToStr(train.getDtDestination()),
                         train.getChief(),
                         (train.getRoad() != null ? train.getRoad().getName() : "Путь не задан"),
                         ((cars == null) ? 0 : cars.size())

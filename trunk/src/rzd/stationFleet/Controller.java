@@ -40,7 +40,7 @@ public class Controller implements ActionListener, MouseListener {
         this.pStationFleet = p;
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
-        pCarInformation = new PCarInformation();
+        pCarInformation = PCarInformation.getInstance();
         popupCarInformation = new JPopupMenu();
         popupCarInformation.add(pCarInformation);
         makeTabs();
