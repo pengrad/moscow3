@@ -13,6 +13,14 @@ import javax.persistence.*;
 @Entity
 public class TrainDetEntity {
 
+    public TrainDetEntity() {
+    }
+
+    public TrainDetEntity(CarEntity car, TrainEntity train) {
+        setCar(car);
+        setTrain(train);
+    }
+
     private int idTrain;
 
     @Column(name = "id_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
