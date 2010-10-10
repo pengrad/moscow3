@@ -308,29 +308,77 @@ public class BusinessManager implements BusinessLogic {
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), idTrain);
             return EntityConverter.convertTrain(te);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public ArrayList<Train> getTrainsOnRoads() {
+        try {
+            Collection<RoadEntity> res = SessionManager.getAllObjects(new RoadEntity());
+            ArrayList<RoadDetEntity> rdes = new ArrayList<RoadDetEntity>();
+            for (RoadEntity re : res) rdes.addAll(re.getRoadDets());
+            ArrayList<Train> list = new ArrayList<Train>();
+            for (RoadDetEntity rde : rdes) {
+                TrainEntity te = rde.getTrain();
+                if (te != null) list.add(EntityConverter.convertTrain(te));
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
         }
     }
 
     public ArrayList<Train> getGoingTrains(int forHours) {
         try {
+            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
-            for(RouteEntity re : r) se.add(re.getSheduleForward());
+            for (RouteEntity re : r) se.add(re.getSheduleForward());
             Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
-                    add(Restrictions.in("shedule", se));
+                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
             ArrayList<Train> list = new ArrayList<Train>();
-            for(TrainEntity te : (List<TrainEntity>)crit.list()){
-                list.add(EntityConverter.convertTrain(te));
+            for (Object te : crit.list()) {
+                list.add(EntityConverter.convertTrain((TrainEntity) te));
             }
             return list;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
+        } finally {
+            SessionManager.closeSession();
         }
     }
 
     public boolean makeTrainForGoing(Train train, Road road, ArrayList<Car> cars, String trainChief) {
-        return false;
+        try {
+            SessionManager.beginTran();
+            TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
+            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
+            if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED) throw new Exception("Поезд сформирован!");
+            if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
+//            ArrayList<CarEntity> ces = new ArrayList<CarEntity>(cars.size());
+//            for (Car car : cars) ces.add(EntityConverter.convertCar(car));
+//            if (ces.size() == 0) throw new Exception("Нет вагонов!");
+            RoadDetEntity rde = new RoadDetEntity(re, null, te);
+            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
+            te.setTrainChief(trainChief);
+            te.setTrainStatus(tse);
+            SessionManager.saveOrUpdateEntities(te, rde);
+            SessionManager.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public ArrayList<Train> getArrivingTrains(int forHours) {
@@ -338,20 +386,19 @@ public class BusinessManager implements BusinessLogic {
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
-            for(RouteEntity re : r) se.add(re.getSheduleBack());
+            for (RouteEntity re : r) se.add(re.getSheduleBack());
             Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
                     add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
             ArrayList<Train> list = new ArrayList<Train>();
-            for(TrainEntity te : (List<TrainEntity>)crit.list()){
-                TrainStatus ts = new TrainStatus(te.getTrainStatus().getIdStatus(), te.getTrainStatus().getcStatus());
-                RouteEntity re = (RouteEntity)te.getShedule().getRoutesBySheduleBack().toArray()[0];
-                Route rr = EntityConverter.convertRoute(re);
-                Train t = new Train(te.getIdTrain(), te.getDateFrom(), te.getDateTo(), te.getTrainChief(), rr.getSheduleForward(), rr, ts, null, null);
-                list.add(t);
+            for (Object te : crit.list()) {
+                list.add(EntityConverter.convertTrain((TrainEntity) te));
             }
             return list;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
+        } finally {
+            SessionManager.closeSession();
         }
     }
 

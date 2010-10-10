@@ -175,10 +175,20 @@ public class EntityConverter {
     public static Train convertTrain(TrainEntity train) {
         try {
             TrainStatus ts = new TrainStatus(train.getTrainStatus().getIdStatus(), train.getTrainStatus().getcStatus());
-            RouteEntity re = (RouteEntity) train.getShedule().getRoutesBySheduleForward().toArray()[0];
-            Route rr = EntityConverter.convertRoute(re);
-            return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(), 
-                    rr.getSheduleForward(), rr, ts, null, null);
+            // маршрут по прибывающему расписанию (поезд прибывает на станцию)
+            Collection<RouteEntity> routes = train.getShedule().getRoutesBySheduleBack();
+            // если маршрута нет, поезд идет по отправляющемуся расписанию (поезд отправляется со станции)
+            if (routes == null || routes.size() == 0) routes = train.getShedule().getRoutesBySheduleForward();
+            // маршрут у расписания должен быть всегда один!
+            RouteEntity re = (RouteEntity) routes.toArray()[0];
+            Route route = EntityConverter.convertRoute(re);
+            Road road = null;
+            // поезд должен быть максимум на одном пути!
+            if (train.getRoadDets() != null && train.getRoadDets().size() > 0) {
+                road = convertRoad(((RoadDetEntity) train.getRoadDets().toArray()[0]).getRoad());
+            }
+            return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(),
+                    convertShedule(train.getShedule()), route, ts, road, null);
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }

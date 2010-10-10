@@ -15,6 +15,10 @@ public class Road {
     private RoadType roadType;
     private int position;
 
+    public Road(int id) {
+        this(id, null, null, null, 1);
+    }
+
     public Road(int id, String name, String comment, RoadType roadType, int position) {
         this.id = id;
         this.name = name;

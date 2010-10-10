@@ -12,6 +12,14 @@ import javax.persistence.*;
 @Entity
 public class RoadDetEntity {
 
+    public RoadDetEntity() {
+    }
+
+    public RoadDetEntity(RoadEntity road, CarEntity car, TrainEntity train) {
+        this.road = road;
+        this.car = car;
+        this.train = train;
+    }
 
     private int id;
 

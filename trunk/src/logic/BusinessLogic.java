@@ -59,6 +59,8 @@ public interface BusinessLogic {
 
     public Train getTrainById(int idTrain);
 
+    public ArrayList<Train> getTrainsOnRoads();
+
     public ArrayList<Train> getGoingTrains(int forHours);
 
     public ArrayList<Train> getArrivingTrains(int forHours);
