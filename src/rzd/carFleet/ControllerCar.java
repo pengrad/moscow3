@@ -39,7 +39,7 @@ public class ControllerCar implements MouseListener, ActionListener {
     public ControllerCar(PCar p) {
         this.pCarFleet = p;
         dCarEdit = new DCarEdit(null, true);
-        carInformation = new PCarInformation();
+        carInformation = PCarInformation.getInstance();
         popCarMenu = new JPopupMenu();
         popCarInfMenu = new JPopupMenu();
         popCarInfMenu.add(carInformation);
@@ -91,7 +91,7 @@ public class ControllerCar implements MouseListener, ActionListener {
         if (e.getSource() == pCarFleet.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
             int row = pCarFleet.tCars.getSelectedRow();
             int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
-            carInformation.setData(Model.getModel().getCarByNumber(number));
+            carInformation.setData(number);
             popCarInfMenu.show(pCarFleet.tCars, e.getX(), e.getY());
         }
     }
@@ -122,6 +122,7 @@ public class ControllerCar implements MouseListener, ActionListener {
 //            JOptionPane.showMessageDialog(pCarFleet, ex.getMessage());
 //        }
 //    }
+
     private void searchCar() {
         boolean b = Utils.searchByTable(pCarFleet.tCars, pCarFleet.fSearch.getText(), 0);
         if (!b) {
@@ -182,7 +183,9 @@ public class ControllerCar implements MouseListener, ActionListener {
     }
 
     public void update() {
-        ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
+        ModelTable mt;
+        mt = (ModelTable) pCarFleet.tCars.getModel();
+
         mt.setDate(getCarsTabView());
     }
     //Методы конверторы

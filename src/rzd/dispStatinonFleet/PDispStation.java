@@ -25,13 +25,14 @@ public class PDispStation extends javax.swing.JPanel {
     public PDispStation() {
         initComponents();
         c = new ControllerDispSt(this);
-        tTrainBack.addMouseListener(c);
+        tArrivingTrains.addMouseListener(c);
         tGoingTrains.addMouseListener(c);
+        tTrainOnRoad.addMouseListener(c);
 //        tTrainDepartureToday.addMouseListener(c);
  //       tTrainDestinationToday.addMouseListener(c);
   //      bAddDeparture.addActionListener(c);
   //      bAddDestination.addActionListener(c);
-          cTimeBeforeBack.addItemListener(c);
+          cTimeBeforeArrivingTrains.addItemListener(c);
           cTimeBeforeGoingTrains.addItemListener(c);
     }
 
@@ -47,7 +48,7 @@ public class PDispStation extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tTrainBack = new javax.swing.JTable();
+        tArrivingTrains = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         tGoingTrains = new javax.swing.JTable();
@@ -55,15 +56,15 @@ public class PDispStation extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tTrainOnRoad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        cTimeBeforeBack = new javax.swing.JComboBox();
+        cTimeBeforeArrivingTrains = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         cTimeBeforeGoingTrains = new javax.swing.JComboBox();
 
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 204));
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11));
 
-        tTrainBack.setModel(new ModelTable() );
-        jScrollPane1.setViewportView(tTrainBack);
+        tArrivingTrains.setModel(new ModelTable() );
+        jScrollPane1.setViewportView(tArrivingTrains);
 
         jTabbedPane1.addTab("Прибывающие поезда", jScrollPane1);
 
@@ -86,7 +87,7 @@ public class PDispStation extends javax.swing.JPanel {
 
         jLabel1.setText("Отображать за часов до прибытия");
 
-        cTimeBeforeBack.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
+        cTimeBeforeArrivingTrains.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
 
         jLabel2.setText("Отображать за часов до прибытия");
 
@@ -101,7 +102,7 @@ public class PDispStation extends javax.swing.JPanel {
                 .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cTimeBeforeBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cTimeBeforeArrivingTrains, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -118,7 +119,7 @@ public class PDispStation extends javax.swing.JPanel {
                 .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cTimeBeforeBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cTimeBeforeArrivingTrains, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
@@ -133,7 +134,7 @@ public class PDispStation extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox cTimeBeforeBack;
+    public javax.swing.JComboBox cTimeBeforeArrivingTrains;
     public javax.swing.JComboBox cTimeBeforeGoingTrains;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -143,8 +144,8 @@ public class PDispStation extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    public javax.swing.JTable tArrivingTrains;
     public javax.swing.JTable tGoingTrains;
-    public javax.swing.JTable tTrainBack;
     public javax.swing.JTable tTrainOnRoad;
     // End of variables declaration//GEN-END:variables
 
