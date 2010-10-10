@@ -123,7 +123,11 @@ public class BusinessTest {
     }
 
     public static void testMakeTrainForGoing() {
-        manager.makeTrainForGoing(new Train(127, new Road(15), "Petrov", null));
+        try {
+            manager.makeTrainForGoing(new Train(127, new Road(15), "Petrov", null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void testGetTrainsOnRoads() {
