@@ -35,8 +35,10 @@ public class BusinessTest {
 //        testRoads();
 //        testDate();
 //        test();
-        testGoingTrains();
-        testArrivingTrains();
+//        testGoingTrains();
+//        testArrivingTrains();
+//        testMakeTrainForGoing();
+        testGetTrainsOnRoads();
     }
 
 
@@ -117,6 +119,16 @@ public class BusinessTest {
     public static void testArrivingTrains() {
         for(Train te : manager.getArrivingTrains(1)) {
             System.out.println(te.getDtDeparture() + " " + te.getDtDestination());
+        }
+    }
+
+    public static void testMakeTrainForGoing() {
+        manager.makeTrainForGoing(new Train(127), new Road(15), null, "Иванов");
+    }
+
+    public static void testGetTrainsOnRoads() {
+        for(Train t :manager.getTrainsOnRoads()) {
+            System.out.println(t.getChief() + " - " + t.getRoad().getName());
         }
     }
 }
