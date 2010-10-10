@@ -365,20 +365,25 @@ public class BusinessManager implements BusinessLogic {
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
             for (Car car : train.getCarsIn()) ces.add(EntityConverter.convertCar(car));
             if (ces.size() == 0) throw new Exception("Нет вагонов!");
-            ArrayList<TrainDetEntity> tdes = new ArrayList<TrainDetEntity>(ces.size());
-            ArrayList<CarHistoryEntity> ches = new ArrayList<CarHistoryEntity>(ces.size());
-            for (CarEntity ce : ces) {
-                if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
-                    throw new Exception("Некоторые вагоны уже в составе другого поезда");
-                ce.setCarLocation(EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, "")));
-                
-            }
-
-            RoadDetEntity rde = new RoadDetEntity(re, null, te);
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
             te.setTrainChief(train.getChief());
             te.setTrainStatus(tse);
-            SessionManager.saveOrUpdateEntities(te, rde);
+            SessionManager.saveOrUpdateEntities(te);
+            for (CarEntity ce : ces) {
+                if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
+                    throw new Exception("Некоторые вагоны уже в составе другого поезда");
+                // todo обработка ремонта
+                for(RoadDetEntity rde : ce.getRoadDets()) {
+                    SessionManager.deleteEntities(rde);
+                }
+                CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
+                ce.setCarLocation(cle);
+                TrainDetEntity tde = new TrainDetEntity(ce, te);
+                CarHistoryEntity che = new CarHistoryEntity(null, cle, te, null, ce, null);
+                SessionManager.saveOrUpdateEntities(ce, tde, che);
+            }
+            RoadDetEntity rde = new RoadDetEntity(re, null, te);
+            SessionManager.saveOrUpdateEntities(rde);
             SessionManager.commit();
             return true;
         } catch (Exception e) {
