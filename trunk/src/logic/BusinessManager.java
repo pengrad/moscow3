@@ -303,14 +303,10 @@ public class BusinessManager implements BusinessLogic {
         return list;
     }
 
-    public List<TrainEntity> getGoingTrains() {
+    public Train getTrainById(int idTrain) {
         try {
-            Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
-            ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
-            for(RouteEntity re : r) se.add(re.getSheduleForward());
-            Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
-                    add(Restrictions.in("shedule", se));
-            return (List<TrainEntity>)crit.list();
+            TrainEntity te = SessionManager.getEntityById(new TrainEntity(), idTrain);
+            return EntityConverter.convertTrain(te);
         } catch (Exception e) {
             return null;
         }
@@ -325,16 +321,16 @@ public class BusinessManager implements BusinessLogic {
                     add(Restrictions.in("shedule", se));
             ArrayList<Train> list = new ArrayList<Train>();
             for(TrainEntity te : (List<TrainEntity>)crit.list()){
-                TrainStatus ts = new TrainStatus(te.getTrainStatus().getIdStatus(), te.getTrainStatus().getcStatus());
-                RouteEntity re = (RouteEntity)te.getShedule().getRoutesBySheduleForward().toArray()[0];
-                Route rr = EntityConverter.convertRoute(re);
-                Train t = new Train(te.getIdTrain(), te.getDateFrom(), te.getDateTo(), te.getTrainChief(), rr.getSheduleForward(), rr, ts, null, null);
-                list.add(t);
+                list.add(EntityConverter.convertTrain(te));
             }
             return list;
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public boolean makeTrainForGoing(Train train, Road road, ArrayList<Car> cars, String trainChief) {
+        return false;
     }
 
     public ArrayList<Train> getArrivingTrains(int forHours) {

@@ -172,4 +172,16 @@ public class EntityConverter {
         }
     }
 
+    public static Train convertTrain(TrainEntity train) {
+        try {
+            TrainStatus ts = new TrainStatus(train.getTrainStatus().getIdStatus(), train.getTrainStatus().getcStatus());
+            RouteEntity re = (RouteEntity) train.getShedule().getRoutesBySheduleForward().toArray()[0];
+            Route rr = EntityConverter.convertRoute(re);
+            return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(), 
+                    rr.getSheduleForward(), rr, ts, null, null);
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
 }
