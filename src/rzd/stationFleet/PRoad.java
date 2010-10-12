@@ -94,13 +94,23 @@ public class PRoad extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateInformationRoad(String inf) {
-        roadTitle.setText(inf);
-    }
+//    public void setInformationRoad(String inf) {
+//        roadTitle.setText(inf);
+//    }
 
-    public void addTrain(GTrainStation train) {
-        if (train != null)
-            road.add(train);
+    public void addTrain(GTrainStation gTrain) {
+        if (gTrain != null) {
+            Train train = gTrain.getTrain();
+            String route = "";
+            if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
+                route = train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo() + "  " + train.getChief();
+            }
+            if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
+                route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom() + "  " + train.getChief();
+            }
+            roadTitle.setText(route);
+            road.add(gTrain);
+        }
     }
 
     public void addCar(GCar car) {

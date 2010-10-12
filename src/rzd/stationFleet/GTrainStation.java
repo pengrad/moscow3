@@ -12,24 +12,31 @@ import rzd.model.objects.Train;
 import rzd.stationFleet.Figure;
 import rzd.stationFleet.GCar;
 
+import javax.swing.*;
+
 /**
  * @author ЧерныхЕА
  */
 public class GTrainStation extends Figure {
-    private Controller c;
+    private ControllerStation c;
     private Train train;
     private ArrayList<GCar> gVagons;
 
-    public GTrainStation(Train train, Controller c) {
+    public GTrainStation(Train train, ControllerStation c) {
         this.c = c;
         gVagons = new ArrayList<GCar>();
         setBackground(Color.pink);
         this.train = train;
         setLayout(new FlowLayout());
-        for (int i = 0; i < 5; i++) {
-            GCar gc = new GCar(new Car(111, "", null, null, "", "", "", "", "", "", false, 10, 10, 10, 10), c);
-            add(gc);
-            gVagons.add(gc);
+        ArrayList<Car> cars = train.getCarsIn();
+        if (cars != null && cars.size() > 0) {
+            for (Car car : cars) {
+                GCar gc = new GCar((car), c);
+                add(gc);
+                gVagons.add(gc);
+            }
+        } else {
+            add(new JLabel("В состав поезда отсутсвуют вагоны"));
         }
     }
 
@@ -45,12 +52,20 @@ public class GTrainStation extends Figure {
         return gVagons;
     }
 
+    public Train getTrain() {
+        return train;
+    }
 
-    public void paint(Graphics2D g) {
-        Graphics2D g2 = (Graphics2D) g;
+
+    public void paint(Graphics2D g2) {
         g2.setStroke(new BasicStroke(2.0f));
-        g2.setColor(Color.RED);
+        if (selected) {
+            g2.setColor(Color.BLUE);
+            g2.fill(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
+        } else {
+            g2.setColor(Color.RED);
 //        System.out.println(getX() + "   " + getY() + "    " + getWidth() + "    " + getHeight());
-        g2.draw(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
+            g2.draw(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
+        }
     }
 }

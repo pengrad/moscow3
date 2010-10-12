@@ -7,7 +7,6 @@ package rzd.stationFleet;
 
 import rzd.stationFleet.Figure;
 import rzd.test.ColorHelper;
-import rzd.test.ControllerStation;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -20,9 +19,9 @@ import rzd.model.objects.Car;
 public class GCar extends Figure {
     private Car car;
     private int number = 12345678;
-    private Controller c;
+    private ControllerStation c;
 
-    public GCar(Car car, Controller c) {
+    public GCar(Car car, ControllerStation c) {
         this.car = car;
         this.c = c;
         setCursor(new Cursor(Cursor.HAND_CURSOR));
