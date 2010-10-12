@@ -2,6 +2,7 @@ package rzd.carFleet;
 
 import rzd.ControllerMain;
 import rzd.ModelTable;
+import rzd.dispStatinonFleet.DEditTrain;
 import rzd.model.objects.Car;
 import rzd.utils.MakerDefaultTextInField;
 
@@ -26,23 +27,18 @@ public class ControllerCar implements MouseListener, ActionListener {
 
     private PCar pCarFleet;
     private JPopupMenu popCarMenu;
-    private JPopupMenu popCarInfMenu;
     private JPopupMenu popHistLocationCar;
     private JMenuItem viewCar;
     private JMenuItem editCar;
     private JMenuItem histLocationCar;
     private JMenuItem deleteCar;
     private JMenuItem locationCar;
-    private PCarInformation carInformation;
     private DCarEdit dCarEdit;
 
     public ControllerCar(PCar p) {
         this.pCarFleet = p;
-        dCarEdit = new DCarEdit(null, true);
-        carInformation = PCarInformation.getInstance();
+        dCarEdit=new DCarEdit(null,true);
         popCarMenu = new JPopupMenu();
-        popCarInfMenu = new JPopupMenu();
-        popCarInfMenu.add(carInformation);
         popHistLocationCar = new JPopupMenu();
         popHistLocationCar.add(new PCarHistory());
         viewCar = new JMenuItem("Посмотреть на карте станции", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
@@ -91,8 +87,7 @@ public class ControllerCar implements MouseListener, ActionListener {
         if (e.getSource() == pCarFleet.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
             int row = pCarFleet.tCars.getSelectedRow();
             int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
-            carInformation.setData(number);
-            popCarInfMenu.show(pCarFleet.tCars, e.getX(), e.getY());
+            ControllerMain.getInstans().showCarInf(pCarFleet.tCars, e.getX(), e.getY(), number);
         }
     }
 
@@ -178,7 +173,6 @@ public class ControllerCar implements MouseListener, ActionListener {
     }
 
     private void histLocationCar() {
-        System.out.println("***");
         popHistLocationCar.show(pCarFleet, popCarMenu.getX(), popCarMenu.getY());
     }
 

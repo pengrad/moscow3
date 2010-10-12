@@ -4,6 +4,8 @@
  */
 package rzd.dispStatinonFleet;
 
+import org.hibernate.mapping.Component;
+import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.Updateble;
 import rzd.model.Model;
@@ -61,7 +63,12 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             ((JTable) e.getSource()).addRowSelectionInterval(row, row);
             menuTrain.show((JTable) e.getSource(), e.getX(), e.getY());
             activeTable = (JTable) e.getSource();
+        } else if (e.getSource() instanceof JTable && e.getButton() == 1 && e.getClickCount() == 2) {
+            int row = ((JTable) e.getSource()).getSelectedRow();
+            int idTrain = new Integer(((JTable) e.getSource()).getValueAt(row, 0).toString());
+            ControllerMain.getInstans().showTrainInf((JTable) e.getSource(), e.getX(), e.getY(), idTrain);
         }
+
     }
 
     public void mousePressed(MouseEvent e) {
@@ -129,11 +136,13 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         Train train = null;
         int row = activeTab.getSelectedRow();
         if (row > -1 && row < activeTab.getRowCount()) {
+            dEditTrain.setLocationRelativeTo(pDispStation);
             int idTrain = new Integer(activeTab.getValueAt(row, 0).toString());
             if (activeTab == pDispStation.tGoingTrains)
                 train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
             if (activeTab == pDispStation.tArrivingTrains)
                 train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
+
             if (activeTab == pDispStation.tTrainOnRoad)
                 train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
             if (train != null) {
@@ -152,7 +161,11 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     }
 
     private void viewTrain(JTable activeTab) {
-
+        int row = activeTab.getSelectedRow();
+        boolean b = ControllerMain.getInstans().searchTrain(new Integer(activeTab.getValueAt(row, 0).toString()));
+        if (!b) {
+            JOptionPane.showMessageDialog(pDispStation, "Выгон не найден", "Сообщение...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+        }
     }
 
     //Методы конвертации

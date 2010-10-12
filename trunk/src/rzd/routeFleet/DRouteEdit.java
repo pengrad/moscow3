@@ -159,7 +159,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel7.setText("   Номер маршрута");
         jLabel7.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel3.setText("   Время отправления");
         jLabel3.setPreferredSize(new java.awt.Dimension(20, 14));
 
@@ -178,6 +178,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel9.setText("   Тип следования");
         jLabel9.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        cTypeSchedule1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cTypeSchedule1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cTypeSchedule1ItemStateChanged(evt);
@@ -201,36 +202,44 @@ public class DRouteEdit extends javax.swing.JDialog {
 
         fLengthForward.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        cHForward.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cHForward.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate1(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("-часы");
 
+        cMForward.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cMForward.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate1(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("-мин");
 
+        cHForwardInWay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cHForwardInWay.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate1(evt);
             }
         });
 
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("-часы");
 
+        cMForwardInWay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cMForwardInWay.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate1(evt);
             }
         });
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("-мин");
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14));
@@ -355,6 +364,7 @@ public class DRouteEdit extends javax.swing.JDialog {
             }
         });
 
+        cEnabled.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cEnabled.setText("-активно");
         cEnabled.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -390,6 +400,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel34.setText("   Тип следования");
         jLabel34.setPreferredSize(new java.awt.Dimension(20, 14));
 
+        cTypeSchedule2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cTypeSchedule2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cTypeSchedule2ItemStateChanged(evt);
@@ -413,36 +424,44 @@ public class DRouteEdit extends javax.swing.JDialog {
 
         fLengthBack.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
+        cHBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cHBack.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate2(evt);
             }
         });
 
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel37.setText("-часы");
 
+        cMBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cMBack.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate2(evt);
             }
         });
 
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel38.setText("-мин");
 
+        cHBackInWay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cHBackInWay.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate2(evt);
             }
         });
 
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel39.setText("-часы");
 
+        cMBackInWay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cMBackInWay.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 updateDate2(evt);
             }
         });
 
+        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel40.setText("-мин");
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 14));

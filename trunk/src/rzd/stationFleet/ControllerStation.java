@@ -4,6 +4,7 @@
  */
 package rzd.stationFleet;
 
+import rzd.ControllerMain;
 import rzd.carFleet.PCarInformation;
 import rzd.model.Model;
 import rzd.model.objects.Car;
@@ -28,24 +29,19 @@ import rzd.utils.MakerDefaultTextInField;
 /**
  * @author ЧерныхЕА
  */
-public class Controller implements ActionListener, MouseListener {
+public class ControllerStation implements ActionListener, MouseListener {
 
     private PStationFleet pStationFleet;
     private HashMap<PRoad, ContainerRoad> roadContainers;
     private HashMap<RoadType, HashMap> roadType;
-    private JPopupMenu popupCarInformation;
-    private PCarInformation pCarInformation;
 
-    public Controller(PStationFleet p) {
+    public ControllerStation(PStationFleet p) {
         this.pStationFleet = p;
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
-        pCarInformation = PCarInformation.getInstance();
-        popupCarInformation = new JPopupMenu();
-        popupCarInformation.add(pCarInformation);
         makeTabs();
         new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
-      //  update();
+        update();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -63,8 +59,7 @@ public class Controller implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() instanceof GCar) {
             GCar v = (GCar) e.getSource();
-            //  pCarInformation.setData();
-            popupCarInformation.show(v, e.getX() + 20, e.getY() + 20);
+            ControllerMain.getInstans().showCarInf(v, e.getX() + 20, e.getY() + 20, v.getCar());
         }
     }
 
@@ -100,7 +95,7 @@ public class Controller implements ActionListener, MouseListener {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
                     //todo работа с тестовой реализацийей
-                    ArrayList<Car> cars = TestModel.get().getCarsByRoad(k);
+                    ArrayList<Car> cars = null;// TestModel.get().getCarsByRoad(k);
                     if (cars != null) {
                         ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
                         for (Car c : cars) {
@@ -110,9 +105,9 @@ public class Controller implements ActionListener, MouseListener {
                     }
                     //todo Надо заполнить поезда вагонпи не забыть!!!!
 
-                    Train train = TestModel.get().getTrainByRoad(k);
+                    Train train = Model.getModel().getTrainByRoad(k);
                     if (train != null) {
-                        roads.get(k).addTrain(new GTrainStation(train,this));
+                        roads.get(k).addTrain(new GTrainStation(train, this));
                     }
                 }
             }
@@ -152,6 +147,42 @@ public class Controller implements ActionListener, MouseListener {
             JOptionPane.showMessageDialog(pStationFleet, e.getMessage());
         }
     }
+
+
+    public boolean searchTrain(int idTrain) {
+        Set<RoadType> keyType = roadType.keySet();
+        Iterator<RoadType> itType = keyType.iterator();
+        while (itType.hasNext()) {
+            RoadType key = itType.next();
+            HashMap<Road, PRoad> roads = roadType.get(key);
+            Set<Road> keyRoad = roads.keySet();
+            Iterator<Road> itRoad = keyRoad.iterator();
+            while (itRoad.hasNext()) {
+                Road k = itRoad.next();
+                Component[] components = roads.get(k).getTrainAndCar();
+                if (components != null && components.length > 0) {
+                    for (int i = 0; i < components.length; i++) {
+                        //Если это поезд
+                        if (components[i] instanceof GTrainStation) {
+                            GTrainStation train = (GTrainStation) components[i];
+                            if (train.getTrain().getId() == idTrain) {
+                                PRoad pr = roads.get(k);
+                                ContainerRoad cr = roadContainers.get(pr);
+                                cr.setViewRoad(roads.get(k));
+                                pr.jScrollPane1.getHorizontalScrollBar().setValue((int) (train.getLocation().getX()));
+                                pStationFleet.tabbedStation.setSelectedComponent(cr);
+
+                                new ViewSearchTrain(train).execute();
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
     //Поиск вагонов в.т.ч которые в составе поезда
     //плюс перемотка скролов согласно положению вагона на карте
@@ -209,8 +240,32 @@ public class Controller implements ActionListener, MouseListener {
     }
 
 
-    private class ViewSearchCar extends SwingWorker {
+    private class ViewSearchTrain extends SwingWorker {
+        private GTrainStation gTrainStation;
 
+        public ViewSearchTrain(GTrainStation gTrainStation) {
+            this.gTrainStation = gTrainStation;
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            for (int i = 0; i < 5; i++) {
+                gTrainStation.setSelected(true);
+                publish(new List());
+                Thread.sleep(100);
+                gTrainStation.setSelected(false);
+                publish(new List());
+                Thread.sleep(100);
+            }
+            return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        protected void process(java.util.List chunks) {
+            gTrainStation.repaint();
+        }
+    }
+
+    private class ViewSearchCar extends SwingWorker {
         private GCar gCar;
 
         public ViewSearchCar(GCar gCar) {

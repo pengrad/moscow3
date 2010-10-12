@@ -15,7 +15,7 @@ package rzd.stationFleet;
  */
 public class PStationFleet extends javax.swing.JPanel {
 
-    private Controller c;
+    private ControllerStation c;
     private String strSearch;
 
     /**
@@ -24,11 +24,11 @@ public class PStationFleet extends javax.swing.JPanel {
     public PStationFleet() {
         initComponents();
         strSearch = fSearchCarByNumber.getText();
-        this.c = new Controller(this);
+        this.c = new ControllerStation(this);
         fSearchCarByNumber.addActionListener(c);
     }
 
-     public Controller getController(){
+     public ControllerStation getController(){
          return c;
     }
 
