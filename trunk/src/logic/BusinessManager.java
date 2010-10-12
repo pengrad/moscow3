@@ -6,9 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import rzd.model.objects.*;
 
-import java.sql.*;
+import java.sql.Timestamp;
 import java.util.*;
-import java.util.Date;
 
 public class BusinessManager implements BusinessLogic {
 
@@ -308,6 +307,22 @@ public class BusinessManager implements BusinessLogic {
         try {
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), idTrain);
             return EntityConverter.convertTrain(te);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public Train getTrainByRoad(Road road) {
+        try {
+            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
+            for (RoadDetEntity rde : re.getRoadDets()) {
+                TrainEntity te = rde.getTrain();
+                if (te != null) return EntityConverter.convertTrain(te);
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
