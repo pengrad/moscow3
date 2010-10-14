@@ -17,12 +17,13 @@ public class RepairEntity {
     public RepairEntity() {
     }
 
-    public RepairEntity(Timestamp dateBegin, Timestamp dateEnd, CarEntity car, RepairTypeEntity repairType, RoadEntity road) {
+    public RepairEntity(Timestamp dateBegin, Timestamp dateEnd, CarEntity car, RepairTypeEntity repairType, RoadEntity road, String comment) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.car = car;
         this.repairType = repairType;
         this.road = road;
+        this.comment = comment;
     }
 
     private int idRepair;
@@ -60,6 +61,18 @@ public class RepairEntity {
 
     public void setDateEnd(Timestamp dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    private String comment;
+
+    @Column(name = "comment", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
+    @Basic
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override
