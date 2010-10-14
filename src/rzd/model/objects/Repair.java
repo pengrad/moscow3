@@ -1,5 +1,6 @@
 package rzd.model.objects;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -14,10 +15,10 @@ public class Repair {
     private RepairType repairType;
     private Car car;
     private Road road;
-    private Date dateBegin;
-    private Date dateEnd;
+    private Timestamp dateBegin;
+    private Timestamp dateEnd;
 
-    public Repair(int idRepair, RepairType repairType, Car car, Road road, Date dateBegin, Date dateEnd) {
+    public Repair(int idRepair, RepairType repairType, Car car, Road road, Timestamp dateBegin, Timestamp dateEnd) {
         this.idRepair = idRepair;
         this.repairType = repairType;
         this.car = car;
@@ -58,19 +59,19 @@ public class Repair {
         this.road = road;
     }
 
-    public Date getDateBegin() {
+    public Timestamp getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(Date dateBegin) {
+    public void setDateBegin(Timestamp dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public Date getDateEnd() {
+    public Timestamp getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(Timestamp dateEnd) {
         this.dateEnd = dateEnd;
     }
 }
