@@ -434,6 +434,14 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
+    public ArrayList<CarLocation> getCarLocations() {
+        return null;
+    }
+
+    public boolean setCarLocation(Car car, Road road, Repair repair) {
+        return false;
+    }
+
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();
         firstDate.setTime(dateBegin);

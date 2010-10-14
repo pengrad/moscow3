@@ -74,4 +74,8 @@ public interface BusinessLogic {
     public ArrayList<Train> getArrivingTrains(int forHours);
 
     public boolean makeTrainForGoing(Train train) throws Exception;
+
+    public ArrayList<CarLocation> getCarLocations();
+
+    public boolean setCarLocation(Car car, Road road, Repair repair);
 }
