@@ -31,4 +31,21 @@ public class CarLocation {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof CarLocation)) {
+            return false;
+        }
+        if (idLocation == ((CarLocation) o).getIdLocation()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

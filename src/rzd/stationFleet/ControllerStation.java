@@ -64,7 +64,7 @@ public class ControllerStation implements ActionListener, MouseListener {
     }
 
     public void mousePressed(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
+       
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -103,8 +103,6 @@ public class ControllerStation implements ActionListener, MouseListener {
                         }
                         roads.get(k).addCars(gCars);
                     }
-                    //todo Надо заполнить поезда вагонпи не забыть!!!!
-
                     Train train = Model.getModel().getTrainByRoad(k);
                     if (train != null) {
                         roads.get(k).addTrain(new GTrainStation(train, this));

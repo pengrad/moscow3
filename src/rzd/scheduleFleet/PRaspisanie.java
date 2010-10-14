@@ -34,8 +34,7 @@ public class PRaspisanie extends JComponent {
     public PRaspisanie() {
         super();
         setData(dBeg, dEnd);
-        addTrain(null);
-//        GTrainV2 pv2 = new GTrainV2();
+        //        GTrainV2 pv2 = new GTrainV2();
 //        pv2.setLocation(5 * sizeDay, 100, 50);
 //        add(pv2);
 //        pv2 = new GTrainV2();
@@ -56,18 +55,19 @@ public class PRaspisanie extends JComponent {
 //        this.c = new Controller(this);
     }
 
+
     public void addTrain(Train train) {
         Calendar cl = Calendar.getInstance();
         cl.setTime(dBeg);
         int ddB = cl.get(Calendar.DAY_OF_MONTH);
         int mmB = cl.get(Calendar.MONTH);
         int yyB = cl.get(Calendar.YEAR);
-        cl.setTime(new GregorianCalendar(2010, 9, 26, 0, 0).getTime());
+        cl.setTime(train.getDtDeparture());
         int ddPB = cl.get(Calendar.DAY_OF_MONTH);
         int mmPB = cl.get(Calendar.MONTH);
         int yyPB = cl.get(Calendar.YEAR);
         int minPB = cl.get(Calendar.HOUR_OF_DAY) * 60 + cl.get(Calendar.MINUTE);
-        cl.setTime(new GregorianCalendar(2010, 9, 28, 23, 59).getTime());
+        cl.setTime(train.getDtDestination());
         int ddPE = cl.get(Calendar.DAY_OF_MONTH);
         int mmPE = cl.get(Calendar.MONTH);
         int yyPE = cl.get(Calendar.YEAR);
@@ -257,6 +257,7 @@ public class PRaspisanie extends JComponent {
         }
         //----------------------------------------------------
         for (int i = 1; i < routes.size(); i++) {
+            //    routes.get(i).
             g2.setColor(Color.BLUE);
             int tx = ((JScrollPane) ((JViewport) getParent().getParent()).getParent()).getHorizontalScrollBar().getValue();
             g2.setFont(new Font("Arial", Font.BOLD, 12));
