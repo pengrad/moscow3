@@ -4,7 +4,6 @@
  */
 package rzd.dispStatinonFleet;
 
-import org.hibernate.mapping.Component;
 import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.Updateble;

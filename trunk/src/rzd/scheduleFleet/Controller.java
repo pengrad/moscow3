@@ -7,25 +7,24 @@
  */
 package rzd.scheduleFleet;
 
+import rzd.model.objects.Train;
 import rzd.scheduleFleet.PRaspisanie;
-import rzd.test.PInfVagon;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Controller implements MouseListener {
-    private JPopupMenu p;
     private PSchedule pSchedule;
+    private PRaspisanie pRaspisanie;
 
     public Controller(PSchedule pSchedule) {
         this.pSchedule = pSchedule;
-        p = new JPopupMenu();
-        p.add(new PInfVagon(p));
     }
 
     public void mouseClicked(MouseEvent e) {
-        p.show((JComponent) e.getSource(), e.getX() + 5, e.getY() + 5);
+
     }
 
     public void mousePressed(MouseEvent e) {
@@ -42,5 +41,10 @@ public class Controller implements MouseListener {
 
     public void mouseExited(MouseEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    private void update(){
+//        ArrayList<Train> trains
+//      pSchedule.getPRaspisanie().addTrain();
     }
 }

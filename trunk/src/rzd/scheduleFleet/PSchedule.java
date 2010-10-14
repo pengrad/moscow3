@@ -21,6 +21,7 @@ import java.awt.event.AdjustmentListener;
  */
 public class PSchedule extends javax.swing.JPanel {
     private Controller c;
+    private PRaspisanie pRaspisanie;
 
     /**
      * Creates new form PSchedule
@@ -28,7 +29,8 @@ public class PSchedule extends javax.swing.JPanel {
     public PSchedule() {
         initComponents();
         c = new Controller(this);
-        pPaint.add(new PRaspisanie());
+        pRaspisanie = new PRaspisanie();
+        pPaint.add(pRaspisanie);
         jScrollPane2.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             public void adjustmentValueChanged(
                     AdjustmentEvent e) {
@@ -156,6 +158,10 @@ public class PSchedule extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public PRaspisanie getPRaspisanie() {
+        return pRaspisanie;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

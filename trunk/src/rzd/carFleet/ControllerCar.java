@@ -4,6 +4,7 @@ import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.dispStatinonFleet.DEditTrain;
 import rzd.model.objects.Car;
+import rzd.model.objects.structure.CarLocationStructure;
 import rzd.utils.MakerDefaultTextInField;
 
 import javax.swing.*;
@@ -34,10 +35,12 @@ public class ControllerCar implements MouseListener, ActionListener {
     private JMenuItem deleteCar;
     private JMenuItem locationCar;
     private DCarEdit dCarEdit;
+    private DCarLocation dCarLocation;
 
     public ControllerCar(PCar p) {
         this.pCarFleet = p;
-        dCarEdit=new DCarEdit(null,true);
+        dCarEdit = new DCarEdit(null, true);
+        dCarLocation = new DCarLocation(null, true);
         popCarMenu = new JPopupMenu();
         popHistLocationCar = new JPopupMenu();
         popHistLocationCar.add(new PCarHistory());
@@ -169,7 +172,16 @@ public class ControllerCar implements MouseListener, ActionListener {
     }
 
     private void locationCar() {
-
+        dCarLocation.setLocationRelativeTo(pCarFleet);
+        int row = pCarFleet.tCars.getSelectedRow();
+        int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
+        Car car = Model.getModel().getCarByNumber(number);
+        CarLocationStructure carLS = dCarLocation.open(car);
+        try {
+            Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void histLocationCar() {
@@ -189,14 +201,14 @@ public class ControllerCar implements MouseListener, ActionListener {
         if (cars != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {
-                Object[] o = new Object[3];
+                Object[] o = new Object[4];
                 o[0] = c.getNumber();
                 o[1] = c.getCarType().getType();
                 o[2] = c.getModel();
-
+                o[3] = c.getCarLocation().toString();
                 res.add(o);
             }
-            res.add(new Object[]{"Номер", "Тип", "Моедль"});
+            res.add(new Object[]{"Номер", "Тип", "Моедль", "Местоположение"});
             return res;
         }
         return null;
