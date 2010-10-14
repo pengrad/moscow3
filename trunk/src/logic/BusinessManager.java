@@ -394,8 +394,14 @@ public class BusinessManager implements BusinessLogic {
                 for (RepairEntity rep : ce.getRepairs()) {
                     if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
                 }
+                // удаляем вагон с пути, если на нем нет поезда - удаляем запись
                 for (RoadDetEntity rde : ce.getRoadDets()) {
-                    SessionManager.deleteEntities(rde);
+                    if (rde.getTrain() == null) {
+                        SessionManager.deleteEntities(rde);
+                    } else {
+                        rde.setCar(null);
+                        SessionManager.saveOrUpdateEntities(rde);
+                    }
                 }
                 CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
                 ce.setCarLocation(cle);
@@ -462,9 +468,21 @@ public class BusinessManager implements BusinessLogic {
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             Timestamp time = new Timestamp(currentDate.getTime());
-            // todo обработка ремонта
+            // заканчиваем ремонты
+            for (RepairEntity rep : ce.getRepairs()) {
+                if (rep.getDateEnd() == null) {
+                    rep.setDateEnd(time);
+                    SessionManager.saveOrUpdateEntities(rep);
+                }
+            }
+            // удаляем вагон с пути, если на нем нет поезда - удаляем запись
             for (RoadDetEntity rde : ce.getRoadDets()) {
-                SessionManager.deleteEntities(rde);
+                if (rde.getTrain() == null) {
+                    SessionManager.deleteEntities(rde);
+                } else {
+                    rde.setCar(null);
+                    SessionManager.saveOrUpdateEntities(rde);
+                }
             }
             CarHistoryEntity che = null;
             CarLocationEntity newCle = null;
@@ -485,6 +503,8 @@ public class BusinessManager implements BusinessLogic {
                     break;
                 case BusinessLogic.REPAIR:
                     rep = EntityConverter.convertRepair(repair);
+                    rep.setDateBegin(time);
+                    rep.setDateEnd(null);
                     newCle = new CarLocationEntity(BusinessLogic.REPAIR, "");
                     che = new CarHistoryEntity(date, newCle, null, null, ce, rep);
                     break;
@@ -506,11 +526,34 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Road getRoadByCar(Car car) {
-        return null;
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            for (RoadDetEntity rde : ce.getRoadDets()) {
+                if (rde != null) return EntityConverter.convertRoad(rde.getRoad());
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public ArrayList<RepairType> getRepairTypes() {
-        return null;
+        try {
+            Collection<RepairTypeEntity> rtes = SessionManager.getAllObjects(new RepairTypeEntity());
+            ArrayList<RepairType> list = new ArrayList<RepairType>(rtes.size());
+            for (RepairTypeEntity rte : rtes) {
+                list.add(EntityConverter.convertRepairType(rte));
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {

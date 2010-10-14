@@ -13,12 +13,18 @@ import java.util.Collection;
 @Entity
 public class RepairTypeEntity {
 
+    public RepairTypeEntity() {
+    }
+
+    public RepairTypeEntity(int idType, String cType) {
+        this.cType = cType;
+        this.idType = idType;
+    }
 
     private int idType;
 
     @javax.persistence.Column(name = "id_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    @Id
-    @GeneratedValue
+    @Id    
     public int getIdType() {
         return idType;
     }

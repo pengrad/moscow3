@@ -17,6 +17,7 @@ public class Repair {
     private Road road;
     private Timestamp dateBegin;
     private Timestamp dateEnd;
+    private String comment;
 
     public Repair(int idRepair, RepairType repairType, Car car, Road road, Timestamp dateBegin, Timestamp dateEnd) {
         this.idRepair = idRepair;
@@ -73,5 +74,13 @@ public class Repair {
 
     public void setDateEnd(Timestamp dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
