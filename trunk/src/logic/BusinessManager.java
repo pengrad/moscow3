@@ -390,8 +390,10 @@ public class BusinessManager implements BusinessLogic {
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             for (CarEntity ce : ces) {
                 if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
-                    throw new Exception("Некоторые вагоны уже в составе другого поезда");
-                // todo обработка ремонта
+                    throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
+                for (RepairEntity rep : ce.getRepairs()) {
+                    if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
+                }
                 for (RoadDetEntity rde : ce.getRoadDets()) {
                     SessionManager.deleteEntities(rde);
                 }
