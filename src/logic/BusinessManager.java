@@ -376,7 +376,8 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.beginTran();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
-            if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED) throw new Exception("Поезд сформирован!");
+            if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED)
+                throw new Exception("Поезд уже был сформирован!");
             if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
             for (Car car : train.getCarsIn()) ces.add(SessionManager.getEntityById(new CarEntity(), car.getNumber()));
@@ -435,11 +436,79 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<CarLocation> getCarLocations() {
+        try {
+            Collection<CarLocationEntity> cles = SessionManager.getAllObjects(new CarLocationEntity());
+            ArrayList<CarLocation> list = new ArrayList<CarLocation>(cles.size());
+            for (CarLocationEntity cle : cles) {
+                list.add(EntityConverter.convertCarLocation(cle));
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public boolean setCarLocation(Car car, Road road, Repair repair) throws Exception {
+        try {
+            SessionManager.beginTran();
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            CarLocationEntity cle = ce.getCarLocation();
+            if (cle.getIdLocation() == BusinessLogic.IN_TRAIN) throw new Exception("Вагон в составе поезда!");
+            Date currentDate = getCurrentDate();
+            java.sql.Date date = new java.sql.Date(currentDate.getTime());
+            Timestamp time = new Timestamp(currentDate.getTime());
+            // todo обработка ремонта
+            for (RoadDetEntity rde : ce.getRoadDets()) {
+                SessionManager.deleteEntities(rde);
+            }
+            CarHistoryEntity che = null;
+            CarLocationEntity newCle = null;
+            RepairEntity rep = null;
+            RoadDetEntity rde = null;
+            switch (car.getCarLocation().getIdLocation()) {
+                case BusinessLogic.IN_TRAIN:
+                    throw new Exception("Вагон нельзя включить в поезд!");
+                case BusinessLogic.ON_ROAD:
+                    RoadEntity re = EntityConverter.convertRoad(road);
+                    rde = new RoadDetEntity(re, ce, null);
+                    newCle = new CarLocationEntity(BusinessLogic.ON_ROAD, "");
+                    che = new CarHistoryEntity(date, newCle, null, re, ce, null);
+                    break;
+                case BusinessLogic.UNKNOWN:
+                    newCle = new CarLocationEntity(BusinessLogic.UNKNOWN, "");
+                    che = new CarHistoryEntity(date, newCle, null, null, ce, null);
+                    break;
+                case BusinessLogic.REPAIR:
+                    rep = EntityConverter.convertRepair(repair);
+                    newCle = new CarLocationEntity(BusinessLogic.REPAIR, "");
+                    che = new CarHistoryEntity(date, newCle, null, null, ce, rep);
+                    break;
+            }
+            ce.setCarLocation(newCle);
+            SessionManager.saveOrUpdateEntities(ce);
+            if (rep != null) SessionManager.saveOrUpdateEntities(rep);
+            if (rde != null) SessionManager.saveOrUpdateEntities(rde);
+            SessionManager.saveOrUpdateEntities(che);
+            SessionManager.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            throw e;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public Road getRoadByCar(Car car) {
         return null;
     }
 
-    public boolean setCarLocation(Car car, Road road, Repair repair) {
-        return false;
+    public ArrayList<RepairType> getRepairTypes() {
+        return null;
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {

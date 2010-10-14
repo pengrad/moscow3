@@ -13,7 +13,13 @@ import java.util.Collection;
 @Entity
 public class CarLocationEntity {
 
-    
+    public CarLocationEntity() {
+    }
+
+    public CarLocationEntity(int idLocation, String cLocation) {
+        this.idLocation = idLocation;
+        this.cLocation = cLocation;
+    }
 
     private int idLocation;
 

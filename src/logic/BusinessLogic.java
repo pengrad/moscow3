@@ -77,5 +77,9 @@ public interface BusinessLogic {
 
     public ArrayList<CarLocation> getCarLocations();
 
-    public boolean setCarLocation(Car car, Road road, Repair repair);
+    public boolean setCarLocation(Car car, Road road, Repair repair) throws Exception;
+
+    public Road getRoadByCar(Car car);
+
+    public ArrayList<RepairType> getRepairTypes();
 }

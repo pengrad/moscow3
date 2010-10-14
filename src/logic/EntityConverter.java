@@ -16,8 +16,7 @@ public class EntityConverter {
 
     public static Car convertCar(CarEntity ce) throws HibernateConvertExcpetion {
         try {
-            CarLocationEntity cle = ce.getCarLocation();
-            CarLocation cl = new CarLocation(cle.getIdLocation(), cle.getcLocation());
+            CarLocation cl = convertCarLocation(ce.getCarLocation());
             return new Car(ce.getCarNumber(), ce.getModel(), cl, convertCarType(ce.getCarType()), ce.getConditioner(),
                     ce.getGenerator(), ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
                     ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
@@ -62,6 +61,14 @@ public class EntityConverter {
             CarLocationEntity cle = new CarLocationEntity();
             cle.setIdLocation(cl.getIdLocation());
             return cle;
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static CarLocation convertCarLocation(CarLocationEntity cle) throws HibernateConvertExcpetion {
+        try {
+            return new CarLocation(cle.getIdLocation(), cle.getcLocation());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
