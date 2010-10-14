@@ -76,6 +76,7 @@ public class EntityConverter {
 
     public static RoadEntity convertRoad(Road r) {
         try {
+            if (r == null) return null;
             RoadTypeEntity rte = new RoadTypeEntity(r.getRoadType().getId(), r.getRoadType().getName());
             return new RoadEntity(r.getName(), r.getComment(), r.getPosition(), rte);
         } catch (Exception e) {
@@ -94,7 +95,24 @@ public class EntityConverter {
 
     public static RepairEntity convertRepair(Repair r) {
         try {
-            return new RepairEntity();
+            return new RepairEntity(r.getDateBegin(), r.getDateEnd(), convertCar(r.getCar()),
+                    convertRepairType(r.getRepairType()), convertRoad(r.getRoad()), r.getComment());
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static RepairTypeEntity convertRepairType(RepairType rt) {
+        try {
+            return new RepairTypeEntity(rt.getId(), rt.getType());
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    public static RepairType convertRepairType(RepairTypeEntity rte) {
+        try {
+            return new RepairType(rte.getIdType(), rte.getcType());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
