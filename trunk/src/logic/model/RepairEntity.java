@@ -26,16 +26,16 @@ public class RepairEntity {
         this.comment = comment;
     }
 
-    private int idRepair;
+    private Integer idRepair;
 
     @Column(name = "id_repair", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
     @GeneratedValue
-    public int getIdRepair() {
+    public Integer getIdRepair() {
         return idRepair;
     }
 
-    public void setIdRepair(int idRepair) {
+    public void setIdRepair(Integer idRepair) {
         this.idRepair = idRepair;
     }
 
