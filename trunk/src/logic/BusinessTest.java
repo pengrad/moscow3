@@ -6,6 +6,7 @@ import rzd.model.objects.*;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -40,7 +41,8 @@ public class BusinessTest {
 //        testArrivingTrains();
 //        testMakeTrainForGoing();
 //        testGetTrainsOnRoads();
-        testRepairTypes();
+//        testRepairTypes();
+        testUpdateRepair();
     }
 
 
@@ -163,5 +165,9 @@ public class BusinessTest {
         for(RepairType rt : manager.getRepairTypes()) {
             System.out.println(rt.getType());
         }
+    }
+
+    public static void testUpdateRepair() {
+        manager.updateRepair(new Repair(11, new RepairType(1,""), new Car(34324242, new CarLocation(1, ""), new CarType(1, "")), null, new Timestamp(new Date().getTime()), null, "sdfsdfsdfs"));
     }
 }
