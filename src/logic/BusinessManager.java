@@ -572,6 +572,23 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
+    public boolean updateRepair(Repair repair) {
+        try {
+            SessionManager.beginTran();
+            RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
+            int id = re.getIdRepair();
+            re = EntityConverter.convertRepair(repair);
+            re.setIdRepair(id);
+            SessionManager.saveOrUpdateEntities(re);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();
         firstDate.setTime(dateBegin);

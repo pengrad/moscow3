@@ -84,4 +84,6 @@ public interface BusinessLogic {
     public ArrayList<RepairType> getRepairTypes();
 
     public Repair getRepairByCar(Car car);
+
+    public boolean updateRepair(Repair repair);
 }
