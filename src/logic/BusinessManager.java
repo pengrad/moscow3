@@ -507,15 +507,16 @@ public class BusinessManager implements BusinessLogic {
                     break;
                 case BusinessLogic.REPAIR:
                     rep = EntityConverter.convertRepair(repair);
-                    //todo протестить
+                    // идентификатор в налл, он должен сохраниться в базе, а геша туда мог какую нибудь ню записать.
                     rep.setIdRepair(null);
                     rep.setDateBegin(time);
                     rep.setDateEnd(null);
+                    // путь на котором прозводится ремонт
                     if (repair.getRoad() != null) {
                         RoadEntity reproad = EntityConverter.convertRoad(repair.getRoad());
                         rde = new RoadDetEntity(reproad, ce, null);
                     }
-                    newCle = new CarLocationEntity(BusinessLogic.REPAIR, "");
+                    newCle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.REPAIR, ""));
                     che = new CarHistoryEntity(date, newCle, null, null, ce, rep);
                     break;
             }
@@ -589,13 +590,11 @@ public class BusinessManager implements BusinessLogic {
             RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
             // удаляем старую запись о пути, вдруг путь обновился! хотя с чего бы, но геша просит
             for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
-                if (rde.getCar().equals(re.getCar())) {
+                if (rde.getCar() != null && rde.getCar().equals(re.getCar())) {
                     s.delete(rde);
                     s.flush();
                 }
             }
-            // todo del
-            int id = re.getIdRepair();
             // клирим сессию для очистки идентификаторов, т.к. мы не обновляем поля set'ами, а создаем новый объект.
             getSession().clear();
             re = EntityConverter.convertRepair(repair);
