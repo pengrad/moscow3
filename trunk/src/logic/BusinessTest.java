@@ -4,6 +4,7 @@ import logic.model.SheduleEntity;
 import logic.model.TrainEntity;
 import rzd.model.objects.*;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.util.*;
 
@@ -37,8 +38,9 @@ public class BusinessTest {
 //        test();
 //        testGoingTrains();
 //        testArrivingTrains();
-        testMakeTrainForGoing();
+//        testMakeTrainForGoing();
 //        testGetTrainsOnRoads();
+        testRepairTypes();
     }
 
 
@@ -140,5 +142,26 @@ public class BusinessTest {
 
     public static void testGetTrainByID() {
         
+    }
+
+    public static void testRepairTypes() {
+        for(RepairType rt : manager.getRepairTypes()) {
+            System.out.println(rt.getType());
+        }
+        System.out.println("sleep/////");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(RepairType rt : manager.getRepairTypes()) {
+            System.out.println(rt.getType());
+        }
+        for(RepairType rt : manager.getRepairTypes()) {
+            System.out.println(rt.getType());
+        }
+        for(RepairType rt : manager.getRepairTypes()) {
+            System.out.println(rt.getType());
+        }
     }
 }
