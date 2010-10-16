@@ -88,4 +88,6 @@ public interface BusinessLogic {
     public boolean updateRepair(Repair repair);
 
     public ArrayList<Car> getCarsOnRoad(Road road);
+
+    public Train getTrainByCar(Car car);
 }

@@ -599,7 +599,7 @@ public class BusinessManager implements BusinessLogic {
             getSession().clear();
             re = EntityConverter.convertRepair(repair);
             RoadEntity newRoad = re.getRoad();
-            if(newRoad != null) {
+            if (newRoad != null) {
                 s.save(new RoadDetEntity(newRoad, re.getCar(), null));
             }
             s.update(re);
@@ -622,6 +622,22 @@ public class BusinessManager implements BusinessLogic {
                 if (rde.getCar() != null) list.add(EntityConverter.convertCar(rde.getCar()));
             }
             return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public Train getTrainByCar(Car car) {
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            for (TrainDetEntity tde : ce.getTrainDets()) {
+                if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED)
+                    return EntityConverter.convertTrain(tde.getTrain());
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
