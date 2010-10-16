@@ -98,6 +98,7 @@ public class EntityConverter {
 
     public static RepairEntity convertRepair(Repair r) {
         try {
+            if (r == null) return null;
             RepairEntity re = new RepairEntity(r.getDateBegin(), r.getDateEnd(), convertCar(r.getCar()),
                     convertRepairType(r.getRepairType()), convertRoad(r.getRoad()), r.getComment());
             re.setIdRepair(r.getIdRepair());
@@ -109,6 +110,7 @@ public class EntityConverter {
 
     public static Repair convertRepair(RepairEntity r) {
         try {
+            if (r == null) return null;
             return new Repair(r.getIdRepair(), convertRepairType(r.getRepairType()), convertCar(r.getCar()),
                     convertRoad(r.getRoad()), r.getDateBegin(), r.getDateEnd(), r.getComment());
         } catch (Exception e) {
@@ -213,6 +215,7 @@ public class EntityConverter {
 
     public static Train convertTrain(TrainEntity train) {
         try {
+            if (train == null) return null;
             TrainStatus ts = new TrainStatus(train.getTrainStatus().getIdStatus(), train.getTrainStatus().getcStatus());
             // маршрут по прибывающему расписанию (поезд прибывает на станцию)
             Collection<RouteEntity> routes = train.getShedule().getRoutesBySheduleBack();
@@ -240,4 +243,12 @@ public class EntityConverter {
         }
     }
 
+    public static CarHistory convertCarHistory(CarHistoryEntity che) {
+        try {
+            return new CarHistory(che.getDate(), convertCarLocation(che.getCarLocation()),
+                    convertTrain(che.getTrain()), convertRoad(che.getRoad()), convertRepair(che.getRepair()));
+        } catch (Exception e) {
+            throw new HibernateConvertExcpetion(e);
+        }
+    }
 }

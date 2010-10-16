@@ -379,7 +379,7 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.beginTran();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
-            if (te.getTrainStatus().getIdStatus() != BusinessLogic.PLANNED)
+            if (te.getTrainStatus().getIdStatus() > BusinessLogic.MAKED)
                 throw new Exception("Поезд уже был сформирован!");
             if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
@@ -638,6 +638,22 @@ public class BusinessManager implements BusinessLogic {
                     return EntityConverter.convertTrain(tde.getTrain());
             }
             return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public ArrayList<CarHistory> getCarHistory(Car car) {
+        try {
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            ArrayList<CarHistory> list = new ArrayList<CarHistory>(ce.getCarHistories().size());
+            for(CarHistoryEntity che : ce.getCarHistories()) {
+                list.add(EntityConverter.convertCarHistory(che));
+            }
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
