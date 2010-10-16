@@ -19,7 +19,7 @@ public class Repair {
     private Timestamp dateEnd;
     private String comment;
 
-    public Repair(int idRepair, RepairType repairType, Car car, Road road, Timestamp dateBegin, Timestamp dateEnd) {
+    public Repair(int idRepair, RepairType repairType, Car car, Road road, Timestamp dateBegin, Timestamp dateEnd, String comment) {
         this.idRepair = idRepair;
         this.repairType = repairType;
         this.car = car;
