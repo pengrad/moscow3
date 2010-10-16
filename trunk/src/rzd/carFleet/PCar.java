@@ -48,10 +48,10 @@ public class PCar extends javax.swing.JPanel {
         bAddCar = new javax.swing.JButton();
         bSearch = new javax.swing.JButton();
 
-        fSearch.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        fSearch.setFont(new java.awt.Font("Tahoma", 2, 11));
 
         tCars.setModel(new ModelTable() );
-        tCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane3.setViewportView(tCars);
 
         bAddCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/add16px.png"))); // NOI18N
