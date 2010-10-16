@@ -194,28 +194,9 @@ public class CarEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CarEntity carEntity = (CarEntity) o;
+        return carNumber == carEntity.carNumber;
 
-        if (carNumber != carEntity.carNumber) return false;
-        if (ecologicToilet != carEntity.ecologicToilet) return false;
-        if (run != carEntity.run) return false;
-        if (runNorm != carEntity.runNorm) return false;
-        if (runToz != carEntity.runToz) return false;
-        if (runTozNorm != carEntity.runTozNorm) return false;
-        if (accumulator != null ? !accumulator.equals(carEntity.accumulator) : carEntity.accumulator != null)
-            return false;
-        if (bodyColor != null ? !bodyColor.equals(carEntity.bodyColor) : carEntity.bodyColor != null) return false;
-        if (conditioner != null ? !conditioner.equals(carEntity.conditioner) : carEntity.conditioner != null)
-            return false;
-        if (electricDevice != null ? !electricDevice.equals(carEntity.electricDevice) : carEntity.electricDevice != null)
-            return false;
-        if (generator != null ? !generator.equals(carEntity.generator) : carEntity.generator != null) return false;
-        if (generatorPrivod != null ? !generatorPrivod.equals(carEntity.generatorPrivod) : carEntity.generatorPrivod != null)
-            return false;
-        if (model != null ? !model.equals(carEntity.model) : carEntity.model != null) return false;
-
-        return true;
     }
 
     @Override
