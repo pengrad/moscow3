@@ -168,6 +168,7 @@ public class BusinessTest {
     }
 
     public static void testUpdateRepair() {
-        manager.updateRepair(new Repair(11, new RepairType(1,""), new Car(34324242, new CarLocation(1, ""), new CarType(1, "")), null, new Timestamp(new Date().getTime()), null, "sdfsdfsdfs"));
+        manager.updateRepair(new Repair(11, new RepairType(1,""), new Car(34324242, new CarLocation(1, ""),
+                new CarType(1, "")), null, new Timestamp(new Date().getTime()), null, "sdfsdfsdfs"));
     }
 }

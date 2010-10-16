@@ -128,11 +128,14 @@ public class BusinessManager implements BusinessLogic {
             if (re == null) throw new Exception("Route not found");
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
+            // удалим старые записи дней по которым работаем расписание
             if (sfe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.deleteEntities(sde);
             if (sbe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) SessionManager.deleteEntities(sde);
+            // заставляем выполнить делит сейчас же
             SessionManager.getSession().flush();
+            // и очищаем сессию, для удаления одинаковых идентификаторов
             SessionManager.getSession().clear();
             re = EntityConverter.convertRoute(r, re.getIdRoute(), sfe.getIdShedule(), sbe.getIdShedule());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
@@ -486,6 +489,7 @@ public class BusinessManager implements BusinessLogic {
             }
             CarHistoryEntity che = null;
             CarLocationEntity newCle = null;
+            // записи о пути и ремонте, если они будут заполнены по условию локации вагона, мы их сохраним
             RepairEntity rep = null;
             RoadDetEntity rde = null;
             switch (car.getCarLocation().getIdLocation()) {
@@ -503,8 +507,14 @@ public class BusinessManager implements BusinessLogic {
                     break;
                 case BusinessLogic.REPAIR:
                     rep = EntityConverter.convertRepair(repair);
+                    //todo протестить
+                    rep.setIdRepair(0);
                     rep.setDateBegin(time);
                     rep.setDateEnd(null);
+                    if (repair.getRoad() != null) {
+                        RoadEntity reproad = EntityConverter.convertRoad(repair.getRoad());
+                        rde = new RoadDetEntity(reproad, ce, null);
+                    }
                     newCle = new CarLocationEntity(BusinessLogic.REPAIR, "");
                     che = new CarHistoryEntity(date, newCle, null, null, ce, rep);
                     break;
@@ -561,7 +571,7 @@ public class BusinessManager implements BusinessLogic {
             Repair repair = null;
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             for (RepairEntity re : ce.getRepairs()) {
-                if(re.getDateEnd() == null) repair = EntityConverter.convertRepair(re);
+                if (re.getDateEnd() == null) repair = EntityConverter.convertRepair(re);
             }
             return repair;
         } catch (Exception e) {
@@ -575,12 +585,25 @@ public class BusinessManager implements BusinessLogic {
     public boolean updateRepair(Repair repair) {
         try {
             SessionManager.beginTran();
+            Session s = getSession();
             RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
+            // удаляем старую запись о пути, вдруг путь обновился! хотя с чего бы, но геша просит
+            for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
+                if (rde.getCar().equals(re.getCar())) {
+                    s.delete(rde);
+                    s.flush();
+                }
+            }
+            // todo del
             int id = re.getIdRepair();
+            // клирим сессию для очистки идентификаторов, т.к. мы не обновляем поля set'ами, а создаем новый объект.
             getSession().clear();
             re = EntityConverter.convertRepair(repair);
-            re.setIdRepair(id);
-            SessionManager.saveOrUpdateEntities(re);
+            RoadEntity newRoad = re.getRoad();
+            if(newRoad != null) {
+                s.save(new RoadDetEntity(newRoad, re.getCar(), null));
+            }
+            s.update(re);
             SessionManager.commit();
             return true;
         } catch (Exception e) {
@@ -596,9 +619,9 @@ public class BusinessManager implements BusinessLogic {
         try {
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
             ArrayList<Car> list = new ArrayList<Car>();
-            for(RoadDetEntity rde : re.getRoadDets()) {
-                if(rde.getCar() != null) list.add(EntityConverter.convertCar(rde.getCar()));
-            }                        
+            for (RoadDetEntity rde : re.getRoadDets()) {
+                if (rde.getCar() != null) list.add(EntityConverter.convertCar(rde.getCar()));
+            }
             return list;
         } catch (Exception e) {
             e.printStackTrace();
