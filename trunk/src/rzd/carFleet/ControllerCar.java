@@ -201,7 +201,7 @@ public class ControllerCar implements MouseListener, ActionListener {
                 JOptionPane.showMessageDialog(pCarFleet, "Информация о ремонте успешно изменена.");
                 update();
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...");
+                JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновлении ниформации о ремонте...");
             }
         }
     }
@@ -216,7 +216,7 @@ public class ControllerCar implements MouseListener, ActionListener {
                     JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
                     update();
                 } else {
-                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка...");
+                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновления информации о вагон...");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
