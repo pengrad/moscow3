@@ -90,4 +90,6 @@ public interface BusinessLogic {
     public ArrayList<Car> getCarsOnRoad(Road road);
 
     public Train getTrainByCar(Car car);
+
+    public ArrayList<CarHistory> getCarHistory(Car car);
 }
