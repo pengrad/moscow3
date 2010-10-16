@@ -108,7 +108,7 @@ public class EntityConverter {
     public static Repair convertRepair(RepairEntity r) {
         try {
             return new Repair(r.getIdRepair(), convertRepairType(r.getRepairType()), convertCar(r.getCar()),
-                    convertRoad(r.getRoad()), r.getDateBegin(), r.getDateEnd());
+                    convertRoad(r.getRoad()), r.getDateBegin(), r.getDateEnd(), r.getComment());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
