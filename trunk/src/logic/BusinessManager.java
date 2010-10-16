@@ -585,7 +585,24 @@ public class BusinessManager implements BusinessLogic {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return false;
+        } finally {
+            SessionManager.closeSession();
+        }
+    }
+
+    public ArrayList<Car> getCarsOnRoad(Road road) {
+        try {
+            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
+            ArrayList<Car> list = new ArrayList<Car>();
+            for(RoadDetEntity rde : re.getRoadDets()) {
+                if(rde.getCar() != null) list.add(EntityConverter.convertCar(rde.getCar()));
+            }                        
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             SessionManager.closeSession();
         }
