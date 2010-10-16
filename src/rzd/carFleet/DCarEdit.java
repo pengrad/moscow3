@@ -92,6 +92,11 @@ public class DCarEdit extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Создание/редактирование вагона ");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jButton2.setText("Отмена");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +112,7 @@ public class DCarEdit extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel1.setText("Номер вагона");
 
         try {
@@ -116,25 +121,25 @@ public class DCarEdit extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel2.setText("Тип");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel3.setText("Модель");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel4.setText("Вент/конд");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel5.setText("Генератор");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel6.setText("Привод генератора");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel7.setText("Аккумулятор");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel8.setText("Электрообоудование");
 
         cTypeParent.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -144,63 +149,63 @@ public class DCarEdit extends javax.swing.JDialog {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel9.setText("Окраска кузова");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel10.setText("Эколог., туалет");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel11.setText("Прбег (км) норма от пл. р.");
 
         fRunNorm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel12.setText("Прбег (км) от пл. р.");
 
         fRun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel13.setText("Прбег (км) норма от ТОЗ.");
 
         fRunTozNorn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel14.setText("Прбег (км) от ТОЗ");
 
         fRunToz.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        cTypeChilld.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cTypeChilld.setFont(new java.awt.Font("Tahoma", 0, 12));
         cTypeChilld.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel16.setText("Подтип");
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel26.setForeground(new java.awt.Color(255, 0, 0));
         jLabel26.setText("*");
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel27.setForeground(new java.awt.Color(255, 0, 0));
         jLabel27.setText("*");
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel28.setForeground(new java.awt.Color(255, 0, 0));
         jLabel28.setText("*");
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel29.setForeground(new java.awt.Color(255, 0, 0));
         jLabel29.setText("*");
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel30.setForeground(new java.awt.Color(255, 0, 0));
         jLabel30.setText("*");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("-обязательное поле для заполнения");
 
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel43.setForeground(new java.awt.Color(255, 0, 0));
         jLabel43.setText("*");
 
@@ -396,6 +401,11 @@ public class DCarEdit extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_cTypeParentItemStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        car = null;
+        setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

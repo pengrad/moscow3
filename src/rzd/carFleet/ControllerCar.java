@@ -1,5 +1,6 @@
 package rzd.carFleet;
 
+import logic.BusinessLogic;
 import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.dispStatinonFleet.DEditTrain;
@@ -85,6 +86,12 @@ public class ControllerCar implements MouseListener, ActionListener {
         if (e.getSource() == pCarFleet.tCars && e.getButton() == 3) {
             int row = pCarFleet.tCars.rowAtPoint(e.getPoint());
             pCarFleet.tCars.addRowSelectionInterval(row, row);
+            Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+            if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
+                locationCar.setEnabled(false);
+            } else {
+                locationCar.setEnabled(true);
+            }
             popCarMenu.show(pCarFleet.tCars, e.getX(), e.getY());
         }
         if (e.getSource() == pCarFleet.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
@@ -146,7 +153,7 @@ public class ControllerCar implements MouseListener, ActionListener {
                 ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
                 mt.setDate(getCarsTabView());
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...попробуйте еще раз.");
+                JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
             }
         }
     }
@@ -154,15 +161,15 @@ public class ControllerCar implements MouseListener, ActionListener {
     private void editCar() {
         dCarEdit.setLocationRelativeTo(pCarFleet);
         int row = pCarFleet.tCars.getSelectedRow();
-        int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
-        Car car = dCarEdit.open(Model.getModel().getCarByNumber(number));
+        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        car = dCarEdit.open(car);
         if (car != null) {
             boolean b = Model.getModel().editCar(car);
             if (b) {
                 JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
                 update();
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...попробуйте еще раз.");
+                JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
             }
         }
     }
@@ -174,13 +181,20 @@ public class ControllerCar implements MouseListener, ActionListener {
     private void locationCar() {
         dCarLocation.setLocationRelativeTo(pCarFleet);
         int row = pCarFleet.tCars.getSelectedRow();
-        int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
-        Car car = Model.getModel().getCarByNumber(number);
+        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
         CarLocationStructure carLS = dCarLocation.open(car);
-        try {
-            Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+        if (carLS != null) {
+            try {
+                boolean b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+                if (b) {
+                    JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
+                    update();
+                } else {
+                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка...");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -202,7 +216,7 @@ public class ControllerCar implements MouseListener, ActionListener {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {
                 Object[] o = new Object[4];
-                o[0] = c.getNumber();
+                o[0] = c;
                 o[1] = c.getCarType().getType();
                 o[2] = c.getModel();
                 o[3] = c.getCarLocation().toString();
