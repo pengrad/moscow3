@@ -78,7 +78,9 @@ public class EntityConverter {
         try {
             if (r == null) return null;
             RoadTypeEntity rte = new RoadTypeEntity(r.getRoadType().getId(), r.getRoadType().getName());
-            return new RoadEntity(r.getName(), r.getComment(), r.getPosition(), rte);
+            RoadEntity re = new RoadEntity(r.getName(), r.getComment(), r.getPosition(), rte);
+            re.setIdRoad(r.getId());
+            return re;
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
