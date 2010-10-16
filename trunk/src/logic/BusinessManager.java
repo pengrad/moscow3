@@ -578,6 +578,7 @@ public class BusinessManager implements BusinessLogic {
             RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
             int id = re.getIdRepair();
             getSession().evict(re);
+            getSession().flush();
             re = EntityConverter.convertRepair(repair);
             re.setIdRepair(id);
             SessionManager.saveOrUpdateEntities(re);
