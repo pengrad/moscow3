@@ -31,6 +31,12 @@ public class Car {
         this.number = number;
     }
 
+    public Car(int number, CarLocation carLocation, CarType carType) {
+        this.number = number;
+        this.carLocation = carLocation;
+        this.carType = carType;
+    }
+
     public Car(int number, String model, CarLocation carLocation, CarType carType, String conditioner, String generator, String generatorPrivod, String accumulator, String electricDevice, String bodyColor, boolean ecologicCoilet, int runNorm, int run, int runTozNorm, int runToz) {
         this.number = number;
         this.model = model;
