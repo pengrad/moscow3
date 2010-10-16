@@ -508,7 +508,7 @@ public class BusinessManager implements BusinessLogic {
                 case BusinessLogic.REPAIR:
                     rep = EntityConverter.convertRepair(repair);
                     //todo протестить
-                    rep.setIdRepair(0);
+                    rep.setIdRepair(null);
                     rep.setDateBegin(time);
                     rep.setDateEnd(null);
                     if (repair.getRoad() != null) {
