@@ -27,24 +27,28 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel11" alignment="0" pref="178" max="32767" attributes="1"/>
-                  <Component id="jLabel13" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel10" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel9" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel8" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel7" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel6" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel5" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel4" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel3" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel16" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
-                  <Component id="jLabel1" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel11" alignment="0" pref="178" max="32767" attributes="1"/>
+                      <Component id="jLabel13" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel10" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel9" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel8" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel7" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel6" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel5" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel4" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel3" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel16" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jLabel1" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lLocOther" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="fLocOther" alignment="0" min="-2" pref="243" max="-2" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cEcologicCoilet" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -171,7 +175,12 @@
                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fLocation" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lLocOther" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fLocOther" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -432,6 +441,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fLocation">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lLocOther">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x442;&#x435;&#x43a;&#x441;&#x442;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fLocOther">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
