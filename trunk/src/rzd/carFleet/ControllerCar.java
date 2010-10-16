@@ -5,6 +5,7 @@ import rzd.ControllerMain;
 import rzd.ModelTable;
 import rzd.dispStatinonFleet.DEditTrain;
 import rzd.model.objects.Car;
+import rzd.model.objects.Repair;
 import rzd.model.objects.structure.CarLocationStructure;
 import rzd.utils.MakerDefaultTextInField;
 
@@ -37,11 +38,13 @@ public class ControllerCar implements MouseListener, ActionListener {
     private JMenuItem locationCar;
     private DCarEdit dCarEdit;
     private DCarLocation dCarLocation;
+    private DCarRepair dCarRepair;
 
     public ControllerCar(PCar p) {
         this.pCarFleet = p;
         dCarEdit = new DCarEdit(null, true);
         dCarLocation = new DCarLocation(null, true);
+        dCarRepair = new DCarRepair(null, true, this);
         popCarMenu = new JPopupMenu();
         popHistLocationCar = new JPopupMenu();
         popHistLocationCar.add(new PCarHistory());
@@ -179,9 +182,32 @@ public class ControllerCar implements MouseListener, ActionListener {
     }
 
     private void locationCar() {
-        dCarLocation.setLocationRelativeTo(pCarFleet);
         int row = pCarFleet.tCars.getSelectedRow();
         Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        if (car.getCarLocation().getIdLocation() == BusinessLogic.REPAIR) {
+            locationRepair(car);
+        } else {
+            locationOther(car);
+        }
+    }
+
+    private void locationRepair(Car car) {
+        dCarRepair.setLocationRelativeTo(pCarFleet);
+        Repair repair = dCarRepair.open(Model.getModel().getRepairByCar(car));
+      //  System.out.println(repair.getComment());
+        if (repair != null) {
+            boolean b = Model.getModel().updateRepair(repair);
+            if (b) {
+                JOptionPane.showMessageDialog(pCarFleet, "Информация о ремонте успешно изменена.");
+                update();
+            } else {
+                JOptionPane.showMessageDialog(pCarFleet, "Ошибка...");
+            }
+        }
+    }
+
+    private void locationOther(Car car) {
+        dCarLocation.setLocationRelativeTo(pCarFleet);
         CarLocationStructure carLS = dCarLocation.open(car);
         if (carLS != null) {
             try {
@@ -198,6 +224,7 @@ public class ControllerCar implements MouseListener, ActionListener {
         }
     }
 
+
     private void histLocationCar() {
         popHistLocationCar.show(pCarFleet, popCarMenu.getX(), popCarMenu.getY());
     }
@@ -208,6 +235,11 @@ public class ControllerCar implements MouseListener, ActionListener {
 
         mt.setDate(getCarsTabView());
     }
+
+    public void endRepair(Car car) {
+        locationOther(car);
+    }
+
     //Методы конверторы
 
     private ArrayList<Object[]> getCarsTabView() {
@@ -227,4 +259,5 @@ public class ControllerCar implements MouseListener, ActionListener {
         }
         return null;
     }
+
 }

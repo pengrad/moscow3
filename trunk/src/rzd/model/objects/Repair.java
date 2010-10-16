@@ -26,6 +26,7 @@ public class Repair {
         this.road = road;
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
+        this.comment= comment;
     }
 
     public int getIdRepair() {

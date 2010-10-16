@@ -54,7 +54,6 @@
                           <Component id="bCancel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="fDate" alignment="0" min="-2" pref="142" max="-2" attributes="1"/>
                       <Component id="lDT" alignment="0" pref="233" max="32767" attributes="0"/>
                       <Component id="fRoute" alignment="0" pref="233" max="32767" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -66,6 +65,7 @@
                       </Group>
                       <Component id="cRoad" alignment="0" pref="233" max="32767" attributes="1"/>
                       <Component id="cRoadType" alignment="0" pref="233" max="32767" attributes="0"/>
+                      <Component id="fDate" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -156,18 +156,6 @@
               <Font name="Tahoma" size="11" style="2"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x414;&#x430;&#x442;&#x430; &#x438; &#x432;&#x440;&#x435;&#x43c;&#x44f; &#x43e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f;/&#x43f;&#x440;&#x438;&#x431;&#x44b;&#x442;&#x438;&#x44f;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="fDate">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="editable" type="boolean" value="false"/>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="" subtype="-1" type="1"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x41d;&#x430;&#x43f;&#x440;&#x438;&#x43c;&#x435;&#x440; 23.11.2010 12:45"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -326,6 +314,14 @@
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="*"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="fDate">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

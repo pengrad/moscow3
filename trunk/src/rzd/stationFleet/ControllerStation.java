@@ -95,7 +95,8 @@ public class ControllerStation implements ActionListener, MouseListener {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
                     //todo работа с тестовой реализацийей
-                    ArrayList<Car> cars = null;// TestModel.get().getCarsByRoad(k);
+                    ArrayList<Car> cars = Model.getModel().getCarsOnRoad(k);
+                    System.out.println("size="+cars.size());
                     if (cars != null) {
                         ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
                         for (Car c : cars) {

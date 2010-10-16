@@ -10,15 +10,20 @@
  */
 package rzd.carFleet;
 
+import javax.xml.ws.LogicalMessage;
+import logic.BusinessLogic;
 import rzd.model.Model;
 import rzd.model.objects.Car;
+import rzd.model.objects.CarLocation;
 import rzd.model.objects.CarType;
+import rzd.model.objects.Repair;
+import rzd.model.objects.Route;
+import rzd.model.objects.Train;
 
 /**
  * @author ЧерныхЕА
  */
 public class PCarInformation extends javax.swing.JPanel {
-
 
     /**
      * Creates new form CarInformation
@@ -26,8 +31,6 @@ public class PCarInformation extends javax.swing.JPanel {
     public PCarInformation() {
         initComponents();
     }
-
-   
 
     public void setData(Car car) {
         if (car != null) {
@@ -48,12 +51,39 @@ public class PCarInformation extends javax.swing.JPanel {
             fRun.setText(new Integer(car.getRun()).toString());
             fRunTozNorn.setText(new Integer(car.getRunTozNorm()).toString());
             fRunToz.setText(new Integer(car.getRunToz()).toString());
+            CarLocation carLocation = car.getCarLocation();
+           fLocation.setText(carLocation.getLocation());
+            if (carLocation.getIdLocation() == BusinessLogic.UNKNOWN) {
+                lLocOther.setVisible(false);
+                fLocOther.setVisible(false);
+            } else if (carLocation.getIdLocation() == BusinessLogic.REPAIR) {
+                Repair repair = Model.getModel().getRepairByCar(car);
+                lLocOther.setText("Тип ремонта");
+                fLocOther.setText(repair.getRepairType().getType() + (repair.getRoad() != null ? " ; путь" + repair.getRoad().getName() : ""));
+            } else if (carLocation.getIdLocation() == BusinessLogic.ON_ROAD) {
+                lLocOther.setText("Путь");
+                fLocOther.setText(Model.getModel().getRoadByCar(car).getName());
+            } else if (carLocation.getIdLocation() == BusinessLogic.IN_TRAIN) {
+                lLocOther.setText("Поезд");
+                Train train = Model.getModel().getTrainByCar(car);
+                String route = "";
+                if (train != null) {
+                    if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
+                        route = train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo();
+                    }
+                    if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
+                        route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom();
+                    }
+                    fLocOther.setText(route);
+                }
+
+            }
         }
     }
 
     public void setData(int numberCar) {
         Car car = Model.getModel().getCarByNumber(numberCar);
-           setData(car);
+        setData(car);
     }
 
     /**
@@ -99,46 +129,48 @@ public class PCarInformation extends javax.swing.JPanel {
         fRunToz = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         fLocation = new javax.swing.JTextField();
+        lLocOther = new javax.swing.JLabel();
+        fLocOther = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(217, 217, 227));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel3.setText("Модель");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel4.setText("Вент/конд");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel5.setText("Генератор");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel6.setText("Привод генератора");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel7.setText("Аккумулятор");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel8.setText("Электрообоудование");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel9.setText("Окраска кузова");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel10.setText("Эколог., туалет");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel11.setText("Прбег (км) норма от пл. р.");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel13.setText("Прбег (км) норма от ТОЗ.");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel1.setText("Номер вагона");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel2.setText("Тип");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel16.setText("Подтип");
 
         fConditioner.setEditable(false);
@@ -203,11 +235,16 @@ public class PCarInformation extends javax.swing.JPanel {
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 13));
         jLabel15.setText("Местоположение");
 
         fLocation.setEditable(false);
         fLocation.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        lLocOther.setText("текст");
+
+        fLocOther.setEditable(false);
+        fLocOther.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -218,23 +255,26 @@ public class PCarInformation extends javax.swing.JPanel {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lLocOther))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fLocOther, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cEcologicCoilet)
@@ -334,7 +374,11 @@ public class PCarInformation extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(fLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lLocOther)
+                    .addComponent(fLocOther, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -353,6 +397,7 @@ public class PCarInformation extends javax.swing.JPanel {
     private javax.swing.JTextField fElectricDevice;
     private javax.swing.JTextField fGenerator;
     private javax.swing.JTextField fGeneratorPrivod;
+    private javax.swing.JTextField fLocOther;
     private javax.swing.JTextField fLocation;
     private javax.swing.JTextField fModelCar;
     private javax.swing.JTextField fNumberCar;
@@ -379,5 +424,6 @@ public class PCarInformation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lLocOther;
     // End of variables declaration//GEN-END:variables
 }

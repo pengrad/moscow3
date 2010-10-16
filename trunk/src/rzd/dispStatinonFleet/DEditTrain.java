@@ -53,7 +53,6 @@ public class DEditTrain extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         lDT = new javax.swing.JLabel();
-        fDate = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         cRoad = new javax.swing.JComboBox();
         bSave = new javax.swing.JButton();
@@ -72,6 +71,7 @@ public class DEditTrain extends javax.swing.JDialog {
         cRoadType = new javax.swing.JComboBox();
         fRoute = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
+        fDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -82,15 +82,10 @@ public class DEditTrain extends javax.swing.JDialog {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(346, 239));
 
-        lDT.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lDT.setFont(new java.awt.Font("Tahoma", 2, 11));
         lDT.setText("Дата и время отправления/прибытия");
 
-        fDate.setBackground(new java.awt.Color(255, 255, 255));
-        fDate.setEditable(false);
-        fDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat(""))));
-        fDate.setToolTipText("Например 23.11.2010 12:45");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel3.setText("Путь отроавления/прибытия");
 
         bSave.setText("Сохранить");
@@ -107,7 +102,7 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel4.setText("Начальник поезда");
 
         lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,13 +133,13 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel5.setText("Вагоны в составе");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel6.setText("Все вагоны");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel7.setText("Маршрут");
 
         cRoadType.addItemListener(new java.awt.event.ItemListener() {
@@ -160,6 +155,9 @@ public class DEditTrain extends javax.swing.JDialog {
         jLabel43.setForeground(new java.awt.Color(255, 0, 0));
         jLabel43.setText("*");
 
+        fDate.setBackground(new java.awt.Color(255, 255, 255));
+        fDate.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,7 +170,6 @@ public class DEditTrain extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(bCancel))
                     .addComponent(jLabel7)
-                    .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lDT, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                     .addComponent(fRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                     .addComponent(jLabel4)
@@ -182,7 +179,8 @@ public class DEditTrain extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel43))
                     .addComponent(cRoad, 0, 233, Short.MAX_VALUE)
-                    .addComponent(cRoadType, 0, 233, Short.MAX_VALUE))
+                    .addComponent(cRoadType, 0, 233, Short.MAX_VALUE)
+                    .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -428,7 +426,7 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JComboBox cRoad;
     private javax.swing.JComboBox cRoadType;
     private javax.swing.JTextField fChief;
-    private javax.swing.JFormattedTextField fDate;
+    private javax.swing.JTextField fDate;
     private javax.swing.JTextField fRoute;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
