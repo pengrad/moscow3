@@ -3,7 +3,7 @@ package rzd.carFleet;
 import logic.BusinessLogic;
 import rzd.ControllerMain;
 import rzd.ModelTable;
-import rzd.dispStatinonFleet.DEditTrain;
+import rzd.carFleet.hist.PCarHistory;
 import rzd.model.objects.Car;
 import rzd.model.objects.Repair;
 import rzd.model.objects.structure.CarLocationStructure;
@@ -39,6 +39,7 @@ public class ControllerCar implements MouseListener, ActionListener {
     private DCarEdit dCarEdit;
     private DCarLocation dCarLocation;
     private DCarRepair dCarRepair;
+    private PCarHistory pCarHistory;
 
     public ControllerCar(PCar p) {
         this.pCarFleet = p;
@@ -47,7 +48,8 @@ public class ControllerCar implements MouseListener, ActionListener {
         dCarRepair = new DCarRepair(null, true, this);
         popCarMenu = new JPopupMenu();
         popHistLocationCar = new JPopupMenu();
-        popHistLocationCar.add(new PCarHistory());
+        pCarHistory = new PCarHistory();
+        popHistLocationCar.add(pCarHistory);
         viewCar = new JMenuItem("Посмотреть на карте станции", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
         viewCar.addActionListener(this);
         locationCar = new JMenuItem("Изменить местоположения вагона", new ImageIcon(getClass().getResource("/rzd/resurce/bt11.gif")));
@@ -194,7 +196,7 @@ public class ControllerCar implements MouseListener, ActionListener {
     private void locationRepair(Car car) {
         dCarRepair.setLocationRelativeTo(pCarFleet);
         Repair repair = dCarRepair.open(Model.getModel().getRepairByCar(car));
-      //  System.out.println(repair.getComment());
+        //  System.out.println(repair.getComment());
         if (repair != null) {
             boolean b = Model.getModel().updateRepair(repair);
             if (b) {
@@ -226,6 +228,9 @@ public class ControllerCar implements MouseListener, ActionListener {
 
 
     private void histLocationCar() {
+        int row = pCarFleet.tCars.getSelectedRow();
+        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        pCarHistory.setData(car);
         popHistLocationCar.show(pCarFleet, popCarMenu.getX(), popCarMenu.getY());
     }
 
