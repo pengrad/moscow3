@@ -59,7 +59,7 @@ public class PCarInformation extends javax.swing.JPanel {
             } else if (carLocation.getIdLocation() == BusinessLogic.REPAIR) {
                 Repair repair = Model.getModel().getRepairByCar(car);
                 lLocOther.setText("Тип ремонта");
-                fLocOther.setText(repair.getRepairType().getType() + (repair.getRoad() != null ? " ; путь" + repair.getRoad().getName() : ""));
+                fLocOther.setText(repair.getRepairType().getType() + (repair.getRoad() != null ? " ; путь - " + repair.getRoad().getName() : ""));
             } else if (carLocation.getIdLocation() == BusinessLogic.ON_ROAD) {
                 lLocOther.setText("Путь");
                 fLocOther.setText(Model.getModel().getRoadByCar(car).getName());
