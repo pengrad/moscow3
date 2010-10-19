@@ -11,6 +11,7 @@ import rzd.ModelTable;
 import javax.swing.*;
 import java.util.ArrayList;
 
+import rzd.Updateble;
 import rzd.model.Model;
 import rzd.model.objects.Route;
 import rzd.utils.MakerDefaultTextInField;
@@ -23,7 +24,7 @@ import rzd.utils.Utils;
  * Time: 17:43:47
  * To change this template use File | Settings | File Templates.
  */
-public class ControllerRoute implements ActionListener, MouseListener {
+public class ControllerRoute implements ActionListener, MouseListener, Updateble {
 
     private PRoute pRoute;
     private DRouteEdit dEditRoute;

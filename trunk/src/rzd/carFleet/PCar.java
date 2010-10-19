@@ -91,6 +91,10 @@ public class PCar extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public ControllerCar getController(){
+     return c;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bAddCar;
     public javax.swing.JButton bSearch;

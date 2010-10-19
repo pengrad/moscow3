@@ -3,6 +3,7 @@ package rzd.carFleet;
 import logic.BusinessLogic;
 import rzd.ControllerMain;
 import rzd.ModelTable;
+import rzd.Updateble;
 import rzd.carFleet.hist.PCarHistory;
 import rzd.model.objects.Car;
 import rzd.model.objects.Repair;
@@ -26,7 +27,7 @@ import rzd.utils.Utils;
  * Time: 16:50:30
  * To change this template use File | Settings | File Templates.
  */
-public class ControllerCar implements MouseListener, ActionListener {
+public class ControllerCar implements MouseListener, ActionListener, Updateble {
 
     private PCar pCarFleet;
     private JPopupMenu popCarMenu;

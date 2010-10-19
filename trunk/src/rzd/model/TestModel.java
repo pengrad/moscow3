@@ -67,10 +67,10 @@ public class TestModel {
 
     public ArrayList<Route> getRoutes() {
         ArrayList<Route> r = new ArrayList<Route>(5);
-        r.add(new Route(12, "", "", "", "", null, null,false,0,0));
-        r.add(new Route(12, "", "", "", "", null, null,false,0,0));
-        r.add(new Route(12, "", "", "", "", null, null,false,0,0));
-        r.add(new Route(12, "", "", "", "", null, null,false,0,0));
+        r.add(new Route(12, "111T", "111B", "Москва", "Владивосток", null, null,false,0,0));
+        r.add(new Route(12, "222T", "222B", "Москва", "Курск", null, null,false,0,0));
+        r.add(new Route(12, "333T", "333B", "Москва", "Варонеж", null, null,false,0,0));
+        r.add(new Route(12, "444T", "444И", "Москва", "Турочак", null, null,false,0,0));
         return r;  //To change body of implemented methods use File | Settings | File Templates.
 //   return null;
     }

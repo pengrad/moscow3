@@ -91,6 +91,10 @@ public class PRoute extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public ControllerRoute getController(){
+        return c;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreateRoute;
     public javax.swing.JButton bSearch;

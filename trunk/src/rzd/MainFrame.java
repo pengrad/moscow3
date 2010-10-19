@@ -41,31 +41,37 @@ public class MainFrame extends javax.swing.JFrame {
 
         tabbedtMain = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        bUpdate = new javax.swing.JMenu();
+        mUpdateThis = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/rzd/resurce/rzd.jpg")).getImage());
 
         tabbedtMain.setBackground(new java.awt.Color(204, 204, 255));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
+        jMenu2.setText("Настройки");
         jMenuBar1.add(jMenu2);
+
+        bUpdate.setForeground(new java.awt.Color(255, 0, 0));
+        bUpdate.setText("Обновить");
+
+        mUpdateThis.setText("Обновить текущию вкладку");
+        bUpdate.add(mUpdateThis);
+
+        jMenuBar1.add(bUpdate);
 
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tabbedtMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabbedtMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tabbedtMain, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabbedtMain, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
         );
 
         pack();
@@ -84,9 +90,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    public javax.swing.JMenu bUpdate;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem mUpdateThis;
     public javax.swing.JTabbedPane tabbedtMain;
     // End of variables declaration//GEN-END:variables
 }
