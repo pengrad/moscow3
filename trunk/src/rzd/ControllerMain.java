@@ -47,25 +47,22 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     private ControllerMain() {
-        mf = new MainFrame();
-        init();
-        mf.setVisible(true);
-        mf.tabbedtMain.addChangeListener(this);
-        mf.mUpdateThis.addActionListener(this);
-       }
+    }
 
-    private void init() {
+    public void init() {
+        mf = new MainFrame();
+        mf.setVisible(true);
         dLoading = new DLoading(mf, true);
-//        pStationFleet = new PStationFleet();
+        pStationFleet = new PStationFleet();
         pSchedule = new PSchedule();
-//        pDispStation = new PDispStation();
-//        pCars = new PCar();
-//        pRoute = new PRoute();
-        // mf.tabbedtMain.add("Станция", pStationFleet);
+        pDispStation = new PDispStation();
+        pCars = new PCar();
+        pRoute = new PRoute();
+        mf.tabbedtMain.add("Станция", pStationFleet);
         mf.tabbedtMain.add("Расписание", pSchedule);
-        // mf.tabbedtMain.add("Диспетчер станции", pDispStation);
-        // mf.tabbedtMain.add("Парк вагонов", pCars);
-        // mf.tabbedtMain.add("Маршруты", pRoute);
+        mf.tabbedtMain.add("Диспетчер станции", pDispStation);
+        mf.tabbedtMain.add("Парк вагонов", pCars);
+        mf.tabbedtMain.add("Маршруты", pRoute);
         popCarInf = new JPopupMenu();
         pCarInformation = new PCarInformation();
         popCarInf.add(pCarInformation);

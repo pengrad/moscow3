@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import rzd.ControllerMain;
 import rzd.ModelTable;
 
 
@@ -44,8 +45,7 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
         menuRoute.add(editRoute);
         menuRoute.add(deleteRoute);
         new MakerDefaultTextInField("Поиск по номеру маршрута", pRoute.fSearch);
-        update();
-
+        ControllerMain.getInstans().update(this);
     }
 
     public void update() {
@@ -101,7 +101,7 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
                 boolean b = Model.getModel().addRoute(data);
                 if (b) {
                     JOptionPane.showMessageDialog(pRoute, "Расписание успешно добавлено.");
-                    update();
+                    ControllerMain.getInstans().update(this);
                 } else {
                     JOptionPane.showMessageDialog(pRoute, "Ошибка...попробуйте еще раз.");
                 }
@@ -133,7 +133,7 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
                     boolean b = Model.getModel().updateRoute(data);
                     if (b) {
                         JOptionPane.showMessageDialog(pRoute, "Расписание успешно изменено.");
-                        ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+                        ControllerMain.getInstans().update(this);
                     } else {
                         JOptionPane.showMessageDialog(pRoute, "Ошибка...попробуйте еще раз.");
                     }
@@ -169,7 +169,7 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());
             for (Route r : routes) {
                 Object[] o = new Object[6];
-                o[0] = r.getId();
+                o[0] = r;
                 o[1] = r.getNumberForward();
                 o[2] = r.getNumberBack();
                 o[3] = r.getCityFrom();

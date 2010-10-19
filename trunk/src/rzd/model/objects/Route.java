@@ -116,7 +116,7 @@ public class Route {
 
     @Override
     public String toString() {
-        return numberForward + "  " + numberBack + " " + cityFrom + " - " + cityTo;
+        return new Integer(id).toString();
     }
 
     @Override

@@ -39,15 +39,15 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         editTrain.addActionListener(this);
         viewTrain.addActionListener(this);
         dEditTrain = new DEditTrain(null, true);
-        update();
+        ControllerMain.getInstans().update(this);
     }
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == pDispStation.cTimeBeforeArrivingTrains) {
-            update();
+            ControllerMain.getInstans().update(this);
         }
         if (e.getSource() == pDispStation.cTimeBeforeGoingTrains) {
-            update();
+            ControllerMain.getInstans().update(this);
         }
     }
 
@@ -153,7 +153,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
                 }
                 if (b) {
                     JOptionPane.showMessageDialog(pDispStation, "Информация о поезде изменена", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
-                    update();
+                    ControllerMain.getInstans().update(this);
                 }
             }
         }
@@ -182,7 +182,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
                     route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom();
                 }
                 data.add(new Object[]{
-                        train.getId(),
+                        train,
                         route,
                         Utils.convertDateTimeToStr(train.getDtDeparture()),
                         Utils.convertDateTimeToStr(train.getDtDestination()),
