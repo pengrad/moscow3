@@ -29,7 +29,7 @@ public class PSchedule extends javax.swing.JPanel {
     public PSchedule() {
         initComponents();
         c = new Controller(this);
-        pRaspisanie = new PRaspisanie();
+        pRaspisanie = new PRaspisanie(c);
         pPaint.add(pRaspisanie);
         jScrollPane2.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             public void adjustmentValueChanged(
@@ -161,6 +161,10 @@ public class PSchedule extends javax.swing.JPanel {
 
     public PRaspisanie getPRaspisanie() {
         return pRaspisanie;
+    }
+
+    public Controller getController() {
+        return c;
     }
 
 

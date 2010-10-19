@@ -7,6 +7,8 @@
  */
 package rzd.scheduleFleet;
 
+import rzd.Updateble;
+import rzd.model.TestModel;
 import rzd.model.objects.Train;
 import rzd.scheduleFleet.PRaspisanie;
 
@@ -14,13 +16,16 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class Controller implements MouseListener {
+public class Controller implements MouseListener, Updateble {
     private PSchedule pSchedule;
     private PRaspisanie pRaspisanie;
 
     public Controller(PSchedule pSchedule) {
         this.pSchedule = pSchedule;
+        this.pRaspisanie = pSchedule.getPRaspisanie();
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -43,8 +48,9 @@ public class Controller implements MouseListener {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    private void update(){
-//        ArrayList<Train> trains
-//      pSchedule.getPRaspisanie().addTrain();
+    public void update() {
+      
+        //  pRaspisanie.update();
+///    pRaspisanie.addTrain(new Train(0, new GregorianCalendar(2010, 9, 2).getTime(),new GregorianCalendar(2010, 9, 5).getTime()));
     }
 }

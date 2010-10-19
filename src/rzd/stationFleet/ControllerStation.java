@@ -5,6 +5,7 @@
 package rzd.stationFleet;
 
 import rzd.ControllerMain;
+import rzd.Updateble;
 import rzd.carFleet.PCarInformation;
 import rzd.model.Model;
 import rzd.model.objects.Car;
@@ -29,7 +30,7 @@ import rzd.utils.MakerDefaultTextInField;
 /**
  * @author ЧерныхЕА
  */
-public class ControllerStation implements ActionListener, MouseListener {
+public class ControllerStation implements ActionListener, MouseListener, Updateble {
 
     private PStationFleet pStationFleet;
     private HashMap<PRoad, ContainerRoad> roadContainers;

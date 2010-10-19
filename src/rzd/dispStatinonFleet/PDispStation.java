@@ -132,6 +132,9 @@ public class PDispStation extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public  ControllerDispSt getController(){
+        return c;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox cTimeBeforeArrivingTrains;
