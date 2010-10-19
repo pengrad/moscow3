@@ -27,6 +27,9 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
+        tabbedtMain.addChangeListener(ControllerMain.getInstans());
+          mUpdateThis.addActionListener(ControllerMain.getInstans());
+
     }
 
     /**

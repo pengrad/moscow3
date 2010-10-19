@@ -109,5 +109,9 @@ public class Train {
     public void setCarsIn(ArrayList<Car> carsIn) {
         this.carsIn = carsIn;
     }
+
+    public String toString(){
+      return new Integer(id).toString(); 
+    }
  
 }

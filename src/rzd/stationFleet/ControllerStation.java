@@ -42,7 +42,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         roadContainers = new HashMap<PRoad, ContainerRoad>();
         makeTabs();
         new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
-        update();
+        ControllerMain.getInstans().update(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -65,7 +65,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
     }
 
     public void mousePressed(MouseEvent e) {
-       
+
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -95,9 +95,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
                 while (itRoad.hasNext()) {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
-                    //todo работа с тестовой реализацийей
                     ArrayList<Car> cars = Model.getModel().getCarsOnRoad(k);
-                    System.out.println("size="+cars.size());
                     if (cars != null) {
                         ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
                         for (Car c : cars) {

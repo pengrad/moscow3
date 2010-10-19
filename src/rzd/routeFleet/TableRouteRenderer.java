@@ -19,13 +19,13 @@ public class TableRouteRenderer extends DefaultTableCellRenderer {
                                                    int row,
                                                    int column) {
         setText(value.toString());
-  //      System.out.println(table.getValueAt(row, 5));
-        if (!isSelected&&((Boolean) table.getValueAt(row, 5)).booleanValue() == false) {
+        //System.out.println(table.getValueAt(row, 5));
+        if (!isSelected && ((Boolean) table.getModel().getValueAt(row, 5)).booleanValue() == false) {
             setBackground(Color.LIGHT_GRAY);
             setForeground(Color.BLACK);
         } else {
             if (isSelected) {
-                setBackground(new Color(51,153,255));
+                setBackground(new Color(51, 153, 255));
                 setForeground(Color.BLACK);
             } else {
                 setBackground(Color.WHITE);

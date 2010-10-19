@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -26,7 +27,7 @@ public class Controller implements MouseListener, Updateble {
     public Controller(PSchedule pSchedule) {
         this.pSchedule = pSchedule;
         this.pRaspisanie = pSchedule.getPRaspisanie();
-    }
+         }
 
     public void mouseClicked(MouseEvent e) {
 
@@ -49,8 +50,9 @@ public class Controller implements MouseListener, Updateble {
     }
 
     public void update() {
-      
-        //  pRaspisanie.update();
+        System.out.println("******!!!!");
+        pRaspisanie.update2(new GregorianCalendar(2010,8,1).getTime(),  new GregorianCalendar(2010,10,25).getTime());
+        System.out.println("!!!!+++");
 ///    pRaspisanie.addTrain(new Train(0, new GregorianCalendar(2010, 9, 2).getTime(),new GregorianCalendar(2010, 9, 5).getTime()));
     }
 }

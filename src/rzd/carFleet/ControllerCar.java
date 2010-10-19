@@ -67,7 +67,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         popCarMenu.add(deleteCar);
         popCarMenu.add(histLocationCar);
         new MakerDefaultTextInField("Поиск по номеру вагона", pCarFleet.fSearch);
-        update();
+        ControllerMain.getInstans().update(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -156,8 +156,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
             boolean b = Model.getModel().addCar(car);
             if (b) {
                 JOptionPane.showMessageDialog(pCarFleet, "Ввагон успешно создан.");
-                ModelTable mt = (ModelTable) pCarFleet.tCars.getModel();
-                mt.setDate(getCarsTabView());
+                ControllerMain.getInstans().update(this);
             } else {
                 JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
             }
@@ -173,7 +172,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
             boolean b = Model.getModel().editCar(car);
             if (b) {
                 JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
-                update();
+                ControllerMain.getInstans().update(this);
             } else {
                 JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
             }
@@ -202,7 +201,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
             boolean b = Model.getModel().updateRepair(repair);
             if (b) {
                 JOptionPane.showMessageDialog(pCarFleet, "Информация о ремонте успешно изменена.");
-                update();
+                ControllerMain.getInstans().update(this);
             } else {
                 JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновлении ниформации о ремонте...");
             }
@@ -217,7 +216,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
                 boolean b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
                 if (b) {
                     JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
-                    update();
+                    ControllerMain.getInstans().update(this);
                 } else {
                     JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновления информации о вагон...");
                 }
@@ -238,7 +237,6 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     public void update() {
         ModelTable mt;
         mt = (ModelTable) pCarFleet.tCars.getModel();
-
         mt.setDate(getCarsTabView());
     }
 
