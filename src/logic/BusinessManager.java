@@ -124,15 +124,29 @@ public class BusinessManager implements BusinessLogic {
     public boolean updateRoute(Route r) {
         try {
             SessionManager.beginTran();
+            Session s = getSession();
             RouteEntity re = SessionManager.getEntityById(new RouteEntity(), r.getId());
             if (re == null) throw new Exception("Route not found");
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
+
+            // todo проверяем изменились ли дни, и если да - удаляем старые данные и создаем новые!
+
             // удалим старые записи дней по которым работаем расписание
             if (sfe.getSheduleDays() != null)
-                for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.deleteEntities(sde);
+                for (SheduleDaysEntity sde : sfe.getSheduleDays()) s.delete(sde);
             if (sbe.getSheduleDays() != null)
-                for (SheduleDaysEntity sde : sbe.getSheduleDays()) SessionManager.deleteEntities(sde);
+                for (SheduleDaysEntity sde : sbe.getSheduleDays()) s.delete(sde);
+            // todo удаляем запланированные поезда - выносим это в отдельный метод
+            List tf = getSession().createQuery("from TrainEntity where shedule = :sh and trainStatus.id = :plan").
+                    setParameter("sh", sfe).setInteger("plan", BusinessLogic.PLANNED).list();
+            for(Object t : tf) {
+                TrainEntity train = (TrainEntity) t;
+                // удаляем тела.
+                train.getTrainDets();
+                // удаляем их с пути
+                // удаляем историю вагонов для них
+            }
             // заставляем выполнить делит сейчас же
             SessionManager.getSession().flush();
             // и очищаем сессию, для удаления одинаковых идентификаторов
@@ -377,11 +391,24 @@ public class BusinessManager implements BusinessLogic {
     public boolean makeTrainForGoing(Train train) throws Exception {
         try {
             SessionManager.beginTran();
+            Session s = getSession();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
             if (te.getTrainStatus().getIdStatus() > BusinessLogic.MAKED)
                 throw new Exception("Поезд уже был сформирован!");
-            if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
+            // если этот поезд не стоит на этом пути
+            if(!re.getRoadDets().containsAll(te.getRoadDets())) {
+                if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
+                // удаляем поезд со своего старого пути, если в записи нет вагона - удаляем запись.
+                for (RoadDetEntity rde : te.getRoadDets()) {
+                    if (rde.getCar() == null) {
+                        s.delete(rde);
+                    } else {
+                        rde.setTrain(null);
+                        s.update(rde);
+                    }
+                }
+            }
             ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
             for (Car car : train.getCarsIn()) ces.add(SessionManager.getEntityById(new CarEntity(), car.getNumber()));
             if (ces.size() == 0) throw new Exception("Нет вагонов!");
@@ -391,13 +418,14 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.saveOrUpdateEntities(te);
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
+            // добавляем вагоны
             for (CarEntity ce : ces) {
                 if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
                     throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
                 for (RepairEntity rep : ce.getRepairs()) {
                     if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
                 }
-                // удаляем вагон с пути, если на нем нет поезда - удаляем запись
+                // удаляем вагон со старого пути, если на нем нет поезда - удаляем запись
                 for (RoadDetEntity rde : ce.getRoadDets()) {
                     if (rde.getTrain() == null) {
                         SessionManager.deleteEntities(rde);
@@ -650,7 +678,7 @@ public class BusinessManager implements BusinessLogic {
         try {
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             ArrayList<CarHistory> list = new ArrayList<CarHistory>(ce.getCarHistories().size());
-            for(CarHistoryEntity che : ce.getCarHistories()) {
+            for (CarHistoryEntity che : ce.getCarHistories()) {
                 list.add(EntityConverter.convertCarHistory(che));
             }
             return list;
