@@ -6,7 +6,6 @@ package rzd.stationFleet;
 
 import rzd.ControllerMain;
 import rzd.Updateble;
-import rzd.carFleet.PCarInformation;
 import rzd.model.Model;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
@@ -42,7 +41,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         roadContainers = new HashMap<PRoad, ContainerRoad>();
         makeTabs();
         new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
-        ControllerMain.getInstans().update(this);
+        pStationFleet.fSearchCarByNumber.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -113,6 +112,10 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
             e.printStackTrace();
             JOptionPane.showMessageDialog(pStationFleet, e.getMessage());
         }
+    }
+
+    public Component getPanel() {
+        return pStationFleet;
     }
     //Формирование структуры табов на основе...
 

@@ -1,5 +1,7 @@
 package rzd;
 
+import java.awt.*;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Евгений
@@ -9,4 +11,5 @@ package rzd;
  */
 public interface Updateble {    
     public void update();
+    public Component getPanel();
 }

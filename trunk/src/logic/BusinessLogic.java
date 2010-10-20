@@ -92,4 +92,8 @@ public interface BusinessLogic {
     public Train getTrainByCar(Car car);
 
     public ArrayList<CarHistory> getCarHistory(Car car);
+
+    public ArrayList<Train> getTrainsForSchedule(Date dBegin, Date dEnd);
+
+    public ArrayList<Car> getFreeCars();
 }

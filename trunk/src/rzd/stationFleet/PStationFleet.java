@@ -25,7 +25,6 @@ public class PStationFleet extends javax.swing.JPanel {
         initComponents();
         strSearch = fSearchCarByNumber.getText();
         this.c = new ControllerStation(this);
-        fSearchCarByNumber.addActionListener(c);
     }
 
      public ControllerStation getController(){
@@ -43,10 +42,10 @@ public class PStationFleet extends javax.swing.JPanel {
     private void initComponents() {
 
         jToggleButton1 = new javax.swing.JToggleButton();
-        tabbedStation = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         fSearchCarByNumber = new javax.swing.JTextField();
         bSearch = new javax.swing.JButton();
+        tabbedStation = new javax.swing.JTabbedPane();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -68,7 +67,7 @@ public class PStationFleet extends javax.swing.JPanel {
                 .addComponent(fSearchCarByNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bSearch)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

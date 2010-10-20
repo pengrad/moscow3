@@ -24,10 +24,6 @@ public class PRoute extends javax.swing.JPanel {
     public PRoute() {
         initComponents();
         this.c = new ControllerRoute(this);
-        bCreateRoute.addActionListener(c);
-        tRoute.addMouseListener(c);
-        fSearch.addActionListener(c);
-        bSearch.addActionListener(c);
     }
 
     /** This method is called from within the constructor to

@@ -1,5 +1,6 @@
 package rzd.routeFleet;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -45,7 +46,11 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
         menuRoute.add(editRoute);
         menuRoute.add(deleteRoute);
         new MakerDefaultTextInField("Поиск по номеру маршрута", pRoute.fSearch);
-        ControllerMain.getInstans().update(this);
+
+        pRoute.bCreateRoute.addActionListener(this);
+        pRoute.tRoute.addMouseListener(this);
+        pRoute.fSearch.addActionListener(this);
+        pRoute.bSearch.addActionListener(this);
     }
 
     public void update() {
@@ -56,6 +61,10 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
+     public Component getPanel(){
+        return pRoute;
+    }
+
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == pRoute.tRoute && e.getButton() == 3) {

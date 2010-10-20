@@ -11,13 +11,17 @@
 package rzd.dispStatinonFleet;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import javax.swing.JPopupMenu;
 
+import logic.BusinessLogic;
 import rzd.ControllerMain;
+import rzd.carFleet.DCarLocation;
 import rzd.carFleet.PCarInformation;
 import rzd.model.Model;
 import rzd.utils.Utils;
@@ -25,6 +29,7 @@ import rzd.model.objects.Car;
 import rzd.model.objects.Road;
 import rzd.model.objects.RoadType;
 import rzd.model.objects.Train;
+import rzd.model.objects.structure.CarLocationStructure;
 
 /**
  * @author Евгений
@@ -32,6 +37,7 @@ import rzd.model.objects.Train;
 public class DEditTrain extends javax.swing.JDialog {
 
     private Train train;
+    private DCarLocation dCarLocation;
 
     /**
      * Creates new form DEditTrain
@@ -39,6 +45,7 @@ public class DEditTrain extends javax.swing.JDialog {
     public DEditTrain(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        dCarLocation = new DCarLocation(null, true);
     }
 
     /**
@@ -105,6 +112,7 @@ public class DEditTrain extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel4.setText("Начальник поезда");
 
+        lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showInfByCar(evt);
@@ -112,6 +120,7 @@ public class DEditTrain extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(lCarInTrain);
 
+        lCarAll.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarAll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showInfByCar(evt);
@@ -148,14 +157,12 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        fRoute.setBackground(new java.awt.Color(255, 255, 255));
         fRoute.setEditable(false);
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel43.setForeground(new java.awt.Color(255, 0, 0));
         jLabel43.setText("*");
 
-        fDate.setBackground(new java.awt.Color(255, 255, 255));
         fDate.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -260,26 +267,37 @@ public class DEditTrain extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRightActionPerformed
-        Object[] selected = lCarInTrain.getSelectedValues();
-        if (selected != null) {
-            for (int i = 0; i < selected.length; i++) {
-                ((DefaultListModel) lCarAll.getModel()).addElement(selected[i]);
-                ((DefaultListModel) lCarInTrain.getModel()).removeElement(selected[i]);
+        Car car = (Car) lCarInTrain.getSelectedValue();
+        if (car != null) {
+            boolean b = true;
+            if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
+                CarLocationStructure carLS = dCarLocation.open(car);
+                try {
+                    b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+                    if(b){
+                        car=carLS.getCar();
+                    }
+                } catch (Exception e) {
+                    b = false;
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            if (b) {
+                ((DefaultListModel) lCarAll.getModel()).addElement(car);
+                ((DefaultListModel) lCarInTrain.getModel()).removeElement(car);
             }
         }
+
+
     }//GEN-LAST:event_bRightActionPerformed
 
     private void bLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLeftActionPerformed
-        Object[] selected = lCarAll.getSelectedValues();
-        if (selected != null) {
-            for (int i = 0; i < selected.length; i++) {
-                ((DefaultListModel) lCarInTrain.getModel()).addElement(selected[i]);
-                ((DefaultListModel) lCarAll.getModel()).removeElement(selected[i]);
-            }
-
+        Car car = (Car) lCarAll.getSelectedValue();
+        if (car != null) {
+            ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
+            ((DefaultListModel) lCarAll.getModel()).removeElement(car);
         }
     }//GEN-LAST:event_bLeftActionPerformed
-
 
     private void cRoadTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cRoadTypeItemStateChanged
         RoadType rt = (RoadType) cRoadType.getSelectedItem();
@@ -366,7 +384,7 @@ public class DEditTrain extends javax.swing.JDialog {
         }
 
         ((DefaultListModel) lCarAll.getModel()).removeAllElements();
-        ArrayList<Car> carsAll = Model.getModel().getCars();
+        ArrayList<Car> carsAll = Model.getModel().getFreeCars();
         if (carsAll != null && carsAll.size() != 0) {
             for (Car c : carsAll) {
                 // System.out.println(lCarAll.getModel().getClass().toString());

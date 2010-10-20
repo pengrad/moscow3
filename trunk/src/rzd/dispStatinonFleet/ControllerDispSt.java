@@ -13,6 +13,7 @@ import rzd.utils.Utils;
 import rzd.model.objects.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -39,7 +40,12 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         editTrain.addActionListener(this);
         viewTrain.addActionListener(this);
         dEditTrain = new DEditTrain(null, true);
-        ControllerMain.getInstans().update(this);
+
+        pDispStation.tArrivingTrains.addMouseListener(this);
+        pDispStation.tGoingTrains.addMouseListener(this);
+        pDispStation.tTrainOnRoad.addMouseListener(this);
+        pDispStation.cTimeBeforeArrivingTrains.addItemListener(this);
+        pDispStation.cTimeBeforeGoingTrains.addItemListener(this);
     }
 
     public void itemStateChanged(ItemEvent e) {
@@ -97,6 +103,10 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         ((ModelTable) pDispStation.tGoingTrains.getModel()).setDate(getTrainTabView(goingTrains));
         ArrayList<Train> arrivingTrains = Model.getModel().getArrivingTrains(new Integer(pDispStation.cTimeBeforeArrivingTrains.getSelectedItem().toString()));
         ((ModelTable) pDispStation.tArrivingTrains.getModel()).setDate(getTrainTabView(arrivingTrains));
+    }
+
+    public Component getPanel() {
+        return pDispStation;
     }
 //
 //    private void addDepartureTrain() {
@@ -173,25 +183,27 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         if (trains != null) {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());
             for (Train train : trains) {
-                ArrayList<Car> cars = TestModel.get().getCarsByTrain(train);
+                ArrayList<Car> cars = train.getCarsIn();
                 String route = "";
+                String dt = "";
                 if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
                     route = train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo();
+                    dt = Utils.convertDateTimeToStr(train.getDtDeparture());
                 }
                 if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
                     route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom();
+                    dt = Utils.convertDateTimeToStr(train.getDtDestination());
                 }
                 data.add(new Object[]{
                         train,
                         route,
-                        Utils.convertDateTimeToStr(train.getDtDeparture()),
-                        Utils.convertDateTimeToStr(train.getDtDestination()),
+                        dt,
                         train.getChief(),
                         (train.getRoad() != null ? train.getRoad().getName() : "Путь не задан"),
                         ((cars == null) ? 0 : cars.size())
                 });
             }
-            data.add(new Object[]{"ID", "Маршрут", "Дата и время прибытия", "Дата и время отправления", "Начальник", "Путь", "Кол-во вагонов"});
+            data.add(new Object[]{"ID", "Маршрут", "Отправление/Прибытие", "Начальник", "Путь", "Кол-во вагонов"});
             return data;
         }
         return null;
