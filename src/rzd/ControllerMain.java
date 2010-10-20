@@ -49,65 +49,86 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     private ControllerMain() {
     }
 
+    public MainFrame getMF() {
+        return mf;
+    }
+
     public void init() {
         mf = new MainFrame();
         mf.setVisible(true);
         dLoading = new DLoading(mf, true);
+        //Инициализируем панели
         pStationFleet = new PStationFleet();
         pSchedule = new PSchedule();
         pDispStation = new PDispStation();
         pCars = new PCar();
         pRoute = new PRoute();
-        mf.tabbedtMain.add("Станция", pStationFleet);
-        mf.tabbedtMain.add("Расписание", pSchedule);
-        mf.tabbedtMain.add("Диспетчер станции", pDispStation);
-        mf.tabbedtMain.add("Парк вагонов", pCars);
-        mf.tabbedtMain.add("Маршруты", pRoute);
+        //-----
+
+        //Добавляем в таргет панель
+        JPanel p = new JPanel(new BorderLayout());
+        p.add(pStationFleet);
+        mf.tabbedtMain.add("Станция", p);
+        p = new JPanel(new BorderLayout());
+        p.add(pSchedule);
+        mf.tabbedtMain.add("Расписание", p);
+        p = new JPanel(new BorderLayout());
+        p.add(pDispStation);
+        mf.tabbedtMain.add("Диспетчер станции", p);
+        p = new JPanel(new BorderLayout());
+        p.add(pCars);
+        mf.tabbedtMain.add("Парк вагонов", p);
+        p = new JPanel(new BorderLayout());
+        p.add(pRoute);
+        mf.tabbedtMain.add("Маршруты", p);
+//              mf.tabbedtMain.add("Станция", pStationFleet);
+//              mf.tabbedtMain.add("Расписание", pSchedule);
+//              mf.tabbedtMain.add("Диспетчер станции", pDispStation);
+//              mf.tabbedtMain.add("Парк вагонов", pCars);
+//              mf.tabbedtMain.add("Маршруты", pRoute);
+
+
         popCarInf = new JPopupMenu();
         pCarInformation = new PCarInformation();
         popCarInf.add(pCarInformation);
         popTrainInf = new JPopupMenu();
         pTrainInformation = new PTrainInformation();
         popTrainInf.add(pTrainInformation);
+
+        //Добавляем листноров
+        //todo Должно быть в конце INITa
+        mf.tabbedtMain.addChangeListener(ControllerMain.getInstans());
+        mf.mUpdateThis.addActionListener(ControllerMain.getInstans());
+        mf.tabbedtMain.setSelectedIndex(0);
+        update(pStationFleet.getController());
+
     }
 
 
     public void stateChanged(ChangeEvent e) {
-        Component c = mf.tabbedtMain.getSelectedComponent();
-        if (c instanceof PSchedule) {
-            update(pSchedule.getController());
-        }
-        if (c instanceof PStationFleet) {
-            update(pStationFleet.getController());
-        }
-        if (c instanceof PDispStation) {
-            update(pDispStation.getController());
-        }
-        if (c instanceof PCar) {
-            update(pCars.getController());
-        }
-
-        if (c instanceof PRoute) {
-            update(pRoute.getController());
-        }
+        updateStateTab();
     }
 
     public void actionPerformed(ActionEvent e) {
-        Component c = mf.tabbedtMain.getSelectedComponent();
-        if (c instanceof PSchedule) {
+        updateStateTab();
+    }
+
+    private void updateStateTab() {
+        JPanel c = (JPanel) mf.tabbedtMain.getSelectedComponent();
+        if (c.getComponents()[0] instanceof PSchedule) {
             update(pSchedule.getController());
         }
-        if (c instanceof PStationFleet) {
+        if (c.getComponents()[0] instanceof PStationFleet) {
             update(pStationFleet.getController());
         }
-        if (c instanceof PDispStation) {
+        if (c.getComponents()[0] instanceof PDispStation) {
             update(pDispStation.getController());
         }
-        if (c instanceof PCar) {
+        if (c.getComponents()[0] instanceof PCar) {
             update(pCars.getController());
         }
 
-        if (c instanceof PRoute) {
+        if (c.getComponents()[0] instanceof PRoute) {
             update(pRoute.getController());
         }
     }
@@ -156,7 +177,7 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     public boolean searchCar(int numberCar) {
         boolean search = pStationFleet.getController().searchCar(numberCar);
         if (search) {
-            mf.tabbedtMain.setSelectedComponent(pStationFleet);
+            mf.tabbedtMain.setSelectedComponent(pStationFleet.getParent());
             pStationFleet.getController().searchCar(numberCar);
         }
         return search;
@@ -165,7 +186,7 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     public boolean searchTrain(int idTrain) {
         boolean search = pStationFleet.getController().searchTrain(idTrain);
         if (search) {
-            mf.tabbedtMain.setSelectedComponent(pStationFleet);
+            mf.tabbedtMain.setSelectedComponent(pStationFleet.getParent());
             pStationFleet.getController().searchTrain(idTrain);
         }
         return search;
@@ -175,9 +196,15 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
         ControllerMain.getInstans();
     }
 
-    public void update(final Updateble source) {
+    synchronized public void update(final Updateble source) {
+        final JPanel panel = ((JPanel) mf.tabbedtMain.getSelectedComponent());
+        source.getPanel().setVisible(false);
+        panel.repaint();
         dLoading.setLocationRelativeTo(mf);
         new SwingWorker() {
+            private JPanel p = panel;
+            private Updateble s = source;
+
             @Override
             protected Object doInBackground() throws Exception {
                 source.update();
@@ -185,12 +212,12 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
             }
 
             public void done() {
+                Component tmp = s.getPanel();
+                tmp.setVisible(true);
+                p.repaint();
                 dLoading.setVisible(false);
             }
         }.execute();
         dLoading.setVisible(true);
-
     }
-
-
 }

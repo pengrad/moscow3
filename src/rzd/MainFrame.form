@@ -22,6 +22,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mUpdateThis">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F5"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/rzd/resurce/adept_update.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x41e;&#x431;&#x43d;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x442;&#x435;&#x43a;&#x443;&#x449;&#x438;&#x44e; &#x432;&#x43a;&#x43b;&#x430;&#x434;&#x43a;&#x443;"/>
               </Properties>
               <AuxValues>

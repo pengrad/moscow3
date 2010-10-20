@@ -1,5 +1,6 @@
 package rzd.scheduleFleet;
 
+import logic.BusinessLogic;
 import rzd.model.objects.Train;
 import rzd.utils.KeyGenerator;
 import rzd.scheduleFleet.Controller;
@@ -74,6 +75,9 @@ public class GTrainV2 extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+
+        //todo Разобраться сос татусами
+        // if(train.getTrainStatus().getId()== BusinessLogic.)
         g2.setColor(Color.BLACK);
         g2.draw(shape);
 //        g2.setColor(Color.WHITE);
@@ -83,6 +87,9 @@ public class GTrainV2 extends JComponent {
         //      g2.drawString("№748", (int) shape.getBounds().getX() + 5, (int) shape.getBounds().getY());
     }
 
+    public Train getTrain(){
+        return train;
+    }
 
     public boolean contains(int x, int y) {
         return shape.intersects(x, y, 5, 5);

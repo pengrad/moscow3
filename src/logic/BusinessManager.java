@@ -690,6 +690,16 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
+    // Поезда за заданный период 
+    public ArrayList<Train> getTrainsForSchedule(Date dBegin, Date dEnd) {
+        return getTrainsOnRoads();
+    }
+
+    //Вск свободне вагоны т.е со статусом на путях и неизвестно
+    public ArrayList<Car> getFreeCars() {
+        return  getCars();
+    }
+
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();
         firstDate.setTime(dateBegin);

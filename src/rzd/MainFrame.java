@@ -27,9 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
-        tabbedtMain.addChangeListener(ControllerMain.getInstans());
-          mUpdateThis.addActionListener(ControllerMain.getInstans());
-
+      
     }
 
     /**
@@ -59,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
         bUpdate.setForeground(new java.awt.Color(255, 0, 0));
         bUpdate.setText("Обновить");
 
+        mUpdateThis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        mUpdateThis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/adept_update.png"))); // NOI18N
         mUpdateThis.setText("Обновить текущию вкладку");
         bUpdate.add(mUpdateThis);
 

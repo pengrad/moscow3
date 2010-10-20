@@ -25,15 +25,6 @@ public class PDispStation extends javax.swing.JPanel {
     public PDispStation() {
         initComponents();
         c = new ControllerDispSt(this);
-        tArrivingTrains.addMouseListener(c);
-        tGoingTrains.addMouseListener(c);
-        tTrainOnRoad.addMouseListener(c);
-//        tTrainDepartureToday.addMouseListener(c);
- //       tTrainDestinationToday.addMouseListener(c);
-  //      bAddDeparture.addActionListener(c);
-  //      bAddDestination.addActionListener(c);
-          cTimeBeforeArrivingTrains.addItemListener(c);
-          cTimeBeforeGoingTrains.addItemListener(c);
     }
 
     /**

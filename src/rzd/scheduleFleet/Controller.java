@@ -7,12 +7,14 @@
  */
 package rzd.scheduleFleet;
 
+import rzd.ControllerMain;
 import rzd.Updateble;
 import rzd.model.TestModel;
 import rzd.model.objects.Train;
 import rzd.scheduleFleet.PRaspisanie;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -22,15 +24,16 @@ import java.util.GregorianCalendar;
 
 public class Controller implements MouseListener, Updateble {
     private PSchedule pSchedule;
-    private PRaspisanie pRaspisanie;
 
     public Controller(PSchedule pSchedule) {
         this.pSchedule = pSchedule;
-        this.pRaspisanie = pSchedule.getPRaspisanie();
-         }
+    }
 
     public void mouseClicked(MouseEvent e) {
-
+        if (e.getButton() == 1 && e.getClickCount() == 2 && e.getSource() instanceof GTrainV2) {
+            Train train = ((GTrainV2) e.getSource()).getTrain();
+            ControllerMain.getInstans().showTrainInf((GTrainV2) e.getSource(), e.getX(), e.getY(), train);
+        }
     }
 
     public void mousePressed(MouseEvent e) {
@@ -50,9 +53,10 @@ public class Controller implements MouseListener, Updateble {
     }
 
     public void update() {
-        System.out.println("******!!!!");
-        pRaspisanie.update2(new GregorianCalendar(2010,8,1).getTime(),  new GregorianCalendar(2010,10,25).getTime());
-        System.out.println("!!!!+++");
-///    pRaspisanie.addTrain(new Train(0, new GregorianCalendar(2010, 9, 2).getTime(),new GregorianCalendar(2010, 9, 5).getTime()));
+        pSchedule.getPRaspisanie().update2(new GregorianCalendar(2010, 8, 1).getTime(), new GregorianCalendar(2010, 11, 25).getTime());
+    }
+
+    public Component getPanel() {
+        return pSchedule;
     }
 }

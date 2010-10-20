@@ -11,6 +11,7 @@ import rzd.model.objects.structure.CarLocationStructure;
 import rzd.utils.MakerDefaultTextInField;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -59,7 +60,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         editCar.addActionListener(this);
         deleteCar = new JMenuItem("Удалить вагон", new ImageIcon(getClass().getResource("/rzd/resurce/bt12.gif")));
         deleteCar.addActionListener(this);
-        histLocationCar = new JMenuItem("История местоположения вагон", new ImageIcon(getClass().getResource("/rzd/resurce/bt4.gif")));
+        histLocationCar = new JMenuItem("История местоположения вагон", new ImageIcon(getClass().getResource("/rzd/resurce/history.png")));
         histLocationCar.addActionListener(this);
         popCarMenu.add(viewCar);
         popCarMenu.add(locationCar);
@@ -67,8 +68,14 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         popCarMenu.add(deleteCar);
         popCarMenu.add(histLocationCar);
         new MakerDefaultTextInField("Поиск по номеру вагона", pCarFleet.fSearch);
-        ControllerMain.getInstans().update(this);
+
+        pCarFleet.tCars.addMouseListener(this);
+        pCarFleet.bAddCar.addActionListener(this);
+        pCarFleet.fSearch.addActionListener(this);
+        pCarFleet.bSearch.addActionListener(this);
     }
+
+
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pCarFleet.fSearch || e.getSource() == pCarFleet.bSearch) {
@@ -218,7 +225,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
                     JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
                     ControllerMain.getInstans().update(this);
                 } else {
-                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновления информации о вагон...");
+                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновления информации о вагоне...");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
@@ -238,6 +245,10 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         ModelTable mt;
         mt = (ModelTable) pCarFleet.tCars.getModel();
         mt.setDate(getCarsTabView());
+    }
+
+     public Component getPanel(){
+        return pCarFleet;
     }
 
     public void endRepair(Car car) {
