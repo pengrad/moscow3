@@ -169,6 +169,9 @@ public class PDayOfMonth extends javax.swing.JPanel {
         jToggleButton31.setBorder(null);
 
         bSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/accept.png"))); // NOI18N
+        bSave.setBorderPainted(false);
+        bSave.setContentAreaFilled(false);
+        bSave.setFocusPainted(false);
         bSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSaveActionPerformed(evt);
@@ -176,6 +179,8 @@ public class PDayOfMonth extends javax.swing.JPanel {
         });
 
         bCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/cancel.png"))); // NOI18N
+        bCancel.setBorderPainted(false);
+        bCancel.setContentAreaFilled(false);
         bCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bCancelActionPerformed(evt);

@@ -7,8 +7,11 @@ package rzd;
 import rzd.MainFrame;
 import rzd.carFleet.PCar;
 import rzd.carFleet.PCarInformation;
+import rzd.carFleet.PCarInformation_1;
 import rzd.dispStatinonFleet.PDispStation;
 import rzd.dispStatinonFleet.PTrainInformation;
+import rzd.dispStatinonFleet.PTrainInformation_1;
+import rzd.model.Model;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
 import rzd.routeFleet.PRoute;
@@ -37,9 +40,9 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     private PCar pCars;
     private PRoute pRoute;
     private JPopupMenu popCarInf;
-    private PCarInformation pCarInformation;
+    private PCarInformation_1 pCarInformation;
     private JPopupMenu popTrainInf;
-    private PTrainInformation pTrainInformation;
+    private PTrainInformation_1 pTrainInformation;
     private DLoading dLoading;
 
     public static ControllerMain getInstans() {
@@ -89,10 +92,10 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
 
         popCarInf = new JPopupMenu();
-        pCarInformation = new PCarInformation();
+        pCarInformation = new PCarInformation_1();
         popCarInf.add(pCarInformation);
         popTrainInf = new JPopupMenu();
-        pTrainInformation = new PTrainInformation();
+        pTrainInformation = new PTrainInformation_1();
         popTrainInf.add(pTrainInformation);
 
         //Добавляем листноров
@@ -155,13 +158,13 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     public void showCarInf(Component c, int x, int y, Car car) {
+        System.out.println(c.getClass());
         pCarInformation.setData(car);
         popCarInf.show(c, x, y);
     }
 
     public void showCarInf(JComponent c, int x, int y, int numberCar) {
-        pCarInformation.setData(numberCar);
-        popCarInf.show(c, x, y);
+        showCarInf(c, x, y, Model.getModel().getCarByNumber(numberCar));
     }
 
     public void showTrainInf(Component c, int x, int y, Train train) {

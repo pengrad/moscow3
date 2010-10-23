@@ -96,4 +96,6 @@ public interface BusinessLogic {
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd);
 
     public ArrayList<Car> getFreeCars();
+
+    public boolean isRoadReadyForTrain(Train train);
 }

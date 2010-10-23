@@ -26,6 +26,8 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     private JPopupMenu menuTrain;
     private JMenuItem editTrain;
     private JMenuItem viewTrain;
+    private JMenuItem deactivateTrain;
+
     private JTable activeTable;
     private DEditTrain dEditTrain;
 
@@ -35,10 +37,16 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         //   editTrain = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
         editTrain = new JMenuItem("Редактировать", new ImageIcon(getClass().getResource("/rzd/resurce/bt5.gif")));
         viewTrain = new JMenuItem("Посмотреть на карте станции", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
+        deactivateTrain = new JMenuItem("Расформировать", new ImageIcon(getClass().getResource("/rzd/resurce/eye.png")));
+
         menuTrain.add(editTrain);
         menuTrain.add(viewTrain);
+        menuTrain.add(deactivateTrain);
+
         editTrain.addActionListener(this);
         viewTrain.addActionListener(this);
+        deactivateTrain.addActionListener(this);
+
         dEditTrain = new DEditTrain(null, true);
 
         pDispStation.tArrivingTrains.addMouseListener(this);
@@ -59,12 +67,18 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() instanceof JTable && e.getButton() == 3) {
-            if (e.getSource() == pDispStation.tTrainOnRoad) {
-                viewTrain.setEnabled(true);
-            } else {
-                viewTrain.setEnabled(false);
-            }
             int row = ((JTable) e.getSource()).rowAtPoint(e.getPoint());
+            if (e.getSource() == pDispStation.tTrainOnRoad) {
+                //    editTrain.setText("Редактировать");
+                viewTrain.setEnabled(true);
+                Train train = (Train) ((JTable) e.getSource()).getValueAt(row, 0);
+                deactivateTrain.setEnabled(train.getRoute().getSheduleBack().equals(train.getShedule()));
+            } else {
+                //    editTrain.setText("Поставить на путь");
+                viewTrain.setEnabled(false);
+                deactivateTrain.setEnabled(false);
+            }
+
             ((JTable) e.getSource()).addRowSelectionInterval(row, row);
             menuTrain.show((JTable) e.getSource(), e.getX(), e.getY());
             activeTable = (JTable) e.getSource();
@@ -93,6 +107,8 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             editTrain(activeTable);
         } else if (e.getSource() == viewTrain) {
             viewTrain(activeTable);
+        } else if (e.getSource() == viewTrain) {
+            deactivateTrain(activeTable);
         }
     }
 
@@ -142,28 +158,23 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
 //    }
 
     private void editTrain(JTable activeTab) {
-        Train train = null;
         int row = activeTab.getSelectedRow();
         if (row > -1 && row < activeTab.getRowCount()) {
             dEditTrain.setLocationRelativeTo(pDispStation);
-            int idTrain = new Integer(activeTab.getValueAt(row, 0).toString());
-            if (activeTab == pDispStation.tGoingTrains)
-                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
-            if (activeTab == pDispStation.tArrivingTrains)
-                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
-
-            if (activeTab == pDispStation.tTrainOnRoad)
-                train = dEditTrain.open(Model.getModel().getTrainById(idTrain));
+            Train train = (Train) activeTab.getValueAt(row, 0);
+            train = dEditTrain.open(train);
             if (train != null) {
                 boolean b = false;
                 try {
                     b = Model.getModel().makeTrainForGoing(train);
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "Внимание...", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "Внимание...", JOptionPane.ERROR_MESSAGE);
                 }
                 if (b) {
                     JOptionPane.showMessageDialog(pDispStation, "Информация о поезде изменена", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
                     ControllerMain.getInstans().update(this);
+                } else {
+                    JOptionPane.showMessageDialog(pDispStation, "Ошибка обновления информации о поезде", "Внимание...", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -174,6 +185,22 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         boolean b = ControllerMain.getInstans().searchTrain(new Integer(activeTab.getValueAt(row, 0).toString()));
         if (!b) {
             JOptionPane.showMessageDialog(pDispStation, "Выгон не найден", "Сообщение...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+        }
+    }
+
+    private void deactivateTrain(JTable activeTab) {
+        int row = activeTab.getSelectedRow();
+        if (row > -1 && row < activeTab.getRowCount()) {
+            dEditTrain.setLocationRelativeTo(pDispStation);
+            Train train = (Train) activeTab.getValueAt(row, 0);
+            train = dEditTrain.open(train);
+            if (train != null) {
+                if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
+                    //todo расформирование
+                } else {
+                    JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Сообщение...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+                }
+            }
         }
     }
 

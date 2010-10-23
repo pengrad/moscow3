@@ -321,6 +321,8 @@ public class PRaspisanie extends JComponent {
 //            System.out.println(tmp.getBounds().getX());
             g2.setColor(Color.WHITE);
             g2.fill(new Rectangle2D.Double(tx + 20, (i - 1) * sizeRoute + smTop + 3, 100, 15));
+            g2.fill(new Rectangle2D.Double(tx + 20, (i) * sizeRoute + smTop -17, 100, 15));
+
             g2.setColor(Color.BLUE);
 
             g2.drawString(routes.get(i - 1).getNumberForward() + " - " + routes.get(i - 1).getCityFrom(), tx + 20, (i - 1) * sizeRoute + 15 + smTop);

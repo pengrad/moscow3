@@ -11,24 +11,16 @@
 package rzd.dispStatinonFleet;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import javax.swing.JPopupMenu;
-
 import logic.BusinessLogic;
 import rzd.ControllerMain;
 import rzd.carFleet.DCarLocation;
-import rzd.carFleet.PCarInformation;
 import rzd.model.Model;
+import rzd.model.objects.*;
 import rzd.utils.Utils;
-import rzd.model.objects.Car;
-import rzd.model.objects.Road;
-import rzd.model.objects.RoadType;
-import rzd.model.objects.Train;
 import rzd.model.objects.structure.CarLocationStructure;
 
 /**
@@ -79,6 +71,8 @@ public class DEditTrain extends javax.swing.JDialog {
         fRoute = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         fDate = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -87,13 +81,18 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(346, 239));
 
-        lDT.setFont(new java.awt.Font("Tahoma", 2, 11));
-        lDT.setText("Дата и время отправления/прибытия");
+        lDT.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        lDT.setForeground(new java.awt.Color(82, 82, 82));
+        lDT.setText("Дата и время");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 11));
-        jLabel3.setText("Путь отроавления/прибытия");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel3.setText("Путь");
+
+        cRoad.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
 
         bSave.setText("Сохранить");
         bSave.addActionListener(new java.awt.event.ActionListener() {
@@ -109,9 +108,13 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 11));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(82, 82, 82));
         jLabel4.setText("Начальник поезда");
 
+        fChief.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -120,6 +123,7 @@ public class DEditTrain extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(lCarInTrain);
 
+        lCarAll.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lCarAll.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarAll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,56 +146,86 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(82, 82, 82));
         jLabel5.setText("Вагоны в составе");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(82, 82, 82));
         jLabel6.setText("Все вагоны");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11));
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setText("Маршрут");
 
+        cRoadType.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         cRoadType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cRoadTypeItemStateChanged(evt);
             }
         });
 
+        fRoute.setBackground(new java.awt.Color(250, 250, 250));
         fRoute.setEditable(false);
+        fRoute.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14));
         jLabel43.setForeground(new java.awt.Color(255, 0, 0));
         jLabel43.setText("*");
 
+        fDate.setBackground(new java.awt.Color(250, 250, 250));
         fDate.setEditable(false);
+        fDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fDate.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel8.setText("Информация о поезде");
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel9.setText("Отправление/прибытие");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(bSave)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bCancel))
-                                .addComponent(jLabel7)
-                                .addComponent(lDT, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                                .addComponent(fRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                                        .addContainerGap()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(bSave)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(bCancel))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel43))
-                                .addComponent(cRoad, 0, 233, Short.MAX_VALUE)
-                                .addComponent(cRoadType, 0, 233, Short.MAX_VALUE)
-                                .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fRoute, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cRoad, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cRoadType, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel43)))
+                                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(bLeft, 0, 0, Short.MAX_VALUE)
@@ -200,55 +234,56 @@ public class DEditTrain extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                         .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(fRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(13, 13, 13)
-                                        .addComponent(lDT)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(fRoute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lDT)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel3)
-                                        .addGap(14, 14, 14)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cRoadType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cRoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(bSave)
                                         .addComponent(bCancel)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addGap(184, 184, 184)
                                         .addComponent(bRight, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(249, 249, 249))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6)
                                         .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))))
                         .addContainerGap())
         );
 
@@ -256,47 +291,23 @@ public class DEditTrain extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRightActionPerformed
-        Car car = (Car) lCarInTrain.getSelectedValue();
-        if (car != null) {
-            boolean b = true;
-            if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
-                CarLocationStructure carLS = dCarLocation.open(car);
-                try {
-                    b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
-                    if(b){
-                        car=carLS.getCar();
-                    }
-                } catch (Exception e) {
-                    b = false;
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-            if (b) {
-                ((DefaultListModel) lCarAll.getModel()).addElement(car);
-                ((DefaultListModel) lCarInTrain.getModel()).removeElement(car);
-            }
-        }
-
+        removeCarInTrain();
 
     }//GEN-LAST:event_bRightActionPerformed
 
     private void bLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLeftActionPerformed
-        Car car = (Car) lCarAll.getSelectedValue();
-        if (car != null) {
-            ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
-            ((DefaultListModel) lCarAll.getModel()).removeElement(car);
-        }
+        addCarInTrain();
     }//GEN-LAST:event_bLeftActionPerformed
 
     private void cRoadTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cRoadTypeItemStateChanged
@@ -312,6 +323,44 @@ public class DEditTrain extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cRoadTypeItemStateChanged
 
+    private void addCarInTrain() {
+        Car car = (Car) lCarAll.getSelectedValue();
+        if (car != null) {
+            ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
+            ((DefaultListModel) lCarAll.getModel()).removeElement(car);
+        }
+    }
+
+    private void removeCarInTrain() {
+        Car car = (Car) lCarInTrain.getSelectedValue();
+        if (car != null) {
+            boolean b = false;
+            System.out.println("ttt=" + car.getCarLocation().getIdLocation());
+            if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
+                System.out.println("ddd");
+                dCarLocation.setLocationRelativeTo(this);
+                CarLocationStructure carLS = dCarLocation.open(car);
+                if (carLS != null) {
+                    try {
+                        b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+                        System.out.println("b=" + b);
+                        if (b) {
+                            car = carLS.getCar();
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            } else {
+                b = true;
+            }
+            if (b) {
+                ((DefaultListModel) lCarAll.getModel()).addElement(car);
+                ((DefaultListModel) lCarInTrain.getModel()).removeElement(car);
+            }
+        }
+    }
+
     private void showInfByCar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showInfByCar
         if (evt.getSource() instanceof JList && evt.getButton() == 1 && evt.getClickCount() == 2) {
             JList list = (JList) evt.getSource();
@@ -322,38 +371,53 @@ public class DEditTrain extends javax.swing.JDialog {
     }//GEN-LAST:event_showInfByCar
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
+        save();
+    }//GEN-LAST:event_bSaveActionPerformed
+
+    private void bCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelActionPerformed
+        close();
+    }//GEN-LAST:event_bCancelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        close();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void save() {
         if (isCorrectInput()) {
-            if (train != null) {
-                train.setChief(fChief.getText().trim());
-                train.setRoad((Road) cRoad.getSelectedItem());
+            if (Model.getModel().isRoadReadyForTrain(train)) {
                 ArrayList<Car> cars = new ArrayList<Car>(lCarInTrain.getModel().getSize());
                 for (int i = 0; i < lCarInTrain.getModel().getSize(); i++) {
                     cars.add((Car) lCarInTrain.getModel().getElementAt(i));
                 }
-                // System.out.println("Save cars in train="+cars.size());
-                train.setCarsIn(cars);
+                this.train = new Train(
+                        train.getId(),
+                        train.getDtDeparture(),
+                        train.getDtDestination(),
+                        fChief.getText().trim(),
+                        train.getShedule(),
+                        train.getRoute(),
+                        train.getTrainStatus(),
+                        (Road) cRoad.getSelectedItem(),
+                        cars
+                );
                 setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Путь занят, укажите другой путь", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Заполните обязательные поля");
         }
-    }//GEN-LAST:event_bSaveActionPerformed
+    }
 
-    private void bCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelActionPerformed
+    private void close() {
         train = null;
         setVisible(false);
-    }//GEN-LAST:event_bCancelActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        train = null;
-        setVisible(false);
-    }//GEN-LAST:event_formWindowClosing
-
+    }
 
     //Возаращеет Train,Route,Road,cars
 
     public Train open(Train train) {
-        this.train = train;
+        if (train == null) close();
         cRoadType.removeAllItems();
         cRoad.removeAllItems();
         RoadType rtTmp = null;
@@ -452,6 +516,8 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

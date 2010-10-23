@@ -46,7 +46,8 @@ public class PCar extends javax.swing.JPanel {
         fSearch.setFont(new java.awt.Font("Tahoma", 2, 11));
 
         tCars.setModel(new ModelTable() );
-        tCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tCars.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tCars);
 
         bAddCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/add16px.png"))); // NOI18N
@@ -67,10 +68,10 @@ public class PCar extends javax.swing.JPanel {
                 .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(bAddCar)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

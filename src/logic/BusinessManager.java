@@ -148,7 +148,7 @@ public class BusinessManager implements BusinessLogic {
             // todo удаляем запланированные поезда - выносим это в отдельный метод
             List tf = s.createQuery("from TrainEntity where shedule = :sh and trainStatus.id = :plan").
                     setParameter("sh", sfe).setInteger("plan", BusinessLogic.PLANNED).list();
-            for(Object t : tf) {
+            for (Object t : tf) {
                 TrainEntity train = (TrainEntity) t;
                 // удаляем тела.
                 train.getTrainDets();
@@ -443,7 +443,7 @@ public class BusinessManager implements BusinessLogic {
             if (te.getTrainStatus().getIdStatus() > BusinessLogic.MAKED)
                 throw new Exception("Поезд уже был сформирован!");
             // если этот поезд не стоит на этом пути
-            if(!re.getRoadDets().containsAll(te.getRoadDets())) {
+            if (!re.getRoadDets().containsAll(te.getRoadDets())) {
                 if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
                 // удаляем поезд со своего старого пути, если в записи нет вагона - удаляем запись.
                 for (RoadDetEntity rde : te.getRoadDets()) {
@@ -555,7 +555,9 @@ public class BusinessManager implements BusinessLogic {
             for (RepairEntity rep : ce.getRepairs()) {
                 if (rep.getDateEnd() == null) {
                     rep.setDateEnd(time);
-                    SessionManager.saveOrUpdateEntities(rep);
+                    System.out.println(rep.getDateEnd());
+                    getSession().update(rep);
+                    getSession().flush();
                 }
             }
             // удаляем вагон с пути, если на нем нет поезда - удаляем запись
@@ -681,6 +683,7 @@ public class BusinessManager implements BusinessLogic {
             Session s = getSession();
             RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
             // удаляем старую запись о пути, вдруг путь обновился! хотя с чего бы, но геша просит
+             //todo Здесь ошибка. У repair может не быть roada!!!
             for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
                 if (rde.getCar() != null && rde.getCar().equals(re.getCar())) {
                     s.delete(rde);
@@ -772,7 +775,12 @@ public class BusinessManager implements BusinessLogic {
 
     //Вск свободне вагоны т.е со статусом на путях и неизвестно
     public ArrayList<Car> getFreeCars() {
-        return  getCars();
+        return getCars();
+    }
+
+    //Свободен ли путь для текущего поезда, если да то true
+     public boolean isRoadReadyForTrain(Train train) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {

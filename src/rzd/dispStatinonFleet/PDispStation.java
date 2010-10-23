@@ -51,35 +51,45 @@ public class PDispStation extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cTimeBeforeGoingTrains = new javax.swing.JComboBox();
 
+        setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jTabbedPane1.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         tArrivingTrains.setModel(new ModelTable() );
+        tArrivingTrains.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tArrivingTrains.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tArrivingTrains);
 
         jTabbedPane1.addTab("Прибывающие поезда", jScrollPane1);
 
         jTabbedPane2.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane2.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jTabbedPane2.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         tGoingTrains.setModel(new ModelTable());
+        tGoingTrains.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tGoingTrains.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tGoingTrains);
 
         jTabbedPane2.addTab("Отправляемые поезда", jScrollPane2);
 
-        jTabbedPane3.setBackground(new java.awt.Color(0, 51, 204));
+        jTabbedPane3.setBackground(new java.awt.Color(0, 255, 102));
         jTabbedPane3.setForeground(new java.awt.Color(0, 0, 204));
-        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jTabbedPane3.setFont(new java.awt.Font("Times New Roman", 1, 14));
 
         tTrainOnRoad.setModel(new ModelTable() );
+        tTrainOnRoad.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tTrainOnRoad.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tTrainOnRoad);
 
         jTabbedPane3.addTab("Поезда на путях", jScrollPane3);
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 13));
         jLabel1.setText("Отображать за часов до прибытия");
 
         cTimeBeforeArrivingTrains.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 13));
         jLabel2.setText("Отображать за часов до прибытия");
 
         cTimeBeforeGoingTrains.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "20", "30" }));
@@ -88,21 +98,21 @@ public class PDispStation extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(350, Short.MAX_VALUE)
+                .addContainerGap(403, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cTimeBeforeArrivingTrains, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(350, Short.MAX_VALUE)
+                .addContainerGap(403, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cTimeBeforeGoingTrains, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
