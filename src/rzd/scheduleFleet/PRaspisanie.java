@@ -1,19 +1,14 @@
 package rzd.scheduleFleet;
 
 import rzd.model.Model;
-import rzd.model.TestModel;
 import rzd.model.objects.Route;
 import rzd.model.objects.Train;
-import rzd.scheduleFleet.Controller;
-import rzd.scheduleFleet.GTrainV2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by IntelliJ IDEA.
@@ -182,7 +177,7 @@ public class PRaspisanie extends JComponent {
             heightPanel = (int) (routes.size() * sizeRoute) + smTop;
         }
         setPreferredSize(new Dimension(widthPanel, heightPanel));
-        ArrayList<Train> trains = Model.getModel().getTrainsForSchedule(dBeg, dEnd);
+        ArrayList<Train> trains = Model.getModel().getTrainsForPeriod(dBeg, dEnd);
         if (trains != null) {
             for (Train train : trains) {
                 addTrain(train);
