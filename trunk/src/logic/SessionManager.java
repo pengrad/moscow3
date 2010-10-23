@@ -1,5 +1,8 @@
 package logic;
 
+import logic.model.CarEntity;
+import logic.model.CarLocationEntity;
+import logic.model.RepairEntity;
 import logic.model.RepairTypeEntity;
 import org.hibernate.CacheMode;
 import org.hibernate.HibernateException;

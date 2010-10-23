@@ -31,20 +31,23 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Date getCurrentDate() {
-        return HibernateUtils.getDate(SessionManager.getSession());
+        return HibernateUtils.getDate(getSession());
     }
 
     public ArrayList<Route> getRoutes() {
         ArrayList<Route> list = null;
         try {
+            SessionManager.beginTran();
             Collection<RouteEntity> objects = SessionManager.getAllObjects(new RouteEntity());
             list = new ArrayList<Route>(objects.size());
             for (RouteEntity re : objects) {
                 Route route = EntityConverter.convertRoute(re);
                 list.add(route);
             }
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             list = null;
         } finally {
             SessionManager.closeSession();
@@ -55,10 +58,13 @@ public class BusinessManager implements BusinessLogic {
     public Route getRouteById(int idRoute) {
         Route route = null;
         try {
+            SessionManager.beginTran();
             RouteEntity re = SessionManager.getEntityById(new RouteEntity(), idRoute);
             route = EntityConverter.convertRoute(re);
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             route = null;
         } finally {
             SessionManager.closeSession();
@@ -69,11 +75,14 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<SheduleType> getSheduleTypes() {
         ArrayList<SheduleType> types = null;
         try {
+            SessionManager.beginTran();
             Collection<SheduleTypeEntity> ste = SessionManager.getAllObjects(new SheduleTypeEntity());
             types = new ArrayList<SheduleType>(ste.size());
             for (SheduleTypeEntity s : ste) types.add(EntityConverter.convertSheduleType(s));
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             types = null;
         } finally {
             SessionManager.closeSession();
@@ -109,7 +118,6 @@ public class BusinessManager implements BusinessLogic {
                     SessionManager.saveOrUpdateEntities(train);
                 }
             }
-            SessionManager.getSession().flush();
             SessionManager.commit();
             return true;
         } catch (Exception e) {
@@ -138,7 +146,7 @@ public class BusinessManager implements BusinessLogic {
             if (sbe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) s.delete(sde);
             // todo удаляем запланированные поезда - выносим это в отдельный метод
-            List tf = getSession().createQuery("from TrainEntity where shedule = :sh and trainStatus.id = :plan").
+            List tf = s.createQuery("from TrainEntity where shedule = :sh and trainStatus.id = :plan").
                     setParameter("sh", sfe).setInteger("plan", BusinessLogic.PLANNED).list();
             for(Object t : tf) {
                 TrainEntity train = (TrainEntity) t;
@@ -148,9 +156,9 @@ public class BusinessManager implements BusinessLogic {
                 // удаляем историю вагонов для них
             }
             // заставляем выполнить делит сейчас же
-            SessionManager.getSession().flush();
+            s.flush();
             // и очищаем сессию, для удаления одинаковых идентификаторов
-            SessionManager.getSession().clear();
+            s.clear();
             re = EntityConverter.convertRoute(r, re.getIdRoute(), sfe.getIdShedule(), sbe.getIdShedule());
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
             if (sfe.getSheduleDays() != null)
@@ -171,14 +179,17 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Car> getCars() {
         ArrayList<Car> list = null;
         try {
+            SessionManager.beginTran();
             Collection<CarEntity> objects = SessionManager.getAllObjects(new CarEntity());
             list = new ArrayList<Car>(objects.size());
             for (CarEntity ce : objects) {
                 Car car = EntityConverter.convertCar(ce);
                 list.add(car);
             }
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             list = null;
         } finally {
             SessionManager.closeSession();
@@ -189,11 +200,14 @@ public class BusinessManager implements BusinessLogic {
     public Car getCarByNumber(int carNumber) {
         Car car = null;
         try {
+            SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), carNumber);
             if (ce == null) throw new Exception("Вагон не найден!");
             car = EntityConverter.convertCar(ce);
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             car = null;
         } finally {
             SessionManager.closeSession();
@@ -204,15 +218,18 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<CarType> getCarParentTypes() {
         ArrayList<CarType> types = null;
         try {
-            Criteria crit = SessionManager.getSession().createCriteria(CarTypeEntity.class).
+            SessionManager.beginTran();
+            Criteria crit = getSession().createCriteria(CarTypeEntity.class).
                     add(Restrictions.isNull("carParentType"));
             List list = crit.list();
             types = new ArrayList<CarType>(list.size());
             for (Object o : list) {
                 types.add(EntityConverter.convertCarType((CarTypeEntity) o));
             }
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             types = null;
         } finally {
             SessionManager.closeSession();
@@ -223,13 +240,16 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<CarType> getCarSubTypes(CarType parentType) {
         ArrayList<CarType> types = null;
         try {
+            SessionManager.beginTran();
             CarTypeEntity cte = SessionManager.getEntityById(new CarTypeEntity(), parentType.getIdType());
             types = new ArrayList<CarType>(cte.getCarSubTypes().size());
             for (CarTypeEntity subType : cte.getCarSubTypes()) {
                 types.add(EntityConverter.convertCarType(subType));
             }
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             types = null;
         } finally {
             SessionManager.closeSession();
@@ -239,11 +259,15 @@ public class BusinessManager implements BusinessLogic {
 
     public CarType getCarParentType(CarType subType) {
         try {
+            SessionManager.beginTran();
             CarTypeEntity cte = SessionManager.getEntityById(new CarTypeEntity(), subType.getIdType());
             CarTypeEntity parentType = cte.getCarParentType();
-            return EntityConverter.convertCarType(parentType);
+            CarType ct = EntityConverter.convertCarType(parentType);
+            SessionManager.commit();
+            return ct;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -273,7 +297,7 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             if (ce == null) throw new Exception("Вагона не существует!");
-            SessionManager.getSession().evict(ce);
+            getSession().evict(ce);
             ce = EntityConverter.convertCar(car);
             SessionManager.saveOrUpdateEntities(ce);
             SessionManager.commit();
@@ -290,11 +314,14 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<RoadType> getRoadTypes() {
         ArrayList<RoadType> list = null;
         try {
+            SessionManager.beginTran();
             Collection<RoadTypeEntity> types = SessionManager.getAllObjects(new RoadTypeEntity());
             list = new ArrayList<RoadType>(types.size());
             for (RoadTypeEntity rte : types) list.add(new RoadType(rte.getIdType(), rte.getTypeName()));
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             list = null;
         } finally {
             SessionManager.closeSession();
@@ -305,14 +332,17 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Road> getRoadsByType(RoadType roadType) {
         ArrayList<Road> list;
         try {
+            SessionManager.beginTran();
             RoadTypeEntity rt = SessionManager.getEntityById(new RoadTypeEntity(), roadType.getId());
             Collection<RoadEntity> roads = rt.getRoads();
             list = new ArrayList<Road>(roads.size());
             for (RoadEntity road : roads) {
                 list.add(EntityConverter.convertRoad(road));
             }
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             list = null;
         } finally {
             SessionManager.closeSession();
@@ -322,10 +352,14 @@ public class BusinessManager implements BusinessLogic {
 
     public Train getTrainById(int idTrain) {
         try {
+            SessionManager.beginTran();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), idTrain);
-            return EntityConverter.convertTrain(te);
+            Train train = EntityConverter.convertTrain(te);
+            SessionManager.commit();
+            return train;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -333,23 +367,30 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Train getTrainByRoad(Road road) {
+        Train train = null;
         try {
+            SessionManager.beginTran();
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
             for (RoadDetEntity rde : re.getRoadDets()) {
                 TrainEntity te = rde.getTrain();
-                if (te != null) return EntityConverter.convertTrain(te);
+                if (te != null) {
+                    train = EntityConverter.convertTrain(te);
+                    break;
+                }
             }
-            return null;
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            SessionManager.rollback();
         } finally {
             SessionManager.closeSession();
         }
+        return train;
     }
 
     public ArrayList<Train> getTrainsOnRoads() {
         try {
+            SessionManager.beginTran();
             Collection<RoadEntity> res = SessionManager.getAllObjects(new RoadEntity());
             ArrayList<RoadDetEntity> rdes = new ArrayList<RoadDetEntity>();
             for (RoadEntity re : res) rdes.addAll(re.getRoadDets());
@@ -358,9 +399,11 @@ public class BusinessManager implements BusinessLogic {
                 TrainEntity te = rde.getTrain();
                 if (te != null) list.add(EntityConverter.convertTrain(te));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -369,19 +412,22 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<Train> getGoingTrains(int forHours) {
         try {
+            SessionManager.beginTran();
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
             for (RouteEntity re : r) se.add(re.getSheduleForward());
-            Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
+            Criteria crit = getSession().createCriteria(TrainEntity.class).
                     add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
             ArrayList<Train> list = new ArrayList<Train>();
             for (Object te : crit.list()) {
                 list.add(EntityConverter.convertTrain((TrainEntity) te));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -455,19 +501,22 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<Train> getArrivingTrains(int forHours) {
         try {
+            SessionManager.beginTran();
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
             ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
             for (RouteEntity re : r) se.add(re.getSheduleBack());
-            Criteria crit = SessionManager.getSession().createCriteria(TrainEntity.class).
+            Criteria crit = getSession().createCriteria(TrainEntity.class).
                     add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
             ArrayList<Train> list = new ArrayList<Train>();
             for (Object te : crit.list()) {
                 list.add(EntityConverter.convertTrain((TrainEntity) te));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -476,14 +525,17 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<CarLocation> getCarLocations() {
         try {
+            SessionManager.beginTran();
             Collection<CarLocationEntity> cles = SessionManager.getAllObjects(new CarLocationEntity());
             ArrayList<CarLocation> list = new ArrayList<CarLocation>(cles.size());
             for (CarLocationEntity cle : cles) {
                 list.add(EntityConverter.convertCarLocation(cle));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -565,30 +617,39 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Road getRoadByCar(Car car) {
+        Road road = null;
         try {
+            SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             for (RoadDetEntity rde : ce.getRoadDets()) {
-                if (rde != null) return EntityConverter.convertRoad(rde.getRoad());
+                if (rde != null) {
+                    road = EntityConverter.convertRoad(rde.getRoad());
+                    break;
+                }
             }
-            return null;
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            SessionManager.rollback();
         } finally {
             SessionManager.closeSession();
         }
+        return road;
     }
 
     public ArrayList<RepairType> getRepairTypes() {
         try {
+            SessionManager.beginTran();
             Collection<RepairTypeEntity> rtes = SessionManager.getAllObjects(new RepairTypeEntity());
             ArrayList<RepairType> list = new ArrayList<RepairType>(rtes.size());
             for (RepairTypeEntity rte : rtes) {
                 list.add(EntityConverter.convertRepairType(rte));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -597,14 +658,17 @@ public class BusinessManager implements BusinessLogic {
 
     public Repair getRepairByCar(Car car) {
         try {
+            SessionManager.beginTran();
             Repair repair = null;
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             for (RepairEntity re : ce.getRepairs()) {
                 if (re.getDateEnd() == null) repair = EntityConverter.convertRepair(re);
             }
+            SessionManager.rollback();
             return repair;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -624,7 +688,7 @@ public class BusinessManager implements BusinessLogic {
                 }
             }
             // клирим сессию для очистки идентификаторов, т.к. мы не обновляем поля set'ами, а создаем новый объект.
-            getSession().clear();
+            s.clear();
             re = EntityConverter.convertRepair(repair);
             RoadEntity newRoad = re.getRoad();
             if (newRoad != null) {
@@ -644,14 +708,17 @@ public class BusinessManager implements BusinessLogic {
 
     public ArrayList<Car> getCarsOnRoad(Road road) {
         try {
+            SessionManager.beginTran();
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
             ArrayList<Car> list = new ArrayList<Car>();
             for (RoadDetEntity rde : re.getRoadDets()) {
                 if (rde.getCar() != null) list.add(EntityConverter.convertCar(rde.getCar()));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -659,31 +726,39 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public Train getTrainByCar(Car car) {
+        Train train = null;
         try {
+            SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             for (TrainDetEntity tde : ce.getTrainDets()) {
-                if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED)
-                    return EntityConverter.convertTrain(tde.getTrain());
+                if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED) {
+                    train = EntityConverter.convertTrain(tde.getTrain());
+                    break;
+                }
             }
-            return null;
+            SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            SessionManager.rollback();
         } finally {
             SessionManager.closeSession();
         }
+        return train;
     }
 
     public ArrayList<CarHistory> getCarHistory(Car car) {
         try {
+            SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
             ArrayList<CarHistory> list = new ArrayList<CarHistory>(ce.getCarHistories().size());
             for (CarHistoryEntity che : ce.getCarHistories()) {
                 list.add(EntityConverter.convertCarHistory(che));
             }
+            SessionManager.commit();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            SessionManager.rollback();
             return null;
         } finally {
             SessionManager.closeSession();
@@ -691,7 +766,7 @@ public class BusinessManager implements BusinessLogic {
     }
 
     // Поезда за заданный период 
-    public ArrayList<Train> getTrainsForSchedule(Date dBegin, Date dEnd) {
+    public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd) {
         return getTrainsOnRoads();
     }
 
