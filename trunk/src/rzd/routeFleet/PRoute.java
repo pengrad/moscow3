@@ -46,6 +46,7 @@ public class PRoute extends javax.swing.JPanel {
         tRoute.setModel(new ModelTable() );
         tRoute.setDefaultRenderer(Object.class, new TableRouteRenderer());
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tRoute.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tRoute);
 
         bCreateRoute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rzd/resurce/add16px.png"))); // NOI18N

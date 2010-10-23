@@ -10,6 +10,7 @@
  */
 package rzd.stationFleet;
 
+import java.awt.Color;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
 
@@ -28,6 +29,8 @@ public class PRoad extends javax.swing.JPanel {
         initComponents();
         ((TitledBorder) jPanel35.getBorder()).setTitle("Путь №" + numberRoad);
         //     jScrollPane1.getHorizontalScrollBar().set
+
+//jScrollPane1.getHorizontalScrollBar().getComponent(0).setBackground(Color.red);
     }
 
     /**

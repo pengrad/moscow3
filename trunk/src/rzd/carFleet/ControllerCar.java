@@ -76,7 +76,6 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     }
 
 
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pCarFleet.fSearch || e.getSource() == pCarFleet.bSearch) {
             searchCar();
@@ -126,20 +125,6 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     public void mouseExited(MouseEvent e) {
     }
 
-//    //Обновляем внешний вид (таблицу)
-//    public void update() {
-//        try {
-//            ArrayList<Car> date = TestModel.get().getCars();
-//            if (date != null) {
-//                JTable t = pCarFleet.tCars;
-//                ModelTable mt = (ModelTable) t.getModel();
-//                mt.setDate(date);
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            JOptionPane.showMessageDialog(pCarFleet, ex.getMessage());
-//        }
-//    }
 
     private void searchCar() {
         boolean b = Utils.searchByTable(pCarFleet.tCars, pCarFleet.fSearch.getText(), 0);
@@ -203,8 +188,8 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     private void locationRepair(Car car) {
         dCarRepair.setLocationRelativeTo(pCarFleet);
         Repair repair = dCarRepair.open(Model.getModel().getRepairByCar(car));
-        //  System.out.println(repair.getComment());
-        if (repair != null) {
+           if (repair != null) {
+              // System.out.println(repair.getRoad().getName());
             boolean b = Model.getModel().updateRepair(repair);
             if (b) {
                 JOptionPane.showMessageDialog(pCarFleet, "Информация о ремонте успешно изменена.");
@@ -247,7 +232,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         mt.setDate(getCarsTabView());
     }
 
-     public Component getPanel(){
+    public Component getPanel() {
         return pCarFleet;
     }
 
