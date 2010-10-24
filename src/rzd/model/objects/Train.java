@@ -21,12 +21,13 @@ public class Train {
     private TrainStatus trainStatus;
     private Road road;
     private ArrayList<Car> carsIn;
+    private boolean carFromHead;
 
-    public Train(int id, Road road, String chief, ArrayList<Car> cars) {
-        this(id, null, null, chief, null, null, null, road, cars);
+    public Train(int id, Road road, String chief, ArrayList<Car> cars,boolean carFromHead) {
+        this(id, null, null, chief, null, null, null, road, cars,carFromHead);
     }
 
-    public Train(int id, Date dtDeparture, Date dtDestination, String chief, Shedule shedule, Route route, TrainStatus trainStatus, Road road, ArrayList<Car> carsIn) {
+    public Train(int id, Date dtDeparture, Date dtDestination, String chief, Shedule shedule, Route route, TrainStatus trainStatus, Road road, ArrayList<Car> carsIn,boolean carFromHead) {
         this.id = id;
         this.dtDeparture = dtDeparture;
         this.dtDestination = dtDestination;
@@ -36,6 +37,7 @@ public class Train {
         this.trainStatus = trainStatus;
         this.road = road;
         this.carsIn = carsIn;
+        this.carFromHead=carFromHead;
     }
 
     public int getId() {
@@ -110,8 +112,16 @@ public class Train {
         this.carsIn = carsIn;
     }
 
-    public String toString(){
-      return new Integer(id).toString(); 
+    public boolean isCarFromHead() {
+        return carFromHead;
     }
- 
+
+    public void setCarFromHead(boolean carFromHead) {
+        this.carFromHead = carFromHead;
+    }
+
+    public String toString() {
+        return new Integer(id).toString();
+    }
+
 }

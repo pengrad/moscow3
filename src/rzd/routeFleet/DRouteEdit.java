@@ -158,60 +158,58 @@ public class DRouteEdit extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)), "Следование из станции назначения в станцию отпрвления:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(51, 51, 255));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel7.setText("   Номер маршрута");
         jLabel7.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fNumberRoute1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fNumberRoute1.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel3.setText("   Время отправления");
         jLabel3.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel8.setText("   Время в пути (в часах)");
         jLabel8.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel4.setText("   Время прибытия");
         jLabel4.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fTimeForward.setBackground(new java.awt.Color(255, 255, 255));
         fTimeForward.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fTimeForward.setEditable(false);
         fTimeForward.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        fTimeForward.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fTimeForward.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel9.setText("   Тип следования");
         jLabel9.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        cTypeSchedule1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        cTypeSchedule1.setFont(new java.awt.Font("Times New Roman", 0, 14));
         cTypeSchedule1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cTypeSchedule1ItemStateChanged(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel11.setText("   Дни следования");
         jLabel11.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fDaysMove1.setBackground(new java.awt.Color(255, 255, 255));
         fDaysMove1.setEditable(false);
-        fDaysMove1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fDaysMove1.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fDaysMove1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fDaysMove1MouseClicked(evt);
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel17.setText("   Расстояние (км)");
         jLabel17.setPreferredSize(new java.awt.Dimension(20, 14));
 
         fLengthForward.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        fLengthForward.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        fLengthForward.setFont(new java.awt.Font("Times New Roman", 0, 13));
 
         cHForward.setFont(new java.awt.Font("Tahoma", 0, 12));
         cHForward.addItemListener(new java.awt.event.ItemListener() {
@@ -358,7 +356,7 @@ public class DRouteEdit extends javax.swing.JDialog {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        fStationDeparture.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fStationDeparture.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fStationDeparture.setText("Москва");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 2, 11));
@@ -369,7 +367,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         jLabel16.setText("   Станция назначения");
         jLabel16.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fStationDestination.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fStationDestination.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
         bCancel.setText("Отмена");
         bCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -379,74 +377,73 @@ public class DRouteEdit extends javax.swing.JDialog {
         });
 
         cEnabled.setBackground(new java.awt.Color(250, 250, 250));
-        cEnabled.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cEnabled.setFont(new java.awt.Font("Tahoma", 0, 12));
         cEnabled.setText("-активно");
-        cEnabled.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cEnabledPropertyChange(evt);
+        cEnabled.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                cEnabledStateChanged(evt);
             }
         });
 
         jLabel25.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel25.setText("*");
 
         jPanel3.setBackground(new java.awt.Color(250, 250, 250));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255)), "Следование из станции назначения в станцию отпрвления:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel3.setForeground(new java.awt.Color(51, 51, 255));
 
-        jLabel30.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel30.setText("   Номер маршрута");
         jLabel30.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fNumberRoute2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fNumberRoute2.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        jLabel31.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel31.setText("   Время отправления");
         jLabel31.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        jLabel32.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel32.setText("   Время в пути (в часах)");
         jLabel32.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel33.setText("   Время прибытия");
         jLabel33.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fTimeBack.setBackground(new java.awt.Color(255, 255, 255));
         fTimeBack.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fTimeBack.setEditable(false);
         fTimeBack.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        fTimeBack.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fTimeBack.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel34.setText("   Тип следования");
         jLabel34.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        cTypeSchedule2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        cTypeSchedule2.setFont(new java.awt.Font("Times New Roman", 0, 14));
         cTypeSchedule2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cTypeSchedule2ItemStateChanged(evt);
             }
         });
 
-        jLabel35.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel35.setText("   Дни следования");
         jLabel35.setPreferredSize(new java.awt.Dimension(20, 14));
 
-        fDaysMove2.setBackground(new java.awt.Color(255, 255, 255));
         fDaysMove2.setEditable(false);
-        fDaysMove2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fDaysMove2.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fDaysMove2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fDaysMove2MouseClicked(evt);
             }
         });
 
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel36.setText("   Расстояние (км)");
         jLabel36.setPreferredSize(new java.awt.Dimension(20, 14));
 
         fLengthBack.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        fLengthBack.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        fLengthBack.setFont(new java.awt.Font("Times New Roman", 0, 13));
 
         cHBack.setFont(new java.awt.Font("Tahoma", 0, 12));
         cHBack.addItemListener(new java.awt.event.ItemListener() {
@@ -631,23 +628,21 @@ public class DRouteEdit extends javax.swing.JDialog {
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pLeftLayout.createSequentialGroup()
-                        .addGroup(pLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pLeftLayout.createSequentialGroup()
-                                .addComponent(cEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pLeftLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(fStationDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel28)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(fStationDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel28)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(fStationDestination, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel29)))
+                        .addComponent(jLabel29))
+                    .addGroup(pLeftLayout.createSequentialGroup()
+                        .addComponent(cEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pLeftLayout.setVerticalGroup(
@@ -664,7 +659,7 @@ public class DRouteEdit extends javax.swing.JDialog {
                 .addGap(7, 7, 7)
                 .addGroup(pLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cEnabled)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -797,13 +792,13 @@ public class DRouteEdit extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_updateDate2
 
-    private void cEnabledPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cEnabledPropertyChange
-     if (cEnabled.isEnabled()) {
+    private void cEnabledStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cEnabledStateChanged
+        if (cEnabled.isSelected()) {
             jLabel25.setText("");
         } else {
-            jLabel25.setText("Расписание не автивно, по данному расписанию поезда формироваться не будут!!!");
+             jLabel25.setText("Расписание не автивно, по данному расписанию поезда формироваться не будут!!!");
         }
-    }//GEN-LAST:event_cEnabledPropertyChange
+    }//GEN-LAST:event_cEnabledStateChanged
 
     private void updateDate1(java.awt.event.ItemEvent evt) {
         if (cMForward.getSelectedItem() != null && cMForwardInWay.getSelectedItem() != null && cHForward.getSelectedItem() != null && cHForwardInWay.getSelectedItem() != null) {
@@ -823,21 +818,7 @@ public class DRouteEdit extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                DRouteEdit dialog = new DRouteEdit(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
 
     public Route open(Route route, ArrayList<SheduleType> sheduleTypes) {
         if (sheduleTypes == null) {

@@ -64,8 +64,8 @@ public class DEditTrain extends javax.swing.JDialog {
         lCarAll = new javax.swing.JList(new DefaultListModel());
         bRight = new javax.swing.JButton();
         bLeft = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbCarInTrain = new javax.swing.JLabel();
+        lbCarAll = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cRoadType = new javax.swing.JComboBox();
         fRoute = new javax.swing.JTextField();
@@ -84,15 +84,15 @@ public class DEditTrain extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(346, 239));
 
-        lDT.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        lDT.setFont(new java.awt.Font("Times New Roman", 2, 13));
         lDT.setForeground(new java.awt.Color(82, 82, 82));
         lDT.setText("Дата и время");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel3.setForeground(new java.awt.Color(82, 82, 82));
         jLabel3.setText("Путь");
 
-        cRoad.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cRoad.setFont(new java.awt.Font("Times New Roman", 0, 13));
 
         bSave.setText("Сохранить");
         bSave.addActionListener(new java.awt.event.ActionListener() {
@@ -108,13 +108,13 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel4.setForeground(new java.awt.Color(82, 82, 82));
         jLabel4.setText("Начальник поезда");
 
-        fChief.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fChief.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        lCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 14));
         lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -123,7 +123,7 @@ public class DEditTrain extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(lCarInTrain);
 
-        lCarAll.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lCarAll.setFont(new java.awt.Font("Times New Roman", 0, 14));
         lCarAll.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarAll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,19 +146,19 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel5.setText("Вагоны в составе");
+        lbCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbCarInTrain.setForeground(new java.awt.Color(82, 82, 82));
+        lbCarInTrain.setText("Вагоны в составе");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(82, 82, 82));
-        jLabel6.setText("Все вагоны");
+        lbCarAll.setFont(new java.awt.Font("Times New Roman", 0, 13));
+        lbCarAll.setForeground(new java.awt.Color(82, 82, 82));
+        lbCarAll.setText("Все вагоны");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 13));
         jLabel7.setForeground(new java.awt.Color(82, 82, 82));
         jLabel7.setText("Маршрут");
 
-        cRoadType.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cRoadType.setFont(new java.awt.Font("Times New Roman", 0, 13));
         cRoadType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cRoadTypeItemStateChanged(evt);
@@ -175,14 +175,14 @@ public class DEditTrain extends javax.swing.JDialog {
 
         fDate.setBackground(new java.awt.Color(250, 250, 250));
         fDate.setEditable(false);
-        fDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fDate.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fDate.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18));
         jLabel8.setForeground(new java.awt.Color(82, 82, 82));
         jLabel8.setText("Информация о поезде");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18));
         jLabel9.setForeground(new java.awt.Color(82, 82, 82));
         jLabel9.setText("Отправление/прибытие");
 
@@ -230,10 +230,10 @@ public class DEditTrain extends javax.swing.JDialog {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(bLeft, 0, 0, Short.MAX_VALUE)
                                         .addComponent(bRight, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel5))
+                                .addComponent(lbCarInTrain))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
+                                .addComponent(lbCarAll)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                         .addContainerGap())
         );
@@ -278,8 +278,8 @@ public class DEditTrain extends javax.swing.JDialog {
                                         .addGap(249, 249, 249))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5))
+                                        .addComponent(lbCarAll)
+                                        .addComponent(lbCarInTrain))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
@@ -478,9 +478,15 @@ public class DEditTrain extends javax.swing.JDialog {
 
             fChief.setText(train.getChief());
             ArrayList<Car> carsInTrain = train.getCarsIn();
-           //if
+            //если поезд без вагонов, то предлагаем дефолтовый состав вагонв
             if (carsInTrain == null) {
-
+                ArrayList<Car> carsPlan = Model.getModel().getPlanCarForTrain(train);
+                if (carsPlan != null) {
+                    for (Car car : carsPlan) {
+                        ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
+                        ((DefaultListModel) lCarAll.getModel()).removeElement(car);
+                    }
+                }
             } else {
                 //  System.out.println("Load cars in train="+carsInTrain.size());
                 for (Car c : carsInTrain) {
@@ -519,8 +525,6 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -530,5 +534,7 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JList lCarAll;
     private javax.swing.JList lCarInTrain;
     private javax.swing.JLabel lDT;
+    private javax.swing.JLabel lbCarAll;
+    private javax.swing.JLabel lbCarInTrain;
     // End of variables declaration//GEN-END:variables
 }
