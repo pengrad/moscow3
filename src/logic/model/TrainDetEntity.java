@@ -16,9 +16,10 @@ public class TrainDetEntity {
     public TrainDetEntity() {
     }
 
-    public TrainDetEntity(CarEntity car, TrainEntity train) {
+    public TrainDetEntity(CarEntity car, TrainEntity train, int carNumberInTrain) {
         setCar(car);
         setTrain(train);
+        this.carNumberInTrain = carNumberInTrain;
     }
 
     private int idTrain;
@@ -43,6 +44,18 @@ public class TrainDetEntity {
 
     public void setCarNumber(int carNumber) {
         this.carNumber = carNumber;
+    }
+
+    private int carNumberInTrain;
+
+    @Column(name = "car_number_in_train", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Basic
+    public int getCarNumberInTrain() {
+        return carNumberInTrain;
+    }
+
+    public void setCarNumberInTrain(int carNumberInTrain) {
+        this.carNumberInTrain = carNumberInTrain;
     }
 
     private CarEntity car;

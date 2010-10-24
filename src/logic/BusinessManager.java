@@ -107,14 +107,16 @@ public class BusinessManager implements BusinessLogic {
                 // генерируем отправляющиеся поезда с текущего момента
                 for (Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getHoursInWay(), sfe.getMinutesInWay());
-                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned);
+                    // todo порядок вагонв с головы
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned, true);
                     SessionManager.saveOrUpdateEntities(train);
                 }
                 // генерируем прибывающие поезда с момента: текущее время - время в пути. (чтобы прибыл уже ближайший)
                 currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getHoursInWay(), sbe.getMinutesInWay());
                 for (Timestamp dateFrom : generateDatesOfDeparture(sbe, currentDate, 20)) {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getHoursInWay(), sbe.getMinutesInWay());
-                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned);
+                    // todo порядок вагонов с головы
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned, true);
                     SessionManager.saveOrUpdateEntities(train);
                 }
             }
@@ -482,7 +484,8 @@ public class BusinessManager implements BusinessLogic {
                 }
                 CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
                 ce.setCarLocation(cle);
-                TrainDetEntity tde = new TrainDetEntity(ce, te);
+                // todo порядковый номер вагона
+                TrainDetEntity tde = new TrainDetEntity(ce, te, 1);
                 CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
                 SessionManager.saveOrUpdateEntities(ce, tde, che);
             }
