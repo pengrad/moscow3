@@ -569,8 +569,8 @@ public class BusinessManager implements BusinessLogic {
             }
             // удаляем вагон из текущего поезда, из прибывших и расформированных не удаляем, для истории
             Integer[] statuses = new Integer[]{BusinessLogic.ARRIVED, BusinessLogic.DESTROYED};
-//            list = s.createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in :s")
-//                    .setParameter("c", ce).setParameterList("s", statuses).list();
+            list = s.createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in (:s)")
+                    .setParameter("c", ce).setParameterList("s", statuses).list();
             for (Object o : list) s.delete(o);
             // новая запись в истории и новая дислокация.
             CarHistoryEntity che = null;
@@ -780,8 +780,8 @@ public class BusinessManager implements BusinessLogic {
         ArrayList<Car> list = null;
         try {
             SessionManager.beginTran();
-            Integer[] locations = new Integer[]{BusinessLogic.UNKNOWN, BusinessLogic.REPAIR};
-            List l = getSession().createQuery("from CarEntity as c where c.carLocation.id in :loc")
+            Integer[] locations = new Integer[]{BusinessLogic.UNKNOWN, BusinessLogic.ON_ROAD};
+            List l = getSession().createQuery("from CarEntity as c where c.carLocation.id in (:loc)")
                     .setParameterList("loc", locations).list();
             list = new ArrayList<Car>(l.size());
             for (Object car : l) list.add(EntityConverter.convertCar((CarEntity) car));
@@ -816,33 +816,47 @@ public class BusinessManager implements BusinessLogic {
         return isReady;
     }
 
-    public boolean destroyTrain(Train train) {
-        boolean isReady = true;
+    public boolean destroyTrain(Train train) throws Exception {
+        boolean ok = true;
         try {
             SessionManager.beginTran();
-            
+            TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
+            if (te.getTrainStatus().getIdStatus() != BusinessLogic.ARRIVED) throw new Exception("Поезд еще не прибыл!");
+            // удаляем поезд с пути, если в записи нет вагона - удаляем запись.
+            for (RoadDetEntity rde : te.getRoadDets()) {
+                if (rde.getCar() == null) {
+                    getSession().delete(rde);
+                } else {
+                    rde.setTrain(null);
+                    getSession().update(rde);
+                }
+            }
+            // ставим статус расформирован
+            te.setTrainStatus(new TrainStatusEntity(BusinessLogic.DESTROYED, ""));
+            getSession().update(te);
             SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            ok = false;
             SessionManager.rollback();
+            throw e;
         } finally {
             SessionManager.closeSession();
         }
-        return isReady;
+        return ok;
     }
 
     public boolean deleteCar(Car car) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     public boolean deleteRoute(Route route) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     public ArrayList<Car> getPlanCarForTrain(Train train) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
-
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();

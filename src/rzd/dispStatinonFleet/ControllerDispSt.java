@@ -169,8 +169,8 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             train = dEditTrain.open(train);
             if (train != null) {
                 if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
-                    boolean b = Model.getModel().destroyTrain(train);
-                    if (b) {
+//                    boolean b = Model.getModel().destroyTrain(train);
+                    if (true) {
                         JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
                         ControllerMain.getInstans().update(this);
                     }
