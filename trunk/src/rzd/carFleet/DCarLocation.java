@@ -289,7 +289,8 @@ public class DCarLocation extends javax.swing.JDialog {
                 this.car.getRunNorm(),
                 this.car.getRun(),
                 this.car.getRunTozNorm(),
-                this.car.getRunToz()
+                this.car.getRunToz(),
+                0
         );
         car.setCarLocation((CarLocation) cLocation.getSelectedItem());
         if (BusinessLogic.ON_ROAD == ((CarLocation) cLocation.getSelectedItem()).getIdLocation()) {
