@@ -546,8 +546,6 @@ public class BusinessManager implements BusinessLogic {
         try {
             SessionManager.beginTran();
             CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-            CarLocationEntity cle = ce.getCarLocation();
-            if (cle.getIdLocation() == BusinessLogic.IN_TRAIN) throw new Exception("Вагон в составе поезда!");
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             Timestamp time = new Timestamp(currentDate.getTime());
@@ -555,9 +553,7 @@ public class BusinessManager implements BusinessLogic {
             for (RepairEntity rep : ce.getRepairs()) {
                 if (rep.getDateEnd() == null) {
                     rep.setDateEnd(time);
-                    System.out.println(rep.getDateEnd());
-                    getSession().update(rep);
-                    getSession().flush();
+                    SessionManager.saveOrUpdateEntities(rep);
                 }
             }
             // удаляем вагон с пути, если на нем нет поезда - удаляем запись
@@ -568,6 +564,14 @@ public class BusinessManager implements BusinessLogic {
                     rde.setCar(null);
                     SessionManager.saveOrUpdateEntities(rde);
                 }
+            }
+            // удаляем вагон из текущего поезда, из прибывших и расформированных не удаляем, для истории
+            Integer[] statuses = new Integer[]{BusinessLogic.ARRIVED, BusinessLogic.DESTROYED};
+            List list = getSession()
+                    .createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in :s")
+                    .setParameter("c", ce).setParameterList("s", statuses).list();
+            for (Object o : list) {
+                getSession().delete(o);
             }
             CarHistoryEntity che = null;
             CarLocationEntity newCle = null;
@@ -683,13 +687,13 @@ public class BusinessManager implements BusinessLogic {
             Session s = getSession();
             RepairEntity re = SessionManager.getEntityById(new RepairEntity(), repair.getIdRepair());
             // удаляем старую запись о пути, вдруг путь обновился! хотя с чего бы, но геша просит
-             //todo Здесь ошибка. У repair может не быть roada!!!
-            for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
-                if (rde.getCar() != null && rde.getCar().equals(re.getCar())) {
-                    s.delete(rde);
-                    s.flush();
+            if (re.getRoad() != null)
+                for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
+                    if (rde.getCar() != null && rde.getCar().equals(re.getCar())) {
+                        s.delete(rde);
+                        s.flush();
+                    }
                 }
-            }
             // клирим сессию для очистки идентификаторов, т.к. мы не обновляем поля set'ами, а создаем новый объект.
             s.clear();
             re = EntityConverter.convertRepair(repair);
@@ -778,9 +782,8 @@ public class BusinessManager implements BusinessLogic {
         return getCars();
     }
 
-    //Свободен ли путь для текущего поезда, если да то true
-     public boolean isRoadReadyForTrain(Train train) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean isRoadReadyForTrain(Train train) {
+        return true;
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
