@@ -26,6 +26,7 @@ public class Car {
     private int run;
     private int runTozNorm;
     private int runToz;
+    private int carNumberInTrain;
 
     public Car(int number) {
         this.number = number;
@@ -37,7 +38,7 @@ public class Car {
         this.carType = carType;
     }
 
-    public Car(int number, String model, CarLocation carLocation, CarType carType, String conditioner, String generator, String generatorPrivod, String accumulator, String electricDevice, String bodyColor, boolean ecologicCoilet, int runNorm, int run, int runTozNorm, int runToz) {
+    public Car(int number, String model, CarLocation carLocation, CarType carType, String conditioner, String generator, String generatorPrivod, String accumulator, String electricDevice, String bodyColor, boolean ecologicCoilet, int runNorm, int run, int runTozNorm, int runToz, int carNumberInTrain) {
         this.number = number;
         this.model = model;
         this.carLocation = carLocation;
@@ -53,6 +54,7 @@ public class Car {
         this.run = run;
         this.runTozNorm = runTozNorm;
         this.runToz = runToz;
+        this.carNumberInTrain = carNumberInTrain;
     }
 
     public int getNumber() {
@@ -173,6 +175,14 @@ public class Car {
 
     public void setRunToz(int runToz) {
         this.runToz = runToz;
+    }
+
+    public int getCarNumberInTrain() {
+        return carNumberInTrain;
+    }
+
+    public void setCarNumberInTrain(int carNumberInTrain) {
+        this.carNumberInTrain = carNumberInTrain;
     }
 
     @Override
