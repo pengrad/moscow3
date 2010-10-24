@@ -93,18 +93,17 @@ public interface BusinessLogic {
 
     public ArrayList<CarHistory> getCarHistory(Car car);
 
+     //TODO Поезда за заданный период
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd);
 
-    //todo Все свободне вагоны т.е со статусом на путях и неизвестно
-
+    // Все свободные вагоны - со статусом на путях и неизвестно
     public ArrayList<Car> getFreeCars();
 
-    //todo Свободен ли путь для текущего поезда, если да то true
-
-    public boolean isRoadReadyForTrain(Train train);
+    // Свободен ли путь для текущего поезда.
+    // Если он на нем уже стоит - свободен, если на нем стоят только вагоны - свободен
+    public boolean isRoadReadyForTrain(Train train, Road road);
 
     //todo Расформировываем поезд
-
     public boolean destroyTrain(Train train);
 
     public boolean deleteCar(Car car);

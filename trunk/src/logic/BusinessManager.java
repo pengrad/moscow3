@@ -557,7 +557,7 @@ public class BusinessManager implements BusinessLogic {
                 RepairEntity rep = (RepairEntity) o;
                 rep.setDateEnd(time);
                 s.update(rep);
-            }      
+            }
             // удаляем вагон с пути, если на нем нет поезда - удаляем запись
             for (RoadDetEntity rde : ce.getRoadDets()) {
                 if (rde.getTrain() == null) {
@@ -772,18 +772,71 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
-    // Поезда за заданный период 
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd) {
         return getTrainsOnRoads();
     }
 
-    //Вск свободне вагоны т.е со статусом на путях и неизвестно
     public ArrayList<Car> getFreeCars() {
-        return getCars();
+        ArrayList<Car> list = null;
+        try {
+            SessionManager.beginTran();
+            Integer[] locations = new Integer[]{BusinessLogic.UNKNOWN, BusinessLogic.REPAIR};
+            List l = getSession().createQuery("from CarEntity as c where c.carLocation.id in :loc")
+                    .setParameterList("loc", locations).list();
+            list = new ArrayList<Car>(l.size());
+            for (Object car : l) list.add(EntityConverter.convertCar((CarEntity) car));
+            SessionManager.commit();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            list = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
     }
 
-    public boolean isRoadReadyForTrain(Train train) {
-        return true;
+    public boolean isRoadReadyForTrain(Train train, Road road) {
+        boolean isReady = true;
+        try {
+            SessionManager.beginTran();
+            RoadEntity re = SessionManager.getEntityById(new RoadEntity(), road.getId());
+            for (RoadDetEntity rde : re.getRoadDets()) {
+                // если на пути есть поезд, и это не наш поезд, значит путь не свободен.
+                if (rde.getTrain() != null && rde.getTrain().getIdTrain() != train.getId()) isReady = false;
+            }
+            SessionManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return isReady;
+    }
+
+    public boolean destroyTrain(Train train) {
+        boolean isReady = true;
+        try {
+            SessionManager.beginTran();
+            
+            SessionManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return isReady;
+    }
+
+    public boolean deleteCar(Car car) {
+        return false;
+    }
+
+    public boolean deleteRoute(Route route) {
+        return false;
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
