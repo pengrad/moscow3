@@ -10,8 +10,13 @@ import rzd.test.ColorHelper;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import rzd.model.objects.Car;
+
+import javax.imageio.ImageIO;
 
 /**
  * @author ЧерныхЕА
@@ -22,6 +27,7 @@ public class GCar extends Figure {
     private ControllerStation c;
 
     public GCar(Car car, ControllerStation c) {
+
         this.car = car;
         this.c = c;
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -35,16 +41,18 @@ public class GCar extends Figure {
     }
 
     public void paint(Graphics2D g) {
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setStroke(new BasicStroke(1.5f));
         g.setColor(ColorHelper.COLOR_VAGON_BORDER);
-        g.draw(new Rectangle2D.Double(shape.getBounds().getX() - 1, shape.getBounds().getY() - 1, shape.getBounds().getWidth() + 2, shape.getBounds().getHeight() + 2));
+        g.drawImage(c.getCarImage(), null, 0, 0);
+        // g.draw(new Rectangle2D.Double(shape.getBounds().getX() - 1, shape.getBounds().getY() - 1, shape.getBounds().getWidth() + 2, shape.getBounds().getHeight() + 2));
         if (!selected) {
             g.setColor(ColorHelper.COLOR_VAGON);
         } else {
             g.setColor(Color.RED);
             g.fill(shape);
         }
-        g.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        g.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         g.setColor(ColorHelper.COLOR_VAGON_NAMBER);
         g.drawString(new Integer(car.getNumber()).toString(), (int) shape.getBounds().getX() + 2, (int) shape.getBounds().getY() + 12);
     }

@@ -11,8 +11,10 @@
 package rzd.stationFleet;
 
 import java.awt.Color;
+
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
+import rzd.utils.Utils;
 
 import java.util.ArrayList;
 import javax.swing.border.TitledBorder;
@@ -45,19 +47,21 @@ public class PRoad extends javax.swing.JPanel {
 
         jPanel40 = new javax.swing.JPanel();
         jPanel35 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         roadTitle = new javax.swing.JLabel();
+        roadTitleSchedule = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         road = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
         jPanel40Layout.setHorizontalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+                jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 736, Short.MAX_VALUE)
         );
         jPanel40Layout.setVerticalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+                jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 3, Short.MAX_VALUE)
         );
 
         jPanel35.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "2 - путь", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(255, 0, 0))); // NOI18N
@@ -65,9 +69,27 @@ public class PRoad extends javax.swing.JPanel {
 
         roadTitle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         roadTitle.setForeground(new java.awt.Color(0, 0, 204));
-        roadTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        roadTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         roadTitle.setPreferredSize(new java.awt.Dimension(1200, 15));
-        jPanel35.add(roadTitle);
+
+        roadTitleSchedule.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(roadTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(roadTitleSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(roadTitleSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                        .addComponent(roadTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel35.add(jPanel1);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -82,16 +104,16 @@ public class PRoad extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
-            .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                        .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -100,13 +122,17 @@ public class PRoad extends javax.swing.JPanel {
         if (gTrain != null) {
             Train train = gTrain.getTrain();
             String route = "";
+            String schedule = "";
             if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
-                route = train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo() + "  " + train.getChief();
+                route = "<html><span color='gray'>Маршрут - </span>" + train.getRoute().getNumberForward() + "  " + train.getRoute().getCityFrom() + " - " + train.getRoute().getCityTo() + "  <span color='gray'>Начальник - </span>" + train.getChief() + "</html>";
+                schedule = "<html><span color='gray'>Отправление - </span>" + Utils.convertDateTimeToStr(train.getDtDeparture()) + "</span></html>";
             }
             if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
-                route = train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom() + "  " + train.getChief();
+                route = "<html><span color='gray'>Маршрут - </span" + train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom() + "  <span color='gray'>Начальник - </span>" + train.getChief() + "</html>";
+                schedule = "<html><span color='gray'>Прибытие - </span>" + Utils.convertDateTimeToStr(train.getDtDestination()) + "</html>";
             }
             roadTitle.setText(route);
+            roadTitleSchedule.setText(schedule);
             road.add(gTrain);
         }
     }
@@ -132,6 +158,7 @@ public class PRoad extends javax.swing.JPanel {
     public void deleteAll() {
         road.removeAll();
         roadTitle.setText("");
+        roadTitleSchedule.setText("");
     }
 
     public java.awt.Component[] getTrainAndCar() {
@@ -140,10 +167,12 @@ public class PRoad extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel40;
     public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel road;
     private javax.swing.JLabel roadTitle;
+    private javax.swing.JLabel roadTitleSchedule;
     // End of variables declaration//GEN-END:variables
 }

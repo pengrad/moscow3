@@ -256,10 +256,10 @@ public class PTrainInformation_1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lCarInTrainshowInfByCar
 
-    public void setData(int idTrain) {
-        Train train = Model.getModel().getTrainById(idTrain);
-        setData(train);
-    }
+//    public void setData(int idTrain) {
+//        Train train = Model.getModel().getTrainById(idTrain);
+//        setData(train);
+//    }
 
     public void setData(Train train) {
         String route = "";
