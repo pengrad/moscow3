@@ -832,18 +832,6 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public boolean deleteCar(Car car) {
-        return false;
-    }
-
-    public boolean deleteRoute(Route route) {
-        return false;
-    }
-
-    public boolean destroyTrain(Train train) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public boolean deleteCar(Car car) {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -854,6 +842,7 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Car> getPlanCarForTrain(Train train) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
         GregorianCalendar firstDate = new GregorianCalendar();
