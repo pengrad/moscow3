@@ -389,6 +389,7 @@ public class DEditTrain extends javax.swing.JDialog {
                 for (int i = 0; i < lCarInTrain.getModel().getSize(); i++) {
                     cars.add((Car) lCarInTrain.getModel().getElementAt(i));
                 }
+//                System.out.println(train.getId());
                 this.train = new Train(
                         train.getId(),
                         train.getDtDeparture(),
@@ -400,6 +401,7 @@ public class DEditTrain extends javax.swing.JDialog {
                         (Road) cRoad.getSelectedItem(),
                         cars
                 );
+//                this.train = t;
                 setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Путь занят, укажите другой путь", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
@@ -418,6 +420,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
     public Train open(Train train) {
         if (train == null) close();
+        this.train=train;
         cRoadType.removeAllItems();
         cRoad.removeAllItems();
         RoadType rtTmp = null;

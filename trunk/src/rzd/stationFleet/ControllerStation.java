@@ -21,7 +21,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import rzd.utils.MakerDefaultTextInField;
@@ -30,13 +34,19 @@ import rzd.utils.MakerDefaultTextInField;
  * @author ЧерныхЕА
  */
 public class ControllerStation implements ActionListener, MouseListener, Updateble {
-
+    private BufferedImage carImg;
     private PStationFleet pStationFleet;
     private HashMap<PRoad, ContainerRoad> roadContainers;
     private HashMap<RoadType, HashMap> roadType;
 
     public ControllerStation(PStationFleet p) {
         this.pStationFleet = p;
+        try {
+            carImg = ImageIO.read(new File(getClass().getResource("/rzd/resurce/car.png").getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
         makeTabs();
@@ -182,6 +192,10 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
             }
         }
         return false;
+    }
+
+    public BufferedImage getCarImage() {
+        return carImg;
     }
 
 

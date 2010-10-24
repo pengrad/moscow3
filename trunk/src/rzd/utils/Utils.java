@@ -1,7 +1,10 @@
 package rzd.utils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -17,6 +20,7 @@ import java.util.StringTokenizer;
  * To change this template use File | Settings | File Templates.
  */
 public class Utils {
+  
 
     public static String convertDateToStr(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -47,6 +51,7 @@ public class Utils {
         int mm = new Integer(t.nextToken());
         return new Time(new GregorianCalendar(0, 0, 0, hh, mm).getTime().getTime());
     }
+
     public static Date convertStrToDateTime(String dt) {
         StringTokenizer t = new StringTokenizer(dt);
         int dd = new Integer(t.nextToken("."));
@@ -64,7 +69,6 @@ public class Utils {
 //        int mm = new Integer(t.nextToken());
 //        return new String[]{t.nextToken(),t.nextToken()};
 //    }
-
 
 
     public static boolean searchByTable(JTable t, String value, int... columns) {

@@ -6,10 +6,9 @@ package rzd;
 
 import rzd.MainFrame;
 import rzd.carFleet.PCar;
-import rzd.carFleet.PCarInformation;
+
 import rzd.carFleet.PCarInformation_1;
 import rzd.dispStatinonFleet.PDispStation;
-import rzd.dispStatinonFleet.PTrainInformation;
 import rzd.dispStatinonFleet.PTrainInformation_1;
 import rzd.model.Model;
 import rzd.model.objects.Car;
@@ -158,8 +157,9 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     public void showCarInf(Component c, int x, int y, Car car) {
-        System.out.println(c.getClass());
         pCarInformation.setData(car);
+        x = (int) (mf.getWidth() / 2 - c.getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - c.getHeight() / 2);
         popCarInf.show(c, x, y);
     }
 
@@ -169,12 +169,13 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void showTrainInf(Component c, int x, int y, Train train) {
         pTrainInformation.setData(train);
+        x = (int) (mf.getWidth() / 2 - c.getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - c.getHeight() / 2);
         popTrainInf.show(c, x, y);
     }
 
     public void showTrainInf(JComponent c, int x, int y, int idTrain) {
-        pTrainInformation.setData(idTrain);
-        popTrainInf.show(c, x, y);
+        showTrainInf(c, x, y, Model.getModel().getTrainById(idTrain));
     }
 
     public boolean searchCar(int numberCar) {

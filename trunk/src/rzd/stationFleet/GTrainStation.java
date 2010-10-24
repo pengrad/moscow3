@@ -63,7 +63,7 @@ public class GTrainStation extends Figure {
             g2.setColor(Color.BLUE);
             g2.fill(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
         } else {
-            g2.setColor(Color.RED);
+            g2.setColor(Color.BLUE);
 //        System.out.println(getX() + "   " + getY() + "    " + getWidth() + "    " + getHeight());
             g2.draw(new Rectangle(2, 2, getWidth() - 5, getHeight() - 5));
         }
