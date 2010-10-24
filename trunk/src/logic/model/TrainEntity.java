@@ -17,12 +17,13 @@ public class TrainEntity {
     public TrainEntity() {
     }
 
-    public TrainEntity(String trainChief, Timestamp dateFrom, Timestamp dateTo, SheduleEntity shedule, TrainStatusEntity trainStatus) {
+    public TrainEntity(String trainChief, Timestamp dateFrom, Timestamp dateTo, SheduleEntity shedule, TrainStatusEntity trainStatus, boolean carFromHead) {
         this.trainChief = trainChief;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.shedule = shedule;
         this.trainStatus = trainStatus;
+        this.carFromHead = carFromHead;
     }
 
     private int idTrain;
@@ -72,6 +73,18 @@ public class TrainEntity {
 
     public void setDateTo(Timestamp dateTo) {
         this.dateTo = dateTo;
+    }
+
+    private boolean carFromHead;
+
+    @javax.persistence.Column(name = "car_from_head", nullable = true, insertable = true, updatable = true, length = 1, precision = 0)
+    @Basic
+    public boolean isCarFromHead() {
+        return carFromHead;
+    }
+
+    public void setCarFromHead(boolean carFromHead) {
+        this.carFromHead = carFromHead;
     }
 
     @Override
