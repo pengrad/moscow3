@@ -798,6 +798,8 @@ public class DRouteEdit extends javax.swing.JDialog {
         } else {
              jLabel25.setText("Расписание не автивно, по данному расписанию поезда формироваться не будут!!!");
         }
+        this.validate();
+        this.repaint();
     }//GEN-LAST:event_cEnabledStateChanged
 
     private void updateDate1(java.awt.event.ItemEvent evt) {

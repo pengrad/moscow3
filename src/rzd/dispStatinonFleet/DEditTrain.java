@@ -399,7 +399,8 @@ public class DEditTrain extends javax.swing.JDialog {
                         train.getRoute(),
                         train.getTrainStatus(),
                         (Road) cRoad.getSelectedItem(),
-                        cars
+                        cars,
+                        false
                 );
 //                this.train = t;
                 setVisible(false);

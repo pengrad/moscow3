@@ -556,7 +556,9 @@ public class DCarEdit extends javax.swing.JDialog {
                     new Integer(fRunNorm.getText().trim()),
                     new Integer(fRun.getText().trim()),
                     new Integer(fRunTozNorn.getText().trim()),
-                    new Integer(fRunToz.getText().trim()));
+                    new Integer(fRunToz.getText().trim()),
+                    10
+            );
             setVisible(false);
         } else {
             JOptionPane.showMessageDialog(this, "Заполните все поля");
