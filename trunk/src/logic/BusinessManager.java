@@ -549,13 +549,15 @@ public class BusinessManager implements BusinessLogic {
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             Timestamp time = new Timestamp(currentDate.getTime());
+            Session s = getSession();
             // заканчиваем ремонты
-            for (RepairEntity rep : ce.getRepairs()) {
-                if (rep.getDateEnd() == null) {
-                    rep.setDateEnd(time);
-                    SessionManager.saveOrUpdateEntities(rep);
-                }
-            }
+            List list = s.createQuery("from RepairEntity as re where re.car = :car and re.dateEnd is null")
+                    .setParameter("car", ce).list();
+            for (Object o : list) {
+                RepairEntity rep = (RepairEntity) o;
+                rep.setDateEnd(time);
+                s.update(rep);
+            }      
             // удаляем вагон с пути, если на нем нет поезда - удаляем запись
             for (RoadDetEntity rde : ce.getRoadDets()) {
                 if (rde.getTrain() == null) {
@@ -567,15 +569,13 @@ public class BusinessManager implements BusinessLogic {
             }
             // удаляем вагон из текущего поезда, из прибывших и расформированных не удаляем, для истории
             Integer[] statuses = new Integer[]{BusinessLogic.ARRIVED, BusinessLogic.DESTROYED};
-            List list = getSession()
-                    .createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in :s")
+            list = s.createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in :s")
                     .setParameter("c", ce).setParameterList("s", statuses).list();
-            for (Object o : list) {
-                getSession().delete(o);
-            }
+            for (Object o : list) s.delete(o);
+            // новая запись в истории и новая дислокация.
             CarHistoryEntity che = null;
             CarLocationEntity newCle = null;
-            // записи о пути и ремонте, если они будут заполнены по условию локации вагона, мы их сохраним
+            // записи о пути и ремонте, если они будут заполнены по условию новой локации вагона, мы их сохраним
             RepairEntity rep = null;
             RoadDetEntity rde = null;
             switch (car.getCarLocation().getIdLocation()) {
