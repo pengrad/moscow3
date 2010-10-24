@@ -10,13 +10,17 @@
  */
 package rzd.dispStatinonFleet;
 
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+import javax.swing.table.DefaultTableModel;
+
 import logic.BusinessLogic;
 import rzd.ControllerMain;
+import rzd.ModelTable;
 import rzd.carFleet.DCarLocation;
 import rzd.model.Model;
 import rzd.model.objects.*;
@@ -50,6 +54,7 @@ public class DEditTrain extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lDT = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,8 +63,6 @@ public class DEditTrain extends javax.swing.JDialog {
         bCancel = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         fChief = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lCarInTrain = new javax.swing.JList(new DefaultListModel());
         jScrollPane2 = new javax.swing.JScrollPane();
         lCarAll = new javax.swing.JList(new DefaultListModel());
         bRight = new javax.swing.JButton();
@@ -73,6 +76,11 @@ public class DEditTrain extends javax.swing.JDialog {
         fDate = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        rHead = new javax.swing.JRadioButton();
+        rHvost = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lCarInTrain = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -114,18 +122,9 @@ public class DEditTrain extends javax.swing.JDialog {
 
         fChief.setFont(new java.awt.Font("Times New Roman", 0, 14));
 
-        lCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 14));
-        lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showInfByCar(evt);
-            }
-        });
-        jScrollPane1.setViewportView(lCarInTrain);
-
         lCarAll.setFont(new java.awt.Font("Times New Roman", 0, 14));
         lCarAll.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lCarAll.addMouseListener(new java.awt.event.MouseAdapter() {
+        lCarAll.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showInfByCar(evt);
             }
@@ -146,7 +145,7 @@ public class DEditTrain extends javax.swing.JDialog {
             }
         });
 
-        lbCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lbCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 13));
         lbCarInTrain.setForeground(new java.awt.Color(82, 82, 82));
         lbCarInTrain.setText("Вагоны в составе");
 
@@ -186,6 +185,57 @@ public class DEditTrain extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(82, 82, 82));
         jLabel9.setText("Отправление/прибытие");
 
+        rHead.setBackground(new java.awt.Color(250, 250, 250));
+        buttonGroup1.add(rHead);
+        rHead.setSelected(true);
+        rHead.setText(" - с головы");
+        rHead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rHeadActionPerformed(evt);
+            }
+        });
+
+        rHvost.setBackground(new java.awt.Color(250, 250, 250));
+        buttonGroup1.add(rHvost);
+        rHvost.setText(" - с хвоста");
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18));
+        jLabel10.setForeground(new java.awt.Color(82, 82, 82));
+        jLabel10.setText("Нумерация");
+
+        lCarInTrain.setAutoCreateRowSorter(true);
+        lCarInTrain.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lCarInTrain.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{
+
+                },
+                new String[]{
+                        "П.Н", "Номер"
+                }
+        ) {
+            Class[] types = new Class[]{
+                    java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean[]{
+                    true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        lCarInTrain.setGridColor(new java.awt.Color(255, 255, 255));
+        lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lCarInTrain.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(lCarInTrain);
+        lCarInTrain.getColumnModel().getColumn(0).setMinWidth(30);
+        lCarInTrain.getColumnModel().getColumn(0).setPreferredWidth(30);
+        lCarInTrain.getColumnModel().getColumn(0).setMaxWidth(30);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,23 +268,28 @@ public class DEditTrain extends javax.swing.JDialog {
                                                 .addComponent(fChief, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel43)))
-                                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(fDate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rHead)
+                                        .addComponent(rHvost)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(bLeft, 0, 0, Short.MAX_VALUE)
                                         .addComponent(bRight, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(lbCarInTrain))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbCarAll)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbCarAll))
                         .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -266,7 +321,13 @@ public class DEditTrain extends javax.swing.JDialog {
                                         .addComponent(cRoadType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cRoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rHead)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rHvost)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(bSave)
                                         .addComponent(bCancel)))
@@ -278,12 +339,13 @@ public class DEditTrain extends javax.swing.JDialog {
                                         .addGap(249, 249, 249))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lbCarAll)
-                                        .addComponent(lbCarInTrain))
+                                        .addComponent(lbCarInTrain)
+                                        .addComponent(lbCarAll))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                         .addContainerGap())
         );
 
@@ -291,7 +353,7 @@ public class DEditTrain extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,37 +388,41 @@ public class DEditTrain extends javax.swing.JDialog {
     private void addCarInTrain() {
         Car car = (Car) lCarAll.getSelectedValue();
         if (car != null) {
-            ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
+            ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
             ((DefaultListModel) lCarAll.getModel()).removeElement(car);
         }
     }
 
     private void removeCarInTrain() {
-        Car car = (Car) lCarInTrain.getSelectedValue();
-        if (car != null) {
-            boolean b = false;
-            System.out.println("ttt=" + car.getCarLocation().getIdLocation());
-            if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
-                System.out.println("ddd");
-                dCarLocation.setLocationRelativeTo(this);
-                CarLocationStructure carLS = dCarLocation.open(car);
-                if (carLS != null) {
-                    try {
-                        b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
-                        System.out.println("b=" + b);
-                        if (b) {
-                            car = carLS.getCar();
+        if (lCarInTrain.getSelectedRow() >= 0) {
+            Car car = (Car) lCarInTrain.getValueAt(lCarInTrain.getSelectedRow(), 1);
+            if (car != null) {
+                boolean b = false;
+                if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
+                    dCarLocation.setLocationRelativeTo(this);
+                    CarLocationStructure carLS = dCarLocation.open(car);
+                    if (carLS != null) {
+                        try {
+                            b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+                            if (b) {
+                                car = carLS.getCar();
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    b = true;
+                }
+                if (b) {
+                    ((DefaultListModel) lCarAll.getModel()).addElement(car);
+                    for (int i = 0; i < ((DefaultListModel) lCarAll.getModel()).size(); i++) {
+                        if (((DefaultTableModel) lCarInTrain.getModel()).getValueAt(i, 1).equals(car)) {
+                            ((DefaultTableModel) lCarInTrain.getModel()).removeRow(i);
+                            break;
+                        }
                     }
                 }
-            } else {
-                b = true;
-            }
-            if (b) {
-                ((DefaultListModel) lCarAll.getModel()).addElement(car);
-                ((DefaultListModel) lCarInTrain.getModel()).removeElement(car);
             }
         }
     }
@@ -382,12 +448,21 @@ public class DEditTrain extends javax.swing.JDialog {
         close();
     }//GEN-LAST:event_formWindowClosing
 
+    private void rHeadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rHeadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rHeadActionPerformed
+
     private void save() {
         if (isCorrectInput()) {
+//            System.out.println("tr="+train.getId());
+//            System.out.println("ro="+( (Road) cRoad.getSelectedItem()).getId());
+
             if (Model.getModel().isRoadReadyForTrain(train, (Road) cRoad.getSelectedItem())) {
-                ArrayList<Car> cars = new ArrayList<Car>(lCarInTrain.getModel().getSize());
-                for (int i = 0; i < lCarInTrain.getModel().getSize(); i++) {
-                    cars.add((Car) lCarInTrain.getModel().getElementAt(i));
+                ArrayList<Car> cars = new ArrayList<Car>(lCarInTrain.getModel().getRowCount());
+                for (int i = 0; i < lCarInTrain.getModel().getRowCount(); i++) {
+                    Car car = (Car) lCarInTrain.getModel().getValueAt(i, 1);
+                    car.setCarNumberInTrain(new Integer(lCarInTrain.getModel().getValueAt(i, 0).toString()));
+                    cars.add(car);
                 }
 //                System.out.println(train.getId());
                 this.train = new Train(
@@ -400,8 +475,7 @@ public class DEditTrain extends javax.swing.JDialog {
                         train.getTrainStatus(),
                         (Road) cRoad.getSelectedItem(),
                         cars,
-                        false
-                );
+                        rHead.isSelected());
 //                this.train = t;
                 setVisible(false);
             } else {
@@ -420,7 +494,9 @@ public class DEditTrain extends javax.swing.JDialog {
     //Возаращеет Train,Route,Road,cars
 
     public Train open(Train train) {
-        if (train == null) close();
+        if (train == null) {
+            close();
+        }
         this.train = train;
         cRoadType.removeAllItems();
         cRoad.removeAllItems();
@@ -433,18 +509,10 @@ public class DEditTrain extends javax.swing.JDialog {
         }
         for (RoadType roadType : roadTypes) {
             cRoadType.addItem(roadType);
-            if (train.getRoad() != null) {
-                ArrayList<Road> lr = Model.getModel().getRoadsByType(roadType);
-                if (lr != null) {
-                    if (lr.contains(lr)) {
-                        rtTmp = roadType;
-                    }
-                }
-            }
         }
-        if (rtTmp != null) {
-            cRoadType.setSelectedItem(rtTmp);
-            ArrayList<Road> roads = Model.getModel().getRoadsByType(rtTmp);
+        if (train.getRoad() != null) {
+            cRoadType.setSelectedItem(train.getRoad().getRoadType());
+            ArrayList<Road> roads = Model.getModel().getRoadsByType(train.getRoad().getRoadType());
             for (Road road : roads) {
                 cRoad.addItem(road);
             }
@@ -463,7 +531,7 @@ public class DEditTrain extends javax.swing.JDialog {
             return null;
         }
 
-        ((DefaultListModel) lCarInTrain.getModel()).removeAllElements();
+        ((DefaultTableModel) lCarInTrain.getModel()).setRowCount(0);
         if (train != null) {
             if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
                 lDT.setText("Дтата и время отправления");
@@ -484,14 +552,14 @@ public class DEditTrain extends javax.swing.JDialog {
                 ArrayList<Car> carsPlan = Model.getModel().getPlanCarForTrain(train);
                 if (carsPlan != null) {
                     for (Car car : carsPlan) {
-                        ((DefaultListModel) lCarInTrain.getModel()).addElement(car);
+                        ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
                         ((DefaultListModel) lCarAll.getModel()).removeElement(car);
                     }
                 }
             } else {
                 //  System.out.println("Load cars in train="+carsInTrain.size());
-                for (Car c : carsInTrain) {
-                    ((DefaultListModel) lCarInTrain.getModel()).addElement(c);
+                for (Car car : carsInTrain) {
+                    ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
                 }
             }
         }
@@ -518,11 +586,13 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JButton bLeft;
     private javax.swing.JButton bRight;
     private javax.swing.JButton bSave;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cRoad;
     private javax.swing.JComboBox cRoadType;
     private javax.swing.JTextField fChief;
     private javax.swing.JTextField fDate;
     private javax.swing.JTextField fRoute;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel43;
@@ -533,9 +603,11 @@ public class DEditTrain extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lCarAll;
-    private javax.swing.JList lCarInTrain;
+    private javax.swing.JTable lCarInTrain;
     private javax.swing.JLabel lDT;
     private javax.swing.JLabel lbCarAll;
     private javax.swing.JLabel lbCarInTrain;
+    private javax.swing.JRadioButton rHead;
+    private javax.swing.JRadioButton rHvost;
     // End of variables declaration//GEN-END:variables
 }

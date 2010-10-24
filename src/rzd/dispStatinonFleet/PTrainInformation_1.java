@@ -113,7 +113,7 @@ public class PTrainInformation_1 extends javax.swing.JPanel {
 
         fRoad.setBackground(new java.awt.Color(255, 255, 255));
         fRoad.setEditable(false);
-        fRoad.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        fRoad.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         fRoad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -126,7 +126,7 @@ public class PTrainInformation_1 extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(82, 82, 82));
         jLabel2.setText("Путь");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18));
         jLabel6.setForeground(new java.awt.Color(82, 82, 82));
         jLabel6.setText("Информация");
 
