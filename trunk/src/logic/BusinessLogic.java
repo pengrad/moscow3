@@ -104,7 +104,7 @@ public interface BusinessLogic {
     public boolean isRoadReadyForTrain(Train train, Road road);
 
     //todo Расформировываем поезд
-    public boolean destroyTrain(Train train);
+    public boolean destroyTrain(Train train) throws Exception;
 
     public boolean deleteCar(Car car);
 

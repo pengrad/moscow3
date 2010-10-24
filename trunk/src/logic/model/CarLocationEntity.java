@@ -21,15 +21,15 @@ public class CarLocationEntity {
         this.cLocation = cLocation;
     }
 
-    private int idLocation;
+    private Integer idLocation;
 
     @Column(name = "id_location", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
-    public int getIdLocation() {
+    public Integer getIdLocation() {
         return idLocation;
     }
 
-    public void setIdLocation(int idLocation) {
+    public void setIdLocation(Integer idLocation) {
         this.idLocation = idLocation;
     }
 
