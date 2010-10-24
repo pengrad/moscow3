@@ -96,7 +96,7 @@ public class BusinessTest {
     }
 
     public static void testAddUpdateCar() {
-        Car car = new Car(12312345, "1", new CarLocation(1, "1"), new CarType(1, "1"), "c", "g", "gp", "a", "ed", "red", true, 101, 100, 101, 100); 
+        Car car = new Car(12312345, "1", new CarLocation(1, "1"), new CarType(1, "1"), "c", "g", "gp", "a", "ed", "red", true, 101, 100, 101, 100, 0);
         System.out.println(manager.addCar(car));
         car.setBodyColor("green");
         System.out.println(manager.editCar(car));
@@ -131,7 +131,7 @@ public class BusinessTest {
         try {
             ArrayList<Car> cars = new ArrayList<Car>();
             cars.add(new Car(12312345));
-            manager.makeTrainForGoing(new Train(128, new Road(14), "Petrov", cars));
+            manager.makeTrainForGoing(new Train(128, new Road(14), "Petrov", cars, true));
         } catch (Exception e) {
             e.printStackTrace();
         }

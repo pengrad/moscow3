@@ -23,7 +23,7 @@ public class Train {
     private ArrayList<Car> carsIn;
     private boolean carFromHead;
 
-    public Train(int id, Road road, String chief, ArrayList<Car> cars,boolean carFromHead) {
+    public Train(int id, Road road, String chief, ArrayList<Car> cars, boolean carFromHead) {
         this(id, null, null, chief, null, null, null, road, cars,carFromHead);
     }
 

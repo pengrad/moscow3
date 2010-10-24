@@ -19,7 +19,7 @@ public class EntityConverter {
             CarLocation cl = convertCarLocation(ce.getCarLocation());
             return new Car(ce.getCarNumber(), ce.getModel(), cl, convertCarType(ce.getCarType()), ce.getConditioner(),
                     ce.getGenerator(), ce.getGeneratorPrivod(), ce.getAccumulator(), ce.getElectricDevice(), ce.getBodyColor(),
-                    ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz());
+                    ce.isEcologicToilet(), ce.getRunNorm(), ce.getRun(), ce.getRunTozNorm(), ce.getRunToz(), 0);
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
@@ -237,7 +237,7 @@ public class EntityConverter {
                 }
             }
             return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(),
-                    convertShedule(train.getShedule()), route, ts, road, cars);
+                    convertShedule(train.getShedule()), route, ts, road, cars, train.isCarFromHead());
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
         }
