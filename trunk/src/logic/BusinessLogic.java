@@ -95,7 +95,21 @@ public interface BusinessLogic {
 
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd);
 
+    //todo Все свободне вагоны т.е со статусом на путях и неизвестно
+
     public ArrayList<Car> getFreeCars();
 
+    //todo Свободен ли путь для текущего поезда, если да то true
+
     public boolean isRoadReadyForTrain(Train train);
+
+    //todo Расформировываем поезд
+
+    public boolean destroyTrain(Train train);
+
+    public boolean deleteCar(Car car);
+
+    public boolean deleteRoute(Route route);
+
+
 }
