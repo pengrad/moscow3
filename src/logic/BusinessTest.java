@@ -43,7 +43,8 @@ public class BusinessTest {
 //        testGetTrainsOnRoads();
 //        testRepairTypes();
 //        testUpdateRepair();
-        testGetFreeCars();
+//        testGetFreeCars();
+        testRoadReadyForTrain();
     }
 
 
@@ -177,5 +178,9 @@ public class BusinessTest {
         for(Car c : manager.getFreeCars()) {
             System.out.println(c.getNumber() + " - " + c.getCarLocation().getLocation());
         }
+    }
+
+    public static void testRoadReadyForTrain() {
+        System.out.println(manager.isRoadReadyForTrain(new Train(128, null, null, null, true), new Road(14)));
     }
 }

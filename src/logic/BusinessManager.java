@@ -107,7 +107,7 @@ public class BusinessManager implements BusinessLogic {
                 // генерируем отправляющиеся поезда с текущего момента
                 for (Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getHoursInWay(), sfe.getMinutesInWay());
-                    // todo порядок вагонв с головы
+                    // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned, true);
                     SessionManager.saveOrUpdateEntities(train);
                 }
@@ -115,7 +115,7 @@ public class BusinessManager implements BusinessLogic {
                 currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getHoursInWay(), sbe.getMinutesInWay());
                 for (Timestamp dateFrom : generateDatesOfDeparture(sbe, currentDate, 20)) {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getHoursInWay(), sbe.getMinutesInWay());
-                    // todo порядок вагонов с головы
+                    // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned, true);
                     SessionManager.saveOrUpdateEntities(train);
                 }
@@ -140,7 +140,7 @@ public class BusinessManager implements BusinessLogic {
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
 
-            // todo проверяем изменились ли дни, и если да - удаляем старые данные и создаем новые!
+            // todo проверяем изменились ли дни, и ТОЛЬКО если да - удаляем старые данные и создаем новые!
 
             // удалим старые записи дней по которым работаем расписание
             if (sfe.getSheduleDays() != null)
@@ -457,9 +457,6 @@ public class BusinessManager implements BusinessLogic {
                     }
                 }
             }
-            ArrayList<CarEntity> ces = new ArrayList<CarEntity>(train.getCarsIn().size());
-            for (Car car : train.getCarsIn()) ces.add(SessionManager.getEntityById(new CarEntity(), car.getNumber()));
-            if (ces.size() == 0) throw new Exception("Нет вагонов!");
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
             te.setTrainChief(train.getChief());
             te.setTrainStatus(tse);
@@ -467,7 +464,8 @@ public class BusinessManager implements BusinessLogic {
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             // добавляем вагоны
-            for (CarEntity ce : ces) {
+            for (Car car : train.getCarsIn()) {
+                CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
                 if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
                     throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
                 for (RepairEntity rep : ce.getRepairs()) {
@@ -484,8 +482,7 @@ public class BusinessManager implements BusinessLogic {
                 }
                 CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
                 ce.setCarLocation(cle);
-                // todo порядковый номер вагона
-                TrainDetEntity tde = new TrainDetEntity(ce, te, 1);
+                TrainDetEntity tde = new TrainDetEntity(ce, te, car.getCarNumberInTrain());
                 CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
                 SessionManager.saveOrUpdateEntities(ce, tde, che);
             }
