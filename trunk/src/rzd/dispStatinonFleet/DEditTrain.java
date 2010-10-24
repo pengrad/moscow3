@@ -384,7 +384,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
     private void save() {
         if (isCorrectInput()) {
-            if (Model.getModel().isRoadReadyForTrain(train)) {
+            if (Model.getModel().isRoadReadyForTrain(train, (Road) cRoad.getSelectedItem())) {
                 ArrayList<Car> cars = new ArrayList<Car>(lCarInTrain.getModel().getSize());
                 for (int i = 0; i < lCarInTrain.getModel().getSize(); i++) {
                     cars.add((Car) lCarInTrain.getModel().getElementAt(i));
@@ -420,7 +420,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
     public Train open(Train train) {
         if (train == null) close();
-        this.train=train;
+        this.train = train;
         cRoadType.removeAllItems();
         cRoad.removeAllItems();
         RoadType rtTmp = null;
@@ -478,7 +478,10 @@ public class DEditTrain extends javax.swing.JDialog {
 
             fChief.setText(train.getChief());
             ArrayList<Car> carsInTrain = train.getCarsIn();
-            if (carsInTrain != null) {
+           //if
+            if (carsInTrain == null) {
+
+            } else {
                 //  System.out.println("Load cars in train="+carsInTrain.size());
                 for (Car c : carsInTrain) {
                     ((DefaultListModel) lCarInTrain.getModel()).addElement(c);
