@@ -30,7 +30,7 @@ import rzd.utils.Utils;
  */
 public class ControllerCar implements MouseListener, ActionListener, Updateble {
 
-    private PCar pCarFleet;
+    private PCar pCar;
     private JPopupMenu popCarMenu;
     private JPopupMenu popHistLocationCar;
     private JMenuItem viewCar;
@@ -44,7 +44,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     private PCarHistory pCarHistory;
 
     public ControllerCar(PCar p) {
-        this.pCarFleet = p;
+        this.pCar = p;
         dCarEdit = new DCarEdit(null, true);
         dCarLocation = new DCarLocation(null, true);
         dCarRepair = new DCarRepair(null, true, this);
@@ -67,21 +67,21 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
         popCarMenu.add(editCar);
         popCarMenu.add(deleteCar);
         popCarMenu.add(histLocationCar);
-        new MakerDefaultTextInField("Поиск по номеру вагона", pCarFleet.fSearch);
+        new MakerDefaultTextInField("Поиск по номеру вагона", pCar.fSearch);
 
-        pCarFleet.tCars.addMouseListener(this);
-        pCarFleet.bAddCar.addActionListener(this);
-        pCarFleet.fSearch.addActionListener(this);
-        pCarFleet.bSearch.addActionListener(this);
+        pCar.tCars.addMouseListener(this);
+        pCar.bAddCar.addActionListener(this);
+        pCar.fSearch.addActionListener(this);
+        pCar.bSearch.addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pCarFleet.fSearch || e.getSource() == pCarFleet.bSearch) {
+        if (e.getSource() == pCar.fSearch || e.getSource() == pCar.bSearch) {
             searchCar();
         } else if (e.getSource() == viewCar) {
             viewCar();
-        } else if (e.getSource() == pCarFleet.bAddCar) {
+        } else if (e.getSource() == pCar.bAddCar) {
             addCar();
         } else if (e.getSource() == editCar) {
             editCar();
@@ -95,21 +95,21 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     }
 
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource() == pCarFleet.tCars && e.getButton() == 3) {
-            int row = pCarFleet.tCars.rowAtPoint(e.getPoint());
-            pCarFleet.tCars.addRowSelectionInterval(row, row);
-            Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        if (e.getSource() == pCar.tCars && e.getButton() == 3) {
+            int row = pCar.tCars.rowAtPoint(e.getPoint());
+            pCar.tCars.addRowSelectionInterval(row, row);
+            Car car = (Car) pCar.tCars.getValueAt(row, 0);
             if (car.getCarLocation().getIdLocation() == BusinessLogic.IN_TRAIN) {
                 locationCar.setEnabled(false);
             } else {
                 locationCar.setEnabled(true);
             }
-            popCarMenu.show(pCarFleet.tCars, e.getX(), e.getY());
+            popCarMenu.show(pCar.tCars, e.getX(), e.getY());
         }
-        if (e.getSource() == pCarFleet.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
-            int row = pCarFleet.tCars.getSelectedRow();
-            int number = new Integer(pCarFleet.tCars.getValueAt(row, 0).toString());
-            ControllerMain.getInstans().showCarInf(pCarFleet.tCars, e.getX(), e.getY(), number);
+        if (e.getSource() == pCar.tCars && e.getButton() == 1 && e.getClickCount() == 2) {
+            int row = pCar.tCars.getSelectedRow();
+            int number = new Integer(pCar.tCars.getValueAt(row, 0).toString());
+            ControllerMain.getInstans().showCarInf(pCar.tCars, e.getX(), e.getY(), number);
         }
     }
 
@@ -127,57 +127,63 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
 
 
     private void searchCar() {
-        boolean b = Utils.searchByTable(pCarFleet.tCars, pCarFleet.fSearch.getText(), 0);
+        boolean b = Utils.searchByTable(pCar.tCars, pCar.fSearch.getText(), 0);
         if (!b) {
-            JOptionPane.showMessageDialog(pCarFleet, "Ничего не найдено", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(pCar, "Ничего не найдено", "", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     private void viewCar() {
-        int row = pCarFleet.tCars.getSelectedRow();
-        boolean b = ControllerMain.getInstans().searchCar(new Integer(pCarFleet.tCars.getValueAt(row, 0).toString()));
+        int row = pCar.tCars.getSelectedRow();
+        boolean b = ControllerMain.getInstans().searchCar(new Integer(pCar.tCars.getValueAt(row, 0).toString()));
         if (!b) {
-            JOptionPane.showMessageDialog(pCarFleet, "Выгон не найден", "Сообщение...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+            JOptionPane.showMessageDialog(pCar, "Выгон не найден", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
         }
     }
 
     private void addCar() {
-        dCarEdit.setLocationRelativeTo(pCarFleet);
+        dCarEdit.setLocationRelativeTo(pCar);
         Car car = dCarEdit.open(null);
         if (car != null) {
             boolean b = Model.getModel().addCar(car);
             if (b) {
-                JOptionPane.showMessageDialog(pCarFleet, "Ввагон успешно создан.");
+                JOptionPane.showMessageDialog(pCar, "Ввагон успешно создан.");
                 ControllerMain.getInstans().update(this);
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
+                JOptionPane.showMessageDialog(pCar, "Вагон с таким номером уже существует.", "", JOptionPane.ERROR);
             }
         }
     }
 
     private void editCar() {
-        dCarEdit.setLocationRelativeTo(pCarFleet);
-        int row = pCarFleet.tCars.getSelectedRow();
-        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        dCarEdit.setLocationRelativeTo(pCar);
+        int row = pCar.tCars.getSelectedRow();
+        Car car = (Car) pCar.tCars.getValueAt(row, 0);
         car = dCarEdit.open(car);
         if (car != null) {
             boolean b = Model.getModel().editCar(car);
             if (b) {
-                JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
+                JOptionPane.showMessageDialog(pCar, "Информация о вагоне успешно изменена.", "", JOptionPane.INFORMATION_MESSAGE);
                 ControllerMain.getInstans().update(this);
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Вагон с таким номером уже существует.");
+                JOptionPane.showMessageDialog(pCar, "Вагон с таким номером уже существует.", "", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     private void deleteCar() {
-
+        int row = pCar.tCars.getSelectedRow();
+        Car car = (Car) pCar.tCars.getValueAt(row, 0);
+        boolean b = Model.getModel().deleteCar(car);
+        if (b) {
+            JOptionPane.showMessageDialog(pCar, "Вагон успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
+            ControllerMain.getInstans().update(this);
+        }
     }
 
     private void locationCar() {
-        int row = pCarFleet.tCars.getSelectedRow();
-        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        int row = pCar.tCars.getSelectedRow();
+        Car car = (Car) pCar.tCars.getValueAt(row, 0);
         if (car.getCarLocation().getIdLocation() == BusinessLogic.REPAIR) {
             locationRepair(car);
         } else {
@@ -186,54 +192,54 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     }
 
     private void locationRepair(Car car) {
-        dCarRepair.setLocationRelativeTo(pCarFleet);
+        dCarRepair.setLocationRelativeTo(pCar);
         Repair repair = dCarRepair.open(Model.getModel().getRepairByCar(car));
-           if (repair != null) {
-              // System.out.println(repair.getRoad().getName());
+        if (repair != null) {
+            // System.out.println(repair.getRoad().getName());
             boolean b = Model.getModel().updateRepair(repair);
             if (b) {
-                JOptionPane.showMessageDialog(pCarFleet, "Информация о ремонте успешно изменена.");
+                JOptionPane.showMessageDialog(pCar, "Информация о ремонте успешно изменена.", "", JOptionPane.INFORMATION_MESSAGE);
                 ControllerMain.getInstans().update(this);
             } else {
-                JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновлении ниформации о ремонте...");
+                JOptionPane.showMessageDialog(pCar, "Ошибка обновлении ниформации о ремонте...", "", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     private void locationOther(Car car) {
-        dCarLocation.setLocationRelativeTo(pCarFleet);
+        dCarLocation.setLocationRelativeTo(pCar);
         CarLocationStructure carLS = dCarLocation.open(car);
         if (carLS != null) {
             try {
                 boolean b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
                 if (b) {
-                    JOptionPane.showMessageDialog(pCarFleet, "Информация о вагоне успешно изменена.");
+                    JOptionPane.showMessageDialog(pCar, "Информация о вагоне успешно изменена.", "", JOptionPane.INFORMATION_MESSAGE);
                     ControllerMain.getInstans().update(this);
                 } else {
-                    JOptionPane.showMessageDialog(pCarFleet, "Ошибка обновления информации о вагоне...");
+                    JOptionPane.showMessageDialog(pCar, "Ошибка обновления информации о вагоне...", "Внимание", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(pCarFleet, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(pCar, e.getMessage(), "Внимание", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
 
     private void histLocationCar() {
-        int row = pCarFleet.tCars.getSelectedRow();
-        Car car = (Car) pCarFleet.tCars.getValueAt(row, 0);
+        int row = pCar.tCars.getSelectedRow();
+        Car car = (Car) pCar.tCars.getValueAt(row, 0);
         pCarHistory.setData(car);
-        popHistLocationCar.show(pCarFleet, popCarMenu.getX(), popCarMenu.getY());
+        popHistLocationCar.show(pCar, popCarMenu.getX(), popCarMenu.getY());
     }
 
     public void update() {
         ModelTable mt;
-        mt = (ModelTable) pCarFleet.tCars.getModel();
+        mt = (ModelTable) pCar.tCars.getModel();
         mt.setDate(getCarsTabView());
     }
 
     public Component getPanel() {
-        return pCarFleet;
+        return pCar;
     }
 
     public void endRepair(Car car) {

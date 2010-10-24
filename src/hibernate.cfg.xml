@@ -4,9 +4,9 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost/rzd</property>
+        <property name="connection.url">jdbc:mysql://192.168.0.1/rzd</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.username">root </property>
+        <property name="connection.username">root</property>
         <property name="connection.password">root</property>
         <property name="hibernate.show_sql">true</property>
         <!--<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
@@ -15,7 +15,7 @@
         <mapping class="logic.model.CarEntity"/>
         <mapping class="logic.model.RoadEntity"/>
         <mapping class="logic.model.RoadTypeEntity"/>
-        <mapping class="logic.model.RouteEntity"/>        
+        <mapping class="logic.model.RouteEntity"/>
         <mapping class="logic.model.TrainEntity"/>
         <mapping class="logic.model.CarHistoryEntity"/>
         <mapping class="logic.model.RoadDetEntity"/>

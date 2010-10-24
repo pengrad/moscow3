@@ -61,18 +61,18 @@ public class PCarHistory extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addContainerGap(307, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addContainerGap(307, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -90,7 +90,7 @@ public class PCarHistory extends javax.swing.JPanel {
                     listHist.add(row);
                 } else if (carHistory.getCarLocation().getIdLocation() == BusinessManager.IN_TRAIN) {
                     row = new Object[2];
-                    row[0] = "<html><span  color='red'><b>"+Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
+                    row[0] = "<html><span  color='red'><b>" + Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
                     Train train = carHistory.getTrain();
                     String route = "";
                     if (train.getRoute().getSheduleForward().equals(train.getShedule())) {
@@ -106,7 +106,7 @@ public class PCarHistory extends javax.swing.JPanel {
 
                 } else if (carHistory.getCarLocation().getIdLocation() == BusinessManager.ON_ROAD) {
                     row = new Object[2];
-                    row[0] = "<html><span  color='red'><b>"+Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
+                    row[0] = "<html><span  color='red'><b>" + Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
                     row[1] = carHistory.getCarLocation();
                     listHist.add(row);
                     row = new Object[]{"", "Путь -  " + carHistory.getRoad().getName()};
@@ -114,7 +114,7 @@ public class PCarHistory extends javax.swing.JPanel {
 
                 } else if (carHistory.getCarLocation().getIdLocation() == BusinessManager.REPAIR) {
                     row = new Object[2];
-                    row[0] = "<html><span  color='red'><b>"+Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
+                    row[0] = "<html><span  color='red'><b>" + Utils.convertDateToStr(carHistory.getDate()) + "</b></span></html>";
                     row[1] = carHistory.getCarLocation();
                     listHist.add(row);
                     row = new Object[]{"", "Тип ремонта -  " + carHistory.getRepair().getRepairType()};
@@ -128,6 +128,9 @@ public class PCarHistory extends javax.swing.JPanel {
             listHist.add(row);
             ModelTable modelTable = (ModelTable) jTable1.getModel();
             modelTable.setDate(listHist);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+
         }
     }
 

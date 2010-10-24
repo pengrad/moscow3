@@ -54,14 +54,12 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
     }
 
     public void update() {
-        try {
-            ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(pRoute, e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        ((ModelTable) pRoute.tRoute.getModel()).setDate(getRoutesTabView());
+        pRoute.tRoute.getColumnModel().getColumn(0).setMinWidth(0);
+        pRoute.tRoute.getColumnModel().getColumn(0).setMaxWidth(0);
     }
-     public Component getPanel(){
+
+    public Component getPanel() {
         return pRoute;
     }
 
@@ -155,19 +153,15 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
     }
 
     private void deleteRoute() {
-//        int row = pRoute.tRoute.getSelectedRow();
-//        if (row != -1) {
-//
-//            try {
-//                boolean b = Model.getModel().removeRoute(data);
-//                if (b) {
-//                    ((ModelTable) pTrains.tRoute.getModel()).setDate(getRoutesTabView());
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(pTrains, e.getMessage());
-//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//            }
-//        }
+        int row = pRoute.tRoute.getSelectedRow();
+        if (row != -1) {
+            Route route = (Route) pRoute.tRoute.getValueAt(row, 0);
+            boolean b = Model.getModel().deleteRoute(route);
+            if (b) {
+                JOptionPane.showMessageDialog(pRoute, "Маршрут успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
+                ControllerMain.getInstans().update(this);
+            }
+        }
     }
 
     //Методы конверторы
