@@ -103,7 +103,7 @@ public interface BusinessLogic {
     // Если он на нем уже стоит - свободен, если на нем стоят только вагоны - свободен
     public boolean isRoadReadyForTrain(Train train, Road road);
 
-    //todo Расформировываем поезд
+    //Расформировываем поезд
     public boolean destroyTrain(Train train) throws Exception;
 
     public boolean deleteCar(Car car);

@@ -233,7 +233,9 @@ public class EntityConverter {
             if (train.getTrainDets() != null && train.getTrainDets().size() > 0) {
                 cars = new ArrayList<Car>(train.getTrainDets().size());
                 for (TrainDetEntity tde : train.getTrainDets()) {
-                    cars.add(convertCar(tde.getCar()));
+                    Car car = convertCar(tde.getCar());
+                    car.setCarNumberInTrain(tde.getCarNumberInTrain());
+                    cars.add(car);
                 }
             }
             return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(),
