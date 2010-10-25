@@ -493,7 +493,6 @@ public class DEditTrain extends javax.swing.JDialog {
                         (Road) cRoad.getSelectedItem(),
                         cars,
                         rHead.isSelected());
-//                this.train = t;
                 setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Путь занят, укажите другой путь", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
@@ -517,7 +516,6 @@ public class DEditTrain extends javax.swing.JDialog {
         this.train = train;
         cRoadType.removeAllItems();
         cRoad.removeAllItems();
-        RoadType rtTmp = null;
         //Запоняем справочники пути
         ArrayList<RoadType> roadTypes = Model.getModel().getRoadTypes();
         if (roadTypes == null) {
@@ -543,9 +541,6 @@ public class DEditTrain extends javax.swing.JDialog {
                 // System.out.println(lCarAll.getModel().getClass().toString());
                 ((DefaultListModel) lCarAll.getModel()).addElement(c);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Справочник вагонов пуст");
-            return null;
         }
 
         ((DefaultTableModel) lCarInTrain.getModel()).setRowCount(0);
@@ -574,11 +569,15 @@ public class DEditTrain extends javax.swing.JDialog {
                     }
                 }
             } else {
-                //  System.out.println("Load cars in train="+carsInTrain.size());
+                //Заполняем вагонами, которые есть в поезде
                 for (Car car : carsInTrain) {
                     ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
                 }
             }
+            if (train.isCarFromHead())
+                rHead.setSelected(true);
+            else
+                rHvost.setSelected(true);
         }
         setVisible(true);
         return this.train;

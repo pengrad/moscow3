@@ -250,8 +250,9 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     //Методы конверторы
 
     private ArrayList<Object[]> getCarsTabView() {
+      //  System.out.println("update car");
         ArrayList<Car> cars = Model.getModel().getCars();
-        System.out.println("cars size="+cars.size());
+       // System.out.println("cars size="+cars.size());
         if (cars != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {

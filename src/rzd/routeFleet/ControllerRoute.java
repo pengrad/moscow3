@@ -127,14 +127,11 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
     private void editRoute() {
         int row = pRoute.tRoute.getSelectedRow();
         if (row != -1) {
-            //  System.out.println(pRoute.tRoute.getValueAt(row, 0).toString());
             Route data = Model.getModel().getRouteById(new Integer(pRoute.tRoute.getValueAt(row, 0).toString()));
             dEditRoute.setLocationRelativeTo(pRoute);
             data = dEditRoute.open(data, Model.getModel().getSheduleTypes());
-            //   System.out.println("editRoute");
             if (data != null) {
                 try {
-                    //          System.out.println("!!updateRoute");
                     boolean b = Model.getModel().updateRoute(data);
                     if (b) {
                         JOptionPane.showMessageDialog(pRoute, "Расписание успешно изменено.");

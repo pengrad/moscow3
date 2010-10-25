@@ -106,7 +106,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             editTrain(activeTable);
         } else if (e.getSource() == viewTrain) {
             viewTrain(activeTable);
-        } else if (e.getSource() == viewTrain) {
+        } else if (e.getSource() == destroyTrain) {
             destroyTrain(activeTable);
         }
     }
@@ -164,15 +164,17 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     private void destroyTrain(JTable activeTab) {
         int row = activeTab.getSelectedRow();
         if (row > -1 && row < activeTab.getRowCount()) {
-            dEditTrain.setLocationRelativeTo(pDispStation);
             Train train = (Train) activeTab.getValueAt(row, 0);
-            train = dEditTrain.open(train);
             if (train != null) {
                 if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
-//                    boolean b = Model.getModel().destroyTrain(train);
-                    if (true) {
-                        JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
-                        ControllerMain.getInstans().update(this);
+                    try {
+                        boolean b = Model.getModel().destroyTrain(train);
+                        if (b) {
+                            JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+                            ControllerMain.getInstans().update(this);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Внимание...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
