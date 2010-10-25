@@ -80,9 +80,6 @@ public class RoadEntity {
         RoadEntity that = (RoadEntity) o;
 
         if (idRoad != that.idRoad) return false;
-        if (position != that.position) return false;
-        if (comments != null ? !comments.equals(that.comments) : that.comments != null) return false;
-        if (roadName != null ? !roadName.equals(that.roadName) : that.roadName != null) return false;
 
         return true;
     }

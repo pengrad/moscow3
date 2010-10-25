@@ -110,7 +110,7 @@ public interface BusinessLogic {
 
     public boolean deleteRoute(Route route) throws Exception;
 
-    // Планируемые поезда в поезде
+    // Планируемые вагоны в поезде
     public ArrayList<Car> getPlanCarForTrain(Train train);
 
 
