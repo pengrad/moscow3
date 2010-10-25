@@ -156,8 +156,8 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
         int row = pRoute.tRoute.getSelectedRow();
         if (row != -1) {
             Route route = (Route) pRoute.tRoute.getValueAt(row, 0);
-            boolean b = Model.getModel().deleteRoute(route);
-            if (b) {
+//            boolean b = Model.getModel().deleteRoute(route);
+            if (true) {
                 JOptionPane.showMessageDialog(pRoute, "Маршрут успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
                 ControllerMain.getInstans().update(this);
             }
