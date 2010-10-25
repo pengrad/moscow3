@@ -995,12 +995,17 @@ public class BusinessManager implements BusinessLogic {
                     setInteger("idSE", seSource.getIdShedule()).
                     setParameterList("status", statuses).
                     setParameter("dFrom", te.getDateFrom()).uniqueResult();
-            // todo добавить фильтр по статусам
             if (id == null) list = null;
             else {
                 TrainEntity teSource = SessionManager.getEntityById(new TrainEntity(), (Integer) id);
                 list = new ArrayList<Car>(teSource.getTrainDets().size());
-                for (TrainDetEntity tde : teSource.getTrainDets()) list.add(EntityConverter.convertCar(tde.getCar()));
+                for (TrainDetEntity tde : teSource.getTrainDets()) {
+                    CarEntity ce = tde.getCar();
+                    int idLoc = ce.getCarLocation().getIdLocation();
+                    // вагоны в пути и в ремонте не показываем
+                    if (idLoc != BusinessLogic.IN_TRAIN && idLoc != BusinessLogic.REPAIR)
+                        list.add(EntityConverter.convertCar(ce));
+                }
             }
             SessionManager.commit();
         } catch (Exception e) {
