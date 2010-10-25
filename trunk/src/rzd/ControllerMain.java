@@ -127,7 +127,7 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
             update(pDispStation.getController());
         }
         if (c.getComponents()[0] instanceof PCar) {
-            System.out.println("****");
+            update(pCars.getController());
         }
 
         if (c.getComponents()[0] instanceof PRoute) {
