@@ -501,7 +501,9 @@ public class BusinessManager implements BusinessLogic {
                 // поезд прибывающий - статус "Прибыл"
             else te.setTrainStatus(new TrainStatusEntity(BusinessLogic.ARRIVED, ""));
             te.setTrainChief(train.getChief());
+            te.setCarFromHead(train.isCarFromHead());
             s.saveOrUpdate(te);
+            // todo создавать новые запланированные поезда!
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             // добавляем вагоны
@@ -1002,7 +1004,7 @@ public class BusinessManager implements BusinessLogic {
                 for (TrainDetEntity tde : teSource.getTrainDets()) {
                     CarEntity ce = tde.getCar();
                     int idLoc = ce.getCarLocation().getIdLocation();
-                    // вагоны в пути и в ремонте не показываем
+                    // вагоны в поезде и в ремонте не показываем
                     if (idLoc != BusinessLogic.IN_TRAIN && idLoc != BusinessLogic.REPAIR)
                         list.add(EntityConverter.convertCar(ce));
                 }
