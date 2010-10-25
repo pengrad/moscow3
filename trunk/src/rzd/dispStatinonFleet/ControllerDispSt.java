@@ -172,6 +172,8 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
                         if (b) {
                             JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
                             ControllerMain.getInstans().update(this);
+                        } else {
+                            JOptionPane.showMessageDialog(pDispStation, "Ошибка...попробуйте еще раз.");
                         }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
@@ -184,7 +186,6 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
     }
 
     //Методы конвертации
-
     private ArrayList<Object[]> getTrainTabView(ArrayList<Train> trains) {
         if (trains != null) {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());

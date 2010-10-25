@@ -563,6 +563,7 @@ public class DEditTrain extends javax.swing.JDialog {
             if (carsInTrain == null) {
                 ArrayList<Car> carsPlan = Model.getModel().getPlanCarForTrain(train);
                 if (carsPlan != null) {
+                    System.out.println("!!!-получили планируемые вагоны = " + carsPlan.size());
                     for (Car car : carsPlan) {
                         ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
                         ((DefaultListModel) lCarAll.getModel()).removeElement(car);
@@ -570,6 +571,7 @@ public class DEditTrain extends javax.swing.JDialog {
                 }
             } else {
                 //Заполняем вагонами, которые есть в поезде
+                System.out.println("!!!-получили вагоны в составе поезда = " + carsInTrain.size());
                 for (Car car : carsInTrain) {
                     ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
                 }

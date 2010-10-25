@@ -128,7 +128,7 @@ public class PRoad extends javax.swing.JPanel {
                 schedule = "<html><span color='gray'>Отправление - </span>" + Utils.convertDateTimeToStr(train.getDtDeparture()) + "</span></html>";
             }
             if (train.getRoute().getSheduleBack().equals(train.getShedule())) {
-                route = "<html><span color='gray'>Маршрут - </span" + train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom() + "  <span color='gray'>Начальник - </span>" + train.getChief() + "</html>";
+                route = "<html><span color='gray'>Маршрут - </span>" + train.getRoute().getNumberBack() + "  " + train.getRoute().getCityTo() + " - " + train.getRoute().getCityFrom() + "  <span color='gray'>Начальник - </span>" + train.getChief() + "</html>";
                 schedule = "<html><span color='gray'>Прибытие - </span>" + Utils.convertDateTimeToStr(train.getDtDestination()) + "</html>";
             }
             roadTitle.setText(route);
