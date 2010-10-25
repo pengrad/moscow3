@@ -16,7 +16,7 @@ public class HibernateUtils {
     public static Date getDate(Session session) {
         Timestamp t = Timestamp.valueOf(session.createSQLQuery("select CURRENT_TIMESTAMP;").uniqueResult().toString());
         return new Date(t.getTime());
-    }
+    }        
 
 
 }
