@@ -22,10 +22,6 @@ public class BusinessManager implements BusinessLogic {
         SessionManager.init();
     }
 
-    private <H, M> void convertHB2Model(Collection<H> src) {
-//        Object o = null; o.getClass().getField("ss").get
-    }
-
     public Session getSession() {
         return SessionManager.getSession();
     }
