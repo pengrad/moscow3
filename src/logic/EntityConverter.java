@@ -264,7 +264,13 @@ public class EntityConverter {
         }
     }
 
-    private static class TrainDetSorter implements Comparator<TrainDetEntity> {
+    // поезд уходящий от нас или прибывающий
+    public static boolean isTrainGoing(TrainEntity train) {
+        if(train.getShedule().getRoutesBySheduleForward().size() > 0) return true;
+        else return false;
+    }
+
+    public static class TrainDetSorter implements Comparator<TrainDetEntity> {
         public TrainDetSorter(boolean fromHead) {
             if (fromHead) this.fromHead = 1;
             else this.fromHead = -1;

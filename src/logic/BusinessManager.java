@@ -476,8 +476,10 @@ public class BusinessManager implements BusinessLogic {
             Session s = getSession();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
-            if (te.getTrainStatus().getIdStatus() > BusinessLogic.MAKED)
-                throw new Exception("Поезд уже был сформирован!");
+            if (te.getTrainStatus().getIdStatus() == BusinessLogic.IN_WAY)
+                throw new Exception("Поезд уже в пути!");
+            if (te.getTrainStatus().getIdStatus() == BusinessLogic.DESTROYED)
+                throw new Exception("Поезд уже расформирован!");
             // если этот поезд не стоит на этом пути
             if (!re.getRoadDets().containsAll(te.getRoadDets())) {
                 if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
@@ -494,10 +496,12 @@ public class BusinessManager implements BusinessLogic {
                 RoadDetEntity rde = new RoadDetEntity(re, null, te);
                 SessionManager.saveOrUpdateEntities(rde);
             }
-            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
+            // поезд уходящий от нас - статус "Сформирован"
+            if (EntityConverter.isTrainGoing(te)) te.setTrainStatus(new TrainStatusEntity(BusinessLogic.MAKED, ""));
+                // поезд прибывающий - статус "Прибыл"
+            else te.setTrainStatus(new TrainStatusEntity(BusinessLogic.ARRIVED, ""));
             te.setTrainChief(train.getChief());
-            te.setTrainStatus(tse);
-            SessionManager.saveOrUpdateEntities(te);
+            s.saveOrUpdate(te);
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             // добавляем вагоны
@@ -510,7 +514,7 @@ public class BusinessManager implements BusinessLogic {
                     if (tde.getIdTrain() == te.getIdTrain()) {
                         isOldCar = true;
                         break;
-                    // если статус поезда не расформирован, вагон не может быть использован
+                        // если статус поезда не расформирован, вагон не может быть использован
                     } else if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED) {
                         throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
                     }
