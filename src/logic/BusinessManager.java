@@ -227,8 +227,7 @@ public class BusinessManager implements BusinessLogic {
             e.printStackTrace();
             SessionManager.rollback();
             list = null;
-        } finally {
-            SessionManager.commit();
+        } finally {            
             SessionManager.closeSession();
         }
         return list;

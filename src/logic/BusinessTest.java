@@ -30,6 +30,7 @@ public class BusinessTest {
     }
 
     public static void main(String[] args) throws HibernateInitializeException {
+        testGetCars();
 //        testGetRoutes();
 //        testGetSheduleTypes();
 //        testAddRoute();
@@ -47,7 +48,7 @@ public class BusinessTest {
 //        testUpdateRepair();
 //        testGetFreeCars();
 //        testRoadReadyForTrain();
-        testTransaction();
+//        testTransaction();
     }
 
 
@@ -55,6 +56,12 @@ public class BusinessTest {
         ArrayList l = null;
         for(Object o : l) {
             System.out.println(o);
+        }
+    }
+
+    public static void testGetCars() {
+        for(Car car : manager.getCars()) {
+            System.out.println(car.getNumber() + " = " + car.getCarLocation().getLocation());
         }
     }
 
