@@ -481,7 +481,7 @@ public class BusinessManager implements BusinessLogic {
             if (te.getTrainStatus().getIdStatus() == BusinessLogic.DESTROYED)
                 throw new Exception("Поезд уже расформирован!");
             // если этот поезд не стоит на этом пути
-            if (!re.getRoadDets().containsAll(te.getRoadDets())) {
+            if (te.getRoadDets().size() == 0 || !te.getRoadDets().iterator().next().getRoad().equals(re)) {
                 if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
                 // удаляем поезд со своего старого пути, если в записи нет вагона - удаляем запись.
                 for (RoadDetEntity rde : te.getRoadDets()) {
@@ -985,7 +985,7 @@ public class BusinessManager implements BusinessLogic {
             SheduleEntity se = te.getShedule();
             // расписание обратное нашему
             SheduleEntity seSource;
-            if (se.getRoutesBySheduleForward().size() > 0) {
+            if (EntityConverter.isTrainGoing(te)) {
                 seSource = se.getRoutesBySheduleForward().toArray(new RouteEntity[]{null})[0].getSheduleBack();
             } else seSource = se.getRoutesBySheduleBack().toArray(new RouteEntity[]{null})[0].getSheduleForward();
             // ищем ближайший прибывший или расформированный поезд.
@@ -995,6 +995,7 @@ public class BusinessManager implements BusinessLogic {
                     setInteger("idSE", seSource.getIdShedule()).
                     setParameterList("status", statuses).
                     setParameter("dFrom", te.getDateFrom()).uniqueResult();
+            // todo добавить фильтр по статусам
             if (id == null) list = null;
             else {
                 TrainEntity teSource = SessionManager.getEntityById(new TrainEntity(), (Integer) id);
