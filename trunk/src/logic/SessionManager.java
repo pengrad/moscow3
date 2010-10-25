@@ -74,7 +74,7 @@ class SessionManager {
 
     public static boolean saveOrUpdateEntities(Object... entities) throws DatabaseException {
         try {
-            // todo возможно вставить сюда свою внутренюю транзакцию и закрывать ее по выходу
+            // возможно вставить сюда свою внутренюю транзакцию и закрывать ее по выходу
             for (Object o : entities) {
                 getSession().saveOrUpdate(o);
             }
@@ -102,7 +102,7 @@ class SessionManager {
 
     public static boolean deleteEntities(Object... entities) throws DatabaseException {
         try {
-            // todo возможно вставить сюда свою внутренюю транзакцию и закрывать ее по выходу
+            // возможно вставить сюда свою внутренюю транзакцию и закрывать ее по выходу
             for (Object o : entities) {
 
                 getSession().delete(o);

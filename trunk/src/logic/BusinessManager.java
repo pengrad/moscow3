@@ -140,33 +140,70 @@ public class BusinessManager implements BusinessLogic {
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
 
-            // todo проверяем изменились ли дни, и ТОЛЬКО если да - удаляем старые данные и создаем новые!
-
-            // удалим старые записи дней по которым работаем расписание
+            // удалим старые записи дней по которым работает расписание
             if (sfe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sfe.getSheduleDays()) s.delete(sde);
             if (sbe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) s.delete(sde);
-            // todo удаляем запланированные поезда - выносим это в отдельный метод
-            List tf = s.createQuery("from TrainEntity where shedule = :sh and trainStatus.id = :plan").
-                    setParameter("sh", sfe).setInteger("plan", BusinessLogic.PLANNED).list();
+            // удаляем запланированные поезда, сформированные и поезда в пути
+            Integer[] statuses = new Integer[]{BusinessLogic.PLANNED, BusinessLogic.MAKED, BusinessLogic.IN_WAY};
+            List tf = s.createQuery("from TrainEntity where shedule in (:sh) and trainStatus.id in (:status)").
+                    setParameterList("sh", new Object[]{sfe, sbe}).setParameterList("status", statuses).list();
+            // todo выносим удаление в отдельный метод
             for (Object t : tf) {
                 TrainEntity train = (TrainEntity) t;
                 // удаляем тела.
-                train.getTrainDets();
-                // удаляем их с пути
-                // удаляем историю вагонов для них
+                for (TrainDetEntity tde : train.getTrainDets()) {
+                    CarEntity car = tde.getCar();
+                    car.setCarLocation(new CarLocationEntity(BusinessLogic.UNKNOWN, ""));
+                    s.update(car);
+                    s.delete(tde);
+                }
+                // историю локаций вагона, где фигурировал этот поезд
+                for (CarHistoryEntity che : train.getCarHistories()) s.delete(che);
+                // удаляем поезд с пути, если в записи нет вагона - удаляем запись.
+                for (RoadDetEntity rde : train.getRoadDets()) {
+                    if (rde.getCar() == null) {
+                        s.delete(rde);
+                    } else {
+                        rde.setTrain(null);
+                        s.update(rde);
+                    }
+                }
+                // удаляем сам поезд
+                s.delete(train);
             }
             // заставляем выполнить делит сейчас же
             s.flush();
             // и очищаем сессию, для удаления одинаковых идентификаторов
             s.clear();
             re = EntityConverter.convertRoute(r, re.getIdRoute(), sfe.getIdShedule(), sbe.getIdShedule());
-            SessionManager.saveOrUpdateEntities(sfe, sbe, re);
+            sfe = re.getSheduleForward();
+            sbe = re.getSheduleBack();
+            SessionManager.saveOrUpdateEntities(sbe, sfe, re);
             if (sfe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.saveOrUpdateEntities(sde);
             if (sbe.getSheduleDays() != null)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) SessionManager.saveOrUpdateEntities(sde);
+            if (re.isEnabled()) {
+                Date currentDate = getCurrentDate();
+                TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+                // генерируем отправляющиеся поезда с текущего момента
+                for (Timestamp dateFrom : generateDatesOfDeparture(sfe, currentDate, 20)) {
+                    Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getHoursInWay(), sfe.getMinutesInWay());
+                    // порядок вагонов по умолчанию с головы
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned, true);
+                    SessionManager.saveOrUpdateEntities(train);
+                }
+                // генерируем прибывающие поезда с момента: текущее время - время в пути. (чтобы прибыл уже ближайший)
+                currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getHoursInWay(), sbe.getMinutesInWay());
+                for (Timestamp dateFrom : generateDatesOfDeparture(sbe, currentDate, 20)) {
+                    Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getHoursInWay(), sbe.getMinutesInWay());
+                    // порядок вагонов по умолчанию с головы
+                    TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned, true);
+                    SessionManager.saveOrUpdateEntities(train);
+                }
+            }
             SessionManager.commit();
             return true;
         } catch (Exception e) {
@@ -179,6 +216,7 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Car> getCars() {
+        SessionManager.beginTran();
         ArrayList<Car> list = null;
         try {
             SessionManager.beginTran();
@@ -194,6 +232,7 @@ public class BusinessManager implements BusinessLogic {
             SessionManager.rollback();
             list = null;
         } finally {
+            SessionManager.commit();
             SessionManager.closeSession();
         }
         return list;
@@ -690,10 +729,16 @@ public class BusinessManager implements BusinessLogic {
             if (re.getRoad() != null)
                 for (RoadDetEntity rde : re.getRoad().getRoadDets()) {
                     if (rde.getCar() != null && rde.getCar().equals(re.getCar())) {
-                        s.delete(rde);
-                        s.flush();
+                        if (rde.getTrain() == null) {
+                            s.delete(rde);
+                        } else {
+                            rde.setCar(null);
+                            s.update(rde);
+                        }
                     }
                 }
+
+            s.flush();
             // клирим сессию для очистки идентификаторов, т.к. мы не обновляем поля set'ами, а создаем новый объект.
             s.clear();
             re = EntityConverter.convertRepair(repair);
@@ -786,7 +831,6 @@ public class BusinessManager implements BusinessLogic {
             list = new ArrayList<Car>(l.size());
             for (Object car : l) list.add(EntityConverter.convertCar((CarEntity) car));
             SessionManager.commit();
-            return list;
         } catch (Exception e) {
             e.printStackTrace();
             SessionManager.rollback();
@@ -847,15 +891,111 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public boolean deleteCar(Car car) {
-        return false;
+        boolean ok = true;
+        try {
+            SessionManager.beginTran();
+            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
+            Session s = getSession();
+            for (CarHistoryEntity che : ce.getCarHistories()) s.delete(che);
+            for (RepairEntity re : ce.getRepairs()) s.delete(re);
+            for (RoadDetEntity rde : ce.getRoadDets()) {
+                if (rde.getTrain() == null) {
+                    s.delete(rde);
+                } else {
+                    rde.setCar(null);
+                    s.update(rde);
+                }
+            }
+            for (TrainDetEntity tde : ce.getTrainDets()) s.delete(tde);
+            s.delete(ce);
+            SessionManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ok = false;
+            SessionManager.rollback();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return ok;
     }
 
-    public boolean deleteRoute(Route route) {
-        return false;
+    public boolean deleteRoute(Route route) throws Exception {
+        boolean ok = true;
+        try {
+            SessionManager.beginTran();
+            RouteEntity re = SessionManager.getEntityById(new RouteEntity(), route.getId());
+            Session s = getSession();
+            SheduleEntity se = re.getSheduleForward();
+            for (int i = 0; i < 2; i++) {
+                for (SheduleDaysEntity sde : se.getSheduleDays()) s.delete(sde);
+                for (TrainEntity te : se.getTrains()) {
+                    int status = te.getTrainStatus().getIdStatus();
+                    if (status == BusinessLogic.ARRIVED) throw new Exception("Сначала расформируйте прибывший поезд!");
+                    for (TrainDetEntity tde : te.getTrainDets()) {
+                        if (status != BusinessLogic.DESTROYED) {
+                            tde.getCar().setCarLocation(new CarLocationEntity(BusinessLogic.UNKNOWN, ""));
+                            s.update(tde.getCar());
+                        }
+                        s.delete(tde);
+                    }
+                    for (CarHistoryEntity che : te.getCarHistories()) s.delete(che);
+                    for (RoadDetEntity rde : te.getRoadDets()) {
+                        if (rde.getCar() == null) {
+                            s.delete(rde);
+                        } else {
+                            rde.setTrain(null);
+                            s.update(rde);
+                        }
+                    }
+                }
+                s.delete(se);
+                se = re.getSheduleBack();
+            }
+            s.delete(re);
+            SessionManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ok = false;
+            SessionManager.rollback();
+        } finally {
+            SessionManager.closeSession();
+        }
+        return ok;
     }
 
     public ArrayList<Car> getPlanCarForTrain(Train train) {
-        return null;
+        ArrayList<Car> list = null;
+        try {
+            SessionManager.beginTran();
+            TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
+            SheduleEntity se = te.getShedule();
+            // расписание обратное нашему
+            SheduleEntity seSource;
+            if (se.getRoutesBySheduleForward().size() > 0) {
+                seSource = se.getRoutesBySheduleForward().toArray(new RouteEntity[]{null})[0].getSheduleBack();
+            } else seSource = se.getRoutesBySheduleBack().toArray(new RouteEntity[]{null})[0].getSheduleForward();
+            // ищем ближайший прибывший или расформированный поезд.
+            Integer[] statuses = new Integer[]{BusinessLogic.ARRIVED, BusinessLogic.DESTROYED};
+            Object id = getSession().createQuery("select max(te.idTrain) from TrainEntity as te where te.shedule.id " +
+                    "= :idSE and te.trainStatus.id in (:status) and te.dateTo < :dFrom").
+                    setInteger("idSE", seSource.getIdShedule()).
+                    setParameterList("status", statuses).
+                    setParameter("dFrom", te.getDateFrom()).uniqueResult();
+            if (id == null) list = null;
+            else {
+                TrainEntity teSource = SessionManager.getEntityById(new TrainEntity(), (Integer) id);
+                list = new ArrayList<Car>(teSource.getTrainDets().size());
+                for (TrainDetEntity tde : teSource.getTrainDets()) list.add(EntityConverter.convertCar(tde.getCar()));
+            }
+            SessionManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            list = null;
+        } finally {
+            SessionManager.closeSession();
+        }
+        return list;
     }
 
     public Collection<Timestamp> generateDatesOfDeparture(SheduleEntity shedule, Date dateBegin, int count) {
