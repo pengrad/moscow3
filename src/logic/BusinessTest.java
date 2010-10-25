@@ -2,6 +2,8 @@ package logic;
 
 import logic.model.SheduleEntity;
 import logic.model.TrainEntity;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import rzd.model.objects.*;
 
 import java.io.IOException;
@@ -44,7 +46,8 @@ public class BusinessTest {
 //        testRepairTypes();
 //        testUpdateRepair();
 //        testGetFreeCars();
-        testRoadReadyForTrain();
+//        testRoadReadyForTrain();
+        testTransaction();
     }
 
 
@@ -183,4 +186,14 @@ public class BusinessTest {
     public static void testRoadReadyForTrain() {
         System.out.println(manager.isRoadReadyForTrain(new Train(128, null, null, null, true), new Road(14)));
     }
+
+    public static void testTransaction() {
+        Session s = manager.getSession();
+        Transaction t = s.beginTransaction();
+        Transaction t1 = s.beginTransaction();
+        t1.commit();
+        t.commit();
+
+    }
+
 }
