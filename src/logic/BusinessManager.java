@@ -93,10 +93,17 @@ public class BusinessManager implements BusinessLogic {
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
-            if (sfe.getSheduleDays() != null)
-                for (SheduleDaysEntity sde : sfe.getSheduleDays()) SessionManager.saveOrUpdateEntities(sde);
-            if (sfe.getSheduleDays() != null)
-                for (SheduleDaysEntity sde : sbe.getSheduleDays()) SessionManager.saveOrUpdateEntities(sde);
+            getSession().flush();
+            if (sfe.getSheduleDays() != null && sfe.getSheduleDays().size() > 0)
+                for (SheduleDaysEntity sde : sfe.getSheduleDays()) {
+                    sde.setShedule(sfe);
+                    SessionManager.saveOrUpdateEntities(sde);
+                }            
+            if (sbe.getSheduleDays() != null && sbe.getSheduleDays().size() > 0)
+                for (SheduleDaysEntity sde : sbe.getSheduleDays()) {
+                    sde.setShedule(sbe);
+                    SessionManager.saveOrUpdateEntities(sde);
+                }
             if (re.isEnabled()) {
                 Date currentDate = getCurrentDate();
                 TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
