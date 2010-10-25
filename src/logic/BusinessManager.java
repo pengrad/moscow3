@@ -227,7 +227,7 @@ public class BusinessManager implements BusinessLogic {
             e.printStackTrace();
             SessionManager.rollback();
             list = null;
-        } finally {            
+        } finally {
             SessionManager.closeSession();
         }
         return list;
@@ -490,6 +490,9 @@ public class BusinessManager implements BusinessLogic {
                         s.update(rde);
                     }
                 }
+                // ставим поезд на новый путь
+                RoadDetEntity rde = new RoadDetEntity(re, null, te);
+                SessionManager.saveOrUpdateEntities(rde);
             }
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.MAKED);
             te.setTrainChief(train.getChief());
@@ -499,33 +502,41 @@ public class BusinessManager implements BusinessLogic {
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
             // добавляем вагоны
             for (Car car : train.getCarsIn()) {
+                // признак того что этот вагон уже в составе этого поезда
+                boolean isOldCar = false;
                 CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
                 for (TrainDetEntity tde : ce.getTrainDets()) {
-                    int status = tde.getTrain().getTrainStatus().getIdStatus();
-                    if (status != BusinessLogic.DESTROYED && tde.getIdTrain() != te.getIdTrain())
+                    // если вагон в составе этого поезда, заполняем признак, для этого вагона мы больше ничего делать не будем.
+                    if (tde.getIdTrain() == te.getIdTrain()) {
+                        isOldCar = true;
+                        break;
+                    // если статус поезда не расформирован, вагон не может быть использован
+                    } else if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED) {
                         throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
+                    }
                     s.evict(tde);
                 }
-                for (RepairEntity rep : ce.getRepairs()) {
-                    if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
-                }
-                // удаляем вагон со старого пути, если на нем нет поезда - удаляем запись
-                for (RoadDetEntity rde : ce.getRoadDets()) {
-                    if (rde.getTrain() == null) {
-                        SessionManager.deleteEntities(rde);
-                    } else {
-                        rde.setCar(null);
-                        SessionManager.saveOrUpdateEntities(rde);
+                // вагон еще не в составе поезда, редактируем его дислокацию и историю
+                if (!isOldCar) {
+                    for (RepairEntity rep : ce.getRepairs()) {
+                        if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
                     }
+                    // удаляем вагон со старого пути, если на нем нет поезда - удаляем запись
+                    for (RoadDetEntity rde : ce.getRoadDets()) {
+                        if (rde.getTrain() == null) {
+                            SessionManager.deleteEntities(rde);
+                        } else {
+                            rde.setCar(null);
+                            SessionManager.saveOrUpdateEntities(rde);
+                        }
+                    }
+                    CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
+                    ce.setCarLocation(cle);
+                    TrainDetEntity tde = new TrainDetEntity(ce, te, car.getCarNumberInTrain());
+                    CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
+                    SessionManager.saveOrUpdateEntities(ce, tde, che);
                 }
-                CarLocationEntity cle = EntityConverter.convertCarLocation(new CarLocation(BusinessLogic.IN_TRAIN, ""));
-                ce.setCarLocation(cle);
-                TrainDetEntity tde = new TrainDetEntity(ce, te, car.getCarNumberInTrain());
-                CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
-                SessionManager.saveOrUpdateEntities(ce, tde, che);
             }
-            RoadDetEntity rde = new RoadDetEntity(re, null, te);
-            SessionManager.saveOrUpdateEntities(rde);
             SessionManager.commit();
             return true;
         } catch (Exception e) {

@@ -30,7 +30,7 @@ public class BusinessTest {
     }
 
     public static void main(String[] args) throws HibernateInitializeException {
-        testGetCars();
+//        testGetCars();
 //        testGetRoutes();
 //        testGetSheduleTypes();
 //        testAddRoute();
@@ -42,7 +42,7 @@ public class BusinessTest {
 //        test();
 //        testGoingTrains();
 //        testArrivingTrains();
-//        testMakeTrainForGoing();
+        testMakeTrainForGoing();
 //        testGetTrainsOnRoads();
 //        testRepairTypes();
 //        testUpdateRepair();
