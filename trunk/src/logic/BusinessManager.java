@@ -501,8 +501,11 @@ public class BusinessManager implements BusinessLogic {
             // добавляем вагоны
             for (Car car : train.getCarsIn()) {
                 CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-                if (ce.getTrainDets() != null && ce.getTrainDets().size() > 0)
-                    throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
+                for (TrainDetEntity tde : ce.getTrainDets()) {
+                    int status = tde.getTrain().getTrainStatus().getIdStatus();
+                    if (status != BusinessLogic.DESTROYED && tde.getIdTrain() != te.getIdTrain())
+                        throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
+                }
                 for (RepairEntity rep : ce.getRepairs()) {
                     if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
                 }
