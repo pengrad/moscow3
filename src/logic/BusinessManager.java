@@ -470,7 +470,7 @@ public class BusinessManager implements BusinessLogic {
         }
     }
 
-    public boolean makeTrainForGoing(Train train) throws Exception {
+    public boolean updateTrainOnRoad(Train train) throws Exception {
         try {
             SessionManager.beginTran();
             Session s = getSession();

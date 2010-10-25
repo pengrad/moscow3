@@ -139,7 +139,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             if (train != null) {
                 boolean b = false;
                 try {
-                    b = Model.getModel().makeTrainForGoing(train);
+                    b = Model.getModel().updateTrainOnRoad(train);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "Внимание...", JOptionPane.ERROR_MESSAGE);
                 }

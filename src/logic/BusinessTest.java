@@ -1,7 +1,5 @@
 package logic;
 
-import logic.model.SheduleEntity;
-import logic.model.TrainEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import rzd.model.objects.*;
@@ -142,7 +140,7 @@ public class BusinessTest {
         try {
             ArrayList<Car> cars = new ArrayList<Car>();
             cars.add(new Car(12312345));
-            manager.makeTrainForGoing(new Train(128, new Road(14), "Petrov", cars, true));
+            manager.updateTrainOnRoad(new Train(128, new Road(14), "Petrov", cars, true));
         } catch (Exception e) {
             e.printStackTrace();
         }

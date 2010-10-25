@@ -73,7 +73,7 @@ public interface BusinessLogic {
 
     public ArrayList<Train> getArrivingTrains(int forHours);
 
-    public boolean makeTrainForGoing(Train train) throws Exception;
+    public boolean updateTrainOnRoad(Train train) throws Exception;
 
     public ArrayList<CarLocation> getCarLocations();
 
