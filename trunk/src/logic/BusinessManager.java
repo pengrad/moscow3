@@ -504,6 +504,7 @@ public class BusinessManager implements BusinessLogic {
                     int status = tde.getTrain().getTrainStatus().getIdStatus();
                     if (status != BusinessLogic.DESTROYED && tde.getIdTrain() != te.getIdTrain())
                         throw new Exception("Вагон " + ce.getCarNumber() + " уже в составе другого поезда!");
+                    s.evict(tde);
                 }
                 for (RepairEntity rep : ce.getRepairs()) {
                     if (rep.getDateEnd() == null) throw new Exception("Вагон " + ce.getCarNumber() + " в ремонте!");
