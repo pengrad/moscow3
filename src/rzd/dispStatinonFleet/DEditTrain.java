@@ -16,6 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import logic.BusinessLogic;
@@ -124,7 +125,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
         lCarAll.setFont(new java.awt.Font("Times New Roman", 0, 14));
         lCarAll.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lCarAll.addMouseListener(new MouseAdapter() {
+        lCarAll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showInfByCar(evt);
             }
@@ -231,6 +232,11 @@ public class DEditTrain extends javax.swing.JDialog {
         lCarInTrain.setGridColor(new java.awt.Color(255, 255, 255));
         lCarInTrain.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lCarInTrain.getTableHeader().setReorderingAllowed(false);
+        lCarInTrain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lCarInTrainMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lCarInTrain);
         lCarInTrain.getColumnModel().getColumn(0).setMinWidth(30);
         lCarInTrain.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -372,7 +378,7 @@ public class DEditTrain extends javax.swing.JDialog {
         addCarInTrain();
     }//GEN-LAST:event_bLeftActionPerformed
 
-    private void cRoadTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cRoadTypeItemStateChanged
+    private void cRoadTypeItemStateChanged(java.awt.event.ItemEvent evt) {
         RoadType rt = (RoadType) cRoadType.getSelectedItem();
         cRoad.removeAllItems();
         if (rt != null) {
@@ -383,7 +389,7 @@ public class DEditTrain extends javax.swing.JDialog {
                 }
             }
         }
-    }//GEN-LAST:event_cRoadTypeItemStateChanged
+    }
 
     private void addCarInTrain() {
         Car car = (Car) lCarAll.getSelectedValue();
@@ -427,14 +433,13 @@ public class DEditTrain extends javax.swing.JDialog {
         }
     }
 
-    private void showInfByCar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showInfByCar
+    private void showInfByCar(java.awt.event.MouseEvent evt) {
         if (evt.getSource() instanceof JList && evt.getButton() == 1 && evt.getClickCount() == 2) {
             JList list = (JList) evt.getSource();
             Car car = ((Car) list.getSelectedValue());
             ControllerMain.getInstans().showCarInf(list, evt.getX() + 5, evt.getY() + 5, car);
         }
-
-    }//GEN-LAST:event_showInfByCar
+    }
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         save();
@@ -452,19 +457,31 @@ public class DEditTrain extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_rHeadActionPerformed
 
+    private void lCarInTrainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCarInTrainMouseClicked
+        if (evt.getSource() instanceof JTable && evt.getButton() == 1 && evt.getClickCount() == 2) {
+            JTable table = (JTable) evt.getSource();
+            int row = table.getSelectedRow();
+            if (row >= 0) {
+                Car car = (Car) table.getValueAt(row, 1);
+                ControllerMain.getInstans().showCarInf(table, evt.getX() + 5, evt.getY() + 5, car);
+            }
+        }
+    }//GEN-LAST:event_lCarInTrainMouseClicked
+
     private void save() {
         if (isCorrectInput()) {
-//            System.out.println("tr="+train.getId());
-//            System.out.println("ro="+( (Road) cRoad.getSelectedItem()).getId());
-
             if (Model.getModel().isRoadReadyForTrain(train, (Road) cRoad.getSelectedItem())) {
                 ArrayList<Car> cars = new ArrayList<Car>(lCarInTrain.getModel().getRowCount());
                 for (int i = 0; i < lCarInTrain.getModel().getRowCount(); i++) {
                     Car car = (Car) lCarInTrain.getModel().getValueAt(i, 1);
-                    car.setCarNumberInTrain(new Integer(lCarInTrain.getModel().getValueAt(i, 0).toString()));
+                    int pn = 0;
+                    try {
+                        pn = new Integer(lCarInTrain.getModel().getValueAt(i, 0).toString());
+                    } catch (Exception e) {
+                    }
+                    car.setCarNumberInTrain(pn);
                     cars.add(car);
                 }
-//                System.out.println(train.getId());
                 this.train = new Train(
                         train.getId(),
                         train.getDtDeparture(),

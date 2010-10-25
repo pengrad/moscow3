@@ -123,6 +123,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     }
 
     public void mouseExited(MouseEvent e) {
+    
     }
 
 
@@ -250,6 +251,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
 
     private ArrayList<Object[]> getCarsTabView() {
         ArrayList<Car> cars = Model.getModel().getCars();
+        System.out.println("cars size="+cars.size());
         if (cars != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {
