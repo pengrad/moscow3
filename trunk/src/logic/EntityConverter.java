@@ -4,7 +4,9 @@ import logic.model.*;
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 
 /**
  * User: Стас
@@ -232,7 +234,9 @@ public class EntityConverter {
             ArrayList<Car> cars = null;
             if (train.getTrainDets() != null && train.getTrainDets().size() > 0) {
                 cars = new ArrayList<Car>(train.getTrainDets().size());
-                for (TrainDetEntity tde : train.getTrainDets()) {
+                TrainDetEntity[] tdes = train.getTrainDets().toArray(new TrainDetEntity[]{null});
+                Arrays.sort(tdes, new TrainDetSorter(train.isCarFromHead()));
+                for (TrainDetEntity tde : tdes) {
                     Car car = convertCar(tde.getCar());
                     car.setCarNumberInTrain(tde.getCarNumberInTrain());
                     cars.add(car);
@@ -240,7 +244,13 @@ public class EntityConverter {
             }
             return new Train(train.getIdTrain(), train.getDateFrom(), train.getDateTo(), train.getTrainChief(),
                     convertShedule(train.getShedule()), route, ts, road, cars, train.isCarFromHead());
-        } catch (Exception e) {
+        }
+
+        catch (
+                Exception e
+                )
+
+        {
             throw new HibernateConvertExcpetion(e);
         }
     }
@@ -251,6 +261,21 @@ public class EntityConverter {
                     convertTrain(che.getTrain()), convertRoad(che.getRoad()), convertRepair(che.getRepair()));
         } catch (Exception e) {
             throw new HibernateConvertExcpetion(e);
+        }
+    }
+
+    private static class TrainDetSorter implements Comparator<TrainDetEntity> {
+        public TrainDetSorter(boolean fromHead) {
+            if (fromHead) this.fromHead = 1;
+            else this.fromHead = -1;
+        }
+
+        private int fromHead = 1;
+
+        public int compare(TrainDetEntity o1, TrainDetEntity o2) {
+            if (o1.getCarNumberInTrain() < o2.getCarNumberInTrain()) return fromHead;
+            else if (o1.getCarNumberInTrain() > o2.getCarNumberInTrain()) return -1 * fromHead;
+            else return 0;
         }
     }
 }
