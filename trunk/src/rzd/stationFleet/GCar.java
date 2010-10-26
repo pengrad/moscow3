@@ -62,7 +62,7 @@ public class GCar extends Figure {
             g.setColor(Color.BLACK);
             g.drawString(new Integer(car.getNumber()).toString(), (int) shape.getBounds().getX() + 15, (int) shape.getBounds().getY() + 12);
         } else {
-            g.drawString(new Integer(car.getNumber()).toString(), (int) shape.getBounds().getX() + 8, (int) shape.getBounds().getY() + 12);
+            g.drawString(new Integer(car.getNumber()).toString(), (int) shape.getBounds().getX() + 9, (int) shape.getBounds().getY() + 12);
         }
     }
 }

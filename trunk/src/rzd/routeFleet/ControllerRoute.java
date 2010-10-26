@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import logic.BusinessLogic;
 import rzd.ControllerMain;
 import rzd.ModelTable;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import rzd.Updateble;
 import rzd.model.Model;
 import rzd.model.objects.Route;
+import rzd.model.objects.Shedule;
 import rzd.utils.MakerDefaultTextInField;
 import rzd.utils.Utils;
 
@@ -118,7 +120,7 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
     }
 
     private void search() {
-        boolean b = Utils.searchByTable(pRoute.tRoute, pRoute.fSearch.getText(), 1, 2);
+        boolean b = Utils.searchByTable(pRoute.tRoute, pRoute.fSearch.getText(), 3, 5);
         if (!b) {
             JOptionPane.showMessageDialog(pRoute, "Ничего не найдено", "Внимание...", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -152,14 +154,19 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
         if (row != -1) {
             Route route = (Route) pRoute.tRoute.getValueAt(row, 0);
             boolean b = false;
-            try {
-                b = Model.getModel().deleteRoute(route);
-                if (b) {
-                    JOptionPane.showMessageDialog(pRoute, "Маршрут успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
-                    ControllerMain.getInstans().update(this);
+            if (route != null) {
+                int i = JOptionPane.showConfirmDialog(pRoute, "Внимание!!! Все поезда связанные с эти маршрутом будут удалены.Удаляем?", "", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    try {
+                        b = Model.getModel().deleteRoute(route);
+                        if (b) {
+                            JOptionPane.showMessageDialog(pRoute, "Маршрут успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
+                            ControllerMain.getInstans().update(this);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(pRoute, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(pRoute, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -170,20 +177,34 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
         ArrayList<Route> routes = Model.getModel().getRoutes();
         if (routes != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(routes.size());
+
             for (Route r : routes) {
-                Object[] o = new Object[6];
+                Object[] o = new Object[8];
                 o[0] = r;
-                o[1] = r.getNumberForward();
-                o[2] = r.getNumberBack();
-                o[3] = r.getCityFrom();
-                o[4] = r.getCityTo();
-                o[5] = r.isEnabled();
+                o[1] = r.getCityFrom();
+                o[2] = r.getCityTo();
+                o[3] = r.getNumberForward();
+                o[4] = convertSchedule(r.getSheduleForward());
+                o[5] = r.getNumberBack();
+                o[6] = convertSchedule(r.getSheduleBack());
+                o[7] = r.isEnabled();
                 res.add(o);
             }
-            res.add(new Object[]{"ID", "Номер маршрута", "Номер обратного маршрута", "Станция отправления", "Станция назначения", "Активность"});
+            res.add(new Object[]{"ID", "Станция отправления", "Станция назначения", "Номер прямого маршрута", "Следование", "Номер обратного маршрута", "Следование", "Активность"});
             return res;
         }
         return null;
+    }
+
+    private String convertSchedule(Shedule shedule) {
+        int type = shedule.getSheduleType().getId();
+        if (type == BusinessLogic.NONPAIR || type == BusinessLogic.PAIR) {
+            return shedule.getSheduleType().getName();
+        } else if (type == BusinessLogic.DAYS_MONTH) {
+            return Utils.convertMasToStr(shedule.getDays());
+        } else if (type == BusinessLogic.DAYS_WEEK) {
+            return Utils.convertMasToDayOfWeek(shedule.getDays());
+        } else return "";
     }
 
 //
