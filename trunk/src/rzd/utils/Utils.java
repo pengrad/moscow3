@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -20,7 +22,7 @@ import java.util.StringTokenizer;
  * To change this template use File | Settings | File Templates.
  */
 public class Utils {
-  
+
 
     public static String convertDateToStr(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -36,13 +38,15 @@ public class Utils {
     }
 
     public static String convertTimeToStr(Date time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        return sdf.format(time);
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.DEFAULT);
+//        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        return df.format(time);
     }
 
     public static String convertDateTimeToStr(Date dt) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-        return sdf.format(dt);
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        return df.format(dt);
     }
 
     public static Time convertStrToTime(String time) {
@@ -59,7 +63,6 @@ public class Utils {
         int yy = new Integer(t.nextToken(" "));
         int hh = new Integer(t.nextToken(":"));
         int mm = new Integer(t.nextToken());
-
         return new GregorianCalendar(yy, MM, dd, hh, mm).getTime();
     }
 
