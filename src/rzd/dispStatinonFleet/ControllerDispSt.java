@@ -139,6 +139,10 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             if (train != null) {
                 boolean b = false;
                 try {
+//                    ArrayList<Car> cars=train.getCarsIn();
+//                    for(Car car:cars){
+//                    System.out.println("Порядковый номен - "+car.getCarNumberInTrain());
+//                    }
                     b = Model.getModel().updateTrainOnRoad(train);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "Внимание...", JOptionPane.ERROR_MESSAGE);
@@ -166,26 +170,30 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         if (row > -1 && row < activeTab.getRowCount()) {
             Train train = (Train) activeTab.getValueAt(row, 0);
             if (train != null) {
-                if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
-                    try {
-                        boolean b = Model.getModel().destroyTrain(train);
-                        if (b) {
-                            JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
-                            ControllerMain.getInstans().update(this);
-                        } else {
-                            JOptionPane.showMessageDialog(pDispStation, "Ошибка...попробуйте еще раз.");
+                int i = JOptionPane.showConfirmDialog(pDispStation, "Расформировать поезд?", "", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
+                        try {
+                            boolean b = Model.getModel().destroyTrain(train);
+                            if (b) {
+                                JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+                                ControllerMain.getInstans().update(this);
+                            } else {
+                                JOptionPane.showMessageDialog(pDispStation, "Ошибка...попробуйте еще раз.");
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
                         }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Внимание...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
                     }
-                } else {
-                    JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Внимание...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
                 }
             }
         }
     }
 
     //Методы конвертации
+
     private ArrayList<Object[]> getTrainTabView(ArrayList<Train> trains) {
         if (trains != null) {
             ArrayList<Object[]> data = new ArrayList<Object[]>(trains.size());

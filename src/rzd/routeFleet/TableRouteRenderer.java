@@ -18,7 +18,7 @@ public class TableRouteRenderer extends DefaultTableCellRenderer {
                                                    boolean hasFocus,
                                                    int row,
                                                    int column) {
-        if (column == 5) {
+        if (column == 7) {
             if(new Boolean(value.toString()))
             setText("Активно");
             else
@@ -27,7 +27,7 @@ public class TableRouteRenderer extends DefaultTableCellRenderer {
             setText(value.toString());
         }
         //System.out.println(table.getValueAt(row, 5));
-        if (!isSelected && ((Boolean) table.getModel().getValueAt(row, 5)).booleanValue() == false) {
+        if (!isSelected && ((Boolean) table.getModel().getValueAt(row, 7)).booleanValue() == false) {
             setBackground(Color.LIGHT_GRAY);
             setForeground(Color.BLACK);
         } else {

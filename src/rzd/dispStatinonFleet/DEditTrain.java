@@ -414,7 +414,7 @@ public class DEditTrain extends javax.swing.JDialog {
                                 car = carLS.getCar();
                             }
                         } catch (Exception e) {
-                            JOptionPane.showMessageDialog(this, e.getMessage(), "Внимание", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 } else {
@@ -538,7 +538,6 @@ public class DEditTrain extends javax.swing.JDialog {
         ArrayList<Car> carsAll = Model.getModel().getFreeCars();
         if (carsAll != null && carsAll.size() != 0) {
             for (Car c : carsAll) {
-                // System.out.println(lCarAll.getModel().getClass().toString());
                 ((DefaultListModel) lCarAll.getModel()).addElement(c);
             }
         }
@@ -560,7 +559,7 @@ public class DEditTrain extends javax.swing.JDialog {
             fChief.setText(train.getChief());
             ArrayList<Car> carsInTrain = train.getCarsIn();
             //если поезд без вагонов, то предлагаем дефолтовый состав вагонв
-            if (carsInTrain == null) {
+            if (carsInTrain == null || carsInTrain.size() == 0) {
                 ArrayList<Car> carsPlan = Model.getModel().getPlanCarForTrain(train);
                 if (carsPlan != null) {
                     System.out.println("!!!-получили планируемые вагоны = " + carsPlan.size());

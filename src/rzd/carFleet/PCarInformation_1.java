@@ -208,13 +208,13 @@ public class PCarInformation_1 extends javax.swing.JPanel {
 
         fGeneratorPrivod.setBackground(new java.awt.Color(255, 255, 255));
         fGeneratorPrivod.setEditable(false);
-        fGeneratorPrivod.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fGeneratorPrivod.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fGeneratorPrivod.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fGeneratorPrivod.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         fAccumulator.setBackground(new java.awt.Color(255, 255, 255));
         fAccumulator.setEditable(false);
-        fAccumulator.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        fAccumulator.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         fAccumulator.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fAccumulator.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
@@ -226,7 +226,7 @@ public class PCarInformation_1 extends javax.swing.JPanel {
 
         fBodyColor.setBackground(new java.awt.Color(255, 255, 255));
         fBodyColor.setEditable(false);
-        fBodyColor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fBodyColor.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fBodyColor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fBodyColor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
@@ -257,20 +257,24 @@ public class PCarInformation_1 extends javax.swing.JPanel {
         fNumberCar.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fNumberCar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
+        fRunNorm.setBackground(new java.awt.Color(255, 255, 255));
         fRunNorm.setEditable(false);
         fRunNorm.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fRunNorm.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
+        fRunTozNorn.setBackground(new java.awt.Color(255, 255, 255));
         fRunTozNorn.setEditable(false);
         fRunTozNorn.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fRunTozNorn.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
+        fRun.setBackground(new java.awt.Color(255, 255, 255));
         fRun.setEditable(false);
         fRun.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fRun.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
+        fRunToz.setBackground(new java.awt.Color(255, 255, 255));
         fRunToz.setEditable(false);
-        fRunToz.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        fRunToz.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         fRunToz.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fRunToz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +288,7 @@ public class PCarInformation_1 extends javax.swing.JPanel {
 
         fLocation.setBackground(new java.awt.Color(255, 255, 255));
         fLocation.setEditable(false);
-        fLocation.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        fLocation.setFont(new java.awt.Font("Times New Roman", 0, 14));
         fLocation.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fLocation.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
@@ -298,7 +302,7 @@ public class PCarInformation_1 extends javax.swing.JPanel {
         fLocOther.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         fLocOther.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 18));
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Местоположение вагона");
 
@@ -313,7 +317,7 @@ public class PCarInformation_1 extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(100, 149, 237));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-        jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 18));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Информация о вагоне");
 
