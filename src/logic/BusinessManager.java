@@ -98,7 +98,7 @@ public class BusinessManager implements BusinessLogic {
                 for (SheduleDaysEntity sde : sfe.getSheduleDays()) {
                     sde.setShedule(sfe);
                     SessionManager.saveOrUpdateEntities(sde);
-                }            
+                }
             if (sbe.getSheduleDays() != null && sbe.getSheduleDays().size() > 0)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) {
                     sde.setShedule(sbe);
@@ -456,12 +456,16 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Train> getGoingTrains(int forHours) {
         try {
             SessionManager.beginTran();
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.setTime(getCurrentDate());
+            calendar.add(Calendar.HOUR_OF_DAY, forHours);
+            Timestamp time = new Timestamp(calendar.getTimeInMillis());
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
-            Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
-            ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
-            for (RouteEntity re : r) se.add(re.getSheduleForward());
+            List se = getSession().createQuery(
+                    "select se from RouteEntity as re join re.sheduleForward as se where re.enabled = true").list();
             Criteria crit = getSession().createCriteria(TrainEntity.class).
-                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
+                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse)).
+                    add(Restrictions.le("dateFrom", time));
             ArrayList<Train> list = new ArrayList<Train>();
             for (Object te : crit.list()) {
                 list.add(EntityConverter.convertTrain((TrainEntity) te));
@@ -568,12 +572,16 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Train> getArrivingTrains(int forHours) {
         try {
             SessionManager.beginTran();
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.setTime(getCurrentDate());
+            calendar.add(Calendar.HOUR_OF_DAY, forHours);
+            Timestamp time = new Timestamp(calendar.getTimeInMillis());
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
-            Collection<RouteEntity> r = SessionManager.getAllObjects(new RouteEntity());
-            ArrayList<SheduleEntity> se = new ArrayList<SheduleEntity>(r.size());
-            for (RouteEntity re : r) se.add(re.getSheduleBack());
+            List se = getSession().createQuery(
+                    "select se from RouteEntity as re join re.sheduleBack as se where re.enabled = true").list();
             Criteria crit = getSession().createCriteria(TrainEntity.class).
-                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse));
+                    add(Restrictions.in("shedule", se)).add(Restrictions.eq("trainStatus", tse)).
+                    add(Restrictions.le("dateTo", time));
             ArrayList<Train> list = new ArrayList<Train>();
             for (Object te : crit.list()) {
                 list.add(EntityConverter.convertTrain((TrainEntity) te));
