@@ -49,7 +49,8 @@ public class BusinessTest {
 //        testUpdateRepair();
 //        testGetFreeCars();
 //        testRoadReadyForTrain();
-        testGetTrainsForPeriod();
+//        testGetTrainsForPeriod();
+        generateCars();
 //        testTransaction();
     }
 
@@ -210,6 +211,11 @@ public class BusinessTest {
         t1.commit();
         t.commit();
 
+    }
+
+    public static void generateCars() {
+        for(int i = 1; i < 701; i ++)
+        manager.addCar(new Car(i, new CarLocation(BusinessLogic.UNKNOWN, ""), new CarType(1, "")));
     }
 
 }
