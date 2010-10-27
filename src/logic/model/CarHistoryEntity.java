@@ -2,6 +2,7 @@ package logic.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * User: Стас
@@ -17,7 +18,7 @@ public class CarHistoryEntity {
     }
 
     public CarHistoryEntity(Date date, CarLocationEntity carLocation, TrainEntity train, RoadEntity road, CarEntity car, RepairEntity repair) {
-        this.date = date;
+        setDate(date);
         this.carLocation = carLocation;
         this.train = train;
         this.road = road;
@@ -38,16 +39,20 @@ public class CarHistoryEntity {
         this.id = id;
     }
 
-    private Date date;
+    private Timestamp date;
 
     @Column(name = "date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
+    }
+
+    public void setDate(Date date) {
+        this.date = new Timestamp(date.getTime());
     }
 
     @Override
