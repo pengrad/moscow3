@@ -158,8 +158,8 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void showCarInf(Component c, int x, int y, Car car) {
         pCarInformation.setData(car);
-        x = (int) (mf.getWidth() / 2 - c.getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - c.getHeight() / 2);
+        x = (int) (mf.getWidth() / 2 - pCarInformation.getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - pCarInformation.getHeight() / 2);
         popCarInf.show(c, x, y);
     }
 
@@ -169,8 +169,8 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void showTrainInf(Component c, int x, int y, Train train) {
         pTrainInformation.setData(train);
-        x = (int) (mf.getWidth() / 2 - c.getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - c.getHeight() / 2);
+        x = (int) (mf.getWidth() / 2 - pTrainInformation.getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - pTrainInformation.getHeight() / 2);
         popTrainInf.show(c, x, y);
     }
 
