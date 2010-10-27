@@ -37,7 +37,7 @@ public class DateUtils {
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(dateFrom);
         while (dates.size() < count) {
-            if (days.contains(getDay(c.getTime()))) {
+            if (days.contains(c.get(calendarType))) {
                 dates.add(new Timestamp(c.getTimeInMillis()));
             }
             c.add(calendarType, 1);
