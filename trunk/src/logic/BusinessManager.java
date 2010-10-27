@@ -656,7 +656,7 @@ public class BusinessManager implements BusinessLogic {
                 }
             }
             // удаляем вагон из текущего поезда, из прибывших и расформированных не удаляем, для истории
-            Integer[] statuses = new Integer[]{BusinessLogic.ARRIVED, BusinessLogic.DESTROYED};
+            Integer[] statuses = new Integer[]{BusinessLogic.DESTROYED};
             list = s.createQuery("from TrainDetEntity as td where td.car = :c and td.train.trainStatus.id not in (:s)")
                     .setParameter("c", ce).setParameterList("s", statuses).list();
             for (Object o : list) s.delete(o);
@@ -923,6 +923,12 @@ public class BusinessManager implements BusinessLogic {
                     rde.setTrain(null);
                     getSession().update(rde);
                 }
+            }
+            // освобождаем вагоны - ставим дислокацию "Неизвестно"
+            for (TrainDetEntity tde : te.getTrainDets()) {
+                CarEntity ce = tde.getCar();
+                ce.setCarLocation(new CarLocationEntity(BusinessLogic.UNKNOWN, ""));
+                getSession().update(ce);
             }
             // ставим статус расформирован
             te.setTrainStatus(new TrainStatusEntity(BusinessLogic.DESTROYED, ""));
