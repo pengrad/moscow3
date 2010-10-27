@@ -868,7 +868,23 @@ public class BusinessManager implements BusinessLogic {
     }
 
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd) {
-        return getTrainsOnRoads();
+        try {
+            SessionManager.beginTran();
+            List l = getSession().createQuery("from TrainEntity as te where te.dateFrom >= :dFrom and te.dateTo < :dTo")
+                    .setTimestamp("dFrom", dBegin).setTimestamp("dTo", dEnd).list();
+            ArrayList<Train> list = new ArrayList<Train>(l.size());
+            for (Object train : l) {
+                list.add(EntityConverter.convertTrain((TrainEntity) train));
+            }
+            SessionManager.commit();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionManager.rollback();
+            return null;
+        } finally {
+            SessionManager.closeSession();
+        }
     }
 
     public ArrayList<Car> getFreeCars() {

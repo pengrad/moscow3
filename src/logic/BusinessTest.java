@@ -7,7 +7,10 @@ import rzd.model.objects.*;
 import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * User: Стас
@@ -40,39 +43,40 @@ public class BusinessTest {
 //        test();
 //        testGoingTrains();
 //        testArrivingTrains();
-        testMakeTrainForGoing();
+//        testMakeTrainForGoing();
 //        testGetTrainsOnRoads();
 //        testRepairTypes();
 //        testUpdateRepair();
 //        testGetFreeCars();
 //        testRoadReadyForTrain();
+        testGetTrainsForPeriod();
 //        testTransaction();
     }
 
 
     public static void test() {
         ArrayList l = null;
-        for(Object o : l) {
+        for (Object o : l) {
             System.out.println(o);
         }
     }
 
     public static void testGetCars() {
-        for(Car car : manager.getCars()) {
+        for (Car car : manager.getCars()) {
             System.out.println(car.getNumber() + " = " + car.getCarLocation().getLocation());
         }
     }
 
     public static void testGetRoutes() {
         ArrayList<Route> r = manager.getRoutes();
-        for(Route rr : r) {
+        for (Route rr : r) {
             System.out.println(rr.getCityFrom() + " - " + rr.getCityTo() + " : " + rr.getNumberForward() + "/" + rr.getNumberBack());
         }
     }
 
     public static void testGetSheduleTypes() {
         ArrayList<SheduleType> r = manager.getSheduleTypes();
-        for(SheduleType rr : r) {
+        for (SheduleType rr : r) {
             System.out.println(rr.getId() + " - " + rr.getName());
         }
     }
@@ -99,7 +103,7 @@ public class BusinessTest {
     }
 
     public static void testGetParentsTypes() {
-        for(CarType ct : manager.getCarParentTypes()) {
+        for (CarType ct : manager.getCarParentTypes()) {
             System.out.println(ct.getType());
         }
     }
@@ -112,9 +116,9 @@ public class BusinessTest {
     }
 
     public static void testRoads() {
-        for(RoadType rt : manager.getRoadTypes()) {
+        for (RoadType rt : manager.getRoadTypes()) {
             System.out.println(rt.getId() + " : " + rt.getName());
-            for(Road r : manager.getRoadsByType(new RoadType(rt.getId(), rt.getName()))) {
+            for (Road r : manager.getRoadsByType(new RoadType(rt.getId(), rt.getName()))) {
                 System.out.println("    " + r.getName());
             }
         }
@@ -125,13 +129,13 @@ public class BusinessTest {
     }
 
     public static void testGoingTrains() {
-        for(Train te : manager.getGoingTrains(1)) {
+        for (Train te : manager.getGoingTrains(1)) {
             System.out.println(te.getDtDeparture() + " " + te.getDtDestination());
         }
     }
 
     public static void testArrivingTrains() {
-        for(Train te : manager.getArrivingTrains(1)) {
+        for (Train te : manager.getArrivingTrains(1)) {
             System.out.println(te.getDtDeparture() + " " + te.getDtDestination());
         }
     }
@@ -147,17 +151,17 @@ public class BusinessTest {
     }
 
     public static void testGetTrainsOnRoads() {
-        for(Train t :manager.getTrainsOnRoads()) {
+        for (Train t : manager.getTrainsOnRoads()) {
             System.out.println(t.getChief() + " - " + t.getRoad().getName());
         }
     }
 
     public static void testGetTrainByID() {
-        
+
     }
 
     public static void testRepairTypes() {
-        for(RepairType rt : manager.getRepairTypes()) {
+        for (RepairType rt : manager.getRepairTypes()) {
             System.out.println(rt.getType());
         }
         System.out.println("sleep/////");
@@ -166,30 +170,37 @@ public class BusinessTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(RepairType rt : manager.getRepairTypes()) {
+        for (RepairType rt : manager.getRepairTypes()) {
             System.out.println(rt.getType());
         }
-        for(RepairType rt : manager.getRepairTypes()) {
+        for (RepairType rt : manager.getRepairTypes()) {
             System.out.println(rt.getType());
         }
-        for(RepairType rt : manager.getRepairTypes()) {
+        for (RepairType rt : manager.getRepairTypes()) {
             System.out.println(rt.getType());
         }
     }
 
     public static void testUpdateRepair() {
-        manager.updateRepair(new Repair(11, new RepairType(1,""), new Car(34324242, new CarLocation(1, ""),
+        manager.updateRepair(new Repair(11, new RepairType(1, ""), new Car(34324242, new CarLocation(1, ""),
                 new CarType(1, "")), null, new Timestamp(new Date().getTime()), null, "sdfsdfsdfs"));
     }
 
     public static void testGetFreeCars() {
-        for(Car c : manager.getFreeCars()) {
+        for (Car c : manager.getFreeCars()) {
             System.out.println(c.getNumber() + " - " + c.getCarLocation().getLocation());
         }
     }
 
     public static void testRoadReadyForTrain() {
         System.out.println(manager.isRoadReadyForTrain(new Train(128, null, null, null, true), new Road(14)));
+    }
+
+    public static void testGetTrainsForPeriod() {
+        ArrayList<Train> t = manager.getTrainsForPeriod(new Date(), new Date(new Date().getTime() + 1000000000));
+        for(Train tt : t) {
+            System.out.println(tt.getId());
+        }
     }
 
     public static void testTransaction() {
