@@ -850,10 +850,11 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<CarHistory> getCarHistory(Car car) {
         try {
             SessionManager.beginTran();
-            CarEntity ce = SessionManager.getEntityById(new CarEntity(), car.getNumber());
-            ArrayList<CarHistory> list = new ArrayList<CarHistory>(ce.getCarHistories().size());
-            for (CarHistoryEntity che : ce.getCarHistories()) {
-                list.add(EntityConverter.convertCarHistory(che));
+            List l = getSession().createQuery("from CarHistoryEntity as che where che.car.id = :car order by che.date")
+                    .setInteger("car", car.getNumber()).list();
+            ArrayList<CarHistory> list = new ArrayList<CarHistory>(l.size());
+            for (Object che : l) {
+                list.add(EntityConverter.convertCarHistory((CarHistoryEntity) che));
             }
             SessionManager.commit();
             return list;
