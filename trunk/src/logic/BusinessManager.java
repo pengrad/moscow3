@@ -522,6 +522,7 @@ public class BusinessManager implements BusinessLogic {
                     // если вагон в составе этого поезда, заполняем признак, для этого вагона мы больше ничего делать не будем.
                     if (tde.getIdTrain() == te.getIdTrain()) {
                         isOldCar = true;
+                        s.evict(tde);
                         break;
                         // если статус поезда не расформирован, вагон не может быть использован
                     } else if (tde.getTrain().getTrainStatus().getIdStatus() != BusinessLogic.DESTROYED) {
@@ -548,6 +549,9 @@ public class BusinessManager implements BusinessLogic {
                     TrainDetEntity tde = new TrainDetEntity(ce, te, car.getCarNumberInTrain());
                     CarHistoryEntity che = new CarHistoryEntity(date, cle, te, null, ce, null);
                     SessionManager.saveOrUpdateEntities(ce, tde, che);
+                } else { // обновляем порядковый номер вагона
+                    TrainDetEntity tde = new TrainDetEntity(ce, te, car.getCarNumberInTrain());
+                    s.update(tde);
                 }
             }
             SessionManager.commit();

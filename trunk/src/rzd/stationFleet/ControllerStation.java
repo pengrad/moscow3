@@ -41,11 +41,11 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
 
     public ControllerStation(PStationFleet p) {
         this.pStationFleet = p;
-        try {
-            carImg = ImageIO.read(new File(getClass().getResource("/rzd/resurce/car.png").getPath()));
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+//        try {
+//            carImg = ImageIO.read(new File(getClass().getResource("/rzd/resurce/car.png").getPath()));
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
 
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
