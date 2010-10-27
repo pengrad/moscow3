@@ -15,6 +15,8 @@ import rzd.scheduleFleet.PRaspisanie;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Controller implements MouseListener, Updateble {
+public class Controller implements MouseListener, ActionListener, Updateble {
     private PSchedule pSchedule;
 
     public Controller(PSchedule pSchedule) {
@@ -53,10 +55,18 @@ public class Controller implements MouseListener, Updateble {
     }
 
     public void update() {
-        pSchedule.getPRaspisanie().update2(new GregorianCalendar(2010, 8, 1).getTime(), new GregorianCalendar(2010, 11, 25).getTime());
+        if (pSchedule.fDateBegin.getText().length() > 0 && pSchedule.fDateEnd.getText().length() > 0) {
+            pSchedule.getPRaspisanie().update2((Date) pSchedule.fDateBegin.getValue(), (Date) pSchedule.fDateEnd.getValue());
+        }
     }
 
     public Component getPanel() {
         return pSchedule;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == pSchedule.bView) {
+            ControllerMain.getInstans().update(this);
+        }
     }
 }

@@ -28,14 +28,26 @@ public class GCar extends Figure {
     private Train train;
     private int number = 12345678;
     private ControllerStation c;
+    private boolean mouseEntered = false;
 
     public GCar(Car car, ControllerStation c) {
         this.car = car;
         this.c = c;
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-        setPreferredSize(new Dimension(69, 19));
+        setPreferredSize(new Dimension(70, 19));
         setShape(new Rectangle2D.Double(2, 2, 65, 14));
         addMouseListener(c);
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mouseEntered = true;
+                repaint();
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                mouseEntered = false;
+                repaint();
+            }
+        });
     }
 
     public Car getCar() {
@@ -44,7 +56,7 @@ public class GCar extends Figure {
 
     public void paint(Graphics2D g) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setStroke(new BasicStroke(1.5f));
+        g.setStroke(new BasicStroke((mouseEntered ? 2.5f : 1.5f)));
         g.setColor(ColorHelper.COLOR_VAGON_BORDER);
 //        g.drawImage(c.getCarImage(), null, 0, 0);
         g.draw(new Rectangle2D.Double(shape.getBounds().getX() - 1, shape.getBounds().getY() - 1, shape.getBounds().getWidth() + 2, shape.getBounds().getHeight() + 2));
@@ -54,6 +66,7 @@ public class GCar extends Figure {
             g.setColor(Color.RED);
             g.fill(shape);
         }
+
         g.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         g.setColor(ColorHelper.COLOR_VAGON_NAMBER);
         if (car.getCarLocation().getIdLocation() == BusinessManager.IN_TRAIN) {

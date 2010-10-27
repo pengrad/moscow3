@@ -158,9 +158,15 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void showCarInf(Component c, int x, int y, Car car) {
         pCarInformation.setData(car);
-        x = (int) (mf.getWidth() / 2 - pCarInformation.getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - pCarInformation.getHeight() / 2);
-        popCarInf.show(c, x, y);
+//        System.out.println("mf.getWidth() / 2=" + mf.getWidth() / 2);
+//        System.out.println("mf.getHeight() / 2=" + mf.getHeight() / 2);
+//        System.out.println("pCarInformation.getWidth() / 2=" + pCarInformation.getPreferredSize().getWidth() / 2);
+//        System.out.println("pCarInformation.getHeight() / 2=" + pCarInformation.getPreferredSize().getHeight() / 2);
+
+
+        x = (int) (mf.getWidth() / 2 - pCarInformation.getPreferredSize().getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - pCarInformation.getPreferredSize().getHeight() / 2);
+        popCarInf.show(mf, x, y);
     }
 
     public void showCarInf(JComponent c, int x, int y, int numberCar) {
@@ -169,9 +175,9 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void showTrainInf(Component c, int x, int y, Train train) {
         pTrainInformation.setData(train);
-        x = (int) (mf.getWidth() / 2 - pTrainInformation.getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - pTrainInformation.getHeight() / 2);
-        popTrainInf.show(c, x, y);
+        x = (int) (mf.getWidth() / 2 - pTrainInformation.getPreferredSize().getWidth() / 2);
+        y = (int) (mf.getHeight() / 2 - pTrainInformation.getPreferredSize().getHeight() / 2);
+        popTrainInf.show(mf, x, y);
     }
 
     public void showTrainInf(JComponent c, int x, int y, int idTrain) {

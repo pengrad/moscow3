@@ -76,13 +76,19 @@ public class Utils {
 
     public static boolean searchByTable(JTable t, String value, int... columns) {
         Arrays.sort(columns);
+        //System.out.println("value=" + value.length());
         if (t == null || value == null || columns == null || columns.length == 0 || columns[0] < 0 || columns[columns.length - 1] > t.getColumnCount()) {
             return false;
         }
         int rowCount = t.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columns.length; j++) {
+                //      System.out.println("j="+j);
+                //  System.out.println("a=" + value+"-");
+                //  System.out.println("columns[j]="+columns[j]);
+                //   System.out.println("b="+t.getValueAt(i, columns[j]).toString()+"-");
                 if (t.getValueAt(i, columns[j]).equals(value)) {
+                    //   System.out.println("****");
                     Rectangle rect = t.getCellRect(i, columns[j], false);
                     JViewport viewport = (JViewport) t.getParent();
                     viewport.setViewPosition(new Point((int) rect.getX(), (int) rect.getY()));

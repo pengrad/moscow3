@@ -191,9 +191,20 @@ public class Car {
     }
 
     public boolean equals(Object o) {
-        if (o == null || !(o instanceof Car)) return false;
-        if (number == ((Car) o).getNumber()) return true;
-        else return false;
+        if (o != null) {
+            if (o instanceof Car) {
+                if (number == ((Car) o).getNumber()) return true;
+            } else {
+                try {
+                    if (number == new Integer(o.toString())) {
+                        return true;
+                    }
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 
