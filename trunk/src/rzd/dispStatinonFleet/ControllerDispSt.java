@@ -172,21 +172,21 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
             if (train != null) {
                 int i = JOptionPane.showConfirmDialog(pDispStation, "Расформировать поезд?", "", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
-                        try {
-                            boolean b = Model.getModel().destroyTrain(train);
-                            if (b) {
-                                JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
-                                ControllerMain.getInstans().update(this);
-                            } else {
-                                JOptionPane.showMessageDialog(pDispStation, "Ошибка...попробуйте еще раз.");
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                    //      if (train.getCarsIn() == null || train.getCarsIn().size() == 0) {
+                    try {
+                        boolean b = Model.getModel().destroyTrain(train);
+                        if (b) {
+                            JOptionPane.showMessageDialog(pDispStation, "Поезд успешно расформирован", "", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+                            ControllerMain.getInstans().update(this);
+                        } else {
+                            JOptionPane.showMessageDialog(pDispStation, "Ошибка...попробуйте еще раз.");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Внимание...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(pDispStation, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
                     }
+//                    } else {
+//                        JOptionPane.showMessageDialog(pDispStation, "Отцепите все вагон от поезд, а затем расформируйте его", "Внимание...", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/rzd/resurce/lightbulb.png")));
+//                    }
                 }
             }
         }

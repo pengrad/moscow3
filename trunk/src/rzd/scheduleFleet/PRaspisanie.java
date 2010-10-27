@@ -179,6 +179,7 @@ public class PRaspisanie extends JComponent {
         setPreferredSize(new Dimension(widthPanel, heightPanel));
         ArrayList<Train> trains = Model.getModel().getTrainsForPeriod(dBeg, dEnd);
         if (trains != null) {
+            System.out.println("size="+trains.size());
             for (Train train : trains) {
                 addTrain(train);
             }
