@@ -89,20 +89,21 @@ public class BusinessManager implements BusinessLogic {
     public boolean addRoute(Route r) {
         try {
             SessionManager.beginTran();
+            Session s = getSession();
             RouteEntity re = EntityConverter.convertRoute(r);
             SheduleEntity sfe = re.getSheduleForward();
             SheduleEntity sbe = re.getSheduleBack();
             SessionManager.saveOrUpdateEntities(sfe, sbe, re);
-            getSession().flush();
+            s.flush();
             if (sfe.getSheduleDays() != null && sfe.getSheduleDays().size() > 0)
                 for (SheduleDaysEntity sde : sfe.getSheduleDays()) {
                     sde.setShedule(sfe);
-                    SessionManager.saveOrUpdateEntities(sde);
+                    s.save(sde);
                 }
             if (sbe.getSheduleDays() != null && sbe.getSheduleDays().size() > 0)
                 for (SheduleDaysEntity sde : sbe.getSheduleDays()) {
                     sde.setShedule(sbe);
-                    SessionManager.saveOrUpdateEntities(sde);
+                    s.save(sde);
                 }
             if (re.isEnabled()) {
                 Date currentDate = getCurrentDate();
@@ -112,7 +113,7 @@ public class BusinessManager implements BusinessLogic {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getHoursInWay(), sfe.getMinutesInWay());
                     // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned, true);
-                    SessionManager.saveOrUpdateEntities(train);
+                    s.save(train);
                 }
                 // генерируем прибывающие поезда с момента: текущее время - время в пути. (чтобы прибыл уже ближайший)
                 currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getHoursInWay(), sbe.getMinutesInWay());
@@ -120,7 +121,7 @@ public class BusinessManager implements BusinessLogic {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getHoursInWay(), sbe.getMinutesInWay());
                     // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned, true);
-                    SessionManager.saveOrUpdateEntities(train);
+                    s.save(train);
                 }
             }
             SessionManager.commit();
@@ -196,7 +197,7 @@ public class BusinessManager implements BusinessLogic {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sfe.getHoursInWay(), sfe.getMinutesInWay());
                     // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sfe, statusPlanned, true);
-                    SessionManager.saveOrUpdateEntities(train);
+                    s.save(train);
                 }
                 // генерируем прибывающие поезда с момента: текущее время - время в пути. (чтобы прибыл уже ближайший)
                 currentDate = DateUtils.getDateMinusTime(currentDate, sbe.getHoursInWay(), sbe.getMinutesInWay());
@@ -204,7 +205,7 @@ public class BusinessManager implements BusinessLogic {
                     Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, sbe.getHoursInWay(), sbe.getMinutesInWay());
                     // порядок вагонов по умолчанию с головы
                     TrainEntity train = new TrainEntity(null, dateFrom, dateTo, sbe, statusPlanned, true);
-                    SessionManager.saveOrUpdateEntities(train);
+                    s.save(train);
                 }
             }
             SessionManager.commit();
@@ -456,10 +457,7 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Train> getGoingTrains(int forHours) {
         try {
             SessionManager.beginTran();
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTime(getCurrentDate());
-            calendar.add(Calendar.HOUR_OF_DAY, forHours);
-            Timestamp time = new Timestamp(calendar.getTimeInMillis());
+            Timestamp time = DateUtils.getDatePlusTime(getCurrentDate(), forHours, 0);
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             List se = getSession().createQuery(
                     "select se from RouteEntity as re join re.sheduleForward as se where re.enabled = true").list();
@@ -515,9 +513,28 @@ public class BusinessManager implements BusinessLogic {
             te.setCarFromHead(train.isCarFromHead());
             s.saveOrUpdate(te);
             // todo создавать новые запланированные поезда!
+            SheduleEntity se = te.getShedule();
+            if (EntityConverter.getPlannedTrainsCount(se, s) < 20) {
+                int id = EntityConverter.getMaxPlannedTrainId(se, s);
+                Date lastDate;
+                if (id != te.getIdTrain()) {
+                    lastDate = SessionManager.getEntityById(new TrainEntity(), id).getDateFrom();
+                } else {
+                    lastDate = te.getDateFrom();
+                }
+                TrainStatusEntity statusPlanned = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+                // генерируем 10 новых поездов начиная с даты последней отправки + 1 час.
+                for (Timestamp dateFrom : generateDatesOfDeparture(se, DateUtils.getDatePlusTime(lastDate, 1, 0), 10)) {
+                    Timestamp dateTo = DateUtils.getDatePlusTime(dateFrom, se.getHoursInWay(), se.getMinutesInWay());
+                    // порядок вагонов по умолчанию с головы
+                    TrainEntity newTrain = new TrainEntity(null, dateFrom, dateTo, se, statusPlanned, true);
+                    s.save(newTrain);
+                }
+                s.evict(statusPlanned);
+            }
+            // обновляем вагоны
             Date currentDate = getCurrentDate();
             java.sql.Date date = new java.sql.Date(currentDate.getTime());
-            // добавляем вагоны
             for (Car car : train.getCarsIn()) {
                 // признак того что этот вагон уже в составе этого поезда
                 boolean isOldCar = false;
@@ -572,10 +589,7 @@ public class BusinessManager implements BusinessLogic {
     public ArrayList<Train> getArrivingTrains(int forHours) {
         try {
             SessionManager.beginTran();
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTime(getCurrentDate());
-            calendar.add(Calendar.HOUR_OF_DAY, forHours);
-            Timestamp time = new Timestamp(calendar.getTimeInMillis());
+            Timestamp time = DateUtils.getDatePlusTime(getCurrentDate(), forHours, 0);
             TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
             List se = getSession().createQuery(
                     "select se from RouteEntity as re join re.sheduleBack as se where re.enabled = true").list();

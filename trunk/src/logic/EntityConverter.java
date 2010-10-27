@@ -1,6 +1,7 @@
 package logic;
 
 import logic.model.*;
+import org.hibernate.Session;
 import rzd.model.objects.*;
 
 import java.util.ArrayList;
@@ -265,9 +266,32 @@ public class EntityConverter {
     }
 
     // поезд уходящий от нас или прибывающий
+
     public static boolean isTrainGoing(TrainEntity train) {
-        if(train.getShedule().getRoutesBySheduleForward().size() > 0) return true;
+        if (train.getShedule().getRoutesBySheduleForward().size() > 0) return true;
         else return false;
+    }
+
+    // количество запланированных поездов для расписания
+
+    public static int getPlannedTrainsCount(SheduleEntity se, Session s) {
+        TrainStatusEntity status = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+        Object o = s.createQuery(
+                "select count(te) from TrainEntity as te where te.shedule = :se and te.trainStatus = :status").
+                setParameter("se", se).setParameter("status", status).uniqueResult();
+        s.evict(status);
+        return Integer.parseInt(o.toString());
+    }
+
+    // самый поздний запланированный поезд для расписания
+
+    public static int getMaxPlannedTrainId(SheduleEntity se, Session s) {
+        TrainStatusEntity status = new TrainStatusEntity(BusinessLogic.PLANNED, "");
+        Integer i = (Integer) s.createQuery(
+                "select max(te.id) from TrainEntity as te where te.shedule = :se and te.trainStatus = :status").
+                setParameter("se", se).setParameter("status", status).uniqueResult();
+        s.evict(status);
+        return i;
     }
 
     public static class TrainDetSorter implements Comparator<TrainDetEntity> {
