@@ -46,8 +46,8 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     public ControllerCar(PCar p) {
         this.pCar = p;
         dCarEdit = new DCarEdit(null, true);
-        dCarLocation = new DCarLocation(null, true);
-        dCarRepair = new DCarRepair(null, true, this);
+        dCarLocation = new DCarLocation(ControllerMain.getInstans().getMF(), true);
+        dCarRepair = new DCarRepair(ControllerMain.getInstans().getMF(), true, this);
         popCarMenu = new JPopupMenu();
         popHistLocationCar = new JPopupMenu();
         pCarHistory = new PCarHistory();

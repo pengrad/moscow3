@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class PRaspisanie extends JComponent {
     private Controller controller;
-    private int sizeDay = 40;
+    private int sizeDay = 50;
     private int sizeRoute = 150;
     private int smTop = 45;
     private ArrayList<Route> routes;
@@ -49,17 +49,14 @@ public class PRaspisanie extends JComponent {
         if (train == null) return;
         Calendar cl = Calendar.getInstance();
         cl.setTime(dBeg);
-        int ddB = cl.get(Calendar.DAY_OF_MONTH);
         int mmB = cl.get(Calendar.MONTH);
         int yyB = cl.get(Calendar.YEAR);
-        //    cl.setTime(train.getDtDestination());
         cl.setTime(train.getDtDeparture());
         int ddPB = cl.get(Calendar.DAY_OF_MONTH);
         int mmPB = cl.get(Calendar.MONTH);
         int yyPB = cl.get(Calendar.YEAR);
         int minPB = cl.get(Calendar.HOUR_OF_DAY) * 60 + cl.get(Calendar.MINUTE);
         cl.setTime(train.getDtDestination());
-        //  cl.setTime(train.getDtDeparture());
 
         int ddPE = cl.get(Calendar.DAY_OF_MONTH);
         int mmPE = cl.get(Calendar.MONTH);
@@ -110,10 +107,15 @@ public class PRaspisanie extends JComponent {
         if (numberRoute >= 0) {
             int x = ddPB * sizeDay + ((int) ((((double) minPB) / (24 * 60)) * sizeDay));
             int y = numberRoute * sizeRoute + smTop;
-//            System.out.println("b=" + ddPB);
-//            System.out.println("e=" + ddPE);
-//            System.out.println("b-e=" + (ddPE - ddPB));
-            int w = (ddPE - ddPB) * sizeDay + ((int) ((((double) minPE) / (24 * 60)) * sizeDay));
+            System.out.println("b=" + ddPB);
+            System.out.println("e=" + ddPE);
+            System.out.println("b-e=" + (ddPE - ddPB));
+            System.out.println("((int) ((((double) minPE) / (24 * 60)) * sizeDay)=" + ((int) ((((double) minPE) / (24 * 60)) * sizeDay)));
+            int w = 0;
+         //   if ((ddPE - ddPB) == 0)
+                w = (ddPE - ddPB) * sizeDay + ((((int) ((((double) minPE) / (24 * 60)) * sizeDay))) - ((int) ((((double) minPB) / (24 * 60)) * sizeDay)));
+         //   else
+           //     w = (ddPE - ddPB) * sizeDay + ((int) ((((double) minPE) / (24 * 60)) * sizeDay));
             int h = sizeRoute;
 
             int route = 0;

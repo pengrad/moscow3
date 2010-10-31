@@ -46,7 +46,7 @@ public class ControllerDispSt implements MouseListener, ActionListener, ItemList
         viewTrain.addActionListener(this);
         destroyTrain.addActionListener(this);
 
-        dEditTrain = new DEditTrain(null, true);
+        dEditTrain = new DEditTrain(ControllerMain.getInstans().getMF(), true);
 
         pDispStation.tArrivingTrains.addMouseListener(this);
         pDispStation.tGoingTrains.addMouseListener(this);
