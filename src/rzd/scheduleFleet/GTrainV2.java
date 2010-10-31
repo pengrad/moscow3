@@ -57,7 +57,7 @@ public class GTrainV2 extends JComponent {
         g2.setStroke(new BasicStroke((mouseEntered ? 4.0f : 2.0f), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 
         //todo Разобраться сос татусами
-        if (train.getTrainStatus().getId() == BusinessLogic.PLANNED)
+        if (train.getTrainStatus().getId() == BusinessLogic.PLANNED || train.getTrainStatus().getId() == BusinessLogic.MAKED)
             g2.setColor(Color.GRAY);
         if (train.getTrainStatus().getId() == BusinessLogic.IN_WAY)
             g2.setColor(Color.RED);
@@ -65,11 +65,13 @@ public class GTrainV2 extends JComponent {
             g2.setColor(Color.BLACK);
         g2.draw(shape);
 
-//        g2.setColor(Color.WHITE);
-//        g2.fill(new Rectangle2D.Double((int) shape.getBounds().getX() + 5, (int) shape.getBounds().getY() - 10, 35, 10));
-//        g2.setColor(Color.RED);
 
-        //      g2.drawString("№748", (int) shape.getBounds().getX() + 5, (int) shape.getBounds().getY());
+        //-------------
+//        AffineTransform fontAT = new AffineTransform();
+//        fontAT.rotate(Math.toRadians(160));
+//        Font fx = new Font("serif", Font.BOLD, 14).deriveFont(fontAT);
+//        g.setFont(fx);
+//        g.drawString("New String ", (int) shape.getBounds().getX(), (int) shape.getBounds().getY());
     }
 
     public Train getTrain() {

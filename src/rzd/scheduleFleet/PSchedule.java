@@ -11,10 +11,14 @@
 
 package rzd.scheduleFleet;
 
+import rzd.utils.Utils;
 import sun.security.provider.certpath.AdjacencyList;
 
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * @author Евгений
@@ -34,6 +38,12 @@ public class PSchedule extends javax.swing.JPanel {
         bView.addActionListener(c);
         fDateBegin.addMouseListener(c);
         fDateEnd.addMouseListener(c);
+        Date dBeg = new Date();
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(dBeg);
+        gc.add(Calendar.MONTH, 1);
+        fDateBegin.setValue(dBeg);
+        fDateEnd.setValue(gc.getTime());
         jScrollPane2.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             public void adjustmentValueChanged(
                     AdjustmentEvent e) {
