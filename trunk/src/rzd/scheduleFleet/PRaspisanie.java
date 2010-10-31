@@ -20,7 +20,7 @@ import java.util.*;
 public class PRaspisanie extends JComponent {
     private Controller controller;
     private int sizeDay = 40;
-    private int sizeRoute = 100;
+    private int sizeRoute = 150;
     private int smTop = 45;
     private ArrayList<Route> routes;
     private int widthPanel;
@@ -42,7 +42,6 @@ public class PRaspisanie extends JComponent {
             }
         };
         heder.setBackground(new Color(213, 213, 213));
-        this.add(heder);
     }
 
 
@@ -106,7 +105,7 @@ public class PRaspisanie extends JComponent {
             updateRoute();
         }
         numberRoute = routes.indexOf(train.getRoute());
-        System.out.println(train.getRoute());
+        //   System.out.println(train.getRoute());
 
         if (numberRoute >= 0) {
             int x = ddPB * sizeDay + ((int) ((((double) minPB) / (24 * 60)) * sizeDay));
@@ -141,6 +140,8 @@ public class PRaspisanie extends JComponent {
     }
 
     public void update2(Date dB, Date dE) {
+        this.removeAll();
+        this.add(heder);
         this.dBeg = dB;
         this.dEnd = dE;
         updateRoute();
@@ -179,7 +180,7 @@ public class PRaspisanie extends JComponent {
         setPreferredSize(new Dimension(widthPanel, heightPanel));
         ArrayList<Train> trains = Model.getModel().getTrainsForPeriod(dBeg, dEnd);
         if (trains != null) {
-            System.out.println("size="+trains.size());
+            //  System.out.println("size=" + trains.size());
             for (Train train : trains) {
                 addTrain(train);
             }
@@ -322,7 +323,7 @@ public class PRaspisanie extends JComponent {
 //            System.out.println(tmp.getBounds().getX());
             g2.setColor(Color.WHITE);
             g2.fill(new Rectangle2D.Double(tx + 20, (i - 1) * sizeRoute + smTop + 3, 100, 15));
-            g2.fill(new Rectangle2D.Double(tx + 20, (i) * sizeRoute + smTop -17, 100, 15));
+            g2.fill(new Rectangle2D.Double(tx + 20, (i) * sizeRoute + smTop - 17, 100, 15));
 
             g2.setColor(Color.BLUE);
 

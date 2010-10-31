@@ -30,9 +30,7 @@ public class PRoad extends javax.swing.JPanel {
     public PRoad(String numberRoad) {
         initComponents();
         ((TitledBorder) jPanel35.getBorder()).setTitle("Путь №" + numberRoad);
-        //     jScrollPane1.getHorizontalScrollBar().set
 
-//jScrollPane1.getHorizontalScrollBar().getComponent(0).setBackground(Color.red);
     }
 
     /**
