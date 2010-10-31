@@ -16,6 +16,7 @@ import rzd.model.objects.Train;
 import rzd.routeFleet.PRoute;
 import rzd.scheduleFleet.PSchedule;
 import rzd.stationFleet.PStationFleet;
+import rzd.utils.calendar.Calendar;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -43,6 +44,7 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     private JPopupMenu popTrainInf;
     private PTrainInformation_1 pTrainInformation;
     private DLoading dLoading;
+    private Calendar calendar;
 
     public static ControllerMain getInstans() {
         return cm;
@@ -66,6 +68,7 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
         pCars = new PCar();
         pRoute = new PRoute();
         //-----
+        calendar = new Calendar(mf);
 
         //Добавляем в таргет панель
         JPanel p = new JPanel(new BorderLayout());
@@ -154,6 +157,12 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
 
     public void mouseExited(MouseEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    public String openCalendar(Component c, int x, int y) {
+        calendar.setLocation(x, y);
+        return calendar.open();
     }
 
     public void showCarInf(Component c, int x, int y, Car car) {

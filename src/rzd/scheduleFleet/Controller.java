@@ -36,6 +36,23 @@ public class Controller implements MouseListener, ActionListener, Updateble {
             Train train = ((GTrainV2) e.getSource()).getTrain();
             ControllerMain.getInstans().showTrainInf((GTrainV2) e.getSource(), e.getX(), e.getY(), train);
         }
+        if (e.getSource() == pSchedule.fDateBegin) {
+            String date = ControllerMain.getInstans().openCalendar(pSchedule.fDateBegin, e.getXOnScreen(), e.getYOnScreen());
+            if (date == null) {
+                pSchedule.fDateBegin.setText("");
+            } else {
+                pSchedule.fDateBegin.setText(date);
+            }
+        }
+        if (e.getSource() == pSchedule.fDateEnd) {
+            String date = ControllerMain.getInstans().openCalendar(pSchedule.fDateEnd, e.getXOnScreen(), e.getYOnScreen());
+            if (date == null) {
+                pSchedule.fDateEnd.setText("");
+            } else {
+                pSchedule.fDateEnd.setText(date);
+            }
+
+        }
     }
 
     public void mousePressed(MouseEvent e) {
