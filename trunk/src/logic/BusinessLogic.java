@@ -93,7 +93,7 @@ public interface BusinessLogic {
 
     public ArrayList<CarHistory> getCarHistory(Car car);
 
-     //TODO Поезда за заданный период
+     // Поезда за заданный период
     public ArrayList<Train> getTrainsForPeriod(Date dBegin, Date dEnd);
 
     // Все свободные вагоны - со статусом на путях и неизвестно
