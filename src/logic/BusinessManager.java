@@ -491,7 +491,12 @@ public class BusinessManager implements BusinessLogic {
                 throw new Exception("Поезд уже расформирован!");
             // если этот поезд не стоит на этом пути
             if (te.getRoadDets().size() == 0 || !te.getRoadDets().iterator().next().getRoad().equals(re)) {
-                if (re.getRoadDets() != null && re.getRoadDets().size() > 0) throw new Exception("Путь занят!");
+                // если на пути стоит поезд - ругаемся
+                if (re.getRoadDets() != null && re.getRoadDets().size() > 0) {
+                    for (RoadDetEntity rde : re.getRoadDets()) {
+                        if (rde.getTrain() != null) throw new Exception("Путь занят!");
+                    }
+                }
                 // удаляем поезд со своего старого пути, если в записи нет вагона - удаляем запись.
                 for (RoadDetEntity rde : te.getRoadDets()) {
                     if (rde.getCar() == null) {
