@@ -27,7 +27,7 @@ public class TableRouteRenderer extends DefaultTableCellRenderer {
             setText(value.toString());
         }
         //System.out.println(table.getValueAt(row, 5));
-        if (!isSelected && ((Boolean) table.getModel().getValueAt(row, 7)).booleanValue() == false) {
+        if (!isSelected && ((Boolean) table.getValueAt(row, 7)).booleanValue() == false) {
             setBackground(Color.LIGHT_GRAY);
             setForeground(Color.BLACK);
         } else {

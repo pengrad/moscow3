@@ -110,7 +110,7 @@
                               <Component id="bSave" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -173,17 +173,17 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel9" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="cTypeSchedule1" min="-2" pref="225" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel11" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="fDaysMove1" min="-2" pref="225" max="-2" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel17" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="fLengthForward" min="-2" pref="225" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -338,9 +338,6 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="fTimeForward">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder bottom="1" left="0" right="0" top="0">
@@ -650,17 +647,17 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel34" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="cTypeSchedule2" min="-2" pref="225" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel35" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="fDaysMove2" min="-2" pref="225" max="-2" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel36" min="-2" pref="179" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="5" max="32767" attributes="0"/>
                               <Component id="fLengthBack" min="-2" pref="225" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -815,9 +812,6 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="fTimeBack">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder bottom="1" left="0" right="0" top="0">

@@ -45,6 +45,7 @@ public class PCar extends javax.swing.JPanel {
 
         fSearch.setFont(new java.awt.Font("Tahoma", 2, 11));
 
+        tCars.setAutoCreateRowSorter(true);
         tCars.setModel(new ModelTable() );
         tCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tCars.getTableHeader().setReorderingAllowed(false);
@@ -68,7 +69,7 @@ public class PCar extends javax.swing.JPanel {
                 .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(bAddCar)
                 .addContainerGap())
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)

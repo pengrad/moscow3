@@ -236,22 +236,22 @@ public class ControllerRoute implements ActionListener, MouseListener, Updateble
 //    public Route getRouteByTabRow(int row) {
 //        if (row < 0 || row > pTrains.tRoute.getModel().getRowCount()) return null;
 //        return new Route(
-//                new Integer(pTrains.tRoute.getModel().getValueAt(row, 0).toString()),
-//                pTrains.tRoute.getModel().getValueAt(row, 1).toString(),
-//                pTrains.tRoute.getModel().getValueAt(row, 2).toString(),
-//                pTrains.tRoute.getModel().getValueAt(row, 2).toString()
+//                new Integer(pTrains.tRoute.getValueAt(row, 0).toString()),
+//                pTrains.tRoute.getValueAt(row, 1).toString(),
+//                pTrains.tRoute.getValueAt(row, 2).toString(),
+//                pTrains.tRoute.getValueAt(row, 2).toString()
 //        );
 //    }
 
 //    public Shedule getScheduleByTabRow(int row) {
 //        if (row < 0 || row > pTrains.tSchedule.getModel().getRowCount()) return null;
 //        return new Shedule(
-//                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 0).toString()),
-//                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 1).toString()),
-//                Utils.convertStrToTime(pTrains.tSchedule.getModel().getValueAt(row, 2).toString()),
-//                Utils.convertStrToDate(pTrains.tSchedule.getModel().getValueAt(row, 3).toString()),
-//                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 4).toString()),
-//                new Integer(pTrains.tSchedule.getModel().getValueAt(row, 5).toString())
+//                new Integer(pTrains.tSchedule.getValueAt(row, 0).toString()),
+//                Utils.convertStrToTime(pTrains.tSchedule.getValueAt(row, 1).toString()),
+//                Utils.convertStrToTime(pTrains.tSchedule.getValueAt(row, 2).toString()),
+//                Utils.convertStrToDate(pTrains.tSchedule.getValueAt(row, 3).toString()),
+//                new Integer(pTrains.tSchedule.getValueAt(row, 4).toString()),
+//                new Integer(pTrains.tSchedule.getValueAt(row, 5).toString())
 //        );
 //    }
 }

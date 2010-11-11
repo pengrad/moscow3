@@ -43,6 +43,7 @@ public class PRoute extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(416, 304));
 
+        tRoute.setAutoCreateRowSorter(true);
         tRoute.setModel(new ModelTable() );
         tRoute.setDefaultRenderer(Object.class, new TableRouteRenderer());
         tRoute.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -69,7 +70,7 @@ public class PRoute extends javax.swing.JPanel {
                 .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(bCreateRoute, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
@@ -84,7 +85,7 @@ public class PRoute extends javax.swing.JPanel {
                         .addComponent(fSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(bSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

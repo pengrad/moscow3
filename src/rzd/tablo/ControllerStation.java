@@ -2,15 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rzd.stationFleet;
+package rzd.tablo;
 
 import rzd.ControllerMain;
 import rzd.Updateble;
 import rzd.model.Model;
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
-import rzd.stationFleet.GCar;
-import rzd.stationFleet.GTrainStation;
+import rzd.tablo.*;
 
 import rzd.model.objects.Road;
 import rzd.model.objects.RoadType;
@@ -25,8 +24,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 
 import rzd.utils.MakerDefaultTextInField;
 
@@ -34,31 +35,26 @@ import rzd.utils.MakerDefaultTextInField;
  * @author ЧерныхЕА
  */
 public class ControllerStation implements ActionListener, MouseListener, Updateble {
-    private BufferedImage carImg;
     private PStationFleet pStationFleet;
     private HashMap<PRoad, ContainerRoad> roadContainers;
     private HashMap<RoadType, HashMap> roadType;
+    private Timer timer;
 
     public ControllerStation(PStationFleet p) {
         this.pStationFleet = p;
+//        try {
+//            carImg = ImageIO.read(new File(getClass().getResource("/rzd/resurce/car.png").getPath()));
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
+        timer = new Timer(30000, this);
+        timer.start();
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
         makeTabs();
-        new MakerDefaultTextInField("Поиск по номеру вагона", pStationFleet.fSearchCarByNumber);
-        pStationFleet.fSearchCarByNumber.addActionListener(this);
+        update();
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pStationFleet.fSearchCarByNumber && !pStationFleet.fSearchCarByNumber.getText().trim().equals("") && !pStationFleet.fSearchCarByNumber.getText().trim().equals("Поиск по номеру вагона")) {
-            try {
-                if (!searchCar(new Integer(pStationFleet.fSearchCarByNumber.getText()))) {
-                    throw new Exception();
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(pStationFleet, "Ничего не найдено");
-            }
-        }
-    }
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() instanceof GCar) {
@@ -188,10 +184,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         return false;
     }
 
-    public BufferedImage getCarImage() {
-        return carImg;
-    }
-
+    
 
     //Поиск вагонов в.т.ч которые в составе поезда
     //плюс перемотка скролов согласно положению вагона на карте
@@ -248,6 +241,14 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         return false;
     }
 
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == timer) {
+           update();
+            pStationFleet.repaint();
+            timer.restart();
+        }
+    }
+
 
     private class ViewSearchTrain extends SwingWorker {
         private GTrainStation gTrainStation;
@@ -259,10 +260,10 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         @Override
         protected Object doInBackground() throws Exception {
             for (int i = 0; i < 5; i++) {
-                gTrainStation.setSelected(true);
+                //    gTrainStation.setSelected(true);
                 publish(new List());
                 Thread.sleep(100);
-                gTrainStation.setSelected(false);
+                //    gTrainStation.setSelected(false);
                 publish(new List());
                 Thread.sleep(100);
             }
@@ -284,10 +285,10 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
         @Override
         protected Object doInBackground() throws Exception {
             for (int i = 0; i < 5; i++) {
-                gCar.setSelected(true);
+                //   gCar.setSelected(true);
                 publish(new List());
                 Thread.sleep(100);
-                gCar.setSelected(false);
+                //    gCar.setSelected(false);
                 publish(new List());
                 Thread.sleep(100);
             }

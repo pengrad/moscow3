@@ -12,6 +12,8 @@ package rzd.dispStatinonFleet;
 
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -35,6 +37,7 @@ public class DEditTrain extends javax.swing.JDialog {
 
     private Train train;
     private DCarLocation dCarLocation;
+    private HashMap<Car, CarLocationStructure> carsForRemove;
 
     /**
      * Creates new form DEditTrain
@@ -42,6 +45,7 @@ public class DEditTrain extends javax.swing.JDialog {
     public DEditTrain(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        carsForRemove = new HashMap<Car, CarLocationStructure>();
         dCarLocation = new DCarLocation(null, true);
     }
 
@@ -394,6 +398,7 @@ public class DEditTrain extends javax.swing.JDialog {
     private void addCarInTrain() {
         Car car = (Car) lCarAll.getSelectedValue();
         if (car != null) {
+            carsForRemove.remove(car);
             ((DefaultTableModel) lCarInTrain.getModel()).addRow(new Object[]{car.getCarNumberInTrain(), car});
             ((DefaultListModel) lCarAll.getModel()).removeElement(car);
         }
@@ -408,23 +413,17 @@ public class DEditTrain extends javax.swing.JDialog {
                     dCarLocation.setLocationRelativeTo(this);
                     CarLocationStructure carLS = dCarLocation.open(car);
                     if (carLS != null) {
-                        try {
-                            b = Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
-                            if (b) {
-                                car = carLS.getCar();
-                            }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
-                        }
+                        carsForRemove.put(car, carLS);
+                        b = true;
                     }
                 } else {
                     b = true;
                 }
                 if (b) {
                     ((DefaultListModel) lCarAll.getModel()).addElement(car);
-                    for (int i = 0; i < ((DefaultListModel) lCarAll.getModel()).size(); i++) {
+                    for (int i = 0; i < ((DefaultTableModel) lCarInTrain.getModel()).getRowCount(); i++) {
                         if (((DefaultTableModel) lCarInTrain.getModel()).getValueAt(i, 1).equals(car)) {
-                            ((DefaultTableModel) lCarInTrain.getModel()).removeRow(i);
+                           ((DefaultTableModel) lCarInTrain.getModel()).removeRow(i);
                             break;
                         }
                     }
@@ -482,6 +481,15 @@ public class DEditTrain extends javax.swing.JDialog {
                     car.setCarNumberInTrain(pn);
                     cars.add(car);
                 }
+                Collection<CarLocationStructure> collectionCarStructure = carsForRemove.values();
+                for (CarLocationStructure carLS : collectionCarStructure) {
+                    try {
+                        Model.getModel().setCarLocation(carLS.getCar(), carLS.getRoad(), carLS.getRepair());
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
                 this.train = new Train(
                         train.getId(),
                         train.getDtDeparture(),
@@ -513,6 +521,7 @@ public class DEditTrain extends javax.swing.JDialog {
         if (train == null) {
             close();
         }
+        carsForRemove.clear();
         this.train = train;
         cRoadType.removeAllItems();
         cRoad.removeAllItems();

@@ -489,8 +489,6 @@ public class DCarEdit extends javax.swing.JDialog {
     }
 
     public Car open(Car car) {
-        if (car == null)
-            close();
         this.car = car;
         if (cTypeParent.getItemCount() > 0)
             cTypeParent.removeAllItems();

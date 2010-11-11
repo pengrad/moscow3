@@ -11,6 +11,7 @@
 package rzd;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author ЧерныхЕА
@@ -27,7 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         initComponents();
-      
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(d);
+
     }
 
     /**

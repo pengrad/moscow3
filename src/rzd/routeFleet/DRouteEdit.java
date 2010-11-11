@@ -822,7 +822,7 @@ public class DRouteEdit extends javax.swing.JDialog {
         if (cEnabled.isSelected()) {
             jLabel25.setText("");
         } else {
-            jLabel25.setText("Расписание не автивно, по данному расписанию поезда формироваться не будут!!!");
+            jLabel25.setText("Расписание не активно, по данному расписанию поезда формироваться не будут!!!");
         }
     }
 

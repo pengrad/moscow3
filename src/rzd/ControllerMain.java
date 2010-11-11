@@ -16,6 +16,7 @@ import rzd.model.objects.Train;
 import rzd.routeFleet.PRoute;
 import rzd.scheduleFleet.PSchedule;
 import rzd.stationFleet.PStationFleet;
+import rzd.utils.RunProgramm;
 import rzd.utils.calendar.Calendar;
 
 import javax.swing.*;
@@ -58,8 +59,8 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     public void init() {
+        RunProgramm runProgramm=new RunProgramm();
         mf = new MainFrame();
-        mf.setVisible(true);
         dLoading = new DLoading(mf, true);
         //Инициализируем панели
         pStationFleet = new PStationFleet();
@@ -86,12 +87,6 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
         p = new JPanel(new BorderLayout());
         p.add(pRoute);
         mf.tabbedtMain.add("Маршруты", p);
-//              mf.tabbedtMain.add("Станция", pStationFleet);
-//              mf.tabbedtMain.add("Расписание", pSchedule);
-//              mf.tabbedtMain.add("Диспетчер станции", pDispStation);
-//              mf.tabbedtMain.add("Парк вагонов", pCars);
-//              mf.tabbedtMain.add("Маршруты", pRoute);
-
 
         popCarInf = new JPopupMenu();
         pCarInformation = new PCarInformation_1();
@@ -105,6 +100,9 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
         mf.tabbedtMain.addChangeListener(ControllerMain.getInstans());
         mf.mUpdateThis.addActionListener(ControllerMain.getInstans());
         mf.tabbedtMain.setSelectedIndex(0);
+//        dLoading.setVisible(false);
+        runProgramm.dispose();
+        mf.setVisible(true);
         update(pStationFleet.getController());
 
     }
@@ -166,16 +164,12 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     public void showCarInf(Component c, int x, int y, Car car) {
-        pCarInformation.setData(car);
-//        System.out.println("mf.getWidth() / 2=" + mf.getWidth() / 2);
-//        System.out.println("mf.getHeight() / 2=" + mf.getHeight() / 2);
-//        System.out.println("pCarInformation.getWidth() / 2=" + pCarInformation.getPreferredSize().getWidth() / 2);
-//        System.out.println("pCarInformation.getHeight() / 2=" + pCarInformation.getPreferredSize().getHeight() / 2);
-
-
-        x = (int) (mf.getWidth() / 2 - pCarInformation.getPreferredSize().getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - pCarInformation.getPreferredSize().getHeight() / 2);
-        popCarInf.show(mf, x, y);
+        if (car != null) {
+            pCarInformation.setData(car);
+            x = (int) (mf.getWidth() / 2 - pCarInformation.getPreferredSize().getWidth() / 2);
+            y = (int) (mf.getHeight() / 2 - pCarInformation.getPreferredSize().getHeight() / 2);
+            popCarInf.show(mf, x, y);
+        }
     }
 
     public void showCarInf(JComponent c, int x, int y, int numberCar) {
@@ -183,10 +177,12 @@ public class ControllerMain implements ChangeListener, ActionListener, MouseList
     }
 
     public void showTrainInf(Component c, int x, int y, Train train) {
-        pTrainInformation.setData(train);
-        x = (int) (mf.getWidth() / 2 - pTrainInformation.getPreferredSize().getWidth() / 2);
-        y = (int) (mf.getHeight() / 2 - pTrainInformation.getPreferredSize().getHeight() / 2);
-        popTrainInf.show(mf, x, y);
+        if (train != null) {
+            pTrainInformation.setData(train);
+            x = (int) (mf.getWidth() / 2 - pTrainInformation.getPreferredSize().getWidth() / 2);
+            y = (int) (mf.getHeight() / 2 - pTrainInformation.getPreferredSize().getHeight() / 2);
+            popTrainInf.show(mf, x, y);
+        }
     }
 
     public void showTrainInf(JComponent c, int x, int y, int idTrain) {
