@@ -41,7 +41,7 @@ public class PRaspisanie extends JComponent {
                 drawHeder(g2);
             }
         };
-        heder.setBackground(new Color(213, 213, 213));
+        heder.setBackground(new Color(230, 230, 230));
     }
 
 

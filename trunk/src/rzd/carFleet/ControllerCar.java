@@ -123,7 +123,7 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     }
 
     public void mouseExited(MouseEvent e) {
-    
+
     }
 
 
@@ -174,11 +174,18 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
 
     private void deleteCar() {
         int row = pCar.tCars.getSelectedRow();
-        Car car = (Car) pCar.tCars.getValueAt(row, 0);
-        boolean b = Model.getModel().deleteCar(car);
-        if (b) {
-            JOptionPane.showMessageDialog(pCar, "Вагон успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
-            ControllerMain.getInstans().update(this);
+        if (row >= 0) {
+            Car car = (Car) pCar.tCars.getValueAt(row, 0);
+            if (car != null) {
+                int i = JOptionPane.showConfirmDialog(pCar, "Вы уверены, что хотите удалить вагон?", "", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    boolean b = Model.getModel().deleteCar(car);
+                    if (b) {
+                        JOptionPane.showMessageDialog(pCar, "Вагон успешно удален", "", JOptionPane.INFORMATION_MESSAGE);
+                        ControllerMain.getInstans().update(this);
+                    }
+                }
+            }
         }
     }
 
@@ -250,9 +257,9 @@ public class ControllerCar implements MouseListener, ActionListener, Updateble {
     //Методы конверторы
 
     private ArrayList<Object[]> getCarsTabView() {
-      //  System.out.println("update car");
+        //  System.out.println("update car");
         ArrayList<Car> cars = Model.getModel().getCars();
-       // System.out.println("cars size="+cars.size());
+        // System.out.println("cars size="+cars.size());
         if (cars != null) {
             ArrayList<Object[]> res = new ArrayList<Object[]>(cars.size());
             for (Car c : cars) {

@@ -8,9 +8,9 @@
  *
  * Created on 09.09.2010, 13:35:55
  */
-package rzd.stationFleet;
+package rzd.tablo;
 
-import java.awt.Color;
+import java.awt.*;
 
 import rzd.model.objects.Car;
 import rzd.model.objects.Train;
@@ -30,7 +30,7 @@ public class PRoad extends javax.swing.JPanel {
     public PRoad(String numberRoad) {
         initComponents();
         ((TitledBorder) jPanel35.getBorder()).setTitle("Путь №" + numberRoad);
-
+     //     road.setPreferredSize(new Dimension(1000,30));
     }
 
     /**
@@ -55,17 +55,19 @@ public class PRoad extends javax.swing.JPanel {
         jPanel40.setLayout(jPanel40Layout);
         jPanel40Layout.setHorizontalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGap(0, 726, Short.MAX_VALUE)
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel35.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "2 - путь", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel35.setLayout(new javax.swing.BoxLayout(jPanel35, javax.swing.BoxLayout.PAGE_AXIS));
 
-        roadTitle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(724, 25));
+
+        roadTitle.setFont(new java.awt.Font("Tahoma", 0, 12));
         roadTitle.setForeground(new java.awt.Color(0, 0, 204));
         roadTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         roadTitle.setPreferredSize(new java.awt.Dimension(1200, 15));
@@ -83,18 +85,20 @@ public class PRoad extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(roadTitleSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
-            .addComponent(roadTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(roadTitleSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(roadTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
 
         jPanel35.add(jPanel1);
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(120, 33));
 
         road.setBackground(new java.awt.Color(255, 255, 255));
         road.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        road.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 2));
+        road.setPreferredSize(new java.awt.Dimension(20, 2));
+        road.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 8));
         jScrollPane1.setViewportView(road);
 
         jPanel35.add(jScrollPane1);
@@ -103,8 +107,10 @@ public class PRoad extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
             .addComponent(jPanel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
-            .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

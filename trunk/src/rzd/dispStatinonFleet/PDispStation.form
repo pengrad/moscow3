@@ -23,7 +23,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jTabbedPane3" alignment="1" pref="658" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="403" max="32767" attributes="0"/>
+              <EmptySpace pref="410" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="cTimeBeforeArrivingTrains" min="-2" max="-2" attributes="0"/>
@@ -31,7 +31,7 @@
           </Group>
           <Component id="jTabbedPane1" alignment="1" pref="658" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="403" max="32767" attributes="0"/>
+              <EmptySpace pref="410" max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="cTimeBeforeGoingTrains" min="-2" max="-2" attributes="0"/>
@@ -91,6 +91,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tArrivingTrains">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModelTable() " type="code"/>
                 </Property>
@@ -137,6 +138,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tGoingTrains">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModelTable()" type="code"/>
                 </Property>
@@ -186,6 +188,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tTrainOnRoad">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModelTable() " type="code"/>
                 </Property>
