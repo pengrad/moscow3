@@ -47,7 +47,7 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
 //        } catch (IOException e) {
 //            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 //        }
-        timer = new Timer(30000, this);
+        timer = new Timer(10000, this);
         timer.start();
         roadType = new HashMap<RoadType, HashMap>();
         roadContainers = new HashMap<PRoad, ContainerRoad>();
@@ -94,14 +94,15 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
                 while (itRoad.hasNext()) {
                     Road k = itRoad.next();
                     roads.get(k).deleteAll();
-                    ArrayList<Car> cars = Model.getModel().getCarsOnRoad(k);
-                    if (cars != null) {
-                        ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
-                        for (Car c : cars) {
-                            gCars.add(new GCar(c, this));
-                        }
-                        roads.get(k).addCars(gCars);
-                    }
+                    //todo постановка вагонов на пути
+//                    ArrayList<Car> cars = Model.getModel().getCarsOnRoad(k);
+//                    if (cars != null) {
+//                        ArrayList<GCar> gCars = new ArrayList<GCar>(cars.size());
+//                        for (Car c : cars) {
+//                            gCars.add(new GCar(c, this));
+//                        }
+//                        roads.get(k).addCars(gCars);
+//                    }
                     Train train = Model.getModel().getTrainByRoad(k);
                     if (train != null) {
                         roads.get(k).addTrain(new GTrainStation(train, this));
@@ -126,7 +127,8 @@ public class ControllerStation implements ActionListener, MouseListener, Updateb
             if (rTypes != null) {
                 ContainerRoad cRoad;
                 HashMap<Road, PRoad> roads;
-                for (int i = 0; i < rTypes.size(); i++) {
+                //todo rTypes.size()
+                for (int i = 0; i < 1; i++) {
                     RoadType rType = rTypes.get(i);
                     ArrayList<Road> r = Model.getModel().getRoadsByType(rType);
                     if (r != null) {
