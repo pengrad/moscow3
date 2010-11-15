@@ -485,7 +485,7 @@ public class BusinessManager implements BusinessLogic {
             Session s = getSession();
             TrainEntity te = SessionManager.getEntityById(new TrainEntity(), train.getId());
             RoadEntity re = SessionManager.getEntityById(new RoadEntity(), train.getRoad().getId());
-            if (te.getTrainStatus().getIdStatus() == BusinessLogic.IN_WAY)
+            if (EntityConverter.isTrainGoing(te) && te.getTrainStatus().getIdStatus() == BusinessLogic.IN_WAY)
                 throw new Exception("Поезд уже в пути!");
             if (te.getTrainStatus().getIdStatus() == BusinessLogic.DESTROYED)
                 throw new Exception("Поезд уже расформирован!");
@@ -595,7 +595,7 @@ public class BusinessManager implements BusinessLogic {
         try {
             SessionManager.beginTran();
             Timestamp time = DateUtils.getDatePlusTime(getCurrentDate(), forHours, 0);
-            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.PLANNED);
+            TrainStatusEntity tse = SessionManager.getEntityById(new TrainStatusEntity(), BusinessLogic.IN_WAY);
             List se = getSession().createQuery(
                     "select se from RouteEntity as re join re.sheduleBack as se where re.enabled = true").list();
             Criteria crit = getSession().createCriteria(TrainEntity.class).
@@ -1003,6 +1003,9 @@ public class BusinessManager implements BusinessLogic {
             RouteEntity re = SessionManager.getEntityById(new RouteEntity(), route.getId());
             Session s = getSession();
             SheduleEntity se = re.getSheduleForward();
+            SheduleEntity sbe = re.getSheduleBack();
+            s.delete(re);
+            // прогоняем 2 раза, сначала для прямого расписания, потом для обратного
             for (int i = 0; i < 2; i++) {
                 for (SheduleDaysEntity sde : se.getSheduleDays()) s.delete(sde);
                 for (TrainEntity te : se.getTrains()) {
@@ -1024,11 +1027,12 @@ public class BusinessManager implements BusinessLogic {
                             s.update(rde);
                         }
                     }
+                    s.delete(te);
                 }
                 s.delete(se);
-                se = re.getSheduleBack();
+                // прогоняем для обратного расписания то же самое
+                se = sbe;
             }
-            s.delete(re);
             SessionManager.commit();
         } catch (Exception e) {
             e.printStackTrace();
