@@ -38,13 +38,13 @@ public class Utils {
     }
 
     public static String convertTimeToStr(Date time) {
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.DEFAULT);
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
 //        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         return df.format(time);
     }
 
     public static String convertDateTimeToStr(Date dt) {
-        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         return df.format(dt);
     }
